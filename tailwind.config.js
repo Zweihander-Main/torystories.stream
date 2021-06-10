@@ -5,10 +5,17 @@ module.exports = {
 	mode: 'jit',
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {
-			colors: {
-				teal: colors.amber,
-			},
+		colors: {
+			black: '#0a0a0a',
+			white: colors.white,
+		},
+		fontFamily: {
+			display: ['Cormorant SC'],
+			body: ['Nunito Sans'],
+		},
+		fontSize: {
+			hero: ['15vw', '10vw'],
+			subHero: ['4vw', '4vw'],
 		},
 	},
 	variants: {

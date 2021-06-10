@@ -8,7 +8,7 @@ const Layout: React.FC<
 	LayoutProps & React.PropsWithChildren<Record<string, unknown>>
 > = ({ children }) => {
 	return (
-		<div className="flex items-center">
+		<div className="flex flex-col items-center bg-black text-white font-body">
 			<main>
 				<Player />
 				{children}
