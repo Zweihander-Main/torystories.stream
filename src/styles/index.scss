@@ -1,13 +1,12 @@
+@import '~@fontsource/cormorant-sc/latin-300.css';
+@import '~@fontsource/nunito-sans/latin-200.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~@fontsource/cormorant-sc/latin-300.css';
-@import '~@fontsource/nunito-sans/latin-200.css';
 
 @layer utilities {
 	.hero-indent {
-		padding-left: 2rem;
-		text-indent: -2rem;
+		text-indent: -0.5em;
 	}
 
 	.one-word-per-line {

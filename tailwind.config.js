@@ -10,12 +10,14 @@ module.exports = {
 			white: colors.white,
 		},
 		fontFamily: {
-			display: ['Cormorant SC'],
+			display: ['Cormorant SC'], //TODO add fallbacks
 			body: ['Nunito Sans'],
 		},
-		fontSize: {
-			hero: ['15vw', '10vw'],
-			subHero: ['4vw', '4vw'],
+		extend: {
+			fontSize: {
+				hero: ['15vw', '10vw'],
+				subHero: ['4vw', '4vw'],
+			},
 		},
 	},
 	variants: {
