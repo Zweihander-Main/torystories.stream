@@ -17,7 +17,10 @@ module.exports = {
 		extend: {
 			fontSize: {
 				hero: ['15vw', '11vw'],
-				subHero: ['4vw', '4vw'],
+				subHero: ['3.5vw', '3.2vw'],
+			},
+			letterSpacing: {
+				display: '-0.035em',
 			},
 		},
 	},

@@ -4,6 +4,8 @@
 
 ## Possible improvements
 
+-   TODO: text-shadow
+
 ## License
 
 Code (outside the `/content` and `/static/docs` folders) is licensed under [MIT](./LICENSE)
