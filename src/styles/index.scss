@@ -12,4 +12,8 @@
 	.one-word-per-line {
 		word-spacing: 1000000px;
 	}
+
+	.hero-height {
+		height: calc(100vh - 5rem);
+	}
 }

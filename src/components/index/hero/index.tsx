@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
 	// }}
 
 	return (
-		<section className="grid grid-rows-2 grid-cols-1 h-screen">
+		<section className="grid grid-rows-2 grid-cols-1 hero-height">
 			<StaticImage
 				src="../../../images/herobg-house-of-commons-pitt.png"
 				alt="Background: Karl Anton Hickel's William Pitt addressing the House of Commons"

@@ -702,7 +702,6 @@ type SitePluginPluginOptions {
   isTSX: Boolean
   allExtensions: Boolean
   jsxPragma: String
-  postCssPlugins: [SitePluginPluginOptionsPostCssPlugins]
   name: String
   path: String
   base64Width: Int
@@ -712,6 +711,16 @@ type SitePluginPluginOptions {
   emitSchema: SitePluginPluginOptionsEmitSchema
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocuments
   pathCheck: Boolean
+  postCssPlugins: [SitePluginPluginOptionsPostCssPlugins]
+}
+
+type SitePluginPluginOptionsEmitSchema {
+  src___generated___gatsby_introspection_json: Boolean
+  src___generated___gatsby_schema_graphql: Boolean
+}
+
+type SitePluginPluginOptionsEmitPluginDocuments {
+  src___generated___gatsby_plugin_documents_graphql: Boolean
 }
 
 type SitePluginPluginOptionsPostCssPlugins {
@@ -722,37 +731,28 @@ type SitePluginPluginOptionsPostCssPlugins {
 }
 
 type SitePluginPluginOptionsPostCssPluginsTheme {
+  colors: SitePluginPluginOptionsPostCssPluginsThemeColors
+  fontFamily: SitePluginPluginOptionsPostCssPluginsThemeFontFamily
   extend: SitePluginPluginOptionsPostCssPluginsThemeExtend
 }
 
+type SitePluginPluginOptionsPostCssPluginsThemeColors {
+  black: String
+  white: String
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeFontFamily {
+  display: [String]
+  body: [String]
+}
+
 type SitePluginPluginOptionsPostCssPluginsThemeExtend {
-  colors: SitePluginPluginOptionsPostCssPluginsThemeExtendColors
+  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize
 }
 
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColors {
-  teal: SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTeal
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTeal {
-  _50: String
-  _100: String
-  _200: String
-  _300: String
-  _400: String
-  _500: String
-  _600: String
-  _700: String
-  _800: String
-  _900: String
-}
-
-type SitePluginPluginOptionsEmitSchema {
-  src___generated___gatsby_introspection_json: Boolean
-  src___generated___gatsby_schema_graphql: Boolean
-}
-
-type SitePluginPluginOptionsEmitPluginDocuments {
-  src___generated___gatsby_plugin_documents_graphql: Boolean
+type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
+  hero: [String]
+  subHero: [String]
 }
 
 type SitePluginPackageJson {
@@ -1820,7 +1820,6 @@ input SitePluginPluginOptionsFilterInput {
   isTSX: BooleanQueryOperatorInput
   allExtensions: BooleanQueryOperatorInput
   jsxPragma: StringQueryOperatorInput
-  postCssPlugins: SitePluginPluginOptionsPostCssPluginsFilterListInput
   name: StringQueryOperatorInput
   path: StringQueryOperatorInput
   base64Width: IntQueryOperatorInput
@@ -1830,6 +1829,16 @@ input SitePluginPluginOptionsFilterInput {
   emitSchema: SitePluginPluginOptionsEmitSchemaFilterInput
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocumentsFilterInput
   pathCheck: BooleanQueryOperatorInput
+  postCssPlugins: SitePluginPluginOptionsPostCssPluginsFilterListInput
+}
+
+input SitePluginPluginOptionsEmitSchemaFilterInput {
+  src___generated___gatsby_introspection_json: BooleanQueryOperatorInput
+  src___generated___gatsby_schema_graphql: BooleanQueryOperatorInput
+}
+
+input SitePluginPluginOptionsEmitPluginDocumentsFilterInput {
+  src___generated___gatsby_plugin_documents_graphql: BooleanQueryOperatorInput
 }
 
 input SitePluginPluginOptionsPostCssPluginsFilterListInput {
@@ -1844,37 +1853,28 @@ input SitePluginPluginOptionsPostCssPluginsFilterInput {
 }
 
 input SitePluginPluginOptionsPostCssPluginsThemeFilterInput {
+  colors: SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput
+  fontFamily: SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput
   extend: SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput
 }
 
+input SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput {
+  black: StringQueryOperatorInput
+  white: StringQueryOperatorInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput {
+  display: StringQueryOperatorInput
+  body: StringQueryOperatorInput
+}
+
 input SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput {
-  colors: SitePluginPluginOptionsPostCssPluginsThemeExtendColorsFilterInput
+  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput
 }
 
-input SitePluginPluginOptionsPostCssPluginsThemeExtendColorsFilterInput {
-  teal: SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTealFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTealFilterInput {
-  _50: StringQueryOperatorInput
-  _100: StringQueryOperatorInput
-  _200: StringQueryOperatorInput
-  _300: StringQueryOperatorInput
-  _400: StringQueryOperatorInput
-  _500: StringQueryOperatorInput
-  _600: StringQueryOperatorInput
-  _700: StringQueryOperatorInput
-  _800: StringQueryOperatorInput
-  _900: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsEmitSchemaFilterInput {
-  src___generated___gatsby_introspection_json: BooleanQueryOperatorInput
-  src___generated___gatsby_schema_graphql: BooleanQueryOperatorInput
-}
-
-input SitePluginPluginOptionsEmitPluginDocumentsFilterInput {
-  src___generated___gatsby_plugin_documents_graphql: BooleanQueryOperatorInput
+input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
+  hero: StringQueryOperatorInput
+  subHero: StringQueryOperatorInput
 }
 
 input SitePluginPackageJsonFilterInput {
@@ -2071,10 +2071,6 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___isTSX
   pluginCreator___pluginOptions___allExtensions
   pluginCreator___pluginOptions___jsxPragma
-  pluginCreator___pluginOptions___postCssPlugins
-  pluginCreator___pluginOptions___postCssPlugins___purge
-  pluginCreator___pluginOptions___postCssPlugins___mode
-  pluginCreator___pluginOptions___postCssPlugins___darkMode
   pluginCreator___pluginOptions___name
   pluginCreator___pluginOptions___path
   pluginCreator___pluginOptions___base64Width
@@ -2085,6 +2081,10 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___emitSchema___src___generated___gatsby_schema_graphql
   pluginCreator___pluginOptions___emitPluginDocuments___src___generated___gatsby_plugin_documents_graphql
   pluginCreator___pluginOptions___pathCheck
+  pluginCreator___pluginOptions___postCssPlugins
+  pluginCreator___pluginOptions___postCssPlugins___purge
+  pluginCreator___pluginOptions___postCssPlugins___mode
+  pluginCreator___pluginOptions___postCssPlugins___darkMode
   pluginCreator___nodeAPIs
   pluginCreator___browserAPIs
   pluginCreator___ssrAPIs
@@ -2565,10 +2565,6 @@ enum SitePluginFieldsEnum {
   pluginOptions___isTSX
   pluginOptions___allExtensions
   pluginOptions___jsxPragma
-  pluginOptions___postCssPlugins
-  pluginOptions___postCssPlugins___purge
-  pluginOptions___postCssPlugins___mode
-  pluginOptions___postCssPlugins___darkMode
   pluginOptions___name
   pluginOptions___path
   pluginOptions___base64Width
@@ -2579,6 +2575,10 @@ enum SitePluginFieldsEnum {
   pluginOptions___emitSchema___src___generated___gatsby_schema_graphql
   pluginOptions___emitPluginDocuments___src___generated___gatsby_plugin_documents_graphql
   pluginOptions___pathCheck
+  pluginOptions___postCssPlugins
+  pluginOptions___postCssPlugins___purge
+  pluginOptions___postCssPlugins___mode
+  pluginOptions___postCssPlugins___darkMode
   nodeAPIs
   browserAPIs
   ssrAPIs

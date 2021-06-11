@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
@@ -10,12 +11,12 @@ module.exports = {
 			white: colors.white,
 		},
 		fontFamily: {
-			display: ['Cormorant SC'], //TODO add fallbacks
-			body: ['Nunito Sans'],
+			display: ['Cormorant SC', ...defaultTheme.fontFamily.serif],
+			body: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
 		},
 		extend: {
 			fontSize: {
-				hero: ['15vw', '10vw'],
+				hero: ['15vw', '11vw'],
 				subHero: ['4vw', '4vw'],
 			},
 		},

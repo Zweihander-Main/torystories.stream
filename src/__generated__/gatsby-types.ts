@@ -646,7 +646,6 @@ type SitePluginPluginOptions = {
   readonly isTSX: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
   readonly jsxPragma: Maybe<Scalars['String']>;
-  readonly postCssPlugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPlugins>>>;
   readonly name: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly base64Width: Maybe<Scalars['Int']>;
@@ -656,6 +655,16 @@ type SitePluginPluginOptions = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchema>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocuments>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
+  readonly postCssPlugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPlugins>>>;
+};
+
+type SitePluginPluginOptionsEmitSchema = {
+  readonly src___generated___gatsby_introspection_json: Maybe<Scalars['Boolean']>;
+  readonly src___generated___gatsby_schema_graphql: Maybe<Scalars['Boolean']>;
+};
+
+type SitePluginPluginOptionsEmitPluginDocuments = {
+  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<Scalars['Boolean']>;
 };
 
 type SitePluginPluginOptionsPostCssPlugins = {
@@ -666,37 +675,28 @@ type SitePluginPluginOptionsPostCssPlugins = {
 };
 
 type SitePluginPluginOptionsPostCssPluginsTheme = {
+  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeColors>;
+  readonly fontFamily: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFontFamily>;
   readonly extend: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtend>;
 };
 
+type SitePluginPluginOptionsPostCssPluginsThemeColors = {
+  readonly black: Maybe<Scalars['String']>;
+  readonly white: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeFontFamily = {
+  readonly display: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly body: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+};
+
 type SitePluginPluginOptionsPostCssPluginsThemeExtend = {
-  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendColors>;
+  readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize>;
 };
 
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColors = {
-  readonly teal: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTeal>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTeal = {
-  readonly _50: Maybe<Scalars['String']>;
-  readonly _100: Maybe<Scalars['String']>;
-  readonly _200: Maybe<Scalars['String']>;
-  readonly _300: Maybe<Scalars['String']>;
-  readonly _400: Maybe<Scalars['String']>;
-  readonly _500: Maybe<Scalars['String']>;
-  readonly _600: Maybe<Scalars['String']>;
-  readonly _700: Maybe<Scalars['String']>;
-  readonly _800: Maybe<Scalars['String']>;
-  readonly _900: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsEmitSchema = {
-  readonly src___generated___gatsby_introspection_json: Maybe<Scalars['Boolean']>;
-  readonly src___generated___gatsby_schema_graphql: Maybe<Scalars['Boolean']>;
-};
-
-type SitePluginPluginOptionsEmitPluginDocuments = {
-  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<Scalars['Boolean']>;
+type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize = {
+  readonly hero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly subHero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SitePluginPackageJson = {
@@ -2120,7 +2120,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly jsxPragma: Maybe<StringQueryOperatorInput>;
-  readonly postCssPlugins: Maybe<SitePluginPluginOptionsPostCssPluginsFilterListInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly base64Width: Maybe<IntQueryOperatorInput>;
@@ -2130,6 +2129,16 @@ type SitePluginPluginOptionsFilterInput = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchemaFilterInput>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocumentsFilterInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
+  readonly postCssPlugins: Maybe<SitePluginPluginOptionsPostCssPluginsFilterListInput>;
+};
+
+type SitePluginPluginOptionsEmitSchemaFilterInput = {
+  readonly src___generated___gatsby_introspection_json: Maybe<BooleanQueryOperatorInput>;
+  readonly src___generated___gatsby_schema_graphql: Maybe<BooleanQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsEmitPluginDocumentsFilterInput = {
+  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<BooleanQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsFilterListInput = {
@@ -2144,37 +2153,28 @@ type SitePluginPluginOptionsPostCssPluginsFilterInput = {
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeFilterInput = {
+  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput>;
+  readonly fontFamily: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput>;
   readonly extend: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput>;
 };
 
+type SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput = {
+  readonly black: Maybe<StringQueryOperatorInput>;
+  readonly white: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput = {
+  readonly display: Maybe<StringQueryOperatorInput>;
+  readonly body: Maybe<StringQueryOperatorInput>;
+};
+
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput = {
-  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendColorsFilterInput>;
+  readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput>;
 };
 
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColorsFilterInput = {
-  readonly teal: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTealFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendColorsTealFilterInput = {
-  readonly _50: Maybe<StringQueryOperatorInput>;
-  readonly _100: Maybe<StringQueryOperatorInput>;
-  readonly _200: Maybe<StringQueryOperatorInput>;
-  readonly _300: Maybe<StringQueryOperatorInput>;
-  readonly _400: Maybe<StringQueryOperatorInput>;
-  readonly _500: Maybe<StringQueryOperatorInput>;
-  readonly _600: Maybe<StringQueryOperatorInput>;
-  readonly _700: Maybe<StringQueryOperatorInput>;
-  readonly _800: Maybe<StringQueryOperatorInput>;
-  readonly _900: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsEmitSchemaFilterInput = {
-  readonly src___generated___gatsby_introspection_json: Maybe<BooleanQueryOperatorInput>;
-  readonly src___generated___gatsby_schema_graphql: Maybe<BooleanQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsEmitPluginDocumentsFilterInput = {
-  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<BooleanQueryOperatorInput>;
+type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput = {
+  readonly hero: Maybe<StringQueryOperatorInput>;
+  readonly subHero: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPackageJsonFilterInput = {
@@ -2398,10 +2398,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.isTSX'
   | 'pluginCreator.pluginOptions.allExtensions'
   | 'pluginCreator.pluginOptions.jsxPragma'
-  | 'pluginCreator.pluginOptions.postCssPlugins'
-  | 'pluginCreator.pluginOptions.postCssPlugins.purge'
-  | 'pluginCreator.pluginOptions.postCssPlugins.mode'
-  | 'pluginCreator.pluginOptions.postCssPlugins.darkMode'
   | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.base64Width'
@@ -2412,6 +2408,10 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginCreator.pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
   | 'pluginCreator.pluginOptions.pathCheck'
+  | 'pluginCreator.pluginOptions.postCssPlugins'
+  | 'pluginCreator.pluginOptions.postCssPlugins.purge'
+  | 'pluginCreator.pluginOptions.postCssPlugins.mode'
+  | 'pluginCreator.pluginOptions.postCssPlugins.darkMode'
   | 'pluginCreator.nodeAPIs'
   | 'pluginCreator.browserAPIs'
   | 'pluginCreator.ssrAPIs'
@@ -2970,10 +2970,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.isTSX'
   | 'pluginOptions.allExtensions'
   | 'pluginOptions.jsxPragma'
-  | 'pluginOptions.postCssPlugins'
-  | 'pluginOptions.postCssPlugins.purge'
-  | 'pluginOptions.postCssPlugins.mode'
-  | 'pluginOptions.postCssPlugins.darkMode'
   | 'pluginOptions.name'
   | 'pluginOptions.path'
   | 'pluginOptions.base64Width'
@@ -2984,6 +2980,10 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
   | 'pluginOptions.pathCheck'
+  | 'pluginOptions.postCssPlugins'
+  | 'pluginOptions.postCssPlugins.purge'
+  | 'pluginOptions.postCssPlugins.mode'
+  | 'pluginOptions.postCssPlugins.darkMode'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
@@ -3174,11 +3174,6 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3209,5 +3204,10 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }
