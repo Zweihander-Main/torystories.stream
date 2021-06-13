@@ -692,11 +692,16 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamily = {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtend = {
   readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize>;
+  readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize = {
   readonly hero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly subHero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing = {
+  readonly display: Maybe<Scalars['String']>;
 };
 
 type SitePluginPackageJson = {
@@ -2170,11 +2175,16 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput = {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput = {
   readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput>;
+  readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput = {
   readonly hero: Maybe<StringQueryOperatorInput>;
   readonly subHero: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput = {
+  readonly display: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPackageJsonFilterInput = {

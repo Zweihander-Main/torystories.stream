@@ -748,11 +748,16 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamily {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtend {
   fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize
+  letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing
 }
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
   hero: [String]
   subHero: [String]
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing {
+  display: String
 }
 
 type SitePluginPackageJson {
@@ -1870,11 +1875,16 @@ input SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput {
 
 input SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput {
   fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput
+  letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput
 }
 
 input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
   hero: StringQueryOperatorInput
   subHero: StringQueryOperatorInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput {
+  display: StringQueryOperatorInput
 }
 
 input SitePluginPackageJsonFilterInput {
