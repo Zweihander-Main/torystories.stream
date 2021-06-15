@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { BaseReactPlayerProps } from 'react-player/base';
 
 type PlayerProps = {
 	url: string;
@@ -59,10 +60,10 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		}
 	};
 
-	const handleProgress = (state) => {
+	const handleProgress: BaseReactPlayerProps['onProgress'] = ({ played }) => {
 		// only if not currently seeking
 		if (!seeking) {
-			setPlayed(state.played);
+			setPlayed(played);
 		}
 	};
 
