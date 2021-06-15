@@ -28,7 +28,9 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		setPlaying(false);
 	};
 
-	const handleVolumeChange = (e) => {
+	const handleVolumeChange: React.ChangeEventHandler<HTMLInputElement> = (
+		e
+	) => {
 		setVolume(parseFloat(e.target.value));
 	};
 
@@ -36,9 +38,10 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		setMuted(!muted);
 	};
 
-	const handleSetPlaybackRate = (e) => {
-		setPlaybackRate(parseFloat(e.target.value));
-	};
+	const handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement> =
+		(e) => {
+			setPlaybackRate(parseFloat((e.target as HTMLButtonElement).value));
+		};
 
 	const handleSeekMouseDown = () => {
 		setSeeking(true);
@@ -50,7 +53,7 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		setPlayed(parseFloat(e.target.value));
 	};
 
-	const handleSeekMouseUp: React.MouseEventHandler<HTMLInputElement> = (
+	const handleSeekMouseUp: React.PointerEventHandler<HTMLInputElement> = (
 		e
 	) => {
 		const percentDone = parseFloat((e.target as HTMLInputElement).value);
