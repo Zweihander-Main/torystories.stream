@@ -52,7 +52,7 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 	const handleSeekMouseUp: React.MouseEventHandler<HTMLInputElement> = (
 		e
 	) => {
-		const percentDone = parseFloat(e.target.value);
+		const percentDone = parseFloat((e.target as HTMLInputElement).value);
 		setSeeking(false);
 		if (player.current) {
 			player.current.seekTo(percentDone);
@@ -77,6 +77,7 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 	return (
 		<div className="flex flex-row fixed bottom-0 z-50 bg-black w-screen h-20">
 			<ReactPlayer
+				className="hidden"
 				ref={player}
 				url={url}
 				playing={playing}
@@ -91,10 +92,12 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 				onError={(e) => console.log('Player error: ', e)}
 				onProgress={handleProgress}
 				onDuration={handleDuration}
+				config={{
+					file: {
+						forceAudio: true,
+					},
+				}}
 			/>
-			<button onClick={handlePlayPause}>
-				{playing ? 'Pause' : 'Play'}
-			</button>
 			<input
 				type="range"
 				min={0}
@@ -104,6 +107,41 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 				onMouseDown={handleSeekMouseDown}
 				onChange={handleSeekChange}
 				onMouseUp={handleSeekMouseUp}
+			/>
+			<button onClick={handlePlayPause}>
+				{playing ? 'Pause' : 'Play'}
+			</button>
+			<button onClick={handleSetPlaybackRate} value={0.75}>
+				0.75x
+			</button>
+			<button onClick={handleSetPlaybackRate} value={1}>
+				1x
+			</button>
+			<button onClick={handleSetPlaybackRate} value={1.25}>
+				1.25x
+			</button>
+			<button onClick={handleSetPlaybackRate} value={1.5}>
+				1.5x
+			</button>
+			<button onClick={handleSetPlaybackRate} value={1.75}>
+				1.75x
+			</button>
+			<button onClick={handleSetPlaybackRate} value={2}>
+				2x
+			</button>
+			<input
+				type="range"
+				min={0}
+				max={1}
+				step="any"
+				value={volume}
+				onChange={handleVolumeChange}
+			/>
+			<input
+				id="muted"
+				type="checkbox"
+				checked={muted}
+				onChange={handleToggleMuted}
 			/>
 		</div>
 	);
