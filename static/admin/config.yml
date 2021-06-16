@@ -50,7 +50,7 @@ collections:
             min: 1
           - label: Syndication Links
             name: syndicationLinks
-            widget: markdown
+            widget: list
             field: { label: Link, name: link, widget: string }
             min: 0
           - label: Subtitles File
