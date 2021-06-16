@@ -22,14 +22,12 @@ collections:
             name: title
             widget: string
             required: true
-            comment: 'Just the title, not the episode number.'
           - label: Episode number
             name: episodeNum
             widget: number
             min: 1
             value_type: 'int'
             required: true
-            comment: 'This affects order, try and keep each episode unique.'
           - label: Publish Date
             name: date
             widget: datetime
@@ -58,6 +56,6 @@ collections:
             widget: file
             required: false
           - label: Episode Blurb
-            name: blurb
+            name: body
             widget: markdown
             required: true
