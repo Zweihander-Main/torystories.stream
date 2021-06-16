@@ -7,3 +7,57 @@ public_folder: /img
 publish_mode: editorial_workflow
 editor:
     preview: true
+site_url: https://www.torystories.stream
+collections:
+    - name: episodes
+      label: Episodes
+      folder: content/episodes
+      create: true
+      slug: index
+      media_folder: ''
+      public_folder: ''
+      path: '{{title}}/index'
+      fields:
+          - label: Title
+            name: title
+            widget: string
+            required: true
+            comment: 'Just the title, not the episode number.'
+          - label: Episode number
+            name: episodeNum
+            widget: number
+            min: 1
+            value_type: 'int'
+            required: true
+            comment: 'This affects order, try and keep each episode unique.'
+          - label: Publish Date
+            name: date
+            widget: datetime
+            required: true
+          - label: SEO Description
+            name: description
+            widget: string
+            required: false
+          - label: Episode Image
+            name: featuredImage
+            widget: image
+            required: false
+          - label: Audio files
+            name: audioFiles
+            widget: list
+            allow_add: true
+            field: { label: File, name: file, widget: file }
+            min: 1
+          - label: Syndication Links
+            name: syndicationLinks
+            widget: markdown
+            field: { label: Link, name: link, widget: string }
+            min: 0
+          - label: Subtitles File
+            name: subtitles file
+            widget: file
+            required: false
+          - label: Episode Blurb
+            name: blurb
+            widget: markdown
+            required: true
