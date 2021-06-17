@@ -74,6 +74,10 @@ type File = Node & {
   readonly childrenImageSharp: Maybe<ReadonlyArray<Maybe<ImageSharp>>>;
   /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
   readonly childImageSharp: Maybe<ImageSharp>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
+  readonly childMarkdownRemark: Maybe<MarkdownRemark>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -306,8 +310,13 @@ type SitePage = Node & {
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
   readonly isCreatedByStatefulCreatePages: Maybe<Scalars['Boolean']>;
+  readonly context: Maybe<SitePageContext>;
   readonly pluginCreator: Maybe<SitePlugin>;
   readonly pluginCreatorId: Maybe<Scalars['String']>;
+};
+
+type SitePageContext = {
+  readonly id: Maybe<Scalars['String']>;
 };
 
 type ImageFormat =
@@ -587,9 +596,13 @@ type MarkdownWordCount = {
 
 type MarkdownRemark = Node & {
   readonly id: Scalars['ID'];
+  readonly frontmatter: Maybe<MarkdownRemarkFrontmatter>;
+  readonly excerpt: Maybe<Scalars['String']>;
+  readonly rawMarkdownBody: Maybe<Scalars['String']>;
+  readonly fileAbsolutePath: Maybe<Scalars['String']>;
+  readonly fields: Maybe<MarkdownRemarkFields>;
   readonly html: Maybe<Scalars['String']>;
   readonly htmlAst: Maybe<Scalars['JSON']>;
-  readonly excerpt: Maybe<Scalars['String']>;
   readonly excerptAst: Maybe<Scalars['JSON']>;
   readonly headings: Maybe<ReadonlyArray<Maybe<MarkdownHeading>>>;
   readonly timeToRead: Maybe<Scalars['Int']>;
@@ -624,6 +637,30 @@ type MarkdownRemark_tableOfContentsArgs = {
   pathToSlugField?: Maybe<Scalars['String']>;
   maxDepth: Maybe<Scalars['Int']>;
   heading: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkFrontmatter = {
+  readonly title: Maybe<Scalars['String']>;
+  readonly episodeNum: Maybe<Scalars['Int']>;
+  readonly description: Maybe<Scalars['String']>;
+  readonly date: Maybe<Scalars['Date']>;
+  readonly featuredImage: Maybe<File>;
+  readonly audioFiles: Maybe<ReadonlyArray<Maybe<File>>>;
+  readonly syndicationLinks: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly subtitles: Maybe<File>;
+};
+
+
+type MarkdownRemarkFrontmatter_dateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkFields = {
+  readonly slug: Maybe<Scalars['String']>;
+  readonly sourceInstanceName: Maybe<Scalars['String']>;
 };
 
 type SitePlugin = Node & {
@@ -806,6 +843,8 @@ type Query_fileArgs = {
   publicURL: Maybe<StringQueryOperatorInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
+  childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -926,6 +965,7 @@ type Query_sitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
   isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
   pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
@@ -962,9 +1002,13 @@ type Query_allImageSharpArgs = {
 
 type Query_markdownRemarkArgs = {
   id: Maybe<StringQueryOperatorInput>;
+  frontmatter: Maybe<MarkdownRemarkFrontmatterFilterInput>;
+  excerpt: Maybe<StringQueryOperatorInput>;
+  rawMarkdownBody: Maybe<StringQueryOperatorInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+  fields: Maybe<MarkdownRemarkFieldsFilterInput>;
   html: Maybe<StringQueryOperatorInput>;
   htmlAst: Maybe<JSONQueryOperatorInput>;
-  excerpt: Maybe<StringQueryOperatorInput>;
   excerptAst: Maybe<JSONQueryOperatorInput>;
   headings: Maybe<MarkdownHeadingFilterListInput>;
   timeToRead: Maybe<IntQueryOperatorInput>;
@@ -1162,6 +1206,110 @@ type BooleanQueryOperatorInput = {
   readonly ne: Maybe<Scalars['Boolean']>;
   readonly in: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
   readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
+};
+
+type MarkdownRemarkFilterListInput = {
+  readonly elemMatch: Maybe<MarkdownRemarkFilterInput>;
+};
+
+type MarkdownRemarkFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly frontmatter: Maybe<MarkdownRemarkFrontmatterFilterInput>;
+  readonly excerpt: Maybe<StringQueryOperatorInput>;
+  readonly rawMarkdownBody: Maybe<StringQueryOperatorInput>;
+  readonly fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+  readonly fields: Maybe<MarkdownRemarkFieldsFilterInput>;
+  readonly html: Maybe<StringQueryOperatorInput>;
+  readonly htmlAst: Maybe<JSONQueryOperatorInput>;
+  readonly excerptAst: Maybe<JSONQueryOperatorInput>;
+  readonly headings: Maybe<MarkdownHeadingFilterListInput>;
+  readonly timeToRead: Maybe<IntQueryOperatorInput>;
+  readonly tableOfContents: Maybe<StringQueryOperatorInput>;
+  readonly wordCount: Maybe<MarkdownWordCountFilterInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type MarkdownRemarkFrontmatterFilterInput = {
+  readonly title: Maybe<StringQueryOperatorInput>;
+  readonly episodeNum: Maybe<IntQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly date: Maybe<DateQueryOperatorInput>;
+  readonly featuredImage: Maybe<FileFilterInput>;
+  readonly audioFiles: Maybe<FileFilterListInput>;
+  readonly syndicationLinks: Maybe<StringQueryOperatorInput>;
+  readonly subtitles: Maybe<FileFilterInput>;
+};
+
+type FileFilterInput = {
+  readonly sourceInstanceName: Maybe<StringQueryOperatorInput>;
+  readonly absolutePath: Maybe<StringQueryOperatorInput>;
+  readonly relativePath: Maybe<StringQueryOperatorInput>;
+  readonly extension: Maybe<StringQueryOperatorInput>;
+  readonly size: Maybe<IntQueryOperatorInput>;
+  readonly prettySize: Maybe<StringQueryOperatorInput>;
+  readonly modifiedTime: Maybe<DateQueryOperatorInput>;
+  readonly accessTime: Maybe<DateQueryOperatorInput>;
+  readonly changeTime: Maybe<DateQueryOperatorInput>;
+  readonly birthTime: Maybe<DateQueryOperatorInput>;
+  readonly root: Maybe<StringQueryOperatorInput>;
+  readonly dir: Maybe<StringQueryOperatorInput>;
+  readonly base: Maybe<StringQueryOperatorInput>;
+  readonly ext: Maybe<StringQueryOperatorInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly relativeDirectory: Maybe<StringQueryOperatorInput>;
+  readonly dev: Maybe<IntQueryOperatorInput>;
+  readonly mode: Maybe<IntQueryOperatorInput>;
+  readonly nlink: Maybe<IntQueryOperatorInput>;
+  readonly uid: Maybe<IntQueryOperatorInput>;
+  readonly gid: Maybe<IntQueryOperatorInput>;
+  readonly rdev: Maybe<IntQueryOperatorInput>;
+  readonly ino: Maybe<FloatQueryOperatorInput>;
+  readonly atimeMs: Maybe<FloatQueryOperatorInput>;
+  readonly mtimeMs: Maybe<FloatQueryOperatorInput>;
+  readonly ctimeMs: Maybe<FloatQueryOperatorInput>;
+  readonly atime: Maybe<DateQueryOperatorInput>;
+  readonly mtime: Maybe<DateQueryOperatorInput>;
+  readonly ctime: Maybe<DateQueryOperatorInput>;
+  readonly birthtime: Maybe<DateQueryOperatorInput>;
+  readonly birthtimeMs: Maybe<FloatQueryOperatorInput>;
+  readonly blksize: Maybe<IntQueryOperatorInput>;
+  readonly blocks: Maybe<IntQueryOperatorInput>;
+  readonly publicURL: Maybe<StringQueryOperatorInput>;
+  readonly childrenImageSharp: Maybe<ImageSharpFilterListInput>;
+  readonly childImageSharp: Maybe<ImageSharpFilterInput>;
+  readonly childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  readonly childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type FileFilterListInput = {
+  readonly elemMatch: Maybe<FileFilterInput>;
+};
+
+type MarkdownRemarkFieldsFilterInput = {
+  readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly sourceInstanceName: Maybe<StringQueryOperatorInput>;
+};
+
+type MarkdownHeadingFilterListInput = {
+  readonly elemMatch: Maybe<MarkdownHeadingFilterInput>;
+};
+
+type MarkdownHeadingFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly value: Maybe<StringQueryOperatorInput>;
+  readonly depth: Maybe<IntQueryOperatorInput>;
+};
+
+type MarkdownWordCountFilterInput = {
+  readonly paragraphs: Maybe<IntQueryOperatorInput>;
+  readonly sentences: Maybe<IntQueryOperatorInput>;
+  readonly words: Maybe<IntQueryOperatorInput>;
 };
 
 type FileConnection = {
@@ -1395,6 +1543,357 @@ type FileFieldsEnum =
   | 'childImageSharp.internal.mediaType'
   | 'childImageSharp.internal.owner'
   | 'childImageSharp.internal.type'
+  | 'childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.id'
+  | 'childrenMarkdownRemark.frontmatter.title'
+  | 'childrenMarkdownRemark.frontmatter.episodeNum'
+  | 'childrenMarkdownRemark.frontmatter.description'
+  | 'childrenMarkdownRemark.frontmatter.date'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.sourceInstanceName'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.absolutePath'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.relativePath'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.extension'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.size'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.prettySize'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.modifiedTime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.accessTime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.changeTime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.birthTime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.root'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.dir'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.base'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.ext'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.name'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.relativeDirectory'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.dev'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.mode'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.nlink'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.uid'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.gid'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.rdev'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.ino'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.atimeMs'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.mtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.ctimeMs'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.atime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.mtime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.ctime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.birthtime'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.birthtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.blksize'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.blocks'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.publicURL'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.childrenImageSharp'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.id'
+  | 'childrenMarkdownRemark.frontmatter.featuredImage.children'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.sourceInstanceName'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.absolutePath'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.relativePath'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.extension'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.size'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.prettySize'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.modifiedTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.accessTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.changeTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.root'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.dir'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.base'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.ext'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.name'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.relativeDirectory'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.dev'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.mode'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.nlink'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.uid'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.gid'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.rdev'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.ino'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.atimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.mtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.ctimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.atime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.mtime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.ctime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthtime'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.blksize'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.blocks'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.publicURL'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.childrenImageSharp'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.id'
+  | 'childrenMarkdownRemark.frontmatter.audioFiles.children'
+  | 'childrenMarkdownRemark.frontmatter.syndicationLinks'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.sourceInstanceName'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.absolutePath'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.relativePath'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.extension'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.size'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.prettySize'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.modifiedTime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.accessTime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.changeTime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.birthTime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.root'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.dir'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.base'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.ext'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.name'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.relativeDirectory'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.dev'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.mode'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.nlink'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.uid'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.gid'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.rdev'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.ino'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.atimeMs'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.mtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.ctimeMs'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.atime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.mtime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.ctime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.birthtime'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.birthtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.blksize'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.blocks'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.publicURL'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.childrenImageSharp'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.id'
+  | 'childrenMarkdownRemark.frontmatter.subtitles.children'
+  | 'childrenMarkdownRemark.excerpt'
+  | 'childrenMarkdownRemark.rawMarkdownBody'
+  | 'childrenMarkdownRemark.fileAbsolutePath'
+  | 'childrenMarkdownRemark.fields.slug'
+  | 'childrenMarkdownRemark.fields.sourceInstanceName'
+  | 'childrenMarkdownRemark.html'
+  | 'childrenMarkdownRemark.htmlAst'
+  | 'childrenMarkdownRemark.excerptAst'
+  | 'childrenMarkdownRemark.headings'
+  | 'childrenMarkdownRemark.headings.id'
+  | 'childrenMarkdownRemark.headings.value'
+  | 'childrenMarkdownRemark.headings.depth'
+  | 'childrenMarkdownRemark.timeToRead'
+  | 'childrenMarkdownRemark.tableOfContents'
+  | 'childrenMarkdownRemark.wordCount.paragraphs'
+  | 'childrenMarkdownRemark.wordCount.sentences'
+  | 'childrenMarkdownRemark.wordCount.words'
+  | 'childrenMarkdownRemark.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.children'
+  | 'childrenMarkdownRemark.parent.children'
+  | 'childrenMarkdownRemark.parent.children.id'
+  | 'childrenMarkdownRemark.parent.children.children'
+  | 'childrenMarkdownRemark.parent.internal.content'
+  | 'childrenMarkdownRemark.parent.internal.contentDigest'
+  | 'childrenMarkdownRemark.parent.internal.description'
+  | 'childrenMarkdownRemark.parent.internal.fieldOwners'
+  | 'childrenMarkdownRemark.parent.internal.ignoreType'
+  | 'childrenMarkdownRemark.parent.internal.mediaType'
+  | 'childrenMarkdownRemark.parent.internal.owner'
+  | 'childrenMarkdownRemark.parent.internal.type'
+  | 'childrenMarkdownRemark.children'
+  | 'childrenMarkdownRemark.children.id'
+  | 'childrenMarkdownRemark.children.parent.id'
+  | 'childrenMarkdownRemark.children.parent.children'
+  | 'childrenMarkdownRemark.children.children'
+  | 'childrenMarkdownRemark.children.children.id'
+  | 'childrenMarkdownRemark.children.children.children'
+  | 'childrenMarkdownRemark.children.internal.content'
+  | 'childrenMarkdownRemark.children.internal.contentDigest'
+  | 'childrenMarkdownRemark.children.internal.description'
+  | 'childrenMarkdownRemark.children.internal.fieldOwners'
+  | 'childrenMarkdownRemark.children.internal.ignoreType'
+  | 'childrenMarkdownRemark.children.internal.mediaType'
+  | 'childrenMarkdownRemark.children.internal.owner'
+  | 'childrenMarkdownRemark.children.internal.type'
+  | 'childrenMarkdownRemark.internal.content'
+  | 'childrenMarkdownRemark.internal.contentDigest'
+  | 'childrenMarkdownRemark.internal.description'
+  | 'childrenMarkdownRemark.internal.fieldOwners'
+  | 'childrenMarkdownRemark.internal.ignoreType'
+  | 'childrenMarkdownRemark.internal.mediaType'
+  | 'childrenMarkdownRemark.internal.owner'
+  | 'childrenMarkdownRemark.internal.type'
+  | 'childMarkdownRemark.id'
+  | 'childMarkdownRemark.frontmatter.title'
+  | 'childMarkdownRemark.frontmatter.episodeNum'
+  | 'childMarkdownRemark.frontmatter.description'
+  | 'childMarkdownRemark.frontmatter.date'
+  | 'childMarkdownRemark.frontmatter.featuredImage.sourceInstanceName'
+  | 'childMarkdownRemark.frontmatter.featuredImage.absolutePath'
+  | 'childMarkdownRemark.frontmatter.featuredImage.relativePath'
+  | 'childMarkdownRemark.frontmatter.featuredImage.extension'
+  | 'childMarkdownRemark.frontmatter.featuredImage.size'
+  | 'childMarkdownRemark.frontmatter.featuredImage.prettySize'
+  | 'childMarkdownRemark.frontmatter.featuredImage.modifiedTime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.accessTime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.changeTime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.birthTime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.root'
+  | 'childMarkdownRemark.frontmatter.featuredImage.dir'
+  | 'childMarkdownRemark.frontmatter.featuredImage.base'
+  | 'childMarkdownRemark.frontmatter.featuredImage.ext'
+  | 'childMarkdownRemark.frontmatter.featuredImage.name'
+  | 'childMarkdownRemark.frontmatter.featuredImage.relativeDirectory'
+  | 'childMarkdownRemark.frontmatter.featuredImage.dev'
+  | 'childMarkdownRemark.frontmatter.featuredImage.mode'
+  | 'childMarkdownRemark.frontmatter.featuredImage.nlink'
+  | 'childMarkdownRemark.frontmatter.featuredImage.uid'
+  | 'childMarkdownRemark.frontmatter.featuredImage.gid'
+  | 'childMarkdownRemark.frontmatter.featuredImage.rdev'
+  | 'childMarkdownRemark.frontmatter.featuredImage.ino'
+  | 'childMarkdownRemark.frontmatter.featuredImage.atimeMs'
+  | 'childMarkdownRemark.frontmatter.featuredImage.mtimeMs'
+  | 'childMarkdownRemark.frontmatter.featuredImage.ctimeMs'
+  | 'childMarkdownRemark.frontmatter.featuredImage.atime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.mtime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.ctime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.birthtime'
+  | 'childMarkdownRemark.frontmatter.featuredImage.birthtimeMs'
+  | 'childMarkdownRemark.frontmatter.featuredImage.blksize'
+  | 'childMarkdownRemark.frontmatter.featuredImage.blocks'
+  | 'childMarkdownRemark.frontmatter.featuredImage.publicURL'
+  | 'childMarkdownRemark.frontmatter.featuredImage.childrenImageSharp'
+  | 'childMarkdownRemark.frontmatter.featuredImage.childrenMarkdownRemark'
+  | 'childMarkdownRemark.frontmatter.featuredImage.id'
+  | 'childMarkdownRemark.frontmatter.featuredImage.children'
+  | 'childMarkdownRemark.frontmatter.audioFiles'
+  | 'childMarkdownRemark.frontmatter.audioFiles.sourceInstanceName'
+  | 'childMarkdownRemark.frontmatter.audioFiles.absolutePath'
+  | 'childMarkdownRemark.frontmatter.audioFiles.relativePath'
+  | 'childMarkdownRemark.frontmatter.audioFiles.extension'
+  | 'childMarkdownRemark.frontmatter.audioFiles.size'
+  | 'childMarkdownRemark.frontmatter.audioFiles.prettySize'
+  | 'childMarkdownRemark.frontmatter.audioFiles.modifiedTime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.accessTime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.changeTime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.birthTime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.root'
+  | 'childMarkdownRemark.frontmatter.audioFiles.dir'
+  | 'childMarkdownRemark.frontmatter.audioFiles.base'
+  | 'childMarkdownRemark.frontmatter.audioFiles.ext'
+  | 'childMarkdownRemark.frontmatter.audioFiles.name'
+  | 'childMarkdownRemark.frontmatter.audioFiles.relativeDirectory'
+  | 'childMarkdownRemark.frontmatter.audioFiles.dev'
+  | 'childMarkdownRemark.frontmatter.audioFiles.mode'
+  | 'childMarkdownRemark.frontmatter.audioFiles.nlink'
+  | 'childMarkdownRemark.frontmatter.audioFiles.uid'
+  | 'childMarkdownRemark.frontmatter.audioFiles.gid'
+  | 'childMarkdownRemark.frontmatter.audioFiles.rdev'
+  | 'childMarkdownRemark.frontmatter.audioFiles.ino'
+  | 'childMarkdownRemark.frontmatter.audioFiles.atimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFiles.mtimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFiles.ctimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFiles.atime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.mtime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.ctime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.birthtime'
+  | 'childMarkdownRemark.frontmatter.audioFiles.birthtimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFiles.blksize'
+  | 'childMarkdownRemark.frontmatter.audioFiles.blocks'
+  | 'childMarkdownRemark.frontmatter.audioFiles.publicURL'
+  | 'childMarkdownRemark.frontmatter.audioFiles.childrenImageSharp'
+  | 'childMarkdownRemark.frontmatter.audioFiles.childrenMarkdownRemark'
+  | 'childMarkdownRemark.frontmatter.audioFiles.id'
+  | 'childMarkdownRemark.frontmatter.audioFiles.children'
+  | 'childMarkdownRemark.frontmatter.syndicationLinks'
+  | 'childMarkdownRemark.frontmatter.subtitles.sourceInstanceName'
+  | 'childMarkdownRemark.frontmatter.subtitles.absolutePath'
+  | 'childMarkdownRemark.frontmatter.subtitles.relativePath'
+  | 'childMarkdownRemark.frontmatter.subtitles.extension'
+  | 'childMarkdownRemark.frontmatter.subtitles.size'
+  | 'childMarkdownRemark.frontmatter.subtitles.prettySize'
+  | 'childMarkdownRemark.frontmatter.subtitles.modifiedTime'
+  | 'childMarkdownRemark.frontmatter.subtitles.accessTime'
+  | 'childMarkdownRemark.frontmatter.subtitles.changeTime'
+  | 'childMarkdownRemark.frontmatter.subtitles.birthTime'
+  | 'childMarkdownRemark.frontmatter.subtitles.root'
+  | 'childMarkdownRemark.frontmatter.subtitles.dir'
+  | 'childMarkdownRemark.frontmatter.subtitles.base'
+  | 'childMarkdownRemark.frontmatter.subtitles.ext'
+  | 'childMarkdownRemark.frontmatter.subtitles.name'
+  | 'childMarkdownRemark.frontmatter.subtitles.relativeDirectory'
+  | 'childMarkdownRemark.frontmatter.subtitles.dev'
+  | 'childMarkdownRemark.frontmatter.subtitles.mode'
+  | 'childMarkdownRemark.frontmatter.subtitles.nlink'
+  | 'childMarkdownRemark.frontmatter.subtitles.uid'
+  | 'childMarkdownRemark.frontmatter.subtitles.gid'
+  | 'childMarkdownRemark.frontmatter.subtitles.rdev'
+  | 'childMarkdownRemark.frontmatter.subtitles.ino'
+  | 'childMarkdownRemark.frontmatter.subtitles.atimeMs'
+  | 'childMarkdownRemark.frontmatter.subtitles.mtimeMs'
+  | 'childMarkdownRemark.frontmatter.subtitles.ctimeMs'
+  | 'childMarkdownRemark.frontmatter.subtitles.atime'
+  | 'childMarkdownRemark.frontmatter.subtitles.mtime'
+  | 'childMarkdownRemark.frontmatter.subtitles.ctime'
+  | 'childMarkdownRemark.frontmatter.subtitles.birthtime'
+  | 'childMarkdownRemark.frontmatter.subtitles.birthtimeMs'
+  | 'childMarkdownRemark.frontmatter.subtitles.blksize'
+  | 'childMarkdownRemark.frontmatter.subtitles.blocks'
+  | 'childMarkdownRemark.frontmatter.subtitles.publicURL'
+  | 'childMarkdownRemark.frontmatter.subtitles.childrenImageSharp'
+  | 'childMarkdownRemark.frontmatter.subtitles.childrenMarkdownRemark'
+  | 'childMarkdownRemark.frontmatter.subtitles.id'
+  | 'childMarkdownRemark.frontmatter.subtitles.children'
+  | 'childMarkdownRemark.excerpt'
+  | 'childMarkdownRemark.rawMarkdownBody'
+  | 'childMarkdownRemark.fileAbsolutePath'
+  | 'childMarkdownRemark.fields.slug'
+  | 'childMarkdownRemark.fields.sourceInstanceName'
+  | 'childMarkdownRemark.html'
+  | 'childMarkdownRemark.htmlAst'
+  | 'childMarkdownRemark.excerptAst'
+  | 'childMarkdownRemark.headings'
+  | 'childMarkdownRemark.headings.id'
+  | 'childMarkdownRemark.headings.value'
+  | 'childMarkdownRemark.headings.depth'
+  | 'childMarkdownRemark.timeToRead'
+  | 'childMarkdownRemark.tableOfContents'
+  | 'childMarkdownRemark.wordCount.paragraphs'
+  | 'childMarkdownRemark.wordCount.sentences'
+  | 'childMarkdownRemark.wordCount.words'
+  | 'childMarkdownRemark.parent.id'
+  | 'childMarkdownRemark.parent.parent.id'
+  | 'childMarkdownRemark.parent.parent.children'
+  | 'childMarkdownRemark.parent.children'
+  | 'childMarkdownRemark.parent.children.id'
+  | 'childMarkdownRemark.parent.children.children'
+  | 'childMarkdownRemark.parent.internal.content'
+  | 'childMarkdownRemark.parent.internal.contentDigest'
+  | 'childMarkdownRemark.parent.internal.description'
+  | 'childMarkdownRemark.parent.internal.fieldOwners'
+  | 'childMarkdownRemark.parent.internal.ignoreType'
+  | 'childMarkdownRemark.parent.internal.mediaType'
+  | 'childMarkdownRemark.parent.internal.owner'
+  | 'childMarkdownRemark.parent.internal.type'
+  | 'childMarkdownRemark.children'
+  | 'childMarkdownRemark.children.id'
+  | 'childMarkdownRemark.children.parent.id'
+  | 'childMarkdownRemark.children.parent.children'
+  | 'childMarkdownRemark.children.children'
+  | 'childMarkdownRemark.children.children.id'
+  | 'childMarkdownRemark.children.children.children'
+  | 'childMarkdownRemark.children.internal.content'
+  | 'childMarkdownRemark.children.internal.contentDigest'
+  | 'childMarkdownRemark.children.internal.description'
+  | 'childMarkdownRemark.children.internal.fieldOwners'
+  | 'childMarkdownRemark.children.internal.ignoreType'
+  | 'childMarkdownRemark.children.internal.mediaType'
+  | 'childMarkdownRemark.children.internal.owner'
+  | 'childMarkdownRemark.children.internal.type'
+  | 'childMarkdownRemark.internal.content'
+  | 'childMarkdownRemark.internal.contentDigest'
+  | 'childMarkdownRemark.internal.description'
+  | 'childMarkdownRemark.internal.fieldOwners'
+  | 'childMarkdownRemark.internal.ignoreType'
+  | 'childMarkdownRemark.internal.mediaType'
+  | 'childMarkdownRemark.internal.owner'
+  | 'childMarkdownRemark.internal.type'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1489,49 +1988,6 @@ type FileGroupConnection = {
   readonly pageInfo: PageInfo;
   readonly field: Scalars['String'];
   readonly fieldValue: Maybe<Scalars['String']>;
-};
-
-type FileFilterInput = {
-  readonly sourceInstanceName: Maybe<StringQueryOperatorInput>;
-  readonly absolutePath: Maybe<StringQueryOperatorInput>;
-  readonly relativePath: Maybe<StringQueryOperatorInput>;
-  readonly extension: Maybe<StringQueryOperatorInput>;
-  readonly size: Maybe<IntQueryOperatorInput>;
-  readonly prettySize: Maybe<StringQueryOperatorInput>;
-  readonly modifiedTime: Maybe<DateQueryOperatorInput>;
-  readonly accessTime: Maybe<DateQueryOperatorInput>;
-  readonly changeTime: Maybe<DateQueryOperatorInput>;
-  readonly birthTime: Maybe<DateQueryOperatorInput>;
-  readonly root: Maybe<StringQueryOperatorInput>;
-  readonly dir: Maybe<StringQueryOperatorInput>;
-  readonly base: Maybe<StringQueryOperatorInput>;
-  readonly ext: Maybe<StringQueryOperatorInput>;
-  readonly name: Maybe<StringQueryOperatorInput>;
-  readonly relativeDirectory: Maybe<StringQueryOperatorInput>;
-  readonly dev: Maybe<IntQueryOperatorInput>;
-  readonly mode: Maybe<IntQueryOperatorInput>;
-  readonly nlink: Maybe<IntQueryOperatorInput>;
-  readonly uid: Maybe<IntQueryOperatorInput>;
-  readonly gid: Maybe<IntQueryOperatorInput>;
-  readonly rdev: Maybe<IntQueryOperatorInput>;
-  readonly ino: Maybe<FloatQueryOperatorInput>;
-  readonly atimeMs: Maybe<FloatQueryOperatorInput>;
-  readonly mtimeMs: Maybe<FloatQueryOperatorInput>;
-  readonly ctimeMs: Maybe<FloatQueryOperatorInput>;
-  readonly atime: Maybe<DateQueryOperatorInput>;
-  readonly mtime: Maybe<DateQueryOperatorInput>;
-  readonly ctime: Maybe<DateQueryOperatorInput>;
-  readonly birthtime: Maybe<DateQueryOperatorInput>;
-  readonly birthtimeMs: Maybe<FloatQueryOperatorInput>;
-  readonly blksize: Maybe<IntQueryOperatorInput>;
-  readonly blocks: Maybe<IntQueryOperatorInput>;
-  readonly publicURL: Maybe<StringQueryOperatorInput>;
-  readonly childrenImageSharp: Maybe<ImageSharpFilterListInput>;
-  readonly childImageSharp: Maybe<ImageSharpFilterInput>;
-  readonly id: Maybe<StringQueryOperatorInput>;
-  readonly parent: Maybe<NodeFilterInput>;
-  readonly children: Maybe<NodeFilterListInput>;
-  readonly internal: Maybe<InternalFilterInput>;
 };
 
 type FileSortInput = {
@@ -2105,6 +2561,10 @@ type SiteFunctionSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type SitePageContextFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+};
+
 type SitePluginFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -2364,6 +2824,7 @@ type SitePageFieldsEnum =
   | 'internal.owner'
   | 'internal.type'
   | 'isCreatedByStatefulCreatePages'
+  | 'context.id'
   | 'pluginCreator.id'
   | 'pluginCreator.parent.id'
   | 'pluginCreator.parent.parent.id'
@@ -2463,6 +2924,7 @@ type SitePageFilterInput = {
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
   readonly isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+  readonly context: Maybe<SitePageContextFilterInput>;
   readonly pluginCreator: Maybe<SitePluginFilterInput>;
   readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
@@ -2651,22 +3113,6 @@ type ImageSharpSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type MarkdownHeadingFilterListInput = {
-  readonly elemMatch: Maybe<MarkdownHeadingFilterInput>;
-};
-
-type MarkdownHeadingFilterInput = {
-  readonly id: Maybe<StringQueryOperatorInput>;
-  readonly value: Maybe<StringQueryOperatorInput>;
-  readonly depth: Maybe<IntQueryOperatorInput>;
-};
-
-type MarkdownWordCountFilterInput = {
-  readonly paragraphs: Maybe<IntQueryOperatorInput>;
-  readonly sentences: Maybe<IntQueryOperatorInput>;
-  readonly words: Maybe<IntQueryOperatorInput>;
-};
-
 type MarkdownRemarkConnection = {
   readonly totalCount: Scalars['Int'];
   readonly edges: ReadonlyArray<MarkdownRemarkEdge>;
@@ -2714,9 +3160,253 @@ type MarkdownRemarkEdge = {
 
 type MarkdownRemarkFieldsEnum =
   | 'id'
+  | 'frontmatter.title'
+  | 'frontmatter.episodeNum'
+  | 'frontmatter.description'
+  | 'frontmatter.date'
+  | 'frontmatter.featuredImage.sourceInstanceName'
+  | 'frontmatter.featuredImage.absolutePath'
+  | 'frontmatter.featuredImage.relativePath'
+  | 'frontmatter.featuredImage.extension'
+  | 'frontmatter.featuredImage.size'
+  | 'frontmatter.featuredImage.prettySize'
+  | 'frontmatter.featuredImage.modifiedTime'
+  | 'frontmatter.featuredImage.accessTime'
+  | 'frontmatter.featuredImage.changeTime'
+  | 'frontmatter.featuredImage.birthTime'
+  | 'frontmatter.featuredImage.root'
+  | 'frontmatter.featuredImage.dir'
+  | 'frontmatter.featuredImage.base'
+  | 'frontmatter.featuredImage.ext'
+  | 'frontmatter.featuredImage.name'
+  | 'frontmatter.featuredImage.relativeDirectory'
+  | 'frontmatter.featuredImage.dev'
+  | 'frontmatter.featuredImage.mode'
+  | 'frontmatter.featuredImage.nlink'
+  | 'frontmatter.featuredImage.uid'
+  | 'frontmatter.featuredImage.gid'
+  | 'frontmatter.featuredImage.rdev'
+  | 'frontmatter.featuredImage.ino'
+  | 'frontmatter.featuredImage.atimeMs'
+  | 'frontmatter.featuredImage.mtimeMs'
+  | 'frontmatter.featuredImage.ctimeMs'
+  | 'frontmatter.featuredImage.atime'
+  | 'frontmatter.featuredImage.mtime'
+  | 'frontmatter.featuredImage.ctime'
+  | 'frontmatter.featuredImage.birthtime'
+  | 'frontmatter.featuredImage.birthtimeMs'
+  | 'frontmatter.featuredImage.blksize'
+  | 'frontmatter.featuredImage.blocks'
+  | 'frontmatter.featuredImage.publicURL'
+  | 'frontmatter.featuredImage.childrenImageSharp'
+  | 'frontmatter.featuredImage.childrenImageSharp.gatsbyImageData'
+  | 'frontmatter.featuredImage.childrenImageSharp.id'
+  | 'frontmatter.featuredImage.childrenImageSharp.children'
+  | 'frontmatter.featuredImage.childImageSharp.gatsbyImageData'
+  | 'frontmatter.featuredImage.childImageSharp.id'
+  | 'frontmatter.featuredImage.childImageSharp.children'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.id'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.excerpt'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.html'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.htmlAst'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.excerptAst'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.headings'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.timeToRead'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.tableOfContents'
+  | 'frontmatter.featuredImage.childrenMarkdownRemark.children'
+  | 'frontmatter.featuredImage.childMarkdownRemark.id'
+  | 'frontmatter.featuredImage.childMarkdownRemark.excerpt'
+  | 'frontmatter.featuredImage.childMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.featuredImage.childMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.featuredImage.childMarkdownRemark.html'
+  | 'frontmatter.featuredImage.childMarkdownRemark.htmlAst'
+  | 'frontmatter.featuredImage.childMarkdownRemark.excerptAst'
+  | 'frontmatter.featuredImage.childMarkdownRemark.headings'
+  | 'frontmatter.featuredImage.childMarkdownRemark.timeToRead'
+  | 'frontmatter.featuredImage.childMarkdownRemark.tableOfContents'
+  | 'frontmatter.featuredImage.childMarkdownRemark.children'
+  | 'frontmatter.featuredImage.id'
+  | 'frontmatter.featuredImage.parent.id'
+  | 'frontmatter.featuredImage.parent.children'
+  | 'frontmatter.featuredImage.children'
+  | 'frontmatter.featuredImage.children.id'
+  | 'frontmatter.featuredImage.children.children'
+  | 'frontmatter.featuredImage.internal.content'
+  | 'frontmatter.featuredImage.internal.contentDigest'
+  | 'frontmatter.featuredImage.internal.description'
+  | 'frontmatter.featuredImage.internal.fieldOwners'
+  | 'frontmatter.featuredImage.internal.ignoreType'
+  | 'frontmatter.featuredImage.internal.mediaType'
+  | 'frontmatter.featuredImage.internal.owner'
+  | 'frontmatter.featuredImage.internal.type'
+  | 'frontmatter.audioFiles'
+  | 'frontmatter.audioFiles.sourceInstanceName'
+  | 'frontmatter.audioFiles.absolutePath'
+  | 'frontmatter.audioFiles.relativePath'
+  | 'frontmatter.audioFiles.extension'
+  | 'frontmatter.audioFiles.size'
+  | 'frontmatter.audioFiles.prettySize'
+  | 'frontmatter.audioFiles.modifiedTime'
+  | 'frontmatter.audioFiles.accessTime'
+  | 'frontmatter.audioFiles.changeTime'
+  | 'frontmatter.audioFiles.birthTime'
+  | 'frontmatter.audioFiles.root'
+  | 'frontmatter.audioFiles.dir'
+  | 'frontmatter.audioFiles.base'
+  | 'frontmatter.audioFiles.ext'
+  | 'frontmatter.audioFiles.name'
+  | 'frontmatter.audioFiles.relativeDirectory'
+  | 'frontmatter.audioFiles.dev'
+  | 'frontmatter.audioFiles.mode'
+  | 'frontmatter.audioFiles.nlink'
+  | 'frontmatter.audioFiles.uid'
+  | 'frontmatter.audioFiles.gid'
+  | 'frontmatter.audioFiles.rdev'
+  | 'frontmatter.audioFiles.ino'
+  | 'frontmatter.audioFiles.atimeMs'
+  | 'frontmatter.audioFiles.mtimeMs'
+  | 'frontmatter.audioFiles.ctimeMs'
+  | 'frontmatter.audioFiles.atime'
+  | 'frontmatter.audioFiles.mtime'
+  | 'frontmatter.audioFiles.ctime'
+  | 'frontmatter.audioFiles.birthtime'
+  | 'frontmatter.audioFiles.birthtimeMs'
+  | 'frontmatter.audioFiles.blksize'
+  | 'frontmatter.audioFiles.blocks'
+  | 'frontmatter.audioFiles.publicURL'
+  | 'frontmatter.audioFiles.childrenImageSharp'
+  | 'frontmatter.audioFiles.childrenImageSharp.gatsbyImageData'
+  | 'frontmatter.audioFiles.childrenImageSharp.id'
+  | 'frontmatter.audioFiles.childrenImageSharp.children'
+  | 'frontmatter.audioFiles.childImageSharp.gatsbyImageData'
+  | 'frontmatter.audioFiles.childImageSharp.id'
+  | 'frontmatter.audioFiles.childImageSharp.children'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.id'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.excerpt'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.html'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.htmlAst'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.excerptAst'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.headings'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.timeToRead'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.tableOfContents'
+  | 'frontmatter.audioFiles.childrenMarkdownRemark.children'
+  | 'frontmatter.audioFiles.childMarkdownRemark.id'
+  | 'frontmatter.audioFiles.childMarkdownRemark.excerpt'
+  | 'frontmatter.audioFiles.childMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.audioFiles.childMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.audioFiles.childMarkdownRemark.html'
+  | 'frontmatter.audioFiles.childMarkdownRemark.htmlAst'
+  | 'frontmatter.audioFiles.childMarkdownRemark.excerptAst'
+  | 'frontmatter.audioFiles.childMarkdownRemark.headings'
+  | 'frontmatter.audioFiles.childMarkdownRemark.timeToRead'
+  | 'frontmatter.audioFiles.childMarkdownRemark.tableOfContents'
+  | 'frontmatter.audioFiles.childMarkdownRemark.children'
+  | 'frontmatter.audioFiles.id'
+  | 'frontmatter.audioFiles.parent.id'
+  | 'frontmatter.audioFiles.parent.children'
+  | 'frontmatter.audioFiles.children'
+  | 'frontmatter.audioFiles.children.id'
+  | 'frontmatter.audioFiles.children.children'
+  | 'frontmatter.audioFiles.internal.content'
+  | 'frontmatter.audioFiles.internal.contentDigest'
+  | 'frontmatter.audioFiles.internal.description'
+  | 'frontmatter.audioFiles.internal.fieldOwners'
+  | 'frontmatter.audioFiles.internal.ignoreType'
+  | 'frontmatter.audioFiles.internal.mediaType'
+  | 'frontmatter.audioFiles.internal.owner'
+  | 'frontmatter.audioFiles.internal.type'
+  | 'frontmatter.syndicationLinks'
+  | 'frontmatter.subtitles.sourceInstanceName'
+  | 'frontmatter.subtitles.absolutePath'
+  | 'frontmatter.subtitles.relativePath'
+  | 'frontmatter.subtitles.extension'
+  | 'frontmatter.subtitles.size'
+  | 'frontmatter.subtitles.prettySize'
+  | 'frontmatter.subtitles.modifiedTime'
+  | 'frontmatter.subtitles.accessTime'
+  | 'frontmatter.subtitles.changeTime'
+  | 'frontmatter.subtitles.birthTime'
+  | 'frontmatter.subtitles.root'
+  | 'frontmatter.subtitles.dir'
+  | 'frontmatter.subtitles.base'
+  | 'frontmatter.subtitles.ext'
+  | 'frontmatter.subtitles.name'
+  | 'frontmatter.subtitles.relativeDirectory'
+  | 'frontmatter.subtitles.dev'
+  | 'frontmatter.subtitles.mode'
+  | 'frontmatter.subtitles.nlink'
+  | 'frontmatter.subtitles.uid'
+  | 'frontmatter.subtitles.gid'
+  | 'frontmatter.subtitles.rdev'
+  | 'frontmatter.subtitles.ino'
+  | 'frontmatter.subtitles.atimeMs'
+  | 'frontmatter.subtitles.mtimeMs'
+  | 'frontmatter.subtitles.ctimeMs'
+  | 'frontmatter.subtitles.atime'
+  | 'frontmatter.subtitles.mtime'
+  | 'frontmatter.subtitles.ctime'
+  | 'frontmatter.subtitles.birthtime'
+  | 'frontmatter.subtitles.birthtimeMs'
+  | 'frontmatter.subtitles.blksize'
+  | 'frontmatter.subtitles.blocks'
+  | 'frontmatter.subtitles.publicURL'
+  | 'frontmatter.subtitles.childrenImageSharp'
+  | 'frontmatter.subtitles.childrenImageSharp.gatsbyImageData'
+  | 'frontmatter.subtitles.childrenImageSharp.id'
+  | 'frontmatter.subtitles.childrenImageSharp.children'
+  | 'frontmatter.subtitles.childImageSharp.gatsbyImageData'
+  | 'frontmatter.subtitles.childImageSharp.id'
+  | 'frontmatter.subtitles.childImageSharp.children'
+  | 'frontmatter.subtitles.childrenMarkdownRemark'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.id'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.excerpt'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.html'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.htmlAst'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.excerptAst'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.headings'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.timeToRead'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.tableOfContents'
+  | 'frontmatter.subtitles.childrenMarkdownRemark.children'
+  | 'frontmatter.subtitles.childMarkdownRemark.id'
+  | 'frontmatter.subtitles.childMarkdownRemark.excerpt'
+  | 'frontmatter.subtitles.childMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.subtitles.childMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.subtitles.childMarkdownRemark.html'
+  | 'frontmatter.subtitles.childMarkdownRemark.htmlAst'
+  | 'frontmatter.subtitles.childMarkdownRemark.excerptAst'
+  | 'frontmatter.subtitles.childMarkdownRemark.headings'
+  | 'frontmatter.subtitles.childMarkdownRemark.timeToRead'
+  | 'frontmatter.subtitles.childMarkdownRemark.tableOfContents'
+  | 'frontmatter.subtitles.childMarkdownRemark.children'
+  | 'frontmatter.subtitles.id'
+  | 'frontmatter.subtitles.parent.id'
+  | 'frontmatter.subtitles.parent.children'
+  | 'frontmatter.subtitles.children'
+  | 'frontmatter.subtitles.children.id'
+  | 'frontmatter.subtitles.children.children'
+  | 'frontmatter.subtitles.internal.content'
+  | 'frontmatter.subtitles.internal.contentDigest'
+  | 'frontmatter.subtitles.internal.description'
+  | 'frontmatter.subtitles.internal.fieldOwners'
+  | 'frontmatter.subtitles.internal.ignoreType'
+  | 'frontmatter.subtitles.internal.mediaType'
+  | 'frontmatter.subtitles.internal.owner'
+  | 'frontmatter.subtitles.internal.type'
+  | 'excerpt'
+  | 'rawMarkdownBody'
+  | 'fileAbsolutePath'
+  | 'fields.slug'
+  | 'fields.sourceInstanceName'
   | 'html'
   | 'htmlAst'
-  | 'excerpt'
   | 'excerptAst'
   | 'headings'
   | 'headings.id'
@@ -2820,21 +3510,6 @@ type MarkdownRemarkGroupConnection = {
   readonly pageInfo: PageInfo;
   readonly field: Scalars['String'];
   readonly fieldValue: Maybe<Scalars['String']>;
-};
-
-type MarkdownRemarkFilterInput = {
-  readonly id: Maybe<StringQueryOperatorInput>;
-  readonly html: Maybe<StringQueryOperatorInput>;
-  readonly htmlAst: Maybe<JSONQueryOperatorInput>;
-  readonly excerpt: Maybe<StringQueryOperatorInput>;
-  readonly excerptAst: Maybe<JSONQueryOperatorInput>;
-  readonly headings: Maybe<MarkdownHeadingFilterListInput>;
-  readonly timeToRead: Maybe<IntQueryOperatorInput>;
-  readonly tableOfContents: Maybe<StringQueryOperatorInput>;
-  readonly wordCount: Maybe<MarkdownWordCountFilterInput>;
-  readonly parent: Maybe<NodeFilterInput>;
-  readonly children: Maybe<NodeFilterListInput>;
-  readonly internal: Maybe<InternalFilterInput>;
 };
 
 type MarkdownRemarkSortInput = {
@@ -3189,11 +3864,6 @@ type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
@@ -3219,5 +3889,23 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
+
+
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<Pick<File, 'relativePath'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'relativePath'>>>>, readonly subtitles: Maybe<Pick<File, 'relativePath'>> }
+    )> }
+  )> };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

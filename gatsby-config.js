@@ -47,6 +47,13 @@ module.exports = {
 		// 		icon: `src/images/torystoriesicon.png`, // This path is relative to the root of the site.
 		// 	},
 		// },
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/content/episodes`,
+				name: `episodes`,
+			},
+		},
 		`gatsby-transformer-remark`,
 		`gatsby-plugin-catch-links`,
 		`gatsby-plugin-netlify-cms`, // should be last in the array or close to it

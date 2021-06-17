@@ -52,7 +52,7 @@ collections:
             field: { label: Link, name: link, widget: string }
             min: 0
           - label: Subtitles File
-            name: subtitles file
+            name: subtitles
             widget: file
             required: false
           - label: Episode Blurb
