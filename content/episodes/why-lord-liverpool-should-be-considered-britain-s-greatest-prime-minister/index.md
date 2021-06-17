@@ -6,7 +6,7 @@ audioFiles:
     - torystoriesep1.mp3
 syndicationLinks:
     - 'https://www.test.com'
-subtitles file: torystories_1_working.vtt
+subtitles file: torystoriesep1.vtt
 ---
 
 Blurb here
