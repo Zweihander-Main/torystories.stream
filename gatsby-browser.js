@@ -3,4 +3,11 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import "./src/styles/index.scss"
+import './src/styles/index.scss';
+
+import React from 'react';
+import AppProvider from './src/contexts/AppContext';
+
+export const wrapRootElement = ({ element }) => (
+	<AppProvider>{element}</AppProvider>
+);
