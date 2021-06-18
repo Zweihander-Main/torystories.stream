@@ -31,7 +31,10 @@
 			"components": ["src/components"],
 			"styles": ["src/styles"],
 			"pages": ["src/pages"],
-			"images": ["src/images"]
+			"images": ["src/images"],
+			"contexts": ["src/contexts"],
+			"hooks": ["src/hooks"],
+			"utils": ["src/utils"]
 		},
 		"plugins": [
 			{

@@ -1,21 +1,16 @@
 import React from 'react';
+import SessionStorage from 'utils/sessionStorage';
 
-interface EpisodeContextInterface {
-	playedSeconds: number;
-	setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const EpisodeContext = React.createContext<EpisodeContextInterface | null>(
-	null
+const EpisodeContext = React.createContext<SessionStorage>(
+	SessionStorage.getInstance()
 );
 
 export default EpisodeContext;
 
 export const EpisodeProvider: React.FC = ({ children }) => {
-	const [playedSeconds, setPlayedSeconds] = React.useState(0);
-
+	const storage = SessionStorage.getInstance();
 	return (
-		<EpisodeContext.Provider value={{ playedSeconds, setPlayedSeconds }}>
+		<EpisodeContext.Provider value={storage}>
 			{children}
 		</EpisodeContext.Provider>
 	);
