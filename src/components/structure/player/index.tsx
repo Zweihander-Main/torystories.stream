@@ -39,7 +39,6 @@ const Player: React.FC = () => {
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
 	const [playbackRate, setPlaybackRate] = useState(1.0);
-	const [duration, setDuration] = useState(0);
 	const [seeking, setSeeking] = useState(false);
 
 	const handlePlayPause = () => {
@@ -104,10 +103,6 @@ const Player: React.FC = () => {
 		setPlaying(false);
 	};
 
-	const handleDuration = (duration: number) => {
-		setDuration(duration);
-	};
-
 	useEffect(() => {
 		if (player.current && player.current.seekTo && playedSeconds) {
 			player.current.seekTo(playedSeconds);
@@ -135,7 +130,6 @@ const Player: React.FC = () => {
 				onEnded={handleEnded}
 				onError={(e) => console.log('Player error: ', e)}
 				onProgress={handleProgress}
-				onDuration={handleDuration}
 				config={{
 					file: {
 						forceAudio: true,
