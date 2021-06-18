@@ -1,14 +1,22 @@
 import { useStaticQuery, graphql } from 'gatsby';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
+
+interface episodeData {
+	title: string;
+	blurb: string;
+	date: string;
+	episodeNum: number;
+	featuredImage: IGatsbyImageData | null;
+	audioURL: string | null;
+}
+
+interface episodeDataInArray extends episodeData {
+	id: string;
+}
 
 type EpisodeListProps = {
-	getEpByID: (id: string) => {
-		title: string;
-		blurb: string;
-		date: string;
-		episodeNum: number;
-		imageURL: string | null;
-		audioURL: string | null;
-	};
+	getEpByID: (id: string) => episodeData;
+	episodeArray: Array<episodeDataInArray>;
 };
 
 const useEpisodeList = (): EpisodeListProps => {
@@ -26,7 +34,9 @@ const useEpisodeList = (): EpisodeListProps => {
 							id
 							frontmatter {
 								featuredImage {
-									publicURL
+									childImageSharp {
+										gatsbyImageData(layout: CONSTRAINED)
+									}
 								}
 								description
 								episodeNum
@@ -44,12 +54,14 @@ const useEpisodeList = (): EpisodeListProps => {
 		`
 	);
 
-	const episodeLookupTable = {};
+	const episodeLookupTable: { [key: string]: episodeData } = {};
 	episodeListData.allMarkdownRemark.edges.forEach(({ node: episode }) => {
 		const { id, excerpt, frontmatter } = episode;
 		let featuredImage = null;
 		if (frontmatter?.featuredImage) {
-			featuredImage = frontmatter?.featuredImage.publicURL;
+			featuredImage =
+				frontmatter?.featuredImage.childImageSharp?.gatsbyImageData ||
+				null;
 		}
 		episodeLookupTable[id] = {
 			title: frontmatter?.title || '',
@@ -65,8 +77,18 @@ const useEpisodeList = (): EpisodeListProps => {
 		return episodeLookupTable[id];
 	};
 
+	const episodeArray = Object.entries(episodeLookupTable)
+		.map(([id, epData]) => {
+			return { id, ...epData };
+		})
+		.sort((a, b) => {
+			// most recent numbers first
+			return b.episodeNum - a.episodeNum;
+		});
+
 	return {
 		getEpByID,
+		episodeArray,
 	};
 };
 

@@ -39,17 +39,11 @@ export const pageQuery = graphql`
 				date(formatString: "MMMM DD, YYYY")
 				description
 				featuredImage {
-					relativePath
-					absolutePath
-				}
-				audioFile {
-					relativePath
-					absolutePath
+					publicURL
 				}
 				syndicationLinks
 				subtitles {
-					relativePath
-					absolutePath
+					publicURL
 				}
 			}
 		}

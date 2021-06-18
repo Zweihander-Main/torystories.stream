@@ -105,7 +105,7 @@ const Player: React.FC = () => {
 		}
 	};
 
-	// This works because the sessionStorage is assumed to be faster than media loading
+	// This works because sessionStorage is assumed to be faster than media loading
 	const handleReady = () => {
 		if (player.current && loadedSeconds !== 0) {
 			player.current.seekTo(playedSeconds);
