@@ -3909,7 +3909,7 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
         & { readonly frontmatter: Maybe<(
           Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
           & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
-        )> }
+        )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;

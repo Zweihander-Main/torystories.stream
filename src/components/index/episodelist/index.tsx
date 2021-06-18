@@ -1,6 +1,7 @@
 import React from 'react';
 import useEpisodeList from 'hooks/useEpisodeList';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { Link } from 'gatsby';
 
 const EpisodeList: React.FC = () => {
 	const { episodeArray } = useEpisodeList();
@@ -16,10 +17,11 @@ const EpisodeList: React.FC = () => {
 					blurb,
 					date,
 					episodeNum,
+					slug,
 				} = episode;
-				// NEXT: get this to work, it's not finding the imageURL
 				return (
 					<div key={id}>
+						<Link to={slug}>{title}</Link>
 						{title}
 						{featuredImage && (
 							<GatsbyImage image={featuredImage} alt={title} />

@@ -8,6 +8,7 @@ interface episodeData {
 	episodeNum: number;
 	featuredImage: IGatsbyImageData | null;
 	audioURL: string | null;
+	slug: string;
 }
 
 interface episodeDataInArray extends episodeData {
@@ -47,6 +48,9 @@ const useEpisodeList = (): EpisodeListProps => {
 								}
 							}
 							excerpt(pruneLength: 160)
+							fields {
+								slug
+							}
 						}
 					}
 				}
@@ -56,7 +60,7 @@ const useEpisodeList = (): EpisodeListProps => {
 
 	const episodeLookupTable: { [key: string]: episodeData } = {};
 	episodeListData.allMarkdownRemark.edges.forEach(({ node: episode }) => {
-		const { id, excerpt, frontmatter } = episode;
+		const { id, excerpt, frontmatter, fields } = episode;
 		let featuredImage = null;
 		if (frontmatter?.featuredImage) {
 			featuredImage =
@@ -70,6 +74,7 @@ const useEpisodeList = (): EpisodeListProps => {
 			episodeNum: frontmatter?.episodeNum || 0,
 			featuredImage,
 			audioURL: frontmatter?.audioFile?.publicURL || null,
+			slug: fields?.slug || '',
 		};
 	});
 
