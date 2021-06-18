@@ -7,7 +7,7 @@ type EpisodeListProps = {
 		date: string;
 		episodeNum: number;
 		imageURL: string | null;
-		audioURLs: Array<string>;
+		audioURL: string | null;
 	};
 };
 
@@ -32,7 +32,7 @@ const useEpisodeList = (): EpisodeListProps => {
 								episodeNum
 								title
 								date(formatString: "MMMM DD, YYYY")
-								audioFiles {
+								audioFile {
 									publicURL
 								}
 							}
@@ -47,12 +47,6 @@ const useEpisodeList = (): EpisodeListProps => {
 	const episodeLookupTable = {};
 	episodeListData.allMarkdownRemark.edges.forEach(({ node: episode }) => {
 		const { id, excerpt, frontmatter } = episode;
-		const audioURLs = [];
-		if (frontmatter?.audioFiles) {
-			audioURLs.push(
-				frontmatter?.audioFiles.map((file) => file?.publicURL)
-			);
-		}
 		let featuredImage = null;
 		if (frontmatter?.featuredImage) {
 			featuredImage = frontmatter?.featuredImage.publicURL;
@@ -63,7 +57,7 @@ const useEpisodeList = (): EpisodeListProps => {
 			date: frontmatter?.date || '',
 			episodeNum: frontmatter?.episodeNum || 0,
 			featuredImage,
-			audioURLs,
+			audioURL: frontmatter?.audioFile?.publicURL || null,
 		};
 	});
 

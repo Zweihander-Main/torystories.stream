@@ -715,7 +715,7 @@ type MarkdownRemarkFrontmatter {
     locale: String
   ): Date
   featuredImage: File
-  audioFiles: [File]
+  audioFile: File
   syndicationLinks: [String]
   subtitles: File
 }
@@ -1039,7 +1039,7 @@ input MarkdownRemarkFrontmatterFilterInput {
   description: StringQueryOperatorInput
   date: DateQueryOperatorInput
   featuredImage: FileFilterInput
-  audioFiles: FileFilterListInput
+  audioFile: FileFilterInput
   syndicationLinks: StringQueryOperatorInput
   subtitles: FileFilterInput
 }
@@ -1087,10 +1087,6 @@ input FileFilterInput {
   parent: NodeFilterInput
   children: NodeFilterListInput
   internal: InternalFilterInput
-}
-
-input FileFilterListInput {
-  elemMatch: FileFilterInput
 }
 
 input MarkdownRemarkFieldsFilterInput {
@@ -1362,45 +1358,44 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___frontmatter___featuredImage___childrenMarkdownRemark
   childrenMarkdownRemark___frontmatter___featuredImage___id
   childrenMarkdownRemark___frontmatter___featuredImage___children
-  childrenMarkdownRemark___frontmatter___audioFiles
-  childrenMarkdownRemark___frontmatter___audioFiles___sourceInstanceName
-  childrenMarkdownRemark___frontmatter___audioFiles___absolutePath
-  childrenMarkdownRemark___frontmatter___audioFiles___relativePath
-  childrenMarkdownRemark___frontmatter___audioFiles___extension
-  childrenMarkdownRemark___frontmatter___audioFiles___size
-  childrenMarkdownRemark___frontmatter___audioFiles___prettySize
-  childrenMarkdownRemark___frontmatter___audioFiles___modifiedTime
-  childrenMarkdownRemark___frontmatter___audioFiles___accessTime
-  childrenMarkdownRemark___frontmatter___audioFiles___changeTime
-  childrenMarkdownRemark___frontmatter___audioFiles___birthTime
-  childrenMarkdownRemark___frontmatter___audioFiles___root
-  childrenMarkdownRemark___frontmatter___audioFiles___dir
-  childrenMarkdownRemark___frontmatter___audioFiles___base
-  childrenMarkdownRemark___frontmatter___audioFiles___ext
-  childrenMarkdownRemark___frontmatter___audioFiles___name
-  childrenMarkdownRemark___frontmatter___audioFiles___relativeDirectory
-  childrenMarkdownRemark___frontmatter___audioFiles___dev
-  childrenMarkdownRemark___frontmatter___audioFiles___mode
-  childrenMarkdownRemark___frontmatter___audioFiles___nlink
-  childrenMarkdownRemark___frontmatter___audioFiles___uid
-  childrenMarkdownRemark___frontmatter___audioFiles___gid
-  childrenMarkdownRemark___frontmatter___audioFiles___rdev
-  childrenMarkdownRemark___frontmatter___audioFiles___ino
-  childrenMarkdownRemark___frontmatter___audioFiles___atimeMs
-  childrenMarkdownRemark___frontmatter___audioFiles___mtimeMs
-  childrenMarkdownRemark___frontmatter___audioFiles___ctimeMs
-  childrenMarkdownRemark___frontmatter___audioFiles___atime
-  childrenMarkdownRemark___frontmatter___audioFiles___mtime
-  childrenMarkdownRemark___frontmatter___audioFiles___ctime
-  childrenMarkdownRemark___frontmatter___audioFiles___birthtime
-  childrenMarkdownRemark___frontmatter___audioFiles___birthtimeMs
-  childrenMarkdownRemark___frontmatter___audioFiles___blksize
-  childrenMarkdownRemark___frontmatter___audioFiles___blocks
-  childrenMarkdownRemark___frontmatter___audioFiles___publicURL
-  childrenMarkdownRemark___frontmatter___audioFiles___childrenImageSharp
-  childrenMarkdownRemark___frontmatter___audioFiles___childrenMarkdownRemark
-  childrenMarkdownRemark___frontmatter___audioFiles___id
-  childrenMarkdownRemark___frontmatter___audioFiles___children
+  childrenMarkdownRemark___frontmatter___audioFile___sourceInstanceName
+  childrenMarkdownRemark___frontmatter___audioFile___absolutePath
+  childrenMarkdownRemark___frontmatter___audioFile___relativePath
+  childrenMarkdownRemark___frontmatter___audioFile___extension
+  childrenMarkdownRemark___frontmatter___audioFile___size
+  childrenMarkdownRemark___frontmatter___audioFile___prettySize
+  childrenMarkdownRemark___frontmatter___audioFile___modifiedTime
+  childrenMarkdownRemark___frontmatter___audioFile___accessTime
+  childrenMarkdownRemark___frontmatter___audioFile___changeTime
+  childrenMarkdownRemark___frontmatter___audioFile___birthTime
+  childrenMarkdownRemark___frontmatter___audioFile___root
+  childrenMarkdownRemark___frontmatter___audioFile___dir
+  childrenMarkdownRemark___frontmatter___audioFile___base
+  childrenMarkdownRemark___frontmatter___audioFile___ext
+  childrenMarkdownRemark___frontmatter___audioFile___name
+  childrenMarkdownRemark___frontmatter___audioFile___relativeDirectory
+  childrenMarkdownRemark___frontmatter___audioFile___dev
+  childrenMarkdownRemark___frontmatter___audioFile___mode
+  childrenMarkdownRemark___frontmatter___audioFile___nlink
+  childrenMarkdownRemark___frontmatter___audioFile___uid
+  childrenMarkdownRemark___frontmatter___audioFile___gid
+  childrenMarkdownRemark___frontmatter___audioFile___rdev
+  childrenMarkdownRemark___frontmatter___audioFile___ino
+  childrenMarkdownRemark___frontmatter___audioFile___atimeMs
+  childrenMarkdownRemark___frontmatter___audioFile___mtimeMs
+  childrenMarkdownRemark___frontmatter___audioFile___ctimeMs
+  childrenMarkdownRemark___frontmatter___audioFile___atime
+  childrenMarkdownRemark___frontmatter___audioFile___mtime
+  childrenMarkdownRemark___frontmatter___audioFile___ctime
+  childrenMarkdownRemark___frontmatter___audioFile___birthtime
+  childrenMarkdownRemark___frontmatter___audioFile___birthtimeMs
+  childrenMarkdownRemark___frontmatter___audioFile___blksize
+  childrenMarkdownRemark___frontmatter___audioFile___blocks
+  childrenMarkdownRemark___frontmatter___audioFile___publicURL
+  childrenMarkdownRemark___frontmatter___audioFile___childrenImageSharp
+  childrenMarkdownRemark___frontmatter___audioFile___childrenMarkdownRemark
+  childrenMarkdownRemark___frontmatter___audioFile___id
+  childrenMarkdownRemark___frontmatter___audioFile___children
   childrenMarkdownRemark___frontmatter___syndicationLinks
   childrenMarkdownRemark___frontmatter___subtitles___sourceInstanceName
   childrenMarkdownRemark___frontmatter___subtitles___absolutePath
@@ -1537,45 +1532,44 @@ enum FileFieldsEnum {
   childMarkdownRemark___frontmatter___featuredImage___childrenMarkdownRemark
   childMarkdownRemark___frontmatter___featuredImage___id
   childMarkdownRemark___frontmatter___featuredImage___children
-  childMarkdownRemark___frontmatter___audioFiles
-  childMarkdownRemark___frontmatter___audioFiles___sourceInstanceName
-  childMarkdownRemark___frontmatter___audioFiles___absolutePath
-  childMarkdownRemark___frontmatter___audioFiles___relativePath
-  childMarkdownRemark___frontmatter___audioFiles___extension
-  childMarkdownRemark___frontmatter___audioFiles___size
-  childMarkdownRemark___frontmatter___audioFiles___prettySize
-  childMarkdownRemark___frontmatter___audioFiles___modifiedTime
-  childMarkdownRemark___frontmatter___audioFiles___accessTime
-  childMarkdownRemark___frontmatter___audioFiles___changeTime
-  childMarkdownRemark___frontmatter___audioFiles___birthTime
-  childMarkdownRemark___frontmatter___audioFiles___root
-  childMarkdownRemark___frontmatter___audioFiles___dir
-  childMarkdownRemark___frontmatter___audioFiles___base
-  childMarkdownRemark___frontmatter___audioFiles___ext
-  childMarkdownRemark___frontmatter___audioFiles___name
-  childMarkdownRemark___frontmatter___audioFiles___relativeDirectory
-  childMarkdownRemark___frontmatter___audioFiles___dev
-  childMarkdownRemark___frontmatter___audioFiles___mode
-  childMarkdownRemark___frontmatter___audioFiles___nlink
-  childMarkdownRemark___frontmatter___audioFiles___uid
-  childMarkdownRemark___frontmatter___audioFiles___gid
-  childMarkdownRemark___frontmatter___audioFiles___rdev
-  childMarkdownRemark___frontmatter___audioFiles___ino
-  childMarkdownRemark___frontmatter___audioFiles___atimeMs
-  childMarkdownRemark___frontmatter___audioFiles___mtimeMs
-  childMarkdownRemark___frontmatter___audioFiles___ctimeMs
-  childMarkdownRemark___frontmatter___audioFiles___atime
-  childMarkdownRemark___frontmatter___audioFiles___mtime
-  childMarkdownRemark___frontmatter___audioFiles___ctime
-  childMarkdownRemark___frontmatter___audioFiles___birthtime
-  childMarkdownRemark___frontmatter___audioFiles___birthtimeMs
-  childMarkdownRemark___frontmatter___audioFiles___blksize
-  childMarkdownRemark___frontmatter___audioFiles___blocks
-  childMarkdownRemark___frontmatter___audioFiles___publicURL
-  childMarkdownRemark___frontmatter___audioFiles___childrenImageSharp
-  childMarkdownRemark___frontmatter___audioFiles___childrenMarkdownRemark
-  childMarkdownRemark___frontmatter___audioFiles___id
-  childMarkdownRemark___frontmatter___audioFiles___children
+  childMarkdownRemark___frontmatter___audioFile___sourceInstanceName
+  childMarkdownRemark___frontmatter___audioFile___absolutePath
+  childMarkdownRemark___frontmatter___audioFile___relativePath
+  childMarkdownRemark___frontmatter___audioFile___extension
+  childMarkdownRemark___frontmatter___audioFile___size
+  childMarkdownRemark___frontmatter___audioFile___prettySize
+  childMarkdownRemark___frontmatter___audioFile___modifiedTime
+  childMarkdownRemark___frontmatter___audioFile___accessTime
+  childMarkdownRemark___frontmatter___audioFile___changeTime
+  childMarkdownRemark___frontmatter___audioFile___birthTime
+  childMarkdownRemark___frontmatter___audioFile___root
+  childMarkdownRemark___frontmatter___audioFile___dir
+  childMarkdownRemark___frontmatter___audioFile___base
+  childMarkdownRemark___frontmatter___audioFile___ext
+  childMarkdownRemark___frontmatter___audioFile___name
+  childMarkdownRemark___frontmatter___audioFile___relativeDirectory
+  childMarkdownRemark___frontmatter___audioFile___dev
+  childMarkdownRemark___frontmatter___audioFile___mode
+  childMarkdownRemark___frontmatter___audioFile___nlink
+  childMarkdownRemark___frontmatter___audioFile___uid
+  childMarkdownRemark___frontmatter___audioFile___gid
+  childMarkdownRemark___frontmatter___audioFile___rdev
+  childMarkdownRemark___frontmatter___audioFile___ino
+  childMarkdownRemark___frontmatter___audioFile___atimeMs
+  childMarkdownRemark___frontmatter___audioFile___mtimeMs
+  childMarkdownRemark___frontmatter___audioFile___ctimeMs
+  childMarkdownRemark___frontmatter___audioFile___atime
+  childMarkdownRemark___frontmatter___audioFile___mtime
+  childMarkdownRemark___frontmatter___audioFile___ctime
+  childMarkdownRemark___frontmatter___audioFile___birthtime
+  childMarkdownRemark___frontmatter___audioFile___birthtimeMs
+  childMarkdownRemark___frontmatter___audioFile___blksize
+  childMarkdownRemark___frontmatter___audioFile___blocks
+  childMarkdownRemark___frontmatter___audioFile___publicURL
+  childMarkdownRemark___frontmatter___audioFile___childrenImageSharp
+  childMarkdownRemark___frontmatter___audioFile___childrenMarkdownRemark
+  childMarkdownRemark___frontmatter___audioFile___id
+  childMarkdownRemark___frontmatter___audioFile___children
   childMarkdownRemark___frontmatter___syndicationLinks
   childMarkdownRemark___frontmatter___subtitles___sourceInstanceName
   childMarkdownRemark___frontmatter___subtitles___absolutePath
@@ -2862,85 +2856,84 @@ enum MarkdownRemarkFieldsEnum {
   frontmatter___featuredImage___internal___mediaType
   frontmatter___featuredImage___internal___owner
   frontmatter___featuredImage___internal___type
-  frontmatter___audioFiles
-  frontmatter___audioFiles___sourceInstanceName
-  frontmatter___audioFiles___absolutePath
-  frontmatter___audioFiles___relativePath
-  frontmatter___audioFiles___extension
-  frontmatter___audioFiles___size
-  frontmatter___audioFiles___prettySize
-  frontmatter___audioFiles___modifiedTime
-  frontmatter___audioFiles___accessTime
-  frontmatter___audioFiles___changeTime
-  frontmatter___audioFiles___birthTime
-  frontmatter___audioFiles___root
-  frontmatter___audioFiles___dir
-  frontmatter___audioFiles___base
-  frontmatter___audioFiles___ext
-  frontmatter___audioFiles___name
-  frontmatter___audioFiles___relativeDirectory
-  frontmatter___audioFiles___dev
-  frontmatter___audioFiles___mode
-  frontmatter___audioFiles___nlink
-  frontmatter___audioFiles___uid
-  frontmatter___audioFiles___gid
-  frontmatter___audioFiles___rdev
-  frontmatter___audioFiles___ino
-  frontmatter___audioFiles___atimeMs
-  frontmatter___audioFiles___mtimeMs
-  frontmatter___audioFiles___ctimeMs
-  frontmatter___audioFiles___atime
-  frontmatter___audioFiles___mtime
-  frontmatter___audioFiles___ctime
-  frontmatter___audioFiles___birthtime
-  frontmatter___audioFiles___birthtimeMs
-  frontmatter___audioFiles___blksize
-  frontmatter___audioFiles___blocks
-  frontmatter___audioFiles___publicURL
-  frontmatter___audioFiles___childrenImageSharp
-  frontmatter___audioFiles___childrenImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark
-  frontmatter___audioFiles___childrenMarkdownRemark___id
-  frontmatter___audioFiles___childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childrenMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___id
-  frontmatter___audioFiles___childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___childMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___audioFiles___id
-  frontmatter___audioFiles___parent___id
-  frontmatter___audioFiles___parent___children
-  frontmatter___audioFiles___children
-  frontmatter___audioFiles___children___id
-  frontmatter___audioFiles___children___children
-  frontmatter___audioFiles___internal___content
-  frontmatter___audioFiles___internal___contentDigest
-  frontmatter___audioFiles___internal___description
-  frontmatter___audioFiles___internal___fieldOwners
-  frontmatter___audioFiles___internal___ignoreType
-  frontmatter___audioFiles___internal___mediaType
-  frontmatter___audioFiles___internal___owner
-  frontmatter___audioFiles___internal___type
+  frontmatter___audioFile___sourceInstanceName
+  frontmatter___audioFile___absolutePath
+  frontmatter___audioFile___relativePath
+  frontmatter___audioFile___extension
+  frontmatter___audioFile___size
+  frontmatter___audioFile___prettySize
+  frontmatter___audioFile___modifiedTime
+  frontmatter___audioFile___accessTime
+  frontmatter___audioFile___changeTime
+  frontmatter___audioFile___birthTime
+  frontmatter___audioFile___root
+  frontmatter___audioFile___dir
+  frontmatter___audioFile___base
+  frontmatter___audioFile___ext
+  frontmatter___audioFile___name
+  frontmatter___audioFile___relativeDirectory
+  frontmatter___audioFile___dev
+  frontmatter___audioFile___mode
+  frontmatter___audioFile___nlink
+  frontmatter___audioFile___uid
+  frontmatter___audioFile___gid
+  frontmatter___audioFile___rdev
+  frontmatter___audioFile___ino
+  frontmatter___audioFile___atimeMs
+  frontmatter___audioFile___mtimeMs
+  frontmatter___audioFile___ctimeMs
+  frontmatter___audioFile___atime
+  frontmatter___audioFile___mtime
+  frontmatter___audioFile___ctime
+  frontmatter___audioFile___birthtime
+  frontmatter___audioFile___birthtimeMs
+  frontmatter___audioFile___blksize
+  frontmatter___audioFile___blocks
+  frontmatter___audioFile___publicURL
+  frontmatter___audioFile___childrenImageSharp
+  frontmatter___audioFile___childrenImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childImageSharp___gatsbyImageData @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childImageSharp___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childImageSharp___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark
+  frontmatter___audioFile___childrenMarkdownRemark___id
+  frontmatter___audioFile___childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childrenMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___id
+  frontmatter___audioFile___childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___rawMarkdownBody @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___fileAbsolutePath @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___html @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___htmlAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___tableOfContents @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___childMarkdownRemark___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
+  frontmatter___audioFile___id
+  frontmatter___audioFile___parent___id
+  frontmatter___audioFile___parent___children
+  frontmatter___audioFile___children
+  frontmatter___audioFile___children___id
+  frontmatter___audioFile___children___children
+  frontmatter___audioFile___internal___content
+  frontmatter___audioFile___internal___contentDigest
+  frontmatter___audioFile___internal___description
+  frontmatter___audioFile___internal___fieldOwners
+  frontmatter___audioFile___internal___ignoreType
+  frontmatter___audioFile___internal___mediaType
+  frontmatter___audioFile___internal___owner
+  frontmatter___audioFile___internal___type
   frontmatter___syndicationLinks
   frontmatter___subtitles___sourceInstanceName
   frontmatter___subtitles___absolutePath

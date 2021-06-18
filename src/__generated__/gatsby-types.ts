@@ -645,7 +645,7 @@ type MarkdownRemarkFrontmatter = {
   readonly description: Maybe<Scalars['String']>;
   readonly date: Maybe<Scalars['Date']>;
   readonly featuredImage: Maybe<File>;
-  readonly audioFiles: Maybe<ReadonlyArray<Maybe<File>>>;
+  readonly audioFile: Maybe<File>;
   readonly syndicationLinks: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly subtitles: Maybe<File>;
 };
@@ -1237,7 +1237,7 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly description: Maybe<StringQueryOperatorInput>;
   readonly date: Maybe<DateQueryOperatorInput>;
   readonly featuredImage: Maybe<FileFilterInput>;
-  readonly audioFiles: Maybe<FileFilterListInput>;
+  readonly audioFile: Maybe<FileFilterInput>;
   readonly syndicationLinks: Maybe<StringQueryOperatorInput>;
   readonly subtitles: Maybe<FileFilterInput>;
 };
@@ -1285,10 +1285,6 @@ type FileFilterInput = {
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
-};
-
-type FileFilterListInput = {
-  readonly elemMatch: Maybe<FileFilterInput>;
 };
 
 type MarkdownRemarkFieldsFilterInput = {
@@ -1587,45 +1583,44 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.featuredImage.childrenMarkdownRemark'
   | 'childrenMarkdownRemark.frontmatter.featuredImage.id'
   | 'childrenMarkdownRemark.frontmatter.featuredImage.children'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.sourceInstanceName'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.absolutePath'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.relativePath'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.extension'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.size'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.prettySize'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.modifiedTime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.accessTime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.changeTime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthTime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.root'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.dir'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.base'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.ext'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.name'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.relativeDirectory'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.dev'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.mode'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.nlink'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.uid'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.gid'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.rdev'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.ino'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.atimeMs'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.mtimeMs'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.ctimeMs'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.atime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.mtime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.ctime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthtime'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.birthtimeMs'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.blksize'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.blocks'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.publicURL'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.childrenImageSharp'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.childrenMarkdownRemark'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.id'
-  | 'childrenMarkdownRemark.frontmatter.audioFiles.children'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.sourceInstanceName'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.absolutePath'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.relativePath'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.extension'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.size'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.prettySize'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.modifiedTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.accessTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.changeTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.birthTime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.root'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.dir'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.base'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.ext'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.name'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.relativeDirectory'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.dev'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.mode'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.nlink'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.uid'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.gid'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.rdev'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.ino'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.atimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.mtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.ctimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.atime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.mtime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.ctime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.birthtime'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.birthtimeMs'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.blksize'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.blocks'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.publicURL'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.childrenImageSharp'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.id'
+  | 'childrenMarkdownRemark.frontmatter.audioFile.children'
   | 'childrenMarkdownRemark.frontmatter.syndicationLinks'
   | 'childrenMarkdownRemark.frontmatter.subtitles.sourceInstanceName'
   | 'childrenMarkdownRemark.frontmatter.subtitles.absolutePath'
@@ -1762,45 +1757,44 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.featuredImage.childrenMarkdownRemark'
   | 'childMarkdownRemark.frontmatter.featuredImage.id'
   | 'childMarkdownRemark.frontmatter.featuredImage.children'
-  | 'childMarkdownRemark.frontmatter.audioFiles'
-  | 'childMarkdownRemark.frontmatter.audioFiles.sourceInstanceName'
-  | 'childMarkdownRemark.frontmatter.audioFiles.absolutePath'
-  | 'childMarkdownRemark.frontmatter.audioFiles.relativePath'
-  | 'childMarkdownRemark.frontmatter.audioFiles.extension'
-  | 'childMarkdownRemark.frontmatter.audioFiles.size'
-  | 'childMarkdownRemark.frontmatter.audioFiles.prettySize'
-  | 'childMarkdownRemark.frontmatter.audioFiles.modifiedTime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.accessTime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.changeTime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.birthTime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.root'
-  | 'childMarkdownRemark.frontmatter.audioFiles.dir'
-  | 'childMarkdownRemark.frontmatter.audioFiles.base'
-  | 'childMarkdownRemark.frontmatter.audioFiles.ext'
-  | 'childMarkdownRemark.frontmatter.audioFiles.name'
-  | 'childMarkdownRemark.frontmatter.audioFiles.relativeDirectory'
-  | 'childMarkdownRemark.frontmatter.audioFiles.dev'
-  | 'childMarkdownRemark.frontmatter.audioFiles.mode'
-  | 'childMarkdownRemark.frontmatter.audioFiles.nlink'
-  | 'childMarkdownRemark.frontmatter.audioFiles.uid'
-  | 'childMarkdownRemark.frontmatter.audioFiles.gid'
-  | 'childMarkdownRemark.frontmatter.audioFiles.rdev'
-  | 'childMarkdownRemark.frontmatter.audioFiles.ino'
-  | 'childMarkdownRemark.frontmatter.audioFiles.atimeMs'
-  | 'childMarkdownRemark.frontmatter.audioFiles.mtimeMs'
-  | 'childMarkdownRemark.frontmatter.audioFiles.ctimeMs'
-  | 'childMarkdownRemark.frontmatter.audioFiles.atime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.mtime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.ctime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.birthtime'
-  | 'childMarkdownRemark.frontmatter.audioFiles.birthtimeMs'
-  | 'childMarkdownRemark.frontmatter.audioFiles.blksize'
-  | 'childMarkdownRemark.frontmatter.audioFiles.blocks'
-  | 'childMarkdownRemark.frontmatter.audioFiles.publicURL'
-  | 'childMarkdownRemark.frontmatter.audioFiles.childrenImageSharp'
-  | 'childMarkdownRemark.frontmatter.audioFiles.childrenMarkdownRemark'
-  | 'childMarkdownRemark.frontmatter.audioFiles.id'
-  | 'childMarkdownRemark.frontmatter.audioFiles.children'
+  | 'childMarkdownRemark.frontmatter.audioFile.sourceInstanceName'
+  | 'childMarkdownRemark.frontmatter.audioFile.absolutePath'
+  | 'childMarkdownRemark.frontmatter.audioFile.relativePath'
+  | 'childMarkdownRemark.frontmatter.audioFile.extension'
+  | 'childMarkdownRemark.frontmatter.audioFile.size'
+  | 'childMarkdownRemark.frontmatter.audioFile.prettySize'
+  | 'childMarkdownRemark.frontmatter.audioFile.modifiedTime'
+  | 'childMarkdownRemark.frontmatter.audioFile.accessTime'
+  | 'childMarkdownRemark.frontmatter.audioFile.changeTime'
+  | 'childMarkdownRemark.frontmatter.audioFile.birthTime'
+  | 'childMarkdownRemark.frontmatter.audioFile.root'
+  | 'childMarkdownRemark.frontmatter.audioFile.dir'
+  | 'childMarkdownRemark.frontmatter.audioFile.base'
+  | 'childMarkdownRemark.frontmatter.audioFile.ext'
+  | 'childMarkdownRemark.frontmatter.audioFile.name'
+  | 'childMarkdownRemark.frontmatter.audioFile.relativeDirectory'
+  | 'childMarkdownRemark.frontmatter.audioFile.dev'
+  | 'childMarkdownRemark.frontmatter.audioFile.mode'
+  | 'childMarkdownRemark.frontmatter.audioFile.nlink'
+  | 'childMarkdownRemark.frontmatter.audioFile.uid'
+  | 'childMarkdownRemark.frontmatter.audioFile.gid'
+  | 'childMarkdownRemark.frontmatter.audioFile.rdev'
+  | 'childMarkdownRemark.frontmatter.audioFile.ino'
+  | 'childMarkdownRemark.frontmatter.audioFile.atimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFile.mtimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFile.ctimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFile.atime'
+  | 'childMarkdownRemark.frontmatter.audioFile.mtime'
+  | 'childMarkdownRemark.frontmatter.audioFile.ctime'
+  | 'childMarkdownRemark.frontmatter.audioFile.birthtime'
+  | 'childMarkdownRemark.frontmatter.audioFile.birthtimeMs'
+  | 'childMarkdownRemark.frontmatter.audioFile.blksize'
+  | 'childMarkdownRemark.frontmatter.audioFile.blocks'
+  | 'childMarkdownRemark.frontmatter.audioFile.publicURL'
+  | 'childMarkdownRemark.frontmatter.audioFile.childrenImageSharp'
+  | 'childMarkdownRemark.frontmatter.audioFile.childrenMarkdownRemark'
+  | 'childMarkdownRemark.frontmatter.audioFile.id'
+  | 'childMarkdownRemark.frontmatter.audioFile.children'
   | 'childMarkdownRemark.frontmatter.syndicationLinks'
   | 'childMarkdownRemark.frontmatter.subtitles.sourceInstanceName'
   | 'childMarkdownRemark.frontmatter.subtitles.absolutePath'
@@ -3242,85 +3236,84 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.featuredImage.internal.mediaType'
   | 'frontmatter.featuredImage.internal.owner'
   | 'frontmatter.featuredImage.internal.type'
-  | 'frontmatter.audioFiles'
-  | 'frontmatter.audioFiles.sourceInstanceName'
-  | 'frontmatter.audioFiles.absolutePath'
-  | 'frontmatter.audioFiles.relativePath'
-  | 'frontmatter.audioFiles.extension'
-  | 'frontmatter.audioFiles.size'
-  | 'frontmatter.audioFiles.prettySize'
-  | 'frontmatter.audioFiles.modifiedTime'
-  | 'frontmatter.audioFiles.accessTime'
-  | 'frontmatter.audioFiles.changeTime'
-  | 'frontmatter.audioFiles.birthTime'
-  | 'frontmatter.audioFiles.root'
-  | 'frontmatter.audioFiles.dir'
-  | 'frontmatter.audioFiles.base'
-  | 'frontmatter.audioFiles.ext'
-  | 'frontmatter.audioFiles.name'
-  | 'frontmatter.audioFiles.relativeDirectory'
-  | 'frontmatter.audioFiles.dev'
-  | 'frontmatter.audioFiles.mode'
-  | 'frontmatter.audioFiles.nlink'
-  | 'frontmatter.audioFiles.uid'
-  | 'frontmatter.audioFiles.gid'
-  | 'frontmatter.audioFiles.rdev'
-  | 'frontmatter.audioFiles.ino'
-  | 'frontmatter.audioFiles.atimeMs'
-  | 'frontmatter.audioFiles.mtimeMs'
-  | 'frontmatter.audioFiles.ctimeMs'
-  | 'frontmatter.audioFiles.atime'
-  | 'frontmatter.audioFiles.mtime'
-  | 'frontmatter.audioFiles.ctime'
-  | 'frontmatter.audioFiles.birthtime'
-  | 'frontmatter.audioFiles.birthtimeMs'
-  | 'frontmatter.audioFiles.blksize'
-  | 'frontmatter.audioFiles.blocks'
-  | 'frontmatter.audioFiles.publicURL'
-  | 'frontmatter.audioFiles.childrenImageSharp'
-  | 'frontmatter.audioFiles.childrenImageSharp.gatsbyImageData'
-  | 'frontmatter.audioFiles.childrenImageSharp.id'
-  | 'frontmatter.audioFiles.childrenImageSharp.children'
-  | 'frontmatter.audioFiles.childImageSharp.gatsbyImageData'
-  | 'frontmatter.audioFiles.childImageSharp.id'
-  | 'frontmatter.audioFiles.childImageSharp.children'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.id'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.excerpt'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.rawMarkdownBody'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.fileAbsolutePath'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.html'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.htmlAst'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.excerptAst'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.headings'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.timeToRead'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.tableOfContents'
-  | 'frontmatter.audioFiles.childrenMarkdownRemark.children'
-  | 'frontmatter.audioFiles.childMarkdownRemark.id'
-  | 'frontmatter.audioFiles.childMarkdownRemark.excerpt'
-  | 'frontmatter.audioFiles.childMarkdownRemark.rawMarkdownBody'
-  | 'frontmatter.audioFiles.childMarkdownRemark.fileAbsolutePath'
-  | 'frontmatter.audioFiles.childMarkdownRemark.html'
-  | 'frontmatter.audioFiles.childMarkdownRemark.htmlAst'
-  | 'frontmatter.audioFiles.childMarkdownRemark.excerptAst'
-  | 'frontmatter.audioFiles.childMarkdownRemark.headings'
-  | 'frontmatter.audioFiles.childMarkdownRemark.timeToRead'
-  | 'frontmatter.audioFiles.childMarkdownRemark.tableOfContents'
-  | 'frontmatter.audioFiles.childMarkdownRemark.children'
-  | 'frontmatter.audioFiles.id'
-  | 'frontmatter.audioFiles.parent.id'
-  | 'frontmatter.audioFiles.parent.children'
-  | 'frontmatter.audioFiles.children'
-  | 'frontmatter.audioFiles.children.id'
-  | 'frontmatter.audioFiles.children.children'
-  | 'frontmatter.audioFiles.internal.content'
-  | 'frontmatter.audioFiles.internal.contentDigest'
-  | 'frontmatter.audioFiles.internal.description'
-  | 'frontmatter.audioFiles.internal.fieldOwners'
-  | 'frontmatter.audioFiles.internal.ignoreType'
-  | 'frontmatter.audioFiles.internal.mediaType'
-  | 'frontmatter.audioFiles.internal.owner'
-  | 'frontmatter.audioFiles.internal.type'
+  | 'frontmatter.audioFile.sourceInstanceName'
+  | 'frontmatter.audioFile.absolutePath'
+  | 'frontmatter.audioFile.relativePath'
+  | 'frontmatter.audioFile.extension'
+  | 'frontmatter.audioFile.size'
+  | 'frontmatter.audioFile.prettySize'
+  | 'frontmatter.audioFile.modifiedTime'
+  | 'frontmatter.audioFile.accessTime'
+  | 'frontmatter.audioFile.changeTime'
+  | 'frontmatter.audioFile.birthTime'
+  | 'frontmatter.audioFile.root'
+  | 'frontmatter.audioFile.dir'
+  | 'frontmatter.audioFile.base'
+  | 'frontmatter.audioFile.ext'
+  | 'frontmatter.audioFile.name'
+  | 'frontmatter.audioFile.relativeDirectory'
+  | 'frontmatter.audioFile.dev'
+  | 'frontmatter.audioFile.mode'
+  | 'frontmatter.audioFile.nlink'
+  | 'frontmatter.audioFile.uid'
+  | 'frontmatter.audioFile.gid'
+  | 'frontmatter.audioFile.rdev'
+  | 'frontmatter.audioFile.ino'
+  | 'frontmatter.audioFile.atimeMs'
+  | 'frontmatter.audioFile.mtimeMs'
+  | 'frontmatter.audioFile.ctimeMs'
+  | 'frontmatter.audioFile.atime'
+  | 'frontmatter.audioFile.mtime'
+  | 'frontmatter.audioFile.ctime'
+  | 'frontmatter.audioFile.birthtime'
+  | 'frontmatter.audioFile.birthtimeMs'
+  | 'frontmatter.audioFile.blksize'
+  | 'frontmatter.audioFile.blocks'
+  | 'frontmatter.audioFile.publicURL'
+  | 'frontmatter.audioFile.childrenImageSharp'
+  | 'frontmatter.audioFile.childrenImageSharp.gatsbyImageData'
+  | 'frontmatter.audioFile.childrenImageSharp.id'
+  | 'frontmatter.audioFile.childrenImageSharp.children'
+  | 'frontmatter.audioFile.childImageSharp.gatsbyImageData'
+  | 'frontmatter.audioFile.childImageSharp.id'
+  | 'frontmatter.audioFile.childImageSharp.children'
+  | 'frontmatter.audioFile.childrenMarkdownRemark'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.id'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.excerpt'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.html'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.htmlAst'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.excerptAst'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.headings'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.timeToRead'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.tableOfContents'
+  | 'frontmatter.audioFile.childrenMarkdownRemark.children'
+  | 'frontmatter.audioFile.childMarkdownRemark.id'
+  | 'frontmatter.audioFile.childMarkdownRemark.excerpt'
+  | 'frontmatter.audioFile.childMarkdownRemark.rawMarkdownBody'
+  | 'frontmatter.audioFile.childMarkdownRemark.fileAbsolutePath'
+  | 'frontmatter.audioFile.childMarkdownRemark.html'
+  | 'frontmatter.audioFile.childMarkdownRemark.htmlAst'
+  | 'frontmatter.audioFile.childMarkdownRemark.excerptAst'
+  | 'frontmatter.audioFile.childMarkdownRemark.headings'
+  | 'frontmatter.audioFile.childMarkdownRemark.timeToRead'
+  | 'frontmatter.audioFile.childMarkdownRemark.tableOfContents'
+  | 'frontmatter.audioFile.childMarkdownRemark.children'
+  | 'frontmatter.audioFile.id'
+  | 'frontmatter.audioFile.parent.id'
+  | 'frontmatter.audioFile.parent.children'
+  | 'frontmatter.audioFile.children'
+  | 'frontmatter.audioFile.children.id'
+  | 'frontmatter.audioFile.children.children'
+  | 'frontmatter.audioFile.internal.content'
+  | 'frontmatter.audioFile.internal.contentDigest'
+  | 'frontmatter.audioFile.internal.description'
+  | 'frontmatter.audioFile.internal.fieldOwners'
+  | 'frontmatter.audioFile.internal.ignoreType'
+  | 'frontmatter.audioFile.internal.mediaType'
+  | 'frontmatter.audioFile.internal.owner'
+  | 'frontmatter.audioFile.internal.type'
   | 'frontmatter.syndicationLinks'
   | 'frontmatter.subtitles.sourceInstanceName'
   | 'frontmatter.subtitles.absolutePath'
@@ -3859,18 +3852,26 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<Pick<File, 'relativePath' | 'absolutePath'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'relativePath' | 'absolutePath'>>>>, readonly subtitles: Maybe<Pick<File, 'relativePath' | 'absolutePath'>> }
-    )> }
-  )> };
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id' | 'excerpt'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
+          & { readonly featuredImage: Maybe<Pick<File, 'publicURL'>>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
+        )> }
+      ) }> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3898,26 +3899,18 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
 
 
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
-
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
-type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'id' | 'excerpt'>
-        & { readonly frontmatter: Maybe<(
-          Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
-          & { readonly featuredImage: Maybe<Pick<File, 'publicURL'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'publicURL'>>>> }
-        )> }
-      ) }> } };
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<Pick<File, 'relativePath' | 'absolutePath'>>, readonly audioFile: Maybe<Pick<File, 'relativePath' | 'absolutePath'>>, readonly subtitles: Maybe<Pick<File, 'relativePath' | 'absolutePath'>> }
+    )> }
+  )> };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

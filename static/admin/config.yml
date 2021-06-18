@@ -40,12 +40,10 @@ collections:
             name: featuredImage
             widget: image
             required: false
-          - label: Audio files
-            name: audioFiles
-            widget: list
-            allow_add: true
-            field: { label: File, name: file, widget: file }
-            min: 1
+          - label: Audio file
+            name: audioFile
+            widget: file
+						required: true
           - label: Syndication Links
             name: syndicationLinks
             widget: list

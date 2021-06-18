@@ -42,7 +42,7 @@ export const pageQuery = graphql`
 					relativePath
 					absolutePath
 				}
-				audioFiles {
+				audioFile {
 					relativePath
 					absolutePath
 				}

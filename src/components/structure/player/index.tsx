@@ -33,7 +33,7 @@ const Player: React.FC = () => {
 	const { getEpByID } = useEpisodeList();
 
 	const player = useRef<null | ReactPlayer>(null);
-	const [urls, setURLs] = React.useState(getEpByID(id).audioURLs);
+	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
 	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(1);
@@ -115,7 +115,7 @@ const Player: React.FC = () => {
 	}, [player]);
 
 	useEffect(() => {
-		setURLs(getEpByID(id).audioURLs);
+		setURL(getEpByID(id).audioURL || undefined);
 	}, [id]);
 
 	return (
@@ -123,7 +123,7 @@ const Player: React.FC = () => {
 			<ReactPlayer
 				className="hidden"
 				ref={player}
-				url={urls}
+				url={url}
 				playing={playing}
 				controls={false}
 				loop={false}
