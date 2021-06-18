@@ -4,19 +4,11 @@ import Layout from 'components/structure/layout';
 import SEO from 'components/structure/seo';
 import { TemplatePageContext } from '../types';
 
-const MiscellanyPostTemplate: React.FC<
+const EpisodeTemplate: React.FC<
 	PageProps<GatsbyTypes.EpisodeBySlug, TemplatePageContext>
 > = ({ data, pageContext }) => {
 	const post = data.markdownRemark;
 	const { next, prev } = pageContext;
-
-	if (!post?.frontmatter?.featuredImage?.childImageSharp?.fluid) {
-		throw new Error(
-			`Image for post ${JSON.stringify(
-				post?.frontmatter?.title
-			)} not found.`
-		);
-	}
 
 	return (
 		<Layout darkMenu={true}>
@@ -33,11 +25,12 @@ const MiscellanyPostTemplate: React.FC<
 	);
 };
 
-export default MiscellanyPostTemplate;
+export default EpisodeTemplate;
 
 export const pageQuery = graphql`
 	query EpisodeBySlug($path: String!) {
 		markdownRemark(fields: { slug: { eq: $path } }) {
+			id
 			excerpt(pruneLength: 160)
 			html
 			frontmatter {
@@ -47,13 +40,16 @@ export const pageQuery = graphql`
 				description
 				featuredImage {
 					relativePath
+					absolutePath
 				}
 				audioFiles {
 					relativePath
+					absolutePath
 				}
 				syndicationLinks
 				subtitles {
 					relativePath
+					absolutePath
 				}
 			}
 		}

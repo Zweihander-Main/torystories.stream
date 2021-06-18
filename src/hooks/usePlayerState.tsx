@@ -1,4 +1,4 @@
-import EpisodeContext from 'contexts/EpisodeContext';
+import PlayerContext from 'contexts/PlayerContext';
 import { useContext, useEffect, useState } from 'react';
 
 // Usage note: do not spread on to JSX Element
@@ -11,7 +11,7 @@ type PlayerStateProps = {
 };
 
 const usePlayerState = (defaultID: string): PlayerStateProps => {
-	const storage = useContext(EpisodeContext);
+	const storage = useContext(PlayerContext);
 
 	const [playedSeconds, setPlayedSeconds] = useState(0);
 	const [id, setID] = useState(defaultID);

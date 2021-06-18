@@ -10,7 +10,7 @@ const Layout: React.FC<
 	return (
 		<div className="flex flex-col items-center bg-black text-white font-body pb-20">
 			<main>
-				<Player url={'torystories-episode1.mp3'} />
+				<Player />
 				{children}
 			</main>
 			<Footer />

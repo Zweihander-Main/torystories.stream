@@ -3859,10 +3859,18 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
 
 
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<Pick<File, 'relativePath' | 'absolutePath'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'relativePath' | 'absolutePath'>>>>, readonly subtitles: Maybe<Pick<File, 'relativePath' | 'absolutePath'>> }
+    )> }
+  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3890,27 +3898,30 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
-
-
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<Pick<File, 'relativePath' | 'absolutePath'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'relativePath' | 'absolutePath'>>>>, readonly subtitles: Maybe<Pick<File, 'relativePath' | 'absolutePath'>> }
-    )> }
-  )> };
-
 type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id' | 'excerpt'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
+          & { readonly featuredImage: Maybe<Pick<File, 'publicURL'>>, readonly audioFiles: Maybe<ReadonlyArray<Maybe<Pick<File, 'publicURL'>>>> }
+        )> }
+      ) }> } };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

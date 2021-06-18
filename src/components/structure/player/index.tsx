@@ -1,14 +1,40 @@
 import React, { useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
+import usePlayerState from 'hooks/usePlayerState';
+import useEpisodeList from 'hooks/useEpisodeList';
+import { useEffect } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 
-type PlayerProps = {
-	url: string;
-};
+const Player: React.FC = () => {
+	const defaultID =
+		useStaticQuery<GatsbyTypes.DefaultEpisodeIDQueryQuery>(graphql`
+			query DefaultEpisodeIDQuery {
+				allMarkdownRemark(
+					limit: 1
+					sort: { fields: frontmatter___date, order: DESC }
+					filter: {
+						fields: { sourceInstanceName: { eq: "episodes" } }
+					}
+				) {
+					edges {
+						node {
+							id
+						}
+					}
+				}
+			}
+		`);
 
-const Player: React.FC<PlayerProps> = ({ url }) => {
+	const { id, setID, playedSeconds, setPlayedSeconds } = usePlayerState(
+		defaultID.allMarkdownRemark.edges[0].node.id
+	);
+
+	const { getEpByID } = useEpisodeList();
+
 	const player = useRef<null | ReactPlayer>(null);
-	const [played, setPlayed] = useState(0);
+	const [urls, setURLs] = React.useState(getEpByID(id).audioURLs);
+	const [playedPercentage, setPlayedPercentage] = useState(0);
 	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
@@ -50,7 +76,7 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 	const handleSeekChange: React.ChangeEventHandler<HTMLInputElement> = (
 		e
 	) => {
-		setPlayed(parseFloat(e.target.value));
+		setPlayedPercentage(parseFloat(e.target.value));
 	};
 
 	const handleSeekMouseUp: React.PointerEventHandler<HTMLInputElement> = (
@@ -63,10 +89,14 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		}
 	};
 
-	const handleProgress: BaseReactPlayerProps['onProgress'] = ({ played }) => {
+	const handleProgress: BaseReactPlayerProps['onProgress'] = ({
+		played,
+		playedSeconds,
+	}) => {
 		// only if not currently seeking
 		if (!seeking) {
-			setPlayed(played);
+			setPlayedPercentage(played);
+			setPlayedSeconds(playedSeconds);
 		}
 	};
 
@@ -78,12 +108,22 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 		setDuration(duration);
 	};
 
+	useEffect(() => {
+		if (player.current && player.current.seekTo && playedSeconds) {
+			player.current.seekTo(playedSeconds);
+		}
+	}, [player]);
+
+	useEffect(() => {
+		setURLs(getEpByID(id).audioURLs);
+	}, [id]);
+
 	return (
 		<div className="flex flex-row fixed bottom-0 z-50 bg-black w-screen h-20">
 			<ReactPlayer
 				className="hidden"
 				ref={player}
-				url={url}
+				url={urls}
 				playing={playing}
 				controls={false}
 				loop={false}
@@ -107,7 +147,7 @@ const Player: React.FC<PlayerProps> = ({ url }) => {
 				min={0}
 				max={0.999999}
 				step="any"
-				value={played}
+				value={playedPercentage}
 				onMouseDown={handleSeekMouseDown}
 				onChange={handleSeekChange}
 				onMouseUp={handleSeekMouseUp}

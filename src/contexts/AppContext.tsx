@@ -1,8 +1,8 @@
 import React from 'react';
-import { EpisodeProvider } from './EpisodeContext';
+import { PlayerProvider } from './PlayerContext';
 
 const AppProvider: React.FC = ({ children }) => {
-	return <EpisodeProvider>{children}</EpisodeProvider>;
+	return <PlayerProvider>{children}</PlayerProvider>;
 };
 
 export default AppProvider;
