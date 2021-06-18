@@ -1,6 +1,5 @@
 import React from 'react';
 import Footer from 'components/structure/footer';
-import Player from 'components/structure/player';
 
 type LayoutProps = {};
 
@@ -9,10 +8,7 @@ const Layout: React.FC<
 > = ({ children }) => {
 	return (
 		<div className="flex flex-col items-center bg-black text-white font-body pb-20">
-			<main>
-				<Player />
-				{children}
-			</main>
+			<main>{children}</main>
 			<Footer />
 		</div>
 	);

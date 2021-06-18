@@ -119,6 +119,8 @@ const Player: React.FC = () => {
 
 	const handleEnded = () => {
 		setPlaying(false);
+		setPlayedPercentage(0);
+		setPlayedSeconds(0);
 	};
 
 	useEffect(() => {
@@ -126,7 +128,7 @@ const Player: React.FC = () => {
 	}, [id]);
 
 	return (
-		<div className="flex flex-row fixed bottom-0 z-50 bg-black w-screen h-20">
+		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-screen h-20">
 			<ReactPlayer
 				className="hidden"
 				ref={player}

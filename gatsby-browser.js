@@ -6,8 +6,12 @@
 import './src/styles/index.scss';
 
 import React from 'react';
+import Player from './src/components/structure/player';
 import AppProvider from './src/contexts/AppContext';
 
 export const wrapRootElement = ({ element }) => (
-	<AppProvider>{element}</AppProvider>
+	<AppProvider>
+		<Player />
+		{element}
+	</AppProvider>
 );

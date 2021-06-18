@@ -22,7 +22,6 @@ const EpisodeList: React.FC = () => {
 				return (
 					<div key={id}>
 						<Link to={slug}>{title}</Link>
-						{title}
 						{featuredImage && (
 							<GatsbyImage image={featuredImage} alt={title} />
 						)}
