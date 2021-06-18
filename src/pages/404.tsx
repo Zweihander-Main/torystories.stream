@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Layout from 'components/structure/layout';
-import SEO from 'components/structure/seo';
+import Layout from 'components/structure/Layout';
+import SEO from 'components/structure/SEO';
 
 const NotFound: React.FC = () => {
 	return (

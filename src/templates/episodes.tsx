@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, PageProps } from 'gatsby';
-import Layout from 'components/structure/layout';
-import SEO from 'components/structure/seo';
+import Layout from 'components/structure/Layout';
+import SEO from 'components/structure/SEO';
 import { TemplatePageContext } from '../types';
 
 const EpisodeTemplate: React.FC<

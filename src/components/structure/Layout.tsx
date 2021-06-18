@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from 'components/structure/footer';
+import Footer from 'components/structure/Footer';
 
 type LayoutProps = {};
 
