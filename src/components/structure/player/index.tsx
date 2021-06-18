@@ -26,20 +26,27 @@ const Player: React.FC = () => {
 			}
 		`);
 
-	const { id, setID, playedSeconds, setPlayedSeconds } = usePlayerState(
-		defaultID.allMarkdownRemark.edges[0].node.id
-	);
-
-	const { getEpByID } = useEpisodeList();
-
 	const player = useRef<null | ReactPlayer>(null);
-	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
 	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
 	const [playbackRate, setPlaybackRate] = useState(1.0);
 	const [seeking, setSeeking] = useState(false);
+
+	const [loadedSeconds, setLoadedSeconds] = useState(0);
+
+	const onStorageLoad = (secondsLoaded: number) => {
+		setLoadedSeconds(secondsLoaded);
+	};
+
+	const { id, setID, playedSeconds, setPlayedSeconds } = usePlayerState({
+		defaultID: defaultID.allMarkdownRemark.edges[0].node.id,
+		onStorageLoad,
+	});
+
+	const { getEpByID } = useEpisodeList();
+	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
 
 	const handlePlayPause = () => {
 		setPlaying(!playing);
@@ -81,33 +88,38 @@ const Player: React.FC = () => {
 	const handleSeekMouseUp: React.PointerEventHandler<HTMLInputElement> = (
 		e
 	) => {
-		const percentDone = parseFloat((e.target as HTMLInputElement).value);
+		const playedFraction = parseFloat((e.target as HTMLInputElement).value);
 		setSeeking(false);
 		if (player.current) {
-			player.current.seekTo(percentDone);
+			player.current.seekTo(playedFraction, 'fraction');
 		}
 	};
 
-	const handleProgress: BaseReactPlayerProps['onProgress'] = ({
-		played,
-		playedSeconds,
-	}) => {
-		// only if not currently seeking
-		if (!seeking) {
-			setPlayedPercentage(played);
-			setPlayedSeconds(playedSeconds);
+	const handleProgress: BaseReactPlayerProps['onProgress'] = (
+		progressData
+	) => {
+		// only if not currently seeking and playing
+		if (!seeking && playing) {
+			setPlayedPercentage(progressData.played);
+			setPlayedSeconds(progressData.playedSeconds);
 		}
+	};
+
+	// This works because the sessionStorage is assumed to be faster than media loading
+	const handleReady = () => {
+		if (player.current && loadedSeconds !== 0) {
+			player.current.seekTo(playedSeconds);
+			const duration = player.current.getDuration();
+			if (duration) {
+				setPlayedPercentage(playedSeconds / duration);
+			}
+		}
+		setLoadedSeconds(0);
 	};
 
 	const handleEnded = () => {
 		setPlaying(false);
 	};
-
-	useEffect(() => {
-		if (player.current && player.current.seekTo && playedSeconds) {
-			player.current.seekTo(playedSeconds);
-		}
-	}, [player]);
 
 	useEffect(() => {
 		setURL(getEpByID(id).audioURL || undefined);
@@ -125,6 +137,7 @@ const Player: React.FC = () => {
 				playbackRate={playbackRate}
 				volume={volume}
 				muted={muted}
+				onReady={handleReady}
 				onPlay={handlePlay}
 				onPause={handlePause}
 				onEnded={handleEnded}

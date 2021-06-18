@@ -23,7 +23,7 @@ export class SessionStorage {
 	readPlayed(id: string): number | undefined {
 		const storedValue = this.read(id);
 		if (storedValue) {
-			return parseInt(storedValue, 10);
+			return parseFloat(storedValue);
 		}
 		return undefined;
 	}
