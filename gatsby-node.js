@@ -5,7 +5,9 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 const { createFilePath } = require('gatsby-source-filesystem');
+const webvtt = require('node-webvtt');
 
 const constructPrevNextObject = (post) => {
 	return {
@@ -38,6 +40,23 @@ const findNext = (posts, startIndex, sourceInstanceName) => {
 	return null;
 };
 
+const parseSubtitles = (subsFile) => {
+	const input = fs.readFileSync(subsFile).toString();
+	console.log(subsFile);
+	const parsed = webvtt.parse(input);
+	if (parsed.valid) {
+		const { cues } = parsed;
+		return cues.map((cue) => ({
+			text: cue.text,
+			startTime: cue.start,
+			endTime: cue.end,
+		}));
+	} else {
+		console.error('Error parsing subtitles: ', error);
+		return [];
+	}
+};
+
 exports.createPages = ({ actions, graphql }) => {
 	const { createPage } = actions;
 	return graphql(`
@@ -55,6 +74,9 @@ exports.createPages = ({ actions, graphql }) => {
 						}
 						frontmatter {
 							title
+							subtitles {
+								absolutePath
+							}
 						}
 						rawMarkdownBody
 					}
@@ -69,27 +91,24 @@ exports.createPages = ({ actions, graphql }) => {
 		const posts = result.data.allMarkdownRemark.edges;
 		posts.forEach((edge, index, array) => {
 			const id = edge.node.id;
+			const sourceInstanceName = edge.node.fields.sourceInstanceName;
+			const context = {
+				id,
+				next: findNext(array, index, sourceInstanceName),
+				prev: findPrev(array, index, sourceInstanceName),
+			};
+			if (sourceInstanceName === 'episodes') {
+				context.subtitlesArray = parseSubtitles(
+					edge.node.frontmatter.subtitles.absolutePath
+				);
+			}
 			createPage({
 				path: edge.node.fields.slug,
 				component: path.resolve(
-					`src/templates/${String(
-						edge.node.fields.sourceInstanceName
-					)}.tsx`
+					`src/templates/${String(sourceInstanceName)}.tsx`
 				),
 				// additional data can be passed via context
-				context: {
-					id,
-					next: findNext(
-						array,
-						index,
-						edge.node.fields.sourceInstanceName
-					),
-					prev: findPrev(
-						array,
-						index,
-						edge.node.fields.sourceInstanceName
-					),
-				},
+				context,
 			});
 		});
 	});

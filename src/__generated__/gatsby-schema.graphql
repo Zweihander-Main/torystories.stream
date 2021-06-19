@@ -384,6 +384,13 @@ type SitePage implements Node {
 
 type SitePageContext {
   id: String
+  subtitlesArray: [SitePageContextSubtitlesArray]
+}
+
+type SitePageContextSubtitlesArray {
+  text: String
+  startTime: Float
+  endTime: Float
 }
 
 enum ImageFormat {
@@ -2256,6 +2263,17 @@ input SiteFunctionSortInput {
 
 input SitePageContextFilterInput {
   id: StringQueryOperatorInput
+  subtitlesArray: SitePageContextSubtitlesArrayFilterListInput
+}
+
+input SitePageContextSubtitlesArrayFilterListInput {
+  elemMatch: SitePageContextSubtitlesArrayFilterInput
+}
+
+input SitePageContextSubtitlesArrayFilterInput {
+  text: StringQueryOperatorInput
+  startTime: FloatQueryOperatorInput
+  endTime: FloatQueryOperatorInput
 }
 
 input SitePluginFilterInput {
@@ -2491,6 +2509,10 @@ enum SitePageFieldsEnum {
   internal___type
   isCreatedByStatefulCreatePages
   context___id
+  context___subtitlesArray
+  context___subtitlesArray___text
+  context___subtitlesArray___startTime
+  context___subtitlesArray___endTime
   pluginCreator___id
   pluginCreator___parent___id
   pluginCreator___parent___parent___id

@@ -8,7 +8,7 @@ const EpisodeTemplate: React.FC<
 	PageProps<GatsbyTypes.EpisodeBySlug, TemplatePageContext>
 > = ({ data, pageContext }) => {
 	const post = data.markdownRemark;
-	const { next, prev } = pageContext;
+	const { next, prev, subtitlesArray } = pageContext;
 
 	return (
 		<Layout darkMenu={true}>
@@ -21,6 +21,7 @@ const EpisodeTemplate: React.FC<
 			{JSON.stringify(post)}
 			{JSON.stringify(next)}
 			{JSON.stringify(prev)}
+			{JSON.stringify(subtitlesArray)}
 		</Layout>
 	);
 };
