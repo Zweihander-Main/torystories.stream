@@ -11,7 +11,7 @@ type UsePlayerStateInputProps = {
 
 type PlayerStateProps = {
 	player: React.MutableRefObject<null | ReactPlayer>;
-	setPlayedSeconds: React.Dispatch<React.SetStateAction<number>>;
+	setPlayedSeconds: (s: number) => void;
 	playedPercentage: number;
 	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
 	playing: boolean;
@@ -31,7 +31,9 @@ type PlayerStateProps = {
 const usePlayerState = ({
 	defaultID,
 }: UsePlayerStateInputProps): PlayerStateProps => {
-	const storage = useContext(PlayerContext);
+	const { storage, playedSeconds, setPlayedSeconds } =
+		useContext(PlayerContext);
+
 	const { getEpByID } = useEpisodeList();
 
 	const [storageLoaded, setStorageLoaded] = React.useState(false);
@@ -39,7 +41,6 @@ const usePlayerState = ({
 
 	const player = useRef<null | ReactPlayer>(null);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
-	const [playedSeconds, setPlayedSeconds] = useState(0);
 	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
