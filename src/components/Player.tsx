@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerState from 'hooks/usePlayerState';
-import useEpisodeList from 'hooks/useEpisodeList';
 import { useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
@@ -26,27 +25,26 @@ const Player: React.FC = () => {
 			}
 		`);
 
-	const player = useRef<null | ReactPlayer>(null);
-	const [playedPercentage, setPlayedPercentage] = useState(0);
-	const [playing, setPlaying] = useState(false);
-	const [volume, setVolume] = useState(1);
-	const [muted, setMuted] = useState(false);
-	const [playbackRate, setPlaybackRate] = useState(1.0);
-	const [seeking, setSeeking] = useState(false);
-
-	const [loadedSeconds, setLoadedSeconds] = useState(0);
-
-	const onStorageLoad = (secondsLoaded: number) => {
-		setLoadedSeconds(secondsLoaded);
-	};
-
-	const { id, setID, playedSeconds, setPlayedSeconds } = usePlayerState({
+	const {
+		player,
+		setPlayedSeconds,
+		playedPercentage,
+		setPlayedPercentage,
+		playing,
+		setPlaying,
+		volume,
+		setVolume,
+		muted,
+		setMuted,
+		playbackRate,
+		setPlaybackRate,
+		seeking,
+		setSeeking,
+		url,
+		setPlayerReady,
+	} = usePlayerState({
 		defaultID: defaultID.allMarkdownRemark.edges[0].node.id,
-		onStorageLoad,
 	});
-
-	const { getEpByID } = useEpisodeList();
-	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
 
 	const handlePlayPause = () => {
 		setPlaying(!playing);
@@ -105,16 +103,8 @@ const Player: React.FC = () => {
 		}
 	};
 
-	// This works because sessionStorage is assumed to be faster than media loading
 	const handleReady = () => {
-		if (player.current && loadedSeconds !== 0) {
-			player.current.seekTo(playedSeconds);
-			const duration = player.current.getDuration();
-			if (duration) {
-				setPlayedPercentage(playedSeconds / duration);
-			}
-		}
-		setLoadedSeconds(0);
+		setPlayerReady(true);
 	};
 
 	const handleEnded = () => {
@@ -122,10 +112,6 @@ const Player: React.FC = () => {
 		setPlayedPercentage(0);
 		setPlayedSeconds(0);
 	};
-
-	useEffect(() => {
-		setURL(getEpByID(id).audioURL || undefined);
-	}, [id]);
 
 	return (
 		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-screen h-20">
