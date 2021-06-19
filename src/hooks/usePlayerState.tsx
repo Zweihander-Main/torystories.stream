@@ -48,10 +48,6 @@ const usePlayerState = ({
 	const [id, setID] = useState(defaultID);
 	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
 
-	const saveCurrentID = () => {
-		storage.saveCurrent(id);
-	};
-
 	const loadSavedSeconds = (id: string) => {
 		const currentSeconds = storage.readPlayed(id);
 		if (currentSeconds) {
@@ -63,8 +59,18 @@ const usePlayerState = ({
 		// system with playerReady and storageLoaded plus useEffect below.
 	};
 
-	const savePlayed = () => {
-		storage.savePlayed(id, playedSeconds);
+	const loadPlayerState = () => {
+		const storedState = storage.readPlayerState();
+		if (storedState) {
+			const {
+				volume: sVolume,
+				muted: sMuted,
+				playbackRate: sPlaybackRate,
+			} = storedState;
+			setVolume(sVolume);
+			setMuted(sMuted);
+			setPlaybackRate(sPlaybackRate);
+		}
 	};
 
 	// read storage initially, storageLoaded should be false
@@ -72,6 +78,7 @@ const usePlayerState = ({
 		const currentID = storage.readCurrent();
 		if (currentID) {
 			setID(currentID);
+			loadPlayerState();
 			loadSavedSeconds(currentID);
 		}
 	}, []);
@@ -80,14 +87,14 @@ const usePlayerState = ({
 	useEffect(() => {
 		setPlayerReady(false);
 		setStorageLoaded(false);
-		saveCurrentID();
+		storage.saveCurrent(id);
 		setURL(getEpByID(id).audioURL || undefined);
 		loadSavedSeconds(id);
 	}, [id]);
 
 	// on progress
 	useEffect(() => {
-		savePlayed();
+		storage.savePlayed(id, playedSeconds);
 	}, [playedSeconds]);
 
 	// load retrieved storage data when player is ready
@@ -105,6 +112,11 @@ const usePlayerState = ({
 			}
 		}
 	}, [playerReady, storageLoaded]);
+
+	// save non-time player state
+	useEffect(() => {
+		storage.savePlayerState({ volume, muted, playbackRate });
+	}, [volume, muted, playbackRate]);
 
 	return {
 		player,

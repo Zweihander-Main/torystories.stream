@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerState from 'hooks/usePlayerState';
-import { useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const Player: React.FC = () => {
