@@ -3903,7 +3903,7 @@ type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
     Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
     & { readonly frontmatter: Maybe<(
       Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<Pick<File, 'publicURL'>>, readonly subtitles: Maybe<Pick<File, 'publicURL'>> }
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
     )> }
   )> };
 

@@ -4,6 +4,7 @@ import Layout from 'components/structure/Layout';
 import SEO from 'components/structure/SEO';
 import { TemplatePageContext } from '../types';
 import Subtitles from 'components/episode/Subtitles';
+import EpisodeInfo from 'components/episode/EpisodeInfo';
 
 const EpisodeTemplate: React.FC<
 	PageProps<GatsbyTypes.EpisodeBySlug, TemplatePageContext>
@@ -11,16 +12,27 @@ const EpisodeTemplate: React.FC<
 	const post = data.markdownRemark;
 	const { next, prev, subtitlesArray } = pageContext;
 
+	const title = post?.frontmatter?.title || '';
+	const description = post?.frontmatter?.description || post?.excerpt || '';
+	const episodeNum = post?.frontmatter?.episodeNum || -1;
+	const html = post?.html || '';
+	const syndicationLinks = post?.frontmatter?.syndicationLinks;
+	const date = post?.frontmatter?.date || '';
+
 	return (
-		<Layout darkMenu={true}>
-			<SEO
-				title={post?.frontmatter?.title || ''}
-				description={
-					post?.frontmatter?.description || post?.excerpt || ''
-				}
-			/>
+		<Layout hideFooter={true}>
+			<SEO title={title} description={description} />
 			<div className="grid grid-cols-2 grid-rows-1">
 				<Subtitles subtitlesArray={subtitlesArray} />
+				<EpisodeInfo
+					title={title}
+					episodeNum={episodeNum}
+					html={html}
+					syndicationLinks={syndicationLinks}
+					date={date}
+					next={next}
+					prev={prev}
+				/>
 			</div>
 			{/* {JSON.stringify(post)}
 			{JSON.stringify(next)}
@@ -44,12 +56,11 @@ export const pageQuery = graphql`
 				date(formatString: "MMMM DD, YYYY")
 				description
 				featuredImage {
-					publicURL
+					childImageSharp {
+						gatsbyImageData(layout: FULL_WIDTH)
+					}
 				}
 				syndicationLinks
-				subtitles {
-					publicURL
-				}
 			}
 		}
 	}

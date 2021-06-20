@@ -26,7 +26,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 	}
 
 	return (
-		<p>
+		<p className="m-20 text-justify">
 			{subtitlesArray.map((sub, index) => {
 				const { text, startTime } = sub;
 				const isCurrentSub = currentSubIndex === index;
