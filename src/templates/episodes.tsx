@@ -18,12 +18,19 @@ const EpisodeTemplate: React.FC<
 	const html = post?.html || '';
 	const syndicationLinks = post?.frontmatter?.syndicationLinks;
 	const date = post?.frontmatter?.date || '';
+	const image =
+		post?.frontmatter?.featuredImage?.childImageSharp?.gatsbyImageData ||
+		null;
 
 	return (
 		<Layout hideFooter={true}>
 			<SEO title={title} description={description} />
 			<div className="grid grid-cols-2 grid-rows-1">
-				<Subtitles subtitlesArray={subtitlesArray} />
+				<Subtitles
+					subtitlesArray={subtitlesArray}
+					image={image}
+					title={title}
+				/>
 				<EpisodeInfo
 					title={title}
 					episodeNum={episodeNum}
@@ -34,10 +41,6 @@ const EpisodeTemplate: React.FC<
 					prev={prev}
 				/>
 			</div>
-			{/* {JSON.stringify(post)}
-			{JSON.stringify(next)}
-			{JSON.stringify(prev)}
-			{JSON.stringify(subtitlesArray)} */}
 		</Layout>
 	);
 };
