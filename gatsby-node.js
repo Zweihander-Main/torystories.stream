@@ -47,7 +47,7 @@ const parseSubtitles = (subsFile) => {
 	if (parsed.valid) {
 		const { cues } = parsed;
 		return cues.map((cue) => ({
-			text: cue.text,
+			text: cue.text.replace(/(<([^>]+)>)/gi, ''), // remove speaker tags
 			startTime: cue.start,
 			endTime: cue.end,
 		}));
