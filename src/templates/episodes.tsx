@@ -3,6 +3,7 @@ import { graphql, PageProps } from 'gatsby';
 import Layout from 'components/structure/Layout';
 import SEO from 'components/structure/SEO';
 import { TemplatePageContext } from '../types';
+import Subtitles from 'components/episode/Subtitles';
 
 const EpisodeTemplate: React.FC<
 	PageProps<GatsbyTypes.EpisodeBySlug, TemplatePageContext>
@@ -18,10 +19,13 @@ const EpisodeTemplate: React.FC<
 					post?.frontmatter?.description || post?.excerpt || ''
 				}
 			/>
-			{JSON.stringify(post)}
+			<div className="grid grid-cols-2 grid-rows-1">
+				<Subtitles subtitlesArray={subtitlesArray} />
+			</div>
+			{/* {JSON.stringify(post)}
 			{JSON.stringify(next)}
 			{JSON.stringify(prev)}
-			{JSON.stringify(subtitlesArray)}
+			{JSON.stringify(subtitlesArray)} */}
 		</Layout>
 	);
 };
