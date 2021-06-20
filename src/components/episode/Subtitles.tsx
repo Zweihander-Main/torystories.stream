@@ -1,6 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { SubtitlesArray } from 'types';
 import useCurrentSub from 'hooks/useCurrentSub';
+import { useEffect } from 'react';
 
 interface SubtitlesProps {
 	subtitlesArray: SubtitlesArray;
@@ -14,13 +15,28 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 	subtitlesArray,
 	currentSubIndex,
 }) => {
+	const currentSubRef = useCallback((node: HTMLSpanElement | null) => {
+		if (node !== null) {
+			console.log(node.offsetTop);
+		}
+	}, []);
+
+	if (currentSubIndex === -1) {
+		currentSubRef(null);
+	}
+
 	return (
 		<p>
 			{subtitlesArray.map((sub, index) => {
 				const { text, startTime } = sub;
-				const className = currentSubIndex === index ? 'font-bold' : '';
+				const isCurrentSub = currentSubIndex === index;
+				const className = isCurrentSub ? 'font-bold' : '';
 				return (
-					<span key={startTime} className={className}>
+					<span
+						key={startTime}
+						ref={isCurrentSub ? currentSubRef : null}
+						className={className}
+					>
 						{text}{' '}
 					</span>
 				);
@@ -39,7 +55,7 @@ const MemoizedSubtitleText: React.FC<SubtitleTextProps> = memo(
 const Subtitles: React.FC<SubtitlesProps> = ({ subtitlesArray }) => {
 	const currentSubIndex = useCurrentSub(subtitlesArray);
 	return (
-		<section>
+		<section className="h-screenMinusPlayer overflow-y-scroll">
 			<MemoizedSubtitleText
 				subtitlesArray={subtitlesArray}
 				currentSubIndex={currentSubIndex}

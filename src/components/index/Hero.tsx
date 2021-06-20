@@ -3,9 +3,9 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 const Hero: React.FC = () => {
 	return (
-		<section className="grid grid-rows-2 grid-cols-1 hero-height">
+		<section className="grid grid-rows-2 grid-cols-1 h-screenMinusPlayer">
 			<StaticImage
-				src="../../../images/herobg-house-of-commons-pitt.png"
+				src="../../images/herobg-house-of-commons-pitt.png"
 				alt="Background: Karl Anton Hickel's William Pitt addressing the House of Commons"
 				layout="fullWidth"
 				className="row-start-1 row-end-3 col-start-1 z-10"

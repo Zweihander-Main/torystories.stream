@@ -790,6 +790,7 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamily {
 type SitePluginPluginOptionsPostCssPluginsThemeExtend {
   fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize
   letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing
+  height: SitePluginPluginOptionsPostCssPluginsThemeExtendHeight
 }
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
@@ -799,6 +800,10 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing {
   display: String
+}
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendHeight {
+  screenMinusPlayer: String
 }
 
 type SitePluginPluginOptionsEmitSchema {
@@ -2338,6 +2343,7 @@ input SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput {
 input SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput {
   fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput
   letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput
+  height: SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput
 }
 
 input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
@@ -2347,6 +2353,10 @@ input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
 
 input SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput {
   display: StringQueryOperatorInput
+}
+
+input SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput {
+  screenMinusPlayer: StringQueryOperatorInput
 }
 
 input SitePluginPluginOptionsEmitSchemaFilterInput {

@@ -113,7 +113,7 @@ const Player: React.FC = () => {
 	};
 
 	return (
-		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-screen h-20">
+		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-screen h-player">
 			<ReactPlayer
 				className="hidden"
 				ref={player}

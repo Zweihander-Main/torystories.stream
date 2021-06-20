@@ -7,13 +7,9 @@
 @layer utilities {
 	.hero-indent {
 		text-indent: -0.5em;
-	}
+	} // TODO: move to extend with package
 
 	.one-word-per-line {
 		word-spacing: 1000000px;
-	}
-
-	.hero-height {
-		height: calc(100vh - 5rem);
 	}
 }

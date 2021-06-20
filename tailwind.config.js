@@ -1,6 +1,8 @@
 const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+const playerHeight = '6rem';
+
 module.exports = {
 	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
 	mode: 'jit',
@@ -21,6 +23,10 @@ module.exports = {
 			},
 			letterSpacing: {
 				display: '-0.035em',
+			},
+			height: {
+				player: playerHeight,
+				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
 			},
 		},
 	},

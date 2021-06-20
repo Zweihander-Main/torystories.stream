@@ -728,6 +728,7 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamily = {
 type SitePluginPluginOptionsPostCssPluginsThemeExtend = {
   readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize>;
   readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing>;
+  readonly height: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendHeight>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize = {
@@ -737,6 +738,10 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize = {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing = {
   readonly display: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendHeight = {
+  readonly screenMinusPlayer: Maybe<Scalars['String']>;
 };
 
 type SitePluginPluginOptionsEmitSchema = {
@@ -2639,6 +2644,7 @@ type SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput = {
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput = {
   readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput>;
   readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput>;
+  readonly height: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput = {
@@ -2648,6 +2654,10 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput = {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput = {
   readonly display: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput = {
+  readonly screenMinusPlayer: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsEmitSchemaFilterInput = {
@@ -3874,6 +3884,16 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];
 }>;
@@ -3886,21 +3906,6 @@ type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
       & { readonly featuredImage: Maybe<Pick<File, 'publicURL'>>, readonly subtitles: Maybe<Pick<File, 'publicURL'>> }
     )> }
   )> };
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
-
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3938,5 +3943,10 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }
