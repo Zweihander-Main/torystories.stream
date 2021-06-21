@@ -803,6 +803,7 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing {
 }
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendHeight {
+  player: String
   screenMinusPlayer: String
 }
 
@@ -2356,6 +2357,7 @@ input SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput {
 }
 
 input SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput {
+  player: StringQueryOperatorInput
   screenMinusPlayer: StringQueryOperatorInput
 }
 
