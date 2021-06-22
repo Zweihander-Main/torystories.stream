@@ -9,6 +9,15 @@ const fs = require('fs');
 const { createFilePath } = require('gatsby-source-filesystem');
 const webvtt = require('node-webvtt');
 
+const hasPage = (edge) => {
+	switch (edge.node.fields.sourceInstanceName) {
+		case 'misc':
+			return false;
+			break;
+	}
+	return true;
+};
+
 const constructPrevNextObject = (post) => {
 	return {
 		title: post.node.frontmatter.title,
@@ -20,7 +29,10 @@ const findPrev = (posts, startIndex, sourceInstanceName) => {
 	let i = startIndex - 1;
 	while (i >= 0) {
 		const post = posts[i];
-		if (post.node.fields.sourceInstanceName === sourceInstanceName) {
+		if (
+			post.node.fields.sourceInstanceName === sourceInstanceName &&
+			hasPage(post)
+		) {
 			return constructPrevNextObject(post);
 		}
 		i--;
@@ -32,7 +44,10 @@ const findNext = (posts, startIndex, sourceInstanceName) => {
 	let i = startIndex + 1;
 	while (i < posts.length) {
 		const post = posts[i];
-		if (post.node.fields.sourceInstanceName === sourceInstanceName) {
+		if (
+			post.node.fields.sourceInstanceName === sourceInstanceName &&
+			hasPage(post)
+		) {
 			return constructPrevNextObject(post);
 		}
 		i++;
@@ -42,7 +57,6 @@ const findNext = (posts, startIndex, sourceInstanceName) => {
 
 const parseSubtitles = (subsFile) => {
 	const input = fs.readFileSync(subsFile).toString();
-	console.log(subsFile);
 	const parsed = webvtt.parse(input);
 	if (parsed.valid) {
 		const { cues } = parsed;
@@ -90,26 +104,28 @@ exports.createPages = ({ actions, graphql }) => {
 		}
 		const posts = result.data.allMarkdownRemark.edges;
 		posts.forEach((edge, index, array) => {
-			const id = edge.node.id;
-			const sourceInstanceName = edge.node.fields.sourceInstanceName;
-			const context = {
-				id,
-				next: findNext(array, index, sourceInstanceName),
-				prev: findPrev(array, index, sourceInstanceName),
-			};
-			if (sourceInstanceName === 'episodes') {
-				context.subtitlesArray = parseSubtitles(
-					edge.node.frontmatter.subtitles.absolutePath
-				);
+			if (hasPage(edge)) {
+				const id = edge.node.id;
+				const sourceInstanceName = edge.node.fields.sourceInstanceName;
+				const context = {
+					id,
+					next: findNext(array, index, sourceInstanceName),
+					prev: findPrev(array, index, sourceInstanceName),
+				};
+				if (sourceInstanceName === 'episodes') {
+					context.subtitlesArray = parseSubtitles(
+						edge.node.frontmatter.subtitles.absolutePath
+					);
+				}
+				createPage({
+					path: edge.node.fields.slug,
+					component: path.resolve(
+						`src/templates/${String(sourceInstanceName)}.tsx`
+					),
+					// additional data can be passed via context
+					context,
+				});
 			}
-			createPage({
-				path: edge.node.fields.slug,
-				component: path.resolve(
-					`src/templates/${String(sourceInstanceName)}.tsx`
-				),
-				// additional data can be passed via context
-				context,
-			});
 		});
 	});
 };

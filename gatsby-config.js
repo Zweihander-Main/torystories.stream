@@ -54,6 +54,13 @@ module.exports = {
 				name: `episodes`,
 			},
 		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/content/misc`,
+				name: `misc`,
+			},
+		},
 		`gatsby-transformer-remark`,
 		`gatsby-plugin-catch-links`,
 		`gatsby-plugin-netlify-cms`, // should be last in the array or close to it

@@ -1,19 +1,53 @@
+import { graphql, useStaticQuery } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 const About: React.FC = () => {
+	const aboutData = useStaticQuery<GatsbyTypes.AboutQuery>(
+		graphql`
+			query About {
+				allMarkdownRemark(
+					sort: { order: DESC, fields: frontmatter___date }
+					filter: {
+						fields: {
+							slug: { eq: "/misc/about" }
+							sourceInstanceName: { eq: "misc" }
+						}
+					}
+				) {
+					edges {
+						node {
+							frontmatter {
+								title
+							}
+							html
+						}
+					}
+				}
+			}
+		`
+	);
+
+	const node = aboutData.allMarkdownRemark.edges[0].node;
+	const html = node.html || '';
+	const title = node.frontmatter?.title || '';
+
 	return (
-		<section className="bg-darkPurple text-center text-2xl bg-georgian-pattern">
-			<div className="w-6/12 mx-auto">
-				<p className="font-body pt-20 pb-20">
-					Come join me on a dive into history from the point of view
-					of an 18<sup>th</sup> century Tory. Explore the dawn of the
-					Industrial Revolution through the foundation of modernity;
-					in particular the Tory achievements of 1660 - 1832.
-					<br />
-					<br />
-					Prepare yourself for the other side of the history you
-					thought you knew: free of Whiggish prejudice and slander!
-				</p>
+		<section className="bg-darkPurple bg-georgian-pattern text-center text-2xl ">
+			<div className="w-6/12 mx-auto pt-20 pb-20">
+				<StaticImage
+					src="../../images/martin-hutchinson-colorized.png"
+					layout="fixed"
+					className="rounded-full mx-auto border-dullPurple border-8"
+					height={225}
+					width={225}
+					alt={title}
+				/>
+				<h2>{title}</h2>
+				<p
+					className="font-body"
+					dangerouslySetInnerHTML={{ __html: html }}
+				/>
 			</div>
 		</section>
 	);

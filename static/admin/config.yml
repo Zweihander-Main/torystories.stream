@@ -43,7 +43,7 @@ collections:
           - label: Audio file
             name: audioFile
             widget: file
-						required: true
+            required: true
           - label: Syndication Links
             name: syndicationLinks
             widget: list
@@ -57,3 +57,20 @@ collections:
             name: body
             widget: markdown
             required: true
+    - name: misc
+      label: Misc Content
+      folder: content/misc
+      create: true
+      slug: index
+      media_folder: ''
+      public_folder: ''
+      path: '{{title}}/index'
+      fields:
+          - label: Name
+            name: title
+            widget: string
+            required: true
+          - label: Body
+            name: body
+            widget: markdown
+            required: false

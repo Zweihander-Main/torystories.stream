@@ -15,7 +15,7 @@ module.exports = {
 			dullBlue: '#5B85AA',
 			dullPurple: '#414770',
 			deepPurple: '#372248',
-			darkPurple: '#171123',
+			darkPurple: '#1D152C',
 		},
 		fontFamily: {
 			display: ['Cormorant SC', ...defaultTheme.fontFamily.serif],
