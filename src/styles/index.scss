@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 @layer utilities {
+	body {
+		font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+		font-kerning: normal;
+	}
+
 	.hero-indent {
 		text-indent: -0.5em;
 	} // TODO: move to extend with package

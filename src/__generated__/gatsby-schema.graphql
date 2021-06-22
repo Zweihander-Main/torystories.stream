@@ -780,6 +780,11 @@ type SitePluginPluginOptionsPostCssPluginsTheme {
 type SitePluginPluginOptionsPostCssPluginsThemeColors {
   black: String
   white: String
+  brightBlue: String
+  dullBlue: String
+  dullPurple: String
+  deepPurple: String
+  darkPurple: String
 }
 
 type SitePluginPluginOptionsPostCssPluginsThemeFontFamily {
@@ -2334,6 +2339,11 @@ input SitePluginPluginOptionsPostCssPluginsThemeFilterInput {
 input SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput {
   black: StringQueryOperatorInput
   white: StringQueryOperatorInput
+  brightBlue: StringQueryOperatorInput
+  dullBlue: StringQueryOperatorInput
+  dullPurple: StringQueryOperatorInput
+  deepPurple: StringQueryOperatorInput
+  darkPurple: StringQueryOperatorInput
 }
 
 input SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput {

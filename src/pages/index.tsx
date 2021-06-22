@@ -11,8 +11,8 @@ const IndexPage: React.FC = () => {
 		<Layout>
 			<SEO title="Home" />
 			<Hero />
-			<EpisodeList />
 			<About />
+			<EpisodeList />
 		</Layout>
 	);
 };

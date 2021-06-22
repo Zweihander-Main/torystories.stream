@@ -11,6 +11,11 @@ module.exports = {
 		colors: {
 			black: '#0a0a0a',
 			white: colors.white,
+			brightBlue: '#0D78C1',
+			dullBlue: '#5B85AA',
+			dullPurple: '#414770',
+			deepPurple: '#372248',
+			darkPurple: '#171123',
 		},
 		fontFamily: {
 			display: ['Cormorant SC', ...defaultTheme.fontFamily.serif],
@@ -28,6 +33,10 @@ module.exports = {
 				player: playerHeight,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
 			},
+			backgroundImage: (theme) => ({
+				'georgian-pattern':
+					"radial-gradient(70% 70% at 50% 50%, rgba(10, 10, 10, 0) 39%, #0A0A0A 100%), url('/images/georgian-pattern.svg')",
+			}),
 		},
 	},
 	variants: {

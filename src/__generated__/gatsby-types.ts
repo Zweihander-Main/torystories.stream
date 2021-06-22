@@ -718,6 +718,11 @@ type SitePluginPluginOptionsPostCssPluginsTheme = {
 type SitePluginPluginOptionsPostCssPluginsThemeColors = {
   readonly black: Maybe<Scalars['String']>;
   readonly white: Maybe<Scalars['String']>;
+  readonly brightBlue: Maybe<Scalars['String']>;
+  readonly dullBlue: Maybe<Scalars['String']>;
+  readonly dullPurple: Maybe<Scalars['String']>;
+  readonly deepPurple: Maybe<Scalars['String']>;
+  readonly darkPurple: Maybe<Scalars['String']>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeFontFamily = {
@@ -2635,6 +2640,11 @@ type SitePluginPluginOptionsPostCssPluginsThemeFilterInput = {
 type SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput = {
   readonly black: Maybe<StringQueryOperatorInput>;
   readonly white: Maybe<StringQueryOperatorInput>;
+  readonly brightBlue: Maybe<StringQueryOperatorInput>;
+  readonly dullBlue: Maybe<StringQueryOperatorInput>;
+  readonly dullPurple: Maybe<StringQueryOperatorInput>;
+  readonly deepPurple: Maybe<StringQueryOperatorInput>;
+  readonly darkPurple: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput = {
@@ -3891,11 +3901,6 @@ type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3906,11 +3911,6 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
           & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
-
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];
@@ -3950,5 +3950,15 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }
