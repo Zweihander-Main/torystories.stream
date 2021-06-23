@@ -2,8 +2,21 @@ import React from 'react';
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="m-20">
-			© {new Date().getFullYear()} Martin Hutchinson
+		<footer className="m-20 text-center">
+			<p>Check out:</p>
+			<p className="mb-4">
+				<a className="underline font-bold" href="https://www.tbwns.com">
+					Martin's blog
+				</a>
+				{' | '}
+				<a
+					className="underline font-bold"
+					href="https://www.lordliverpool.com"
+				>
+					His biography of Lord Liverpool
+				</a>
+			</p>
+			<p>© {new Date().getFullYear()} Martin Hutchinson</p>
 		</footer>
 	);
 };
