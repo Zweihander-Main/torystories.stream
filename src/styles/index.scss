@@ -10,6 +10,11 @@
 		font-kerning: normal;
 	}
 
+	.kern-episode-num {
+		font-feature-settings: 'lnum';
+		font-variant-numeric: lining-nums;
+	}
+
 	.hero-indent {
 		text-indent: -0.5em;
 	} // TODO: move to extend with package

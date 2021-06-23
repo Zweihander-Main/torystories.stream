@@ -25,6 +25,7 @@ module.exports = {
 			fontSize: {
 				hero: ['15vw', '11vw'],
 				subHero: ['3.5vw', '3.2vw'],
+				episodeNum: ['15vw'],
 			},
 			letterSpacing: {
 				display: '-0.035em',
@@ -32,6 +33,12 @@ module.exports = {
 			height: {
 				player: playerHeight,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
+			},
+			gridTemplateColumns: {
+				episodes: '1fr 5fr 25rem',
+			},
+			gridTemplateRows: {
+				episodes: '25rem',
 			},
 			backgroundImage: (theme) => ({
 				'georgian-pattern':
