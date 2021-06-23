@@ -2,7 +2,17 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerState from 'hooks/usePlayerState';
+import useEpisodeList from 'hooks/useEpisodeList';
 import { graphql, useStaticQuery } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import {
+	RiPlayCircleLine,
+	RiPauseCircleLine,
+	RiVolumeUpLine,
+	RiVolumeMuteLine,
+	RiMusic2Line,
+	RiInformationLine,
+} from 'react-icons/ri';
 
 const Player: React.FC = () => {
 	const defaultID =
@@ -40,6 +50,8 @@ const Player: React.FC = () => {
 		seeking,
 		setSeeking,
 		url,
+		image,
+		slug,
 		setPlayerReady,
 	} = usePlayerState({
 		defaultID: defaultID.allMarkdownRemark.edges[0].node.id,
@@ -136,6 +148,19 @@ const Player: React.FC = () => {
 					},
 				}}
 			/>
+			<div>
+				{image && (
+					<GatsbyImage
+						className={
+							'relative w-64 h-64 m-12 bottom-64 border-black border-8 box-content'
+						}
+						image={image}
+					/>
+				)}
+			</div>
+			<button onClick={handlePlayPause}>
+				{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
+			</button>
 			<input
 				type="range"
 				min={0}
@@ -145,44 +170,59 @@ const Player: React.FC = () => {
 				onMouseDown={handleSeekMouseDown}
 				onChange={handleSeekChange}
 				onMouseUp={handleSeekMouseUp}
+				className={'w-full'}
 			/>
-			<button onClick={handlePlayPause}>
-				{playing ? 'Pause' : 'Play'}
+			<div>
+				<span onClick={handleToggleMuted}>
+					{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
+				</span>
+				<input
+					type="range"
+					min={0}
+					max={1}
+					step="any"
+					value={volume}
+					onChange={handleVolumeChange}
+					orient="vertical"
+					style={{
+						'writing-mode': 'bt-lr',
+						appearance: 'slider-vertical',
+					}}
+				/>
+			</div>
+			<div>
+				<span>
+					<RiMusic2Line />
+				</span>
+				<span>
+					<button onClick={handleSetPlaybackRate} value={0.75}>
+						0.75x
+					</button>
+					<button onClick={handleSetPlaybackRate} value={1}>
+						1x
+					</button>
+					<button onClick={handleSetPlaybackRate} value={1.25}>
+						1.25x
+					</button>
+					<button onClick={handleSetPlaybackRate} value={1.5}>
+						1.5x
+					</button>
+					<button onClick={handleSetPlaybackRate} value={1.75}>
+						1.75x
+					</button>
+					<button onClick={handleSetPlaybackRate} value={2}>
+						2x
+					</button>
+				</span>
+			</div>
+			<button>
+				<RiInformationLine />
 			</button>
-			<button onClick={handleSetPlaybackRate} value={0.75}>
-				0.75x
-			</button>
-			<button onClick={handleSetPlaybackRate} value={1}>
-				1x
-			</button>
-			<button onClick={handleSetPlaybackRate} value={1.25}>
-				1.25x
-			</button>
-			<button onClick={handleSetPlaybackRate} value={1.5}>
-				1.5x
-			</button>
-			<button onClick={handleSetPlaybackRate} value={1.75}>
-				1.75x
-			</button>
-			<button onClick={handleSetPlaybackRate} value={2}>
-				2x
-			</button>
-			<input
-				type="range"
-				min={0}
-				max={1}
-				step="any"
-				value={volume}
-				onChange={handleVolumeChange}
-			/>
-			<input
-				id="muted"
-				type="checkbox"
-				checked={muted}
-				onChange={handleToggleMuted}
-			/>
 		</div>
 	);
 };
+
+// TODO title on hover
+// TODO style
 
 export default Player;

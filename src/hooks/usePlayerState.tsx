@@ -25,6 +25,8 @@ type PlayerStateProps = {
 	seeking: boolean;
 	setSeeking: React.Dispatch<React.SetStateAction<boolean>>;
 	url: string | undefined;
+	image: IGatsbyImageData | null;
+	slug: string;
 	setPlayerReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -47,7 +49,10 @@ const usePlayerState = ({
 	const [playbackRate, setPlaybackRate] = useState(1.0);
 	const [seeking, setSeeking] = useState(false);
 	const [id, setID] = useState(defaultID);
-	const [url, setURL] = React.useState(getEpByID(id).audioURL || undefined);
+	const defaultEpData = getEpByID(id);
+	const [url, setURL] = React.useState(defaultEpData.audioURL || undefined);
+	const [image, setImage] = React.useState(defaultEpData.featuredImage);
+	const [slug, setSlug] = React.useState(defaultEpData.slug);
 
 	const loadSavedSeconds = (id: string) => {
 		const currentSeconds = storage.readPlayed(id);
@@ -89,8 +94,11 @@ const usePlayerState = ({
 		setPlayerReady(false);
 		setStorageLoaded(false);
 		storage.saveCurrent(id);
-		setURL(getEpByID(id).audioURL || undefined);
+		const epData = getEpByID(id);
+		setURL(epData.audioURL || undefined);
 		loadSavedSeconds(id);
+		setImage(epData.featuredImage);
+		setSlug(epData.slug);
 	}, [id]);
 
 	// on progress
@@ -135,6 +143,8 @@ const usePlayerState = ({
 		seeking,
 		setSeeking,
 		url,
+		image,
+		slug,
 		setPlayerReady,
 	};
 };
