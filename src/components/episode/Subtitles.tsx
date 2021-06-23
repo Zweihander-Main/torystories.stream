@@ -34,7 +34,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 	}
 
 	return (
-		<p className={`p-20 text-justify ${className}`}>
+		<p className={`text-xl p-20 text-justify ${className}`}>
 			{subtitlesArray.map((sub, index) => {
 				const { text, startTime } = sub;
 				const isCurrentSub = currentSubIndex === index;
@@ -113,7 +113,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 				<GatsbyImage
 					image={image}
 					alt={title}
-					className="row-start-1 row-end-2 col-start-1 col-end-2 z-10 sticky top-0 h-screenMinusPlayer"
+					className="row-start-1 row-end-2 col-start-1 col-end-2 z-10 sticky top-0 h-screenMinusPlayer opacity-40"
 				/>
 			)}
 
