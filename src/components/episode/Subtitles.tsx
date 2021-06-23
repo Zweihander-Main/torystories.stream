@@ -104,7 +104,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 
 	return (
 		<section
-			className="grid grid-rows-0 grid-cols-0 h-screenMinusPlayer overflow-y-scroll"
+			className="grid grid-rows-0 grid-cols-0 h-screenMinusPlayer overflow-y-scroll z-10"
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}

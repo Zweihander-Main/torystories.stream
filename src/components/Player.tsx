@@ -2,8 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerState from 'hooks/usePlayerState';
-import useEpisodeList from 'hooks/useEpisodeList';
-import { graphql, useStaticQuery } from 'gatsby';
+import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import {
 	RiPlayCircleLine,
@@ -125,7 +124,7 @@ const Player: React.FC = () => {
 	};
 
 	return (
-		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-screen h-player">
+		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-full h-player justify-center">
 			<ReactPlayer
 				className="hidden"
 				ref={player}
@@ -150,15 +149,37 @@ const Player: React.FC = () => {
 			/>
 			<div>
 				{image && (
-					<GatsbyImage
+					<div
 						className={
-							'relative w-64 h-64 m-12 bottom-64 border-black border-8 box-content'
+							'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 box-content grid grid-rows-none grid-columns-none justify-items-center items-center'
 						}
-						image={image}
-					/>
+					>
+						<GatsbyImage
+							className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+							image={image}
+						/>
+						<button
+							className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
+							onClick={handlePlay}
+						>
+							{!playing && <RiPlayCircleLine size={'100%'} />}
+						</button>
+					</div>
 				)}
 			</div>
-			<button onClick={handlePlayPause}>
+			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
+				1
+			</span>
+			<Link
+				to={slug}
+				className="hover:underline hover:font-bold flex justify-center items-center mr-8"
+			>
+				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
+					Why Lord Liverpool Should Be Considered Britain's Greatest
+					Prime Minister
+				</h3>
+			</Link>
+			<button className="text-6xl mr-2" onClick={handlePlayPause}>
 				{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
 			</button>
 			<input
@@ -170,10 +191,10 @@ const Player: React.FC = () => {
 				onMouseDown={handleSeekMouseDown}
 				onChange={handleSeekChange}
 				onMouseUp={handleSeekMouseUp}
-				className={'w-full'}
+				className={'w-full m-4'}
 			/>
-			<div>
-				<span onClick={handleToggleMuted}>
+			<div className="flex justify-center items-center m-4">
+				<span onClick={handleToggleMuted} className={'text-4xl'}>
 					{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
 				</span>
 				<input
@@ -184,17 +205,18 @@ const Player: React.FC = () => {
 					value={volume}
 					onChange={handleVolumeChange}
 					orient="vertical"
+					className={'absolute bottom-0'}
 					style={{
 						'writing-mode': 'bt-lr',
 						appearance: 'slider-vertical',
 					}}
 				/>
 			</div>
-			<div>
-				<span>
+			<div className="flex justify-center items-center m-4">
+				<span className={'text-4xl'}>
 					<RiMusic2Line />
 				</span>
-				<span>
+				<div className="absolute bottom-0">
 					<button onClick={handleSetPlaybackRate} value={0.75}>
 						0.75x
 					</button>
@@ -213,11 +235,14 @@ const Player: React.FC = () => {
 					<button onClick={handleSetPlaybackRate} value={2}>
 						2x
 					</button>
-				</span>
+				</div>
 			</div>
-			<button>
+			<Link
+				to={slug}
+				className="text-4xl m-4 flex justify-center items-center"
+			>
 				<RiInformationLine />
-			</button>
+			</Link>
 		</div>
 	);
 };
