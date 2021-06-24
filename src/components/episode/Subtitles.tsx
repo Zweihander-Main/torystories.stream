@@ -104,7 +104,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 
 	return (
 		<section
-			className="grid grid-rows-0 grid-cols-0 h-screenMinusPlayer overflow-y-scroll z-10"
+			className="grid grid-rows-0 grid-cols-0 h-screenMinusPlayer overflow-y-scroll z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
@@ -121,7 +121,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 				subtitlesArray={subtitlesArray}
 				currentSubIndex={currentSubIndex}
 				shouldScroll={shouldScroll}
-				className="row-start-1 row-end-2 col-start-1 col-end-2 z-50"
+				className="row-start-1 row-end-2 col-start-1 col-end-2 z-50 "
 			/>
 		</section>
 	);
