@@ -4,6 +4,9 @@ module.exports = {
 		description: `Tory Stories is The Martin Hutchinson Podcast`,
 		author: `Martin Hutchinson`,
 	},
+	flags: {
+		DEV_SSR: true,
+	},
 	plugins: [
 		`gatsby-alias-imports`,
 		{

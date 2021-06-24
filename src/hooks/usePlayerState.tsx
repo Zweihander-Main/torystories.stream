@@ -12,7 +12,7 @@ type PlayerStateProps = {
 	playedPercentage: number;
 	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
 	playing: boolean;
-	setPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+	setPlaying: (b: boolean) => void;
 	volume: number;
 	setVolume: React.Dispatch<React.SetStateAction<number>>;
 	muted: boolean;

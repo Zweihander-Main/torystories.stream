@@ -10,8 +10,7 @@ import Player from './src/components/Player';
 import AppProvider from './src/contexts/AppContext';
 
 export const wrapRootElement = ({ element }) => (
-	<AppProvider>
-		<Player />
-		{element}
-	</AppProvider>
+	<AppProvider>{element}</AppProvider>
 );
+
+export const wrapPageElement = ({ element }) => <Player>{element}</Player>;

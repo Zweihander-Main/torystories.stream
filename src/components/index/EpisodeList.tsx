@@ -21,16 +21,8 @@ const EpisodeList: React.FC = () => {
 	return (
 		<section>
 			{episodeArray.map((episode) => {
-				const {
-					id,
-					title,
-					featuredImage,
-					audioURL,
-					blurb,
-					date,
-					episodeNum,
-					slug,
-				} = episode;
+				const { id, title, featuredImage, blurb, episodeNum, slug } =
+					episode;
 				return (
 					<div key={id} className="flex flex-column">
 						<Link
