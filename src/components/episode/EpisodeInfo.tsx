@@ -21,7 +21,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 	prev,
 }) => {
 	return (
-		<section className="m-20">
+		<section className="p-20 bg-georgian-pattern bg-darkPurple">
 			<h1 className="font-display tracking-display text-5xl mb-4">
 				{title}
 			</h1>
