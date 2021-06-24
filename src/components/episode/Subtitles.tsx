@@ -113,7 +113,11 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 				<GatsbyImage
 					image={image}
 					alt={title}
-					className="row-start-1 row-end-2 col-start-1 col-end-2 z-10 sticky top-0 h-screenMinusPlayer opacity-40"
+					className="sticky row-start-1 row-end-1 col-start-1 col-end-1 z-10 top-0 h-screenMinusPlayer opacity-40"
+					objectPosition={''}
+					style={{
+						position: 'sticky',
+					}}
 				/>
 			)}
 
@@ -121,7 +125,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 				subtitlesArray={subtitlesArray}
 				currentSubIndex={currentSubIndex}
 				shouldScroll={shouldScroll}
-				className="row-start-1 row-end-2 col-start-1 col-end-2 z-50 "
+				className="row-start-1 row-end-1 col-start-1 col-end-1 z-50 "
 			/>
 		</section>
 	);

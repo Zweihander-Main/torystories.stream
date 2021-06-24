@@ -757,7 +757,6 @@ type SitePluginPluginOptions {
   isTSX: Boolean
   allExtensions: Boolean
   jsxPragma: String
-  postCssPlugins: [SitePluginPluginOptionsPostCssPlugins]
   name: String
   path: String
   base64Width: Int
@@ -767,92 +766,6 @@ type SitePluginPluginOptions {
   emitSchema: SitePluginPluginOptionsEmitSchema
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocuments
   pathCheck: Boolean
-}
-
-type SitePluginPluginOptionsPostCssPlugins {
-  purge: [String]
-  mode: String
-  darkMode: Boolean
-  theme: SitePluginPluginOptionsPostCssPluginsTheme
-  plugins: [SitePluginPluginOptionsPostCssPluginsPlugins]
-}
-
-type SitePluginPluginOptionsPostCssPluginsTheme {
-  colors: SitePluginPluginOptionsPostCssPluginsThemeColors
-  fontFamily: SitePluginPluginOptionsPostCssPluginsThemeFontFamily
-  extend: SitePluginPluginOptionsPostCssPluginsThemeExtend
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeColors {
-  black: String
-  white: String
-  brightBlue: String
-  dullBlue: String
-  dullPurple: String
-  deepPurple: String
-  darkPurple: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeFontFamily {
-  display: [String]
-  body: [String]
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtend {
-  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize
-  letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing
-  height: SitePluginPluginOptionsPostCssPluginsThemeExtendHeight
-  gridTemplateColumns: SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumns
-  gridTemplateRows: SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRows
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize {
-  hero: [String]
-  subHero: [String]
-  episodeNum: [String]
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing {
-  display: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendHeight {
-  player: String
-  screenMinusPlayer: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumns {
-  episodes: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRows {
-  episodes: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsPlugins {
-  config: SitePluginPluginOptionsPostCssPluginsPluginsConfig
-}
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfig {
-  theme: SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme
-  variants: SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants
-}
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme {
-  textShadow: SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow
-}
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow {
-  default: String
-  sm: String
-  md: String
-  lg: String
-  xl: String
-  none: String
-}
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants {
-  textShadow: [String]
 }
 
 type SitePluginPluginOptionsEmitSchema {
@@ -2356,7 +2269,6 @@ input SitePluginPluginOptionsFilterInput {
   isTSX: BooleanQueryOperatorInput
   allExtensions: BooleanQueryOperatorInput
   jsxPragma: StringQueryOperatorInput
-  postCssPlugins: SitePluginPluginOptionsPostCssPluginsFilterListInput
   name: StringQueryOperatorInput
   path: StringQueryOperatorInput
   base64Width: IntQueryOperatorInput
@@ -2366,100 +2278,6 @@ input SitePluginPluginOptionsFilterInput {
   emitSchema: SitePluginPluginOptionsEmitSchemaFilterInput
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocumentsFilterInput
   pathCheck: BooleanQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsFilterListInput {
-  elemMatch: SitePluginPluginOptionsPostCssPluginsFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsFilterInput {
-  purge: StringQueryOperatorInput
-  mode: StringQueryOperatorInput
-  darkMode: BooleanQueryOperatorInput
-  theme: SitePluginPluginOptionsPostCssPluginsThemeFilterInput
-  plugins: SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeFilterInput {
-  colors: SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput
-  fontFamily: SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput
-  extend: SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput {
-  black: StringQueryOperatorInput
-  white: StringQueryOperatorInput
-  brightBlue: StringQueryOperatorInput
-  dullBlue: StringQueryOperatorInput
-  dullPurple: StringQueryOperatorInput
-  deepPurple: StringQueryOperatorInput
-  darkPurple: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput {
-  display: StringQueryOperatorInput
-  body: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput {
-  fontSize: SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput
-  letterSpacing: SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput
-  height: SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput
-  gridTemplateColumns: SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumnsFilterInput
-  gridTemplateRows: SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRowsFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput {
-  hero: StringQueryOperatorInput
-  subHero: StringQueryOperatorInput
-  episodeNum: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput {
-  display: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput {
-  player: StringQueryOperatorInput
-  screenMinusPlayer: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumnsFilterInput {
-  episodes: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRowsFilterInput {
-  episodes: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput {
-  elemMatch: SitePluginPluginOptionsPostCssPluginsPluginsFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsFilterInput {
-  config: SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput {
-  theme: SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput
-  variants: SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput {
-  textShadow: SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput {
-  default: StringQueryOperatorInput
-  sm: StringQueryOperatorInput
-  md: StringQueryOperatorInput
-  lg: StringQueryOperatorInput
-  xl: StringQueryOperatorInput
-  none: StringQueryOperatorInput
-}
-
-input SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput {
-  textShadow: StringQueryOperatorInput
 }
 
 input SitePluginPluginOptionsEmitSchemaFilterInput {
@@ -2670,11 +2488,6 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___isTSX
   pluginCreator___pluginOptions___allExtensions
   pluginCreator___pluginOptions___jsxPragma
-  pluginCreator___pluginOptions___postCssPlugins
-  pluginCreator___pluginOptions___postCssPlugins___purge
-  pluginCreator___pluginOptions___postCssPlugins___mode
-  pluginCreator___pluginOptions___postCssPlugins___darkMode
-  pluginCreator___pluginOptions___postCssPlugins___plugins
   pluginCreator___pluginOptions___name
   pluginCreator___pluginOptions___path
   pluginCreator___pluginOptions___base64Width
@@ -3378,11 +3191,6 @@ enum SitePluginFieldsEnum {
   pluginOptions___isTSX
   pluginOptions___allExtensions
   pluginOptions___jsxPragma
-  pluginOptions___postCssPlugins
-  pluginOptions___postCssPlugins___purge
-  pluginOptions___postCssPlugins___mode
-  pluginOptions___postCssPlugins___darkMode
-  pluginOptions___postCssPlugins___plugins
   pluginOptions___name
   pluginOptions___path
   pluginOptions___base64Width

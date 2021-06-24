@@ -695,7 +695,6 @@ type SitePluginPluginOptions = {
   readonly isTSX: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
   readonly jsxPragma: Maybe<Scalars['String']>;
-  readonly postCssPlugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPlugins>>>;
   readonly name: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly base64Width: Maybe<Scalars['Int']>;
@@ -705,92 +704,6 @@ type SitePluginPluginOptions = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchema>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocuments>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
-};
-
-type SitePluginPluginOptionsPostCssPlugins = {
-  readonly purge: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly mode: Maybe<Scalars['String']>;
-  readonly darkMode: Maybe<Scalars['Boolean']>;
-  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsTheme>;
-  readonly plugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPluginsPlugins>>>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsTheme = {
-  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeColors>;
-  readonly fontFamily: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFontFamily>;
-  readonly extend: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtend>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeColors = {
-  readonly black: Maybe<Scalars['String']>;
-  readonly white: Maybe<Scalars['String']>;
-  readonly brightBlue: Maybe<Scalars['String']>;
-  readonly dullBlue: Maybe<Scalars['String']>;
-  readonly dullPurple: Maybe<Scalars['String']>;
-  readonly deepPurple: Maybe<Scalars['String']>;
-  readonly darkPurple: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeFontFamily = {
-  readonly display: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly body: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtend = {
-  readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize>;
-  readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing>;
-  readonly height: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendHeight>;
-  readonly gridTemplateColumns: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumns>;
-  readonly gridTemplateRows: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRows>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSize = {
-  readonly hero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly subHero: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly episodeNum: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacing = {
-  readonly display: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendHeight = {
-  readonly player: Maybe<Scalars['String']>;
-  readonly screenMinusPlayer: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumns = {
-  readonly episodes: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRows = {
-  readonly episodes: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPlugins = {
-  readonly config: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfig>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfig = {
-  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme>;
-  readonly variants: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme = {
-  readonly textShadow: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow = {
-  readonly default: Maybe<Scalars['String']>;
-  readonly sm: Maybe<Scalars['String']>;
-  readonly md: Maybe<Scalars['String']>;
-  readonly lg: Maybe<Scalars['String']>;
-  readonly xl: Maybe<Scalars['String']>;
-  readonly none: Maybe<Scalars['String']>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants = {
-  readonly textShadow: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 type SitePluginPluginOptionsEmitSchema = {
@@ -2658,7 +2571,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly jsxPragma: Maybe<StringQueryOperatorInput>;
-  readonly postCssPlugins: Maybe<SitePluginPluginOptionsPostCssPluginsFilterListInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly base64Width: Maybe<IntQueryOperatorInput>;
@@ -2668,100 +2580,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchemaFilterInput>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocumentsFilterInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsFilterListInput = {
-  readonly elemMatch: Maybe<SitePluginPluginOptionsPostCssPluginsFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsFilterInput = {
-  readonly purge: Maybe<StringQueryOperatorInput>;
-  readonly mode: Maybe<StringQueryOperatorInput>;
-  readonly darkMode: Maybe<BooleanQueryOperatorInput>;
-  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFilterInput>;
-  readonly plugins: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeFilterInput = {
-  readonly colors: Maybe<SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput>;
-  readonly fontFamily: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput>;
-  readonly extend: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeColorsFilterInput = {
-  readonly black: Maybe<StringQueryOperatorInput>;
-  readonly white: Maybe<StringQueryOperatorInput>;
-  readonly brightBlue: Maybe<StringQueryOperatorInput>;
-  readonly dullBlue: Maybe<StringQueryOperatorInput>;
-  readonly dullPurple: Maybe<StringQueryOperatorInput>;
-  readonly deepPurple: Maybe<StringQueryOperatorInput>;
-  readonly darkPurple: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeFontFamilyFilterInput = {
-  readonly display: Maybe<StringQueryOperatorInput>;
-  readonly body: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendFilterInput = {
-  readonly fontSize: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput>;
-  readonly letterSpacing: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput>;
-  readonly height: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput>;
-  readonly gridTemplateColumns: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumnsFilterInput>;
-  readonly gridTemplateRows: Maybe<SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRowsFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendFontSizeFilterInput = {
-  readonly hero: Maybe<StringQueryOperatorInput>;
-  readonly subHero: Maybe<StringQueryOperatorInput>;
-  readonly episodeNum: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendLetterSpacingFilterInput = {
-  readonly display: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendHeightFilterInput = {
-  readonly player: Maybe<StringQueryOperatorInput>;
-  readonly screenMinusPlayer: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumnsFilterInput = {
-  readonly episodes: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRowsFilterInput = {
-  readonly episodes: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput = {
-  readonly elemMatch: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsFilterInput = {
-  readonly config: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput = {
-  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput>;
-  readonly variants: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput = {
-  readonly textShadow: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput = {
-  readonly default: Maybe<StringQueryOperatorInput>;
-  readonly sm: Maybe<StringQueryOperatorInput>;
-  readonly md: Maybe<StringQueryOperatorInput>;
-  readonly lg: Maybe<StringQueryOperatorInput>;
-  readonly xl: Maybe<StringQueryOperatorInput>;
-  readonly none: Maybe<StringQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput = {
-  readonly textShadow: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsEmitSchemaFilterInput = {
@@ -2999,11 +2817,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.isTSX'
   | 'pluginCreator.pluginOptions.allExtensions'
   | 'pluginCreator.pluginOptions.jsxPragma'
-  | 'pluginCreator.pluginOptions.postCssPlugins'
-  | 'pluginCreator.pluginOptions.postCssPlugins.purge'
-  | 'pluginCreator.pluginOptions.postCssPlugins.mode'
-  | 'pluginCreator.pluginOptions.postCssPlugins.darkMode'
-  | 'pluginCreator.pluginOptions.postCssPlugins.plugins'
   | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.base64Width'
@@ -3785,11 +3598,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.isTSX'
   | 'pluginOptions.allExtensions'
   | 'pluginOptions.jsxPragma'
-  | 'pluginOptions.postCssPlugins'
-  | 'pluginOptions.postCssPlugins.purge'
-  | 'pluginOptions.postCssPlugins.mode'
-  | 'pluginOptions.postCssPlugins.darkMode'
-  | 'pluginOptions.postCssPlugins.plugins'
   | 'pluginOptions.name'
   | 'pluginOptions.path'
   | 'pluginOptions.base64Width'
@@ -3990,10 +3798,21 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<MarkdownRemark, 'id' | 'excerpt'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
+          & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
+        )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
+      ) }> } };
 
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];
@@ -4007,6 +3826,11 @@ type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
       & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
     )> }
   )> };
+
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -4033,22 +3857,6 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
-
-type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<MarkdownRemark, 'id' | 'excerpt'>
-        & { readonly frontmatter: Maybe<(
-          Pick<MarkdownRemarkFrontmatter, 'description' | 'episodeNum' | 'title' | 'date'>
-          & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
-        )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
-      ) }> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 

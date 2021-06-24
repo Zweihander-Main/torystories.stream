@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import './src/styles/index.scss';
+import './src/styles/index.css';
 
 import React from 'react';
 import Player from './src/components/Player';

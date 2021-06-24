@@ -12,7 +12,7 @@ const Layout: React.FC<
 	LayoutProps & React.PropsWithChildren<Record<string, unknown>>
 > = ({ children, showHomeButton = false, hideFooter = false }) => {
 	return (
-		<div className="flex flex-col items-center bg-black text-white font-body pb-20">
+		<div className="layout flex flex-col items-center bg-black text-white font-body mb-20">
 			{showHomeButton && (
 				<nav className={'absolute left-0 top-4 z-50'}>
 					<Link
@@ -22,7 +22,7 @@ const Layout: React.FC<
 						<RiHome2Line className={'inline'} size="2rem" />
 						<span
 							className={
-								'font-display tracking-display pl-2 relative top-1 text-2xl'
+								'font-display tracking-display pl-2 relative top-1 text-2xl text-shadow-md'
 							}
 						>
 							Home
