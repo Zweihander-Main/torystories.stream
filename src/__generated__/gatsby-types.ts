@@ -690,6 +690,7 @@ type SitePluginPluginOptions = {
   readonly isTSX: Maybe<Scalars['Boolean']>;
   readonly allExtensions: Maybe<Scalars['Boolean']>;
   readonly jsxPragma: Maybe<Scalars['String']>;
+  readonly postCssPlugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPlugins>>>;
   readonly name: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
   readonly base64Width: Maybe<Scalars['Int']>;
@@ -699,16 +700,6 @@ type SitePluginPluginOptions = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchema>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocuments>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
-  readonly postCssPlugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPlugins>>>;
-};
-
-type SitePluginPluginOptionsEmitSchema = {
-  readonly src___generated___gatsby_introspection_json: Maybe<Scalars['Boolean']>;
-  readonly src___generated___gatsby_schema_graphql: Maybe<Scalars['Boolean']>;
-};
-
-type SitePluginPluginOptionsEmitPluginDocuments = {
-  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<Scalars['Boolean']>;
 };
 
 type SitePluginPluginOptionsPostCssPlugins = {
@@ -716,6 +707,7 @@ type SitePluginPluginOptionsPostCssPlugins = {
   readonly mode: Maybe<Scalars['String']>;
   readonly darkMode: Maybe<Scalars['Boolean']>;
   readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsTheme>;
+  readonly plugins: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPostCssPluginsPlugins>>>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsTheme = {
@@ -768,6 +760,41 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumns = {
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRows = {
   readonly episodes: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPlugins = {
+  readonly config: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfig>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfig = {
+  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme>;
+  readonly variants: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigTheme = {
+  readonly textShadow: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadow = {
+  readonly default: Maybe<Scalars['String']>;
+  readonly sm: Maybe<Scalars['String']>;
+  readonly md: Maybe<Scalars['String']>;
+  readonly lg: Maybe<Scalars['String']>;
+  readonly xl: Maybe<Scalars['String']>;
+  readonly none: Maybe<Scalars['String']>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigVariants = {
+  readonly textShadow: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+};
+
+type SitePluginPluginOptionsEmitSchema = {
+  readonly src___generated___gatsby_introspection_json: Maybe<Scalars['Boolean']>;
+  readonly src___generated___gatsby_schema_graphql: Maybe<Scalars['Boolean']>;
+};
+
+type SitePluginPluginOptionsEmitPluginDocuments = {
+  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<Scalars['Boolean']>;
 };
 
 type SitePluginPackageJson = {
@@ -2619,6 +2646,7 @@ type SitePluginPluginOptionsFilterInput = {
   readonly isTSX: Maybe<BooleanQueryOperatorInput>;
   readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
   readonly jsxPragma: Maybe<StringQueryOperatorInput>;
+  readonly postCssPlugins: Maybe<SitePluginPluginOptionsPostCssPluginsFilterListInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
   readonly base64Width: Maybe<IntQueryOperatorInput>;
@@ -2628,16 +2656,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchemaFilterInput>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocumentsFilterInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
-  readonly postCssPlugins: Maybe<SitePluginPluginOptionsPostCssPluginsFilterListInput>;
-};
-
-type SitePluginPluginOptionsEmitSchemaFilterInput = {
-  readonly src___generated___gatsby_introspection_json: Maybe<BooleanQueryOperatorInput>;
-  readonly src___generated___gatsby_schema_graphql: Maybe<BooleanQueryOperatorInput>;
-};
-
-type SitePluginPluginOptionsEmitPluginDocumentsFilterInput = {
-  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<BooleanQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsFilterListInput = {
@@ -2649,6 +2667,7 @@ type SitePluginPluginOptionsPostCssPluginsFilterInput = {
   readonly mode: Maybe<StringQueryOperatorInput>;
   readonly darkMode: Maybe<BooleanQueryOperatorInput>;
   readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsThemeFilterInput>;
+  readonly plugins: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput>;
 };
 
 type SitePluginPluginOptionsPostCssPluginsThemeFilterInput = {
@@ -2701,6 +2720,45 @@ type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateColumnsFilterIn
 
 type SitePluginPluginOptionsPostCssPluginsThemeExtendGridTemplateRowsFilterInput = {
   readonly episodes: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsFilterListInput = {
+  readonly elemMatch: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsFilterInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsFilterInput = {
+  readonly config: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigFilterInput = {
+  readonly theme: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput>;
+  readonly variants: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeFilterInput = {
+  readonly textShadow: Maybe<SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigThemeTextShadowFilterInput = {
+  readonly default: Maybe<StringQueryOperatorInput>;
+  readonly sm: Maybe<StringQueryOperatorInput>;
+  readonly md: Maybe<StringQueryOperatorInput>;
+  readonly lg: Maybe<StringQueryOperatorInput>;
+  readonly xl: Maybe<StringQueryOperatorInput>;
+  readonly none: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPostCssPluginsPluginsConfigVariantsFilterInput = {
+  readonly textShadow: Maybe<StringQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsEmitSchemaFilterInput = {
+  readonly src___generated___gatsby_introspection_json: Maybe<BooleanQueryOperatorInput>;
+  readonly src___generated___gatsby_schema_graphql: Maybe<BooleanQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsEmitPluginDocumentsFilterInput = {
+  readonly src___generated___gatsby_plugin_documents_graphql: Maybe<BooleanQueryOperatorInput>;
 };
 
 type SitePluginPackageJsonFilterInput = {
@@ -2929,6 +2987,11 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.isTSX'
   | 'pluginCreator.pluginOptions.allExtensions'
   | 'pluginCreator.pluginOptions.jsxPragma'
+  | 'pluginCreator.pluginOptions.postCssPlugins'
+  | 'pluginCreator.pluginOptions.postCssPlugins.purge'
+  | 'pluginCreator.pluginOptions.postCssPlugins.mode'
+  | 'pluginCreator.pluginOptions.postCssPlugins.darkMode'
+  | 'pluginCreator.pluginOptions.postCssPlugins.plugins'
   | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.path'
   | 'pluginCreator.pluginOptions.base64Width'
@@ -2939,10 +3002,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginCreator.pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
   | 'pluginCreator.pluginOptions.pathCheck'
-  | 'pluginCreator.pluginOptions.postCssPlugins'
-  | 'pluginCreator.pluginOptions.postCssPlugins.purge'
-  | 'pluginCreator.pluginOptions.postCssPlugins.mode'
-  | 'pluginCreator.pluginOptions.postCssPlugins.darkMode'
   | 'pluginCreator.nodeAPIs'
   | 'pluginCreator.browserAPIs'
   | 'pluginCreator.ssrAPIs'
@@ -3714,6 +3773,11 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.isTSX'
   | 'pluginOptions.allExtensions'
   | 'pluginOptions.jsxPragma'
+  | 'pluginOptions.postCssPlugins'
+  | 'pluginOptions.postCssPlugins.purge'
+  | 'pluginOptions.postCssPlugins.mode'
+  | 'pluginOptions.postCssPlugins.darkMode'
+  | 'pluginOptions.postCssPlugins.plugins'
   | 'pluginOptions.name'
   | 'pluginOptions.path'
   | 'pluginOptions.base64Width'
@@ -3724,10 +3788,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
   | 'pluginOptions.pathCheck'
-  | 'pluginOptions.postCssPlugins'
-  | 'pluginOptions.postCssPlugins.purge'
-  | 'pluginOptions.postCssPlugins.mode'
-  | 'pluginOptions.postCssPlugins.darkMode'
   | 'nodeAPIs'
   | 'browserAPIs'
   | 'ssrAPIs'
@@ -3934,24 +3994,6 @@ type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
-
-
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-    )> }
-  )> };
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
-
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
 type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
@@ -3977,6 +4019,24 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
+
+
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+    )> }
+  )> };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
