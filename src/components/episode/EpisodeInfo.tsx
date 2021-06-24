@@ -51,8 +51,13 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 				{prev && <div>{prev}</div>}
 				{next && <div>{next}</div>}
 			</div>
+			<p className="mt-8">
+				© {new Date().getFullYear()} Martin Hutchinson
+			</p>
 		</section>
 	);
 };
+
+// TODO prev next styling
 
 export default EpisodeInfo;

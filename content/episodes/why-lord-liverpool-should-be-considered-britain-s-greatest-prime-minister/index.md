@@ -15,12 +15,11 @@ An examination of the major achievements of Robert Banks Jenkinson, Second Earl 
 For more information, see Martin's new book on Lord Liverpool:
 
 [Britain's Greatest Prime Minister](https://www.lordliverpool.com)
-<br>
-<br>
-**_Intro/outro music:_**
 
-Beethoven's Symphony No. 7 in A major, Op. 92 - Finale.
+<br>
+
+_Intro/outro music:_
+
+_Beethoven's Symphony No. 7 in A major, Op. 92 - Finale._
 
 <sup>[Source: John Michel Cello](https://commons.wikimedia.org/wiki/File:JOHN_MICHEL_CELLO-BEETHOVEN_SYMPHONY_7_Finale.ogg)</sup>
-
-© 2021 Martin Hutchinson

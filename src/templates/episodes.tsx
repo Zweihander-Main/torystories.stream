@@ -23,7 +23,7 @@ const EpisodeTemplate: React.FC<
 		null;
 
 	return (
-		<Layout hideFooter={true}>
+		<Layout hideFooter={true} showHomeButton={true}>
 			<SEO title={title} description={description} />
 			<div className="grid grid-cols-2 grid-rows-1">
 				<Subtitles
