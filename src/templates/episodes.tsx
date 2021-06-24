@@ -16,9 +16,9 @@ const EpisodeTemplate: React.FC<
 	const description = post?.frontmatter?.description || post?.excerpt || '';
 	const episodeNum = post?.frontmatter?.episodeNum || -1;
 	const html = post?.html || '';
-	const possibleLinks = post?.frontmatter?.syndicationLinks || [];
-	const syndicationLinks =
-		typeof possibleLinks[0] === 'string' ? possibleLinks : [];
+	const syndicationLinks = (post?.frontmatter?.syndicationLinks || []).map(
+		(link) => link || ''
+	);
 	const date = post?.frontmatter?.date || '';
 	const image =
 		post?.frontmatter?.featuredImage?.childImageSharp?.gatsbyImageData ||
