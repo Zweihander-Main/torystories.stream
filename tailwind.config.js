@@ -42,7 +42,7 @@ module.exports = {
 			},
 			backgroundImage: (theme) => ({
 				'georgian-pattern':
-					"radial-gradient(70% 70% at 50% 50%, rgba(10, 10, 10, 0) 39%, #0A0A0A 100%), url('/images/georgian-pattern.svg')",
+					"radial-gradient(70% 60% at 50% 50%, rgba(10, 10, 10, 0) 39%, #0A0A0A 100%), url('/images/georgian-pattern.svg')",
 			}),
 		},
 	},

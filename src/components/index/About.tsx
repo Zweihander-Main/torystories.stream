@@ -34,7 +34,7 @@ const About: React.FC = () => {
 	const title = node.frontmatter?.title || '';
 
 	return (
-		<section className="bg-darkPurple bg-georgian-pattern text-center ">
+		<section className="bg-darkPurple bg-georgian-pattern text-center bg-fixed">
 			<div className="w-6/12 mx-auto pt-24 pb-24">
 				<StaticImage
 					src="../../images/martin-hutchinson-colorized.png"
