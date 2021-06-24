@@ -8,6 +8,8 @@ type PlayerContextProps = {
 	idPlaying: string;
 	setIdPlaying: (id: string) => void;
 	setPlayedSeconds: (s: number) => void;
+	playing: boolean;
+	setPlaying: (b: boolean) => void;
 };
 
 const PlayerContext = React.createContext<PlayerContextProps>({
@@ -16,6 +18,8 @@ const PlayerContext = React.createContext<PlayerContextProps>({
 	idPlaying: '',
 	setIdPlaying: () => {},
 	setPlayedSeconds: () => {},
+	playing: false,
+	setPlaying: () => {},
 });
 
 export default PlayerContext;
@@ -42,6 +46,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
 
 	const storage = SessionStorage.getInstance();
 	const [playedSeconds, setPlayedSeconds] = useState(0);
+	const [playing, setPlaying] = useState(false);
+
 	const [idPlaying, setIdPlaying] = useState(
 		defaultID.allMarkdownRemark.edges[0].node.id
 	);
@@ -54,6 +60,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
 				idPlaying,
 				setIdPlaying,
 				setPlayedSeconds,
+				playing,
+				setPlaying,
 			}}
 		>
 			{children}

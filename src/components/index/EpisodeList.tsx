@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useEpisodeList from 'hooks/useEpisodeList';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
-
-const Episode: React.FC = () => {};
+import PlayerContext from 'contexts/PlayerContext';
+import { RiPlayCircleLine } from 'react-icons/ri';
 
 const EpisodeList: React.FC = () => {
 	const { episodeArray } = useEpisodeList();
+	const { setIdPlaying, playing, setPlaying, idPlaying } =
+		useContext(PlayerContext);
+
+	const handlePlayClick = (e: React.MouseEvent<SVGElement>, id: string) => {
+		e.preventDefault();
+		setIdPlaying(id);
+		if (!playing) {
+			setPlaying(true);
+		}
+	};
 
 	return (
 		<section>
@@ -36,13 +46,22 @@ const EpisodeList: React.FC = () => {
 										{blurb}
 									</p>
 								</div>
-								<div>
+								<div className="grid grid-rows-none grid-cols-none">
+									{(!playing || id !== idPlaying) && (
+										<RiPlayCircleLine
+											size="100%"
+											className="h-full self-center justify-self-center row-start-1 row-end-1 col-start-1 col-end-1 z-20 text-white opacity-20 hover:opacity-80 cursor-pointer"
+											onClick={(e) =>
+												handlePlayClick(e, id)
+											}
+										/>
+									)}
 									{featuredImage && (
 										<GatsbyImage
 											image={featuredImage}
 											alt={title}
 											objectFit={'cover'}
-											className="h-full self-center justify-self-center"
+											className="h-full self-center justify-self-center row-start-1 row-end-1 col-start-1 col-end-1 z-10"
 										/>
 									)}
 								</div>

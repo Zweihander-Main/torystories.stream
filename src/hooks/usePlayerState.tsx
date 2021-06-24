@@ -36,6 +36,8 @@ const usePlayerState = (): PlayerStateProps => {
 		setPlayedSeconds,
 		idPlaying,
 		setIdPlaying,
+		playing,
+		setPlaying,
 	} = useContext(PlayerContext);
 
 	const { getEpByID } = useEpisodeList();
@@ -45,7 +47,6 @@ const usePlayerState = (): PlayerStateProps => {
 
 	const player = useRef<null | ReactPlayer>(null);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
-	const [playing, setPlaying] = useState(false);
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
 	const [playbackRate, setPlaybackRate] = useState(1.0);
