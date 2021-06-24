@@ -14,25 +14,6 @@ import {
 } from 'react-icons/ri';
 
 const Player: React.FC = () => {
-	const defaultID =
-		useStaticQuery<GatsbyTypes.DefaultEpisodeIDQueryQuery>(graphql`
-			query DefaultEpisodeIDQuery {
-				allMarkdownRemark(
-					limit: 1
-					sort: { fields: frontmatter___date, order: DESC }
-					filter: {
-						fields: { sourceInstanceName: { eq: "episodes" } }
-					}
-				) {
-					edges {
-						node {
-							id
-						}
-					}
-				}
-			}
-		`);
-
 	const {
 		player,
 		setPlayedSeconds,
@@ -54,9 +35,7 @@ const Player: React.FC = () => {
 		title,
 		episodeNum,
 		setPlayerReady,
-	} = usePlayerState({
-		defaultID: defaultID.allMarkdownRemark.edges[0].node.id,
-	});
+	} = usePlayerState();
 
 	const handlePlayPause = () => {
 		setPlaying(!playing);
@@ -159,6 +138,7 @@ const Player: React.FC = () => {
 						<GatsbyImage
 							className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
 							image={image}
+							alt={title}
 						/>
 						<button
 							className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"

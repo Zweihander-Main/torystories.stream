@@ -6,10 +6,6 @@ import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 // Usage note: do not spread on to JSX Element
 
-type UsePlayerStateInputProps = {
-	defaultID: string;
-};
-
 type PlayerStateProps = {
 	player: React.MutableRefObject<null | ReactPlayer>;
 	setPlayedSeconds: (s: number) => void;
@@ -33,11 +29,14 @@ type PlayerStateProps = {
 	setPlayerReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const usePlayerState = ({
-	defaultID,
-}: UsePlayerStateInputProps): PlayerStateProps => {
-	const { storage, playedSeconds, setPlayedSeconds } =
-		useContext(PlayerContext);
+const usePlayerState = (): PlayerStateProps => {
+	const {
+		storage,
+		playedSeconds,
+		setPlayedSeconds,
+		idPlaying,
+		setIdPlaying,
+	} = useContext(PlayerContext);
 
 	const { getEpByID } = useEpisodeList();
 
@@ -51,8 +50,7 @@ const usePlayerState = ({
 	const [muted, setMuted] = useState(false);
 	const [playbackRate, setPlaybackRate] = useState(1.0);
 	const [seeking, setSeeking] = useState(false);
-	const [id, setID] = useState(defaultID);
-	const defaultEpData = getEpByID(id);
+	const defaultEpData = getEpByID(idPlaying);
 	const [url, setURL] = useState(defaultEpData.audioURL || undefined);
 	const [image, setImage] = useState(defaultEpData.featuredImage);
 	const [slug, setSlug] = useState(defaultEpData.slug);
@@ -88,7 +86,7 @@ const usePlayerState = ({
 	useEffect(() => {
 		const currentID = storage.readCurrent();
 		if (currentID) {
-			setID(currentID);
+			setIdPlaying(currentID);
 			loadPlayerState();
 			loadSavedSeconds(currentID);
 		}
@@ -98,19 +96,19 @@ const usePlayerState = ({
 	useEffect(() => {
 		setPlayerReady(false);
 		setStorageLoaded(false);
-		storage.saveCurrent(id);
-		const epData = getEpByID(id);
+		storage.saveCurrent(idPlaying);
+		const epData = getEpByID(idPlaying);
 		setURL(epData.audioURL || undefined);
-		loadSavedSeconds(id);
+		loadSavedSeconds(idPlaying);
 		setImage(epData.featuredImage);
 		setSlug(epData.slug);
 		setTitle(epData.title);
 		setEpisodeNum(epData.episodeNum);
-	}, [id]);
+	}, [idPlaying]);
 
 	// on progress
 	useEffect(() => {
-		storage.savePlayed(id, playedSeconds);
+		storage.savePlayed(idPlaying, playedSeconds);
 	}, [playedSeconds]);
 
 	// load retrieved storage data when player is ready
