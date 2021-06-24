@@ -22,7 +22,7 @@
 		"strict": true,
 		"suppressImplicitAnyIndexErrors": true,
 		"target": "es5",
-		"typeRoots": ["./typings", "./node_modules/@types"],
+		"typeRoots": ["./node_modules/@types", "./typings"],
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"noEmit": true,
