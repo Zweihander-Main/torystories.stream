@@ -22,4 +22,30 @@
 	.one-word-per-line {
 		word-spacing: 1000000px;
 	}
+
+	.tooltip {
+		position: relative;
+	}
+
+	.volume-vertical {
+		appearance: slider-vertical;
+		writing-mode: bt-lr;
+	}
+
+	.tooltip::before {
+		border-radius: 10px;
+		content: attr(data-text);
+		display: none;
+		font-size: 0.825rem;
+		padding: 0.25rem;
+		position: absolute;
+		text-align: center;
+		top: 100%;
+		transform: translate(-20%, -50%);
+		width: max-content;
+	}
+
+	.tooltip:hover::before {
+		display: block;
+	}
 }

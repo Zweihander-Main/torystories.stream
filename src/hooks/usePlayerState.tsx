@@ -2,6 +2,7 @@ import PlayerContext from 'contexts/PlayerContext';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import useEpisodeList from 'hooks/useEpisodeList';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 // Usage note: do not spread on to JSX Element
 
@@ -27,6 +28,8 @@ type PlayerStateProps = {
 	url: string | undefined;
 	image: IGatsbyImageData | null;
 	slug: string;
+	title: string;
+	episodeNum: number;
 	setPlayerReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -38,8 +41,8 @@ const usePlayerState = ({
 
 	const { getEpByID } = useEpisodeList();
 
-	const [storageLoaded, setStorageLoaded] = React.useState(false);
-	const [playerReady, setPlayerReady] = React.useState(false);
+	const [storageLoaded, setStorageLoaded] = useState(false);
+	const [playerReady, setPlayerReady] = useState(false);
 
 	const player = useRef<null | ReactPlayer>(null);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
@@ -50,9 +53,11 @@ const usePlayerState = ({
 	const [seeking, setSeeking] = useState(false);
 	const [id, setID] = useState(defaultID);
 	const defaultEpData = getEpByID(id);
-	const [url, setURL] = React.useState(defaultEpData.audioURL || undefined);
-	const [image, setImage] = React.useState(defaultEpData.featuredImage);
-	const [slug, setSlug] = React.useState(defaultEpData.slug);
+	const [url, setURL] = useState(defaultEpData.audioURL || undefined);
+	const [image, setImage] = useState(defaultEpData.featuredImage);
+	const [slug, setSlug] = useState(defaultEpData.slug);
+	const [title, setTitle] = useState(defaultEpData.title);
+	const [episodeNum, setEpisodeNum] = useState(defaultEpData.episodeNum);
 
 	const loadSavedSeconds = (id: string) => {
 		const currentSeconds = storage.readPlayed(id);
@@ -99,6 +104,8 @@ const usePlayerState = ({
 		loadSavedSeconds(id);
 		setImage(epData.featuredImage);
 		setSlug(epData.slug);
+		setTitle(epData.title);
+		setEpisodeNum(epData.episodeNum);
 	}, [id]);
 
 	// on progress
@@ -145,6 +152,8 @@ const usePlayerState = ({
 		url,
 		image,
 		slug,
+		title,
+		episodeNum,
 		setPlayerReady,
 	};
 };

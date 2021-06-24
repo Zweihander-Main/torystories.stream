@@ -51,6 +51,8 @@ const Player: React.FC = () => {
 		url,
 		image,
 		slug,
+		title,
+		episodeNum,
 		setPlayerReady,
 	} = usePlayerState({
 		defaultID: defaultID.allMarkdownRemark.edges[0].node.id,
@@ -124,7 +126,7 @@ const Player: React.FC = () => {
 	};
 
 	return (
-		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-black w-full h-player justify-center">
+		<div className="flex flex-row fixed bottom-0 z-50 text-white bg-player w-full h-player justify-center">
 			<ReactPlayer
 				className="hidden"
 				ref={player}
@@ -168,15 +170,14 @@ const Player: React.FC = () => {
 				)}
 			</div>
 			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
-				1
+				{episodeNum}
 			</span>
 			<Link
 				to={slug}
 				className="hover:underline hover:font-bold flex justify-center items-center mr-8"
 			>
 				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
-					Why Lord Liverpool Should Be Considered Britain's Greatest
-					Prime Minister
+					{title}
 				</h3>
 			</Link>
 			<button className="text-6xl mr-2" onClick={handlePlayPause}>
@@ -191,18 +192,19 @@ const Player: React.FC = () => {
 				onMouseDown={handleSeekMouseDown}
 				onChange={handleSeekChange}
 				onMouseUp={handleSeekMouseUp}
-				className={'w-full m-4'}
+				className={'w-full m-4 cursor-pointer'}
 			/>
-			<div className="flex justify-center items-center p-4 group relative">
+			<div className="flex justify-center items-center group relative">
 				<span
 					onClick={handleToggleMuted}
-					className={'text-4xl cursor-pointer'}
+					className={'tooltip p-4 text-4xl cursor-pointer'}
+					data-text={'Volume'}
 				>
 					{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
 				</span>
 				<span
 					className={
-						'absolute bottom-full hidden hover:flex group-hover:flex bg-black w-16 justify-center pt-4'
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-player pb-4 w-16 justify-center pt-4'
 					}
 				>
 					<input
@@ -213,21 +215,17 @@ const Player: React.FC = () => {
 						value={volume}
 						onChange={handleVolumeChange}
 						orient="vertical"
-						className={'cursor-pointer'}
-						style={{
-							'writing-mode': 'bt-lr',
-							appearance: 'slider-vertical',
-						}}
+						className={'cursor-pointer volume-vertical'}
 					/>
 				</span>
 			</div>
-			<div className="flex justify-center items-center m-4 group relative">
-				<span className={'text-4xl'}>
+			<div className="tooltip flex justify-center items-center group relative">
+				<span className={'tooltip text-4xl p-4'} data-text={'Speed'}>
 					<RiMusic2Line />
 				</span>
 				<div
 					className={
-						'absolute bottom-full hidden hover:flex group-hover:flex bg-black w-16 justify-center flex-col-reverse'
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
 					}
 				>
 					{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => (
@@ -246,15 +244,16 @@ const Player: React.FC = () => {
 			</div>
 			<Link
 				to={slug}
-				className="text-4xl p-4 mr-2 flex justify-center items-center"
+				className="text-4xl mr-2 flex justify-center items-center"
 			>
-				<RiInformationLine />
+				<span className="tooltip p-4" data-text={'Info/Subs'}>
+					<RiInformationLine />
+				</span>
 			</Link>
 		</div>
 	);
 };
 
-// TODO title on hover
-// TODO style
+// TODO style both of the range's
 
 export default Player;
