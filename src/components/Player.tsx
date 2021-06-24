@@ -151,7 +151,7 @@ const Player: React.FC = () => {
 				{image && (
 					<div
 						className={
-							'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 box-content grid grid-rows-none grid-columns-none justify-items-center items-center'
+							'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
 						}
 					>
 						<GatsbyImage
@@ -193,53 +193,60 @@ const Player: React.FC = () => {
 				onMouseUp={handleSeekMouseUp}
 				className={'w-full m-4'}
 			/>
-			<div className="flex justify-center items-center m-4">
-				<span onClick={handleToggleMuted} className={'text-4xl'}>
+			<div className="flex justify-center items-center p-4 group relative">
+				<span
+					onClick={handleToggleMuted}
+					className={'text-4xl cursor-pointer'}
+				>
 					{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
 				</span>
-				<input
-					type="range"
-					min={0}
-					max={1}
-					step="any"
-					value={volume}
-					onChange={handleVolumeChange}
-					orient="vertical"
-					className={'absolute bottom-0'}
-					style={{
-						'writing-mode': 'bt-lr',
-						appearance: 'slider-vertical',
-					}}
-				/>
+				<span
+					className={
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-black w-16 justify-center pt-4'
+					}
+				>
+					<input
+						type="range"
+						min={0}
+						max={1}
+						step="any"
+						value={volume}
+						onChange={handleVolumeChange}
+						orient="vertical"
+						className={'cursor-pointer'}
+						style={{
+							'writing-mode': 'bt-lr',
+							appearance: 'slider-vertical',
+						}}
+					/>
+				</span>
 			</div>
-			<div className="flex justify-center items-center m-4">
+			<div className="flex justify-center items-center m-4 group relative">
 				<span className={'text-4xl'}>
 					<RiMusic2Line />
 				</span>
-				<div className="absolute bottom-0">
-					<button onClick={handleSetPlaybackRate} value={0.75}>
-						0.75x
-					</button>
-					<button onClick={handleSetPlaybackRate} value={1}>
-						1x
-					</button>
-					<button onClick={handleSetPlaybackRate} value={1.25}>
-						1.25x
-					</button>
-					<button onClick={handleSetPlaybackRate} value={1.5}>
-						1.5x
-					</button>
-					<button onClick={handleSetPlaybackRate} value={1.75}>
-						1.75x
-					</button>
-					<button onClick={handleSetPlaybackRate} value={2}>
-						2x
-					</button>
+				<div
+					className={
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-black w-16 justify-center flex-col-reverse'
+					}
+				>
+					{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => (
+						<button
+							key={speed}
+							className={`p-2 hover:font-bold ${
+								playbackRate === speed ? 'font-bold' : ''
+							}`}
+							onClick={handleSetPlaybackRate}
+							value={speed}
+						>
+							{`${speed}x`}
+						</button>
+					))}
 				</div>
 			</div>
 			<Link
 				to={slug}
-				className="text-4xl m-4 flex justify-center items-center"
+				className="text-4xl p-4 mr-2 flex justify-center items-center"
 			>
 				<RiInformationLine />
 			</Link>
