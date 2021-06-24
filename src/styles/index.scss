@@ -48,4 +48,8 @@
 	.tooltip:hover::before {
 		display: block;
 	}
+
+	a {
+		@apply underline hover:font-bold;
+	}
 }

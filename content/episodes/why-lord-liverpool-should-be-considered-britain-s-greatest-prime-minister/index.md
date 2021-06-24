@@ -10,5 +10,17 @@ syndicationLinks:
 subtitles: torystoriesep1.vtt
 ---
 
-Blurb here
-CC notice on music
+An examination of the major achievements of Robert Banks Jenkinson, Second Earl of Liverpool; Prime Minister 1812 - 1827.
+
+For more information, see Martin's new book on Lord Liverpool:
+
+[Britain's Greatest Prime Minister](https://www.lordliverpool.com)
+<br>
+<br>
+**_Intro/outro music:_**
+
+Beethoven's Symphony No. 7 in A major, Op. 92 - Finale.
+
+<sup>[Source: John Michel Cello](https://commons.wikimedia.org/wiki/File:JOHN_MICHEL_CELLO-BEETHOVEN_SYMPHONY_7_Finale.ogg)</sup>
+
+© 2021 Martin Hutchinson

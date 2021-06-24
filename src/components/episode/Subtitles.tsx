@@ -127,4 +127,6 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 	);
 };
 
+// TODO: subtitles can be obscured by cover
+
 export default Subtitles;

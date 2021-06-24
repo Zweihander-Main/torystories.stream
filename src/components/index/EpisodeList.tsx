@@ -33,7 +33,10 @@ const EpisodeList: React.FC = () => {
 				} = episode;
 				return (
 					<div key={id} className="flex flex-column">
-						<Link to={slug}>
+						<Link
+							className={'no-underline hover:font-normal'}
+							to={slug}
+						>
 							<div className="grid grid-cols-episodes grid-rows-episodes bg-brightBlue text-black hover:bg-dullBlue">
 								<div className="font-display text-episodeNum kern-episode-num justify-self-center self-center">
 									{episodeNum}

@@ -154,7 +154,7 @@ const Player: React.FC = () => {
 			</span>
 			<Link
 				to={slug}
-				className="hover:underline hover:font-bold flex justify-center items-center mr-8"
+				className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
 			>
 				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
 					{title}

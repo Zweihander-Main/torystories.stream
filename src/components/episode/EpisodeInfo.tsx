@@ -21,19 +21,28 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 	prev,
 }) => {
 	return (
-		<section>
-			<h1>
-				{episodeNum !== -1 && `Episode ${episodeNum}: `}
+		<section className="m-20">
+			<h1 className="font-display tracking-display text-5xl mb-4">
 				{title}
 			</h1>
-			{date}
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<h2 className="font-body  text-2xl mb">
+				{episodeNum !== -1 && `Episode ${episodeNum}`}
+			</h2>
+			<h3 className={'font-display text-lg mb-4'}>{date}</h3>
+			<div
+				className={'font-body text-lg mb-4'}
+				dangerouslySetInnerHTML={{ __html: html }}
+			/>
 			{syndicationLinks.length > 0 && (
 				<React.Fragment>
-					<h3>Episode available at:</h3>
+					<h3 className="font-display tracking-display text-2xl">
+						Episode available at:
+					</h3>
 					<ul>
 						{syndicationLinks.map((link) => (
-							<li key={link}>{link}</li>
+							<li key={link}>
+								<a href={link}>{link}</a>
+							</li>
 						))}
 					</ul>
 				</React.Fragment>
