@@ -6,7 +6,7 @@ date: 2021-06-17T01:32:07.973Z
 featuredImage: ep1-lord-liverpool.png
 audioFile: torystoriesep1.mp3
 syndicationLinks:
-    - 'https://soundcloud.com/user-93601500/why-lord-liverpool-should-be-considered-britains-greatest-prime-minister'
+    - 'https://soundcloud.com/tory-stories/why-lord-liverpool-should-be-considered-britains-greatest-prime-minister'
 subtitles: torystoriesep1.vtt
 ---
 
