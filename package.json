@@ -44,6 +44,7 @@
 		"@types/react-helmet": "^6.1.1",
 		"@typescript-eslint/eslint-plugin": "^4.26.1",
 		"@typescript-eslint/parser": "^4.26.1",
+		"cypress": "^8.6.0",
 		"eslint": "^7.28.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-graphql": "^4.0.0",
@@ -51,6 +52,7 @@
 		"eslint-plugin-react": "^7.24.0",
 		"netlify-cli": "^3.35.10",
 		"prettier": "^2.3.1",
+		"start-server-and-test": "^1.14.0",
 		"stylelint": "^13.13.1",
 		"stylelint-config-prettier": "^8.0.2",
 		"stylelint-config-standard": "^22.0.0",
@@ -65,7 +67,10 @@
 		"lint": "tsc",
 		"lint:watch": "tsc --watch",
 		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-		"test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+		"test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+		"cy:run": "cypress run",
+		"cy:open": "cypress open",
+		"test:e2e": "start-server-and-test develop http://localhost:8000 cy:open"
 	},
 	"repository": {
 		"type": "git",
