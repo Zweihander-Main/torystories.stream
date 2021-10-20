@@ -108,7 +108,11 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 
 	return (
 		<div>
-			<div className="flex flex-row fixed bottom-0 z-50 text-white bg-player w-full h-player justify-center">
+			<nav
+				className="flex flex-row fixed bottom-0 z-50 text-white bg-player w-full h-player justify-center"
+				role="navigation"
+				aria-label="Podcast player"
+			>
 				<ReactPlayer
 					className="hidden"
 					ref={player}
@@ -146,6 +150,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							<button
 								className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
 								onClick={handlePlay}
+								aria-label="Start playback"
 							>
 								{!playing && <RiPlayCircleLine size={'100%'} />}
 							</button>
@@ -167,7 +172,8 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					className="text-6xl mr-2"
 					onClick={handlePlayPause}
 					role="switch"
-					title="Play Button"
+					aria-label="Play/Pause Button"
+					aria-checked={playing}
 				>
 					{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
 				</button>
@@ -181,7 +187,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					onChange={handleSeekChange}
 					onMouseUp={handleSeekMouseUp}
 					className={'w-full m-4 cursor-pointer'}
-					title="Seek"
+					aria-label="Seek and progress slider"
 				/>
 				<div className="flex justify-center items-center group relative">
 					<span
@@ -247,7 +253,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 						<RiInformationLine />
 					</span>
 				</Link>
-			</div>
+			</nav>
 			{children}
 		</div>
 	);
