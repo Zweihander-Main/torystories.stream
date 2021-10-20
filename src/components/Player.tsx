@@ -167,6 +167,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					className="text-6xl mr-2"
 					onClick={handlePlayPause}
 					role="switch"
+					title="Play Button"
 				>
 					{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
 				</button>
@@ -180,12 +181,14 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					onChange={handleSeekChange}
 					onMouseUp={handleSeekMouseUp}
 					className={'w-full m-4 cursor-pointer'}
+					title="Seek"
 				/>
 				<div className="flex justify-center items-center group relative">
 					<span
 						onClick={handleToggleMuted}
 						className={'tooltip p-4 text-4xl cursor-pointer'}
 						data-text={'Volume'}
+						title="Volume Button"
 					>
 						{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
 					</span>
@@ -203,6 +206,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							onChange={handleVolumeChange}
 							orient="vertical"
 							className={'cursor-pointer volume-vertical'}
+							title="Volume Slider"
 						/>
 					</span>
 				</div>
@@ -210,6 +214,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					<span
 						className={'tooltip text-4xl p-4'}
 						data-text={'Speed'}
+						title="Playback Speed Button"
 					>
 						<RiMusic2Line />
 					</span>
@@ -226,6 +231,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 								}`}
 								onClick={handleSetPlaybackRate}
 								value={speed}
+								title="Playback Speed Slider"
 							>
 								{`${speed}x`}
 							</button>
@@ -235,6 +241,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				<Link
 					to={slug}
 					className="text-4xl mr-2 flex justify-center items-center"
+					title="Episode Info and Subtitles"
 				>
 					<span className="tooltip p-4" data-text={'Info/Subs'}>
 						<RiInformationLine />
