@@ -23,6 +23,7 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"target": "es5",
 		"typeRoots": ["./node_modules/@types", "./typings"],
+		"types": ["cypress", "@testing-library/cypress", "cypress-axe"],
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"noEmit": true,
@@ -44,5 +45,5 @@
 			}
 		]
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*", "cypress/**/*"]
 }

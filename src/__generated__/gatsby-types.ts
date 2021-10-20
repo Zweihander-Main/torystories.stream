@@ -3798,15 +3798,23 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
 type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
+
+
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+    )> }
+  )> };
 
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3819,10 +3827,10 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3850,18 +3858,10 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-    )> }
-  )> };
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 

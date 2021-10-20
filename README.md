@@ -9,6 +9,7 @@
 -   GraphQL + Typegen
 -   TailwindCSS
 -   NetlifyCMS
+-   Cypress + axe
 
 ## Dev notes
 
