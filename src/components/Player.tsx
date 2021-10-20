@@ -163,7 +163,11 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 						{title}
 					</h3>
 				</Link>
-				<button className="text-6xl mr-2" onClick={handlePlayPause}>
+				<button
+					className="text-6xl mr-2"
+					onClick={handlePlayPause}
+					role="switch"
+				>
 					{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
 				</button>
 				<input
