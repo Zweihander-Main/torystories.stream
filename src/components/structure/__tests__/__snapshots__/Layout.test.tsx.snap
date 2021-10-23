@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Layout renders correctly 1`] = `
+exports[`Layout preserves its structure 1`] = `
 <div>
   <div
     class="layout flex flex-col items-center bg-black text-white font-body mb-20"
