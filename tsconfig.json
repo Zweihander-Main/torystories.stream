@@ -23,7 +23,13 @@
 		"suppressImplicitAnyIndexErrors": true,
 		"target": "es5",
 		"typeRoots": ["./node_modules/@types", "./typings"],
-		"types": ["cypress", "@testing-library/cypress", "cypress-axe"],
+		"types": [
+			"cypress",
+			"@testing-library/cypress",
+			"cypress-axe",
+			"jest",
+			"@testing-library/react"
+		],
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"noEmit": true,
@@ -45,5 +51,6 @@
 			}
 		]
 	},
-	"include": ["src/**/*", "cypress/**/*"]
+	"include": ["src/**/*", "cypress/**/*"],
+	"exclude": ["src/**/*.test.tsx"]
 }

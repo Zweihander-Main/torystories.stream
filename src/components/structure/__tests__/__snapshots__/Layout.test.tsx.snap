@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders correctly 1`] = `
+<div>
+  <div
+    class="layout flex flex-col items-center bg-black text-white font-body mb-20"
+  >
+    <main />
+    <footer
+      class="m-20 text-center"
+    >
+      <p>
+        Check out:
+      </p>
+      <p
+        class="mb-4"
+      >
+        <a
+          class="font-bold"
+          href="https://www.tbwns.com"
+        >
+          Martin's blog
+        </a>
+         | 
+        <a
+          class="font-bold"
+          href="https://www.lordliverpool.com"
+        >
+          His biography of Lord Liverpool
+        </a>
+      </p>
+      <p>
+        © 
+        2021
+         Martin Hutchinson
+      </p>
+    </footer>
+  </div>
+</div>
+`;

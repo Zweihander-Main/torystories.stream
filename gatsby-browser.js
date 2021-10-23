@@ -6,7 +6,7 @@
 import './src/styles/index.css';
 
 import React from 'react';
-import Player from './src/components/Player';
+import Player from './src/components/player/Player';
 import AppProvider from './src/contexts/AppContext';
 
 export const wrapRootElement = ({ element }) => (
