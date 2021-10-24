@@ -24,11 +24,13 @@ module.exports = {
 	testPathIgnorePatterns: [
 		`node_modules`,
 		`\\.cache`,
-		`<rootDir>.*/public`,
 		`\\.typings`,
 		`\\.vscode`,
-		`content`,
+		'\\.netlify',
+		`<rootDir>.*/public`,
 		`cypress`,
+		`__generated__`,
+		'coverage',
 	],
 	transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
 	globals: {

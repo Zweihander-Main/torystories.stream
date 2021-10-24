@@ -5,5 +5,6 @@ module.exports = {
 	displayName: 'eslint',
 	runner: 'jest-runner-eslint',
 	testMatch: ['<rootDir>/src/**/*'],
+	testPathIgnorePatterns: [`__generated__`],
 	watchPlugins: ['jest-runner-eslint/watch-fix'],
 };
