@@ -158,3 +158,9 @@ public
 
 # Local Netlify folder
 .netlify
+
+# Cypress
+cypress/results/*
+cypress/reports/*
+cypress/screenshots/*
+cypress/videos/*

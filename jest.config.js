@@ -9,28 +9,32 @@ Object.keys(paths).forEach((key) => {
 });
 
 module.exports = {
-	transform: {
-		'^.+\\.[jt]sx?$': `<rootDir>/test/jest-preprocess.js`,
-	},
-	moduleNameMapper: {
-		'.+\\.(css|styl|less|sass|scss)$': `identity-obj-proxy`,
-		'.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `<rootDir>/test/__mocks__/file-mock.js`,
-		...fixedPaths,
-	},
-	testPathIgnorePatterns: [
-		`node_modules`,
-		`\\.cache`,
-		`<rootDir>.*/public`,
-		`\\.typings`,
-		`\\.vscode`,
-		`content`,
-		`cypress`,
+	...require('./test/jest.common'),
+	collectCoverageFrom: [
+		'**/src/**/*.js',
+		'!**/__tests__/**',
+		'!**/__server_tests__/**',
+		'!**/node_modules/**',
 	],
-	transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
-	globals: {
-		__PATH_PREFIX__: ``,
+	coverageThreshold: {
+		global: {
+			statements: 15,
+			branches: 10,
+			functions: 15,
+			lines: 15,
+		},
+		'./src/shared/utils.js': {
+			statements: 100,
+			branches: 80,
+			functions: 100,
+			lines: 100,
+		},
 	},
-	testURL: `http://localhost`,
-	setupFiles: [`<rootDir>/test/loadershim.js`],
-	testEnvironment: 'jest-environment-jsdom',
+	projects: [
+		'./test/jest.client.js',
+		'./test/jest.lint.eslint.js',
+		'./test/jest.lint.tsc.js',
+		'./test/jest.lint.prettier.js',
+		'./test/jest.lint.stylelint.js',
+	],
 };
