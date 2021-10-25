@@ -1,5 +1,7 @@
 const { compilerOptions } = require('./tsconfig.json');
 const { pathsToModuleNameMapper } = require('ts-jest/utils');
+const path = require('path');
+
 const paths = pathsToModuleNameMapper(compilerOptions.paths, {
 	prefix: '<rootDir>/',
 });
@@ -8,10 +10,43 @@ Object.keys(paths).forEach((key) => {
 	fixedPaths[`${key.slice(0, -1)}/(.*)$`] = paths[key].concat('/$1');
 });
 
+const commonForJestTests = {
+	globals: {
+		__PATH_PREFIX__: '',
+	},
+	moduleNameMapper: {
+		'.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+		'.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+			'<rootDir>/test/__mocks__/file-mock.js',
+		...fixedPaths,
+	},
+	setupFiles: ['<rootDir>/test/loadershim.js'],
+	testURL: 'http://localhost',
+	testPathIgnorePatterns: [
+		'node_modules',
+		'\\.cache',
+		'\\.typings',
+		'\\.vscode',
+		'\\.netlify',
+		'<rootDir>.*/public',
+		'cypress',
+		'__generated__',
+		'coverage',
+	],
+	transform: {
+		'^.+\\.[jt]sx?$': '<rootDir>/test/jest-preprocess.js',
+	},
+	transformIgnorePatterns: ['node_modules/(?!(gatsby)/)'],
+};
+
+const commonForLintRunners = {
+	testMatch: ['<rootDir>/src/**/*'],
+	testPathIgnorePatterns: ['__generated__'],
+};
+
 module.exports = {
-	...require('./test/jest.common'),
 	collectCoverageFrom: [
-		'**/src/**/*.js',
+		'**/src/**/*.{js,jsx,ts,tsx}',
 		'!**/__tests__/**',
 		'!**/__server_tests__/**',
 		'!**/node_modules/**',
@@ -23,18 +58,38 @@ module.exports = {
 			functions: 15,
 			lines: 15,
 		},
-		'./src/shared/utils.js': {
-			statements: 100,
-			branches: 80,
-			functions: 100,
-			lines: 100,
-		},
 	},
+	watchPlugins: [
+		'jest-watch-typeahead/filename',
+		'jest-watch-typeahead/testname',
+		'jest-watch-select-projects',
+	],
 	projects: [
-		'./test/jest.client.js',
-		'./test/jest.lint.eslint.js',
-		'./test/jest.lint.tsc.js',
-		'./test/jest.lint.prettier.js',
-		'./test/jest.lint.stylelint.js',
+		{
+			...commonForJestTests,
+			displayName: 'client',
+			testEnvironment: 'jest-environment-jsdom',
+		},
+		{
+			...commonForLintRunners,
+			displayName: 'eslint',
+			runner: 'jest-runner-eslint',
+		},
+		{
+			...commonForLintRunners,
+			displayName: 'prettier',
+			preset: 'jest-runner-prettier',
+		},
+		{
+			...commonForLintRunners,
+			displayName: 'stylelint',
+			preset: 'jest-runner-stylelint',
+		},
+		{
+			...commonForLintRunners,
+			displayName: 'tsc',
+			runner: 'jest-runner-tsc',
+			moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
+		},
 	],
 };

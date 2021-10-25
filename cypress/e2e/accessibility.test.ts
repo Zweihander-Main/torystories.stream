@@ -11,3 +11,5 @@ describe('Accessibility tests', () => {
 			.checkA11y();
 	});
 });
+
+export {};
