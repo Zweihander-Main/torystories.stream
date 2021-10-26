@@ -10,6 +10,18 @@ Object.keys(paths).forEach((key) => {
 	fixedPaths[`${key.slice(0, -1)}/(.*)$`] = paths[key].concat('/$1');
 });
 
+const testPathIgnorePatterns = [
+	'node_modules',
+	'\\.cache',
+	'\\.typings',
+	'\\.vscode',
+	'\\.netlify',
+	'<rootDir>.*/public',
+	'cypress',
+	'__generated__',
+	'coverage',
+];
+
 const commonForJestTests = {
 	globals: {
 		__PATH_PREFIX__: '',
@@ -22,21 +34,12 @@ const commonForJestTests = {
 	},
 	setupFiles: ['<rootDir>/test/loadershim.js'],
 	testURL: 'http://localhost',
-	testPathIgnorePatterns: [
-		'node_modules',
-		'\\.cache',
-		'\\.typings',
-		'\\.vscode',
-		'\\.netlify',
-		'<rootDir>.*/public',
-		'cypress',
-		'__generated__',
-		'coverage',
-	],
+	testPathIgnorePatterns,
 	transform: {
 		'^.+\\.[jt]sx?$': '<rootDir>/test/jest-preprocess.js',
 	},
 	transformIgnorePatterns: ['node_modules/(?!(gatsby)/)'],
+	watchPathIgnorePatterns: testPathIgnorePatterns,
 };
 
 const commonForLintRunners = {

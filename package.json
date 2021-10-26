@@ -157,6 +157,12 @@
 					"env": "relay",
 					"tagName": "graphql"
 				}
+			],
+			"@typescript-eslint/unbound-method": [
+				"error",
+				{
+					"ignoreStatic": true
+				}
 			]
 		},
 		"overrides": [
