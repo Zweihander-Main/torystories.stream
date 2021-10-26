@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('getSessionStorage', (key: string) => {
+	cy.window().then((window) => window.sessionStorage.getItem(key));
+});
+
+Cypress.Commands.add('setSessionStorage', (key: string, value: string) => {
+	cy.window().then((window) => {
+		window.sessionStorage.setItem(key, value);
+	});
+});
+
+Cypress.Commands.add('waitForSessionStorage', (key: string) => {
+	cy.waitUntil(() => cy.getSessionStorage(key).then((val) => val !== null));
+});

@@ -16,10 +16,10 @@ const PlayerContext = React.createContext<PlayerContextProps>({
 	storage: SessionStorage.getInstance(),
 	playedSeconds: 0,
 	idPlaying: '',
-	setIdPlaying: () => {},
-	setPlayedSeconds: () => {},
+	setIdPlaying: () => undefined,
+	setPlayedSeconds: () => undefined,
 	playing: false,
-	setPlaying: () => {},
+	setPlaying: () => undefined,
 });
 
 export default PlayerContext;

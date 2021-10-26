@@ -8,15 +8,11 @@
 // You can change the location of this file or turn off
 // automatically serving support files with the
 // 'supportFile' configuration option.
-//
-// You can read more here:
+//// You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
 import './commands';
 import 'cypress-axe';
+import 'cypress-wait-until';
 import '@testing-library/cypress/add-commands';
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')

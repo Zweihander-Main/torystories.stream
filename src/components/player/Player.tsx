@@ -127,7 +127,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					onPlay={handlePlay}
 					onPause={handlePause}
 					onEnded={handleEnded}
-					onError={(e) => console.log('Player error: ', e)}
+					onError={(e) => console.warn('Player error: ', e)}
 					onProgress={handleProgress}
 					config={{
 						file: {
@@ -209,7 +209,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							max={1}
 							step="any"
 							value={volume}
-							onChange={handleVolumeChange}
+							onInput={handleVolumeChange}
 							orient="vertical"
 							className={'cursor-pointer volume-vertical'}
 							title="Volume Slider"
@@ -237,7 +237,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 								}`}
 								onClick={handleSetPlaybackRate}
 								value={speed}
-								title="Playback Speed Slider"
+								title={`Playback Speed ${speed}`}
 							>
 								{`${speed}x`}
 							</button>
