@@ -1,21 +1,41 @@
-const STATE_KEY_PREFIX = `@@ts_appstate|`;
-const TS_APP_STATE = `___TS_APP_STATE`;
-const CURRENT = `___TS_CURRENT`;
-const PLAYER_STATE = `___TS_PLAYER_STATE`;
-
-const unavailbleMessage = `[TS--AppState] Unable to access sessionStorage; sessionStorage is not available.`;
+const STATE_KEY_PREFIX = '@@ts_appstate|';
+const TS_APP_STATE = '___TS_APP_STATE';
+const CURRENT = '___TS_CURRENT';
+const PLAYER_STATE = '___TS_PLAYER_STATE';
 
 type PlayerState = {
 	volume: number;
 	muted: boolean;
 	playbackRate: number;
 };
+
+const isStoredState = (parsedState: unknown): parsedState is PlayerState => {
+	if (
+		parsedState &&
+		typeof parsedState === 'object' &&
+		parsedState !== null &&
+		Object.prototype.hasOwnProperty.call(parsedState, 'volume') &&
+		Object.prototype.hasOwnProperty.call(parsedState, 'muted') &&
+		Object.prototype.hasOwnProperty.call(parsedState, 'playbackRate')
+	) {
+		return true;
+	}
+	return false;
+};
+
+const appStateInWindow = (): Record<string, unknown> | undefined => {
+	if (window && window[TS_APP_STATE]) {
+		const appStateObj: unknown = window[TS_APP_STATE];
+		if (typeof appStateObj === 'object' && appStateObj !== null) {
+			return appStateObj as Record<string, unknown>;
+		}
+	}
+	return undefined;
+};
 export class SessionStorage {
 	private static instance: SessionStorage;
 
-	private constructor() {}
-
-	static getInstance() {
+	static getInstance(): SessionStorage {
 		if (!SessionStorage.instance) {
 			SessionStorage.instance = new SessionStorage();
 		}
@@ -23,29 +43,32 @@ export class SessionStorage {
 	}
 
 	readCurrent(): string | undefined {
-		return this.read(CURRENT);
+		const current = this.read(CURRENT);
+		if (current && typeof current === 'string') {
+			return current;
+		}
+		return undefined;
 	}
 
 	readPlayed(id: string): number | undefined {
 		const storedValue = this.read(id);
 		if (storedValue) {
-			return parseFloat(storedValue);
+			if (typeof storedValue === 'string') {
+				return parseFloat(storedValue);
+			} else if (typeof storedValue === 'number') {
+				return storedValue;
+			}
 		}
 		return undefined;
 	}
 
 	readPlayerState(): PlayerState | undefined {
 		const storedState = this.read(PLAYER_STATE);
-		if (storedState) {
-			const parsedState = JSON.parse(storedState);
-			if (
-				parsedState &&
-				typeof parsedState === 'object' &&
-				parsedState !== null &&
-				parsedState.hasOwnProperty('volume') &&
-				parsedState.hasOwnProperty('muted') &&
-				parsedState.hasOwnProperty('playbackRate')
-			) {
+
+		if (storedState && typeof storedState === 'string') {
+			const parsedState: unknown = JSON.parse(storedState);
+
+			if (isStoredState(parsedState)) {
 				return parsedState;
 			} else {
 				// stored value is mangled, delete it
@@ -63,35 +86,27 @@ export class SessionStorage {
 		this.save(id, played.toString(10));
 	}
 
-	savePlayerState(state: PlayerState) {
+	savePlayerState(state: PlayerState): void {
 		this.save(PLAYER_STATE, JSON.stringify(state));
 	}
 
 	private getStateKey(key: string): string {
-		return key === null || typeof key === `undefined`
+		return key === null || typeof key === 'undefined'
 			? STATE_KEY_PREFIX
 			: `${STATE_KEY_PREFIX}|${key}`;
 	}
 
-	private read(key: string): string | undefined {
+	private read(key: string): unknown | undefined {
 		const stateKey = this.getStateKey(key);
 
 		try {
 			const value = window.sessionStorage.getItem(stateKey);
 			return value ? JSON.parse(value) : undefined;
 		} catch (e) {
-			if (process.env.NODE_ENV !== `production`) {
-				console.warn(unavailbleMessage);
+			const appState = appStateInWindow();
+			if (appState && appState[stateKey]) {
+				return appState[stateKey];
 			}
-
-			if (
-				window &&
-				window[TS_APP_STATE] &&
-				window[TS_APP_STATE][stateKey]
-			) {
-				return window[TS_APP_STATE][stateKey];
-			}
-
 			return undefined;
 		}
 	}
@@ -103,15 +118,16 @@ export class SessionStorage {
 		try {
 			window.sessionStorage.setItem(stateKey, storedValue);
 		} catch (e) {
-			if (window && window[TS_APP_STATE]) {
-				window[TS_APP_STATE][stateKey] = JSON.parse(storedValue);
+			const appState = appStateInWindow();
+			const parsedValue: unknown = JSON.parse(storedValue);
+			if (appState) {
+				appState[stateKey] = parsedValue;
 			} else {
 				window[TS_APP_STATE] = {};
-				window[TS_APP_STATE][stateKey] = JSON.parse(storedValue);
-			}
-
-			if (process.env.NODE_ENV !== `production`) {
-				console.warn(unavailbleMessage);
+				const newAppState = appStateInWindow();
+				if (newAppState) {
+					newAppState[stateKey] = parsedValue;
+				}
 			}
 		}
 	}
@@ -122,16 +138,9 @@ export class SessionStorage {
 		try {
 			window.sessionStorage.removeItem(stateKey);
 		} catch (e) {
-			if (
-				window &&
-				window[TS_APP_STATE] &&
-				window[TS_APP_STATE][stateKey]
-			) {
-				delete window[TS_APP_STATE][stateKey];
-			}
-
-			if (process.env.NODE_ENV !== `production`) {
-				console.warn(unavailbleMessage);
+			const appState = appStateInWindow();
+			if (appState && appState[stateKey]) {
+				delete appState[stateKey];
 			}
 		}
 	}
