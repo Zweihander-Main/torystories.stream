@@ -11,15 +11,15 @@ Object.keys(paths).forEach((key) => {
 });
 
 const testPathIgnorePatterns = [
-	'node_modules',
-	'\\.cache',
-	'\\.typings',
-	'\\.vscode',
-	'\\.netlify',
+	'<rootDir>/node_modules',
+	'<rootDir>/\\.cache',
+	'<rootDir>/\\.typings',
+	'<rootDir>/\\.vscode',
+	'<rootDir>/\\.netlify',
 	'<rootDir>.*/public',
-	'cypress',
+	'<rootDir>/cypress',
+	'<rootDir>/coverage',
 	'__generated__',
-	'coverage',
 ];
 
 const commonForJestTests = {
