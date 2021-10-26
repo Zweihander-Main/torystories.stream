@@ -34,6 +34,14 @@ Cypress.Commands.add('setSessionStorage', (key: string, value: string) => {
 	});
 });
 
-Cypress.Commands.add('waitForSessionStorage', (key: string) => {
-	cy.waitUntil(() => cy.getSessionStorage(key).then((val) => val !== null));
-});
+Cypress.Commands.add(
+	'visitAndSpyStorage',
+	(url: string, func: string = 'setItem') => {
+		cy.visit(url, {
+			onLoad: (win) => {
+				cy.spy(win.sessionStorage, func).as('sessStorFunc');
+			},
+		});
+		cy.get('@sessStorFunc').should('be.called');
+	}
+);

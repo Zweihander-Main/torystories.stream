@@ -190,14 +190,15 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					aria-label="Seek and progress slider"
 				/>
 				<div className="flex justify-center items-center group relative">
-					<span
+					<button
 						onClick={handleToggleMuted}
 						className={'tooltip p-4 text-4xl cursor-pointer'}
 						data-text={'Volume'}
 						title="Volume Button"
+						aria-pressed={muted}
 					>
 						{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
-					</span>
+					</button>
 					<span
 						className={
 							'absolute bottom-full hidden hover:flex group-hover:flex bg-player pb-4 w-16 justify-center pt-4'
@@ -229,19 +230,23 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
 						}
 					>
-						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => (
-							<button
-								key={speed}
-								className={`p-2 hover:font-bold ${
-									playbackRate === speed ? 'font-bold' : ''
-								}`}
-								onClick={handleSetPlaybackRate}
-								value={speed}
-								title={`Playback Speed ${speed}`}
-							>
-								{`${speed}x`}
-							</button>
-						))}
+						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
+							const selected = playbackRate === speed;
+							return (
+								<button
+									key={speed}
+									className={`p-2 hover:font-bold ${
+										selected ? 'font-bold' : ''
+									}`}
+									aria-pressed={selected}
+									onClick={handleSetPlaybackRate}
+									value={speed}
+									title={`Playback Speed ${speed}`}
+								>
+									{`${speed}x`}
+								</button>
+							);
+						})}
 					</div>
 				</div>
 				<Link

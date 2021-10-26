@@ -14,10 +14,10 @@ declare namespace Cypress {
 		 */
 		setSessionStorage(key: string, value: string): Chainable<void>;
 		/**
-		 * Custom command to wait for session storage to haven non-null key value
-		 * @example cy.waitForSessionStorage('id')
+		 * Custom visit that also spies on session storage
+		 * @example cy.waitForSessionStorage('/', 'setItem')
 		 */
-		waitForSessionStorage(key: string): Chainable<boolean>;
+		visitAndSpyStorage(url: string, func?: string): Chainable<boolean>;
 	}
 
 	interface Cypress {
