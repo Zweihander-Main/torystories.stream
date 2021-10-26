@@ -1,10 +1,10 @@
-const STATE_KEY_PREFIX = '@@ts_appstate';
-const TS_APP_STATE = '___TS_APP_STATE';
-const CURRENT = '___TS_CURRENT';
-const PLAYER_STATE = '___TS_PLAYER_STATE';
-const DELIM = '||';
+import {
+	STATE_KEY_PREFIX,
+	CURRENT,
+	PLAYER_STATE,
+	DELIM,
+} from 'utils/constants';
 
-// TODO DRY constants, notice | after key prefix
 describe('Session storage ', () => {
 	before(() => {
 		Cypress.session.clearAllSavedSessions();

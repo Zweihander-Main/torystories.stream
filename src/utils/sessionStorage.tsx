@@ -1,7 +1,10 @@
-const STATE_KEY_PREFIX = '@@ts_appstate|';
-const TS_APP_STATE = '___TS_APP_STATE';
-const CURRENT = '___TS_CURRENT';
-const PLAYER_STATE = '___TS_PLAYER_STATE';
+import {
+	STATE_KEY_PREFIX,
+	TS_APP_STATE,
+	CURRENT,
+	PLAYER_STATE,
+	DELIM,
+} from 'utils/constants';
 
 type PlayerState = {
 	volume: number;
@@ -93,7 +96,7 @@ export class SessionStorage {
 	private getStateKey(key: string): string {
 		return key === null || typeof key === 'undefined'
 			? STATE_KEY_PREFIX
-			: `${STATE_KEY_PREFIX}|${key}`;
+			: `${STATE_KEY_PREFIX}${DELIM}${key}`;
 	}
 
 	private read(key: string): unknown | undefined {

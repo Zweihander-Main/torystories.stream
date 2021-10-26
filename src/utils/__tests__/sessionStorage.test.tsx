@@ -1,14 +1,14 @@
 import SessionStorage from '../sessionStorage';
+import {
+	STATE_KEY_PREFIX,
+	CURRENT,
+	PLAYER_STATE,
+	DELIM,
+} from 'utils/constants';
 
 const setItem = jest.spyOn(window.localStorage.__proto__, 'setItem');
 const getItem = jest.spyOn(window.localStorage.__proto__, 'getItem');
 const clear = jest.spyOn(window.localStorage.__proto__, 'clear');
-
-const STATE_KEY_PREFIX = '@@ts_appstate';
-const DELIM = '||';
-// const TS_APP_STATE = '___TS_APP_STATE';
-const CURRENT = '___TS_CURRENT';
-const PLAYER_STATE = '___TS_PLAYER_STATE';
 
 afterEach(() => {
 	setItem.mockClear();
