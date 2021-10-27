@@ -16,9 +16,3 @@ export interface TemplatePageContext {
 	next: NextPrevInfo;
 	subtitlesArray: SubtitlesArray;
 }
-
-declare module 'react' {
-	interface InputHTMLAttributes<T> {
-		orient?: 'horizontal' | 'vertical';
-	}
-}

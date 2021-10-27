@@ -211,7 +211,6 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							step="any"
 							value={volume}
 							onInput={handleVolumeChange}
-							orient="vertical"
 							className={'cursor-pointer volume-vertical'}
 							title="Volume Slider"
 						/>
