@@ -10,19 +10,34 @@ Object.keys(paths).forEach((key) => {
 	fixedPaths[`${key.slice(0, -1)}/(.*)$`] = paths[key].concat('/$1');
 });
 
-const testPathIgnorePatterns = [
+const basicIgnorePatterns = [
 	'<rootDir>/node_modules',
 	'<rootDir>/\\.cache',
-	'<rootDir>/\\.typings',
 	'<rootDir>/\\.vscode',
 	'<rootDir>/\\.netlify',
 	'<rootDir>.*/public',
 	'<rootDir>/cypress',
 	'<rootDir>/coverage',
-	'__generated__',
 ];
 
+const testPathIgnorePatterns = [...basicIgnorePatterns, '__generated__'];
+
+const transformIgnorePatterns = [
+	...basicIgnorePatterns,
+	'__generated__',
+	'<rootDir>/node_modules/(?!(gatsby)/)',
+];
+
+const watchPathIgnorePatterns = [...basicIgnorePatterns];
+
+const common = {
+	testPathIgnorePatterns,
+	transformIgnorePatterns,
+	watchPathIgnorePatterns,
+};
+
 const commonForJestTests = {
+	...common,
 	globals: {
 		__PATH_PREFIX__: '',
 	},
@@ -34,17 +49,14 @@ const commonForJestTests = {
 	},
 	setupFiles: ['<rootDir>/test/loadershim.js'],
 	testURL: 'http://localhost',
-	testPathIgnorePatterns,
 	transform: {
 		'^.+\\.[jt]sx?$': '<rootDir>/test/jest-preprocess.js',
 	},
-	transformIgnorePatterns: ['node_modules/(?!(gatsby)/)'],
-	watchPathIgnorePatterns: testPathIgnorePatterns,
 };
 
 const commonForLintRunners = {
+	...common,
 	testMatch: ['<rootDir>/src/**/*'],
-	testPathIgnorePatterns: ['__generated__'],
 };
 
 module.exports = {
@@ -87,12 +99,6 @@ module.exports = {
 			...commonForLintRunners,
 			displayName: 'stylelint',
 			preset: 'jest-runner-stylelint',
-		},
-		{
-			...commonForLintRunners,
-			displayName: 'tsc',
-			runner: 'jest-runner-tsc',
-			moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
 		},
 	],
 };

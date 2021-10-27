@@ -65,7 +65,6 @@
 		"jest-runner-eslint": "^1.0.0",
 		"jest-runner-prettier": "^0.3.7",
 		"jest-runner-stylelint": "^2.3.7",
-		"jest-runner-tsc": "^1.6.0",
 		"jest-watch-select-projects": "^2.0.0",
 		"jest-watch-typeahead": "^1.0.0",
 		"netlify-cli": "^3.35.10",
