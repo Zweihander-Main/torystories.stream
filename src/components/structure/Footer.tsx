@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
 			<p>Check out:</p>
 			<p className="mb-4">
 				<a className="font-bold" href="https://www.tbwns.com">
-					Martin's blog
+					Martin&apos;s blog
 				</a>
 				{' | '}
 				<a className="font-bold" href="https://www.lordliverpool.com">
