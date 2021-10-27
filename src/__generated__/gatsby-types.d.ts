@@ -701,6 +701,7 @@ type SitePluginPluginOptions = {
   readonly stripMetadata: Maybe<Scalars['Boolean']>;
   readonly defaultQuality: Maybe<Scalars['Int']>;
   readonly failOnError: Maybe<Scalars['Boolean']>;
+  readonly outputPath: Maybe<Scalars['String']>;
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchema>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocuments>;
   readonly pathCheck: Maybe<Scalars['Boolean']>;
@@ -2577,6 +2578,7 @@ type SitePluginPluginOptionsFilterInput = {
   readonly stripMetadata: Maybe<BooleanQueryOperatorInput>;
   readonly defaultQuality: Maybe<IntQueryOperatorInput>;
   readonly failOnError: Maybe<BooleanQueryOperatorInput>;
+  readonly outputPath: Maybe<StringQueryOperatorInput>;
   readonly emitSchema: Maybe<SitePluginPluginOptionsEmitSchemaFilterInput>;
   readonly emitPluginDocuments: Maybe<SitePluginPluginOptionsEmitPluginDocumentsFilterInput>;
   readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
@@ -2823,6 +2825,7 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.stripMetadata'
   | 'pluginCreator.pluginOptions.defaultQuality'
   | 'pluginCreator.pluginOptions.failOnError'
+  | 'pluginCreator.pluginOptions.outputPath'
   | 'pluginCreator.pluginOptions.emitSchema.src___generated___gatsby_introspection_json'
   | 'pluginCreator.pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginCreator.pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
@@ -3604,6 +3607,7 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.stripMetadata'
   | 'pluginOptions.defaultQuality'
   | 'pluginOptions.failOnError'
+  | 'pluginOptions.outputPath'
   | 'pluginOptions.emitSchema.src___generated___gatsby_introspection_json'
   | 'pluginOptions.emitSchema.src___generated___gatsby_schema_graphql'
   | 'pluginOptions.emitPluginDocuments.src___generated___gatsby_plugin_documents_graphql'
@@ -3798,6 +3802,11 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
 type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3813,11 +3822,6 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
           & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];

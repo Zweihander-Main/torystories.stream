@@ -763,6 +763,7 @@ type SitePluginPluginOptions {
   stripMetadata: Boolean
   defaultQuality: Int
   failOnError: Boolean
+  outputPath: String
   emitSchema: SitePluginPluginOptionsEmitSchema
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocuments
   pathCheck: Boolean
@@ -2275,6 +2276,7 @@ input SitePluginPluginOptionsFilterInput {
   stripMetadata: BooleanQueryOperatorInput
   defaultQuality: IntQueryOperatorInput
   failOnError: BooleanQueryOperatorInput
+  outputPath: StringQueryOperatorInput
   emitSchema: SitePluginPluginOptionsEmitSchemaFilterInput
   emitPluginDocuments: SitePluginPluginOptionsEmitPluginDocumentsFilterInput
   pathCheck: BooleanQueryOperatorInput
@@ -2494,6 +2496,7 @@ enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___stripMetadata
   pluginCreator___pluginOptions___defaultQuality
   pluginCreator___pluginOptions___failOnError
+  pluginCreator___pluginOptions___outputPath
   pluginCreator___pluginOptions___emitSchema___src___generated___gatsby_introspection_json
   pluginCreator___pluginOptions___emitSchema___src___generated___gatsby_schema_graphql
   pluginCreator___pluginOptions___emitPluginDocuments___src___generated___gatsby_plugin_documents_graphql
@@ -3197,6 +3200,7 @@ enum SitePluginFieldsEnum {
   pluginOptions___stripMetadata
   pluginOptions___defaultQuality
   pluginOptions___failOnError
+  pluginOptions___outputPath
   pluginOptions___emitSchema___src___generated___gatsby_introspection_json
   pluginOptions___emitSchema___src___generated___gatsby_schema_graphql
   pluginOptions___emitPluginDocuments___src___generated___gatsby_plugin_documents_graphql

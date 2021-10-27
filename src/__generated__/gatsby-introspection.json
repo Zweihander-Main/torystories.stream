@@ -6393,6 +6393,18 @@
             "deprecationReason": null
           },
           {
+            "name": "outputPath",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "emitSchema",
             "description": null,
             "args": [],
@@ -20753,6 +20765,18 @@
             "deprecationReason": null
           },
           {
+            "name": "outputPath",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringQueryOperatorInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "emitSchema",
             "description": null,
             "type": {
@@ -22377,6 +22401,12 @@
           },
           {
             "name": "pluginCreator___pluginOptions___failOnError",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pluginCreator___pluginOptions___outputPath",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -27576,6 +27606,12 @@
           },
           {
             "name": "pluginOptions___failOnError",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pluginOptions___outputPath",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
