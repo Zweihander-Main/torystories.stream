@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { useState } from 'react';
 import SessionStorage from 'utils/sessionStorage';
-
 type PlayerContextProps = {
 	storage: SessionStorage;
 	playedSeconds: number;
