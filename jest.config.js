@@ -18,6 +18,7 @@ const basicIgnorePatterns = [
 	'<rootDir>.*/public',
 	'<rootDir>/cypress',
 	'<rootDir>/coverage',
+	'__snapshots__',
 ];
 
 const testPathIgnorePatterns = [...basicIgnorePatterns, '__generated__'];
