@@ -4,7 +4,6 @@ import { useStaticQuery } from 'gatsby';
 import { SubtitlesArray } from 'types';
 import PlayerContext from 'contexts/PlayerContext';
 import React from 'react';
-import SessionStorage from 'utils/sessionStorage';
 
 const testSubs: SubtitlesArray = [
 	{
@@ -44,13 +43,24 @@ describe('useCurrentSub hook', () => {
 		}) => (
 			<PlayerContext.Provider
 				value={{
-					storage: SessionStorage.getInstance(),
 					playedSeconds: played,
-					idPlaying: '',
-					setIdPlaying: () => undefined,
 					setPlayedSeconds: () => undefined,
-					playing: false,
-					setPlaying: () => undefined,
+					isPlayerPlaying: false,
+					setIsPlayerPlaying: () => undefined,
+					playerVolume: 1,
+					setPlayerVolume: () => undefined,
+					isPlayerMuted: false,
+					setIsPlayerMuted: () => undefined,
+					playerPlaybackRate: 1.0,
+					setPlayerPlaybackRate: () => undefined,
+					trackId: '',
+					setTrackId: () => undefined,
+					trackAudioURL: undefined,
+					trackImage: null,
+					trackSlug: '',
+					trackTitle: '',
+					trackEpisodeNum: 1,
+					hasStorageBeenReadFromForCurrentTrack: false,
 				}}
 			>
 				{children}

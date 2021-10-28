@@ -7,14 +7,14 @@ import { RiPlayCircleLine } from 'react-icons/ri';
 
 const EpisodeList: React.FC = () => {
 	const { episodeArray } = useEpisodeList();
-	const { setIdPlaying, playing, setPlaying, idPlaying } =
+	const { trackId, setTrackId, isPlayerPlaying, setIsPlayerPlaying } =
 		useContext(PlayerContext);
 
 	const handlePlayClick = (e: React.MouseEvent<SVGElement>, id: string) => {
 		e.preventDefault();
-		setIdPlaying(id);
-		if (!playing) {
-			setPlaying(true);
+		setTrackId(id);
+		if (!isPlayerPlaying) {
+			setIsPlayerPlaying(true);
 		}
 	};
 
@@ -42,7 +42,7 @@ const EpisodeList: React.FC = () => {
 									</p>
 								</div>
 								<div className="grid grid-rows-none grid-cols-none">
-									{(!playing || id !== idPlaying) && (
+									{(!isPlayerPlaying || id !== trackId) && (
 										<RiPlayCircleLine
 											size="100%"
 											className="h-full self-center justify-self-center row-start-1 row-end-1 col-start-1 col-end-1 z-20 text-white opacity-20 hover:opacity-80 cursor-pointer"

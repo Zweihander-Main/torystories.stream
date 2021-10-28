@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
-import usePlayerState from 'hooks/usePlayerState';
+import PlayerContext from 'contexts/PlayerContext';
+import usePlayerStatus from 'hooks/usePlayerStatus';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import {
@@ -17,53 +18,58 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	children,
 }) => {
 	const {
-		player,
 		setPlayedSeconds,
+		isPlayerPlaying,
+		setIsPlayerPlaying,
+		playerVolume,
+		setPlayerVolume,
+		isPlayerMuted,
+		setIsPlayerMuted,
+		playerPlaybackRate,
+		setPlayerPlaybackRate,
+		trackAudioURL,
+		trackImage,
+		trackSlug,
+		trackTitle,
+		trackEpisodeNum,
+	} = useContext(PlayerContext);
+
+	const {
+		player,
 		playedPercentage,
 		setPlayedPercentage,
-		playing,
-		setPlaying,
-		volume,
-		setVolume,
-		muted,
-		setMuted,
-		playbackRate,
-		setPlaybackRate,
 		seeking,
 		setSeeking,
-		url,
-		image,
-		slug,
-		title,
-		episodeNum,
-		setPlayerReady,
-	} = usePlayerState();
+		setMediaLoadedAndReady,
+	} = usePlayerStatus();
 
 	const handlePlayPause = () => {
-		setPlaying(!playing);
+		setIsPlayerPlaying(!isPlayerPlaying);
 	};
 
 	const handlePlay = () => {
-		setPlaying(true);
+		setIsPlayerPlaying(true);
 	};
 
 	const handlePause = () => {
-		setPlaying(false);
+		setIsPlayerPlaying(false);
 	};
 
 	const handleVolumeChange: React.ChangeEventHandler<HTMLInputElement> = (
 		e
 	) => {
-		setVolume(parseFloat(e.target.value));
+		setPlayerVolume(parseFloat(e.target.value));
 	};
 
 	const handleToggleMuted = () => {
-		setMuted(!muted);
+		setIsPlayerMuted(!isPlayerMuted);
 	};
 
 	const handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement> =
 		(e) => {
-			setPlaybackRate(parseFloat((e.target as HTMLButtonElement).value));
+			setPlayerPlaybackRate(
+				parseFloat((e.target as HTMLButtonElement).value)
+			);
 		};
 
 	const handleSeekMouseDown = () => {
@@ -86,22 +92,22 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 		}
 	};
 
-	const handleProgress: BaseReactPlayerProps['onProgress'] = (
+	const handlePlayerProgress: BaseReactPlayerProps['onProgress'] = (
 		progressData
 	) => {
-		// only if not currently seeking and playing
-		if (!seeking && playing) {
+		// only if not currently seeking and is playing
+		if (!seeking && isPlayerPlaying) {
 			setPlayedPercentage(progressData.played);
 			setPlayedSeconds(progressData.playedSeconds);
 		}
 	};
 
-	const handleReady = () => {
-		setPlayerReady(true);
+	const handleMediaLoadedAndReady = () => {
+		setMediaLoadedAndReady(true);
 	};
 
-	const handleEnded = () => {
-		setPlaying(false);
+	const handleTrackEnded = () => {
+		setIsPlayerPlaying(false);
 		setPlayedPercentage(0);
 		setPlayedSeconds(0);
 	};
@@ -116,19 +122,19 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				<ReactPlayer
 					className="hidden"
 					ref={player}
-					url={url}
-					playing={playing}
+					url={trackAudioURL}
+					playing={isPlayerPlaying}
 					controls={false}
 					loop={false}
-					playbackRate={playbackRate}
-					volume={volume}
-					muted={muted}
-					onReady={handleReady}
+					playbackRate={playerPlaybackRate}
+					volume={playerVolume}
+					muted={isPlayerMuted}
+					onReady={handleMediaLoadedAndReady}
 					onPlay={handlePlay}
 					onPause={handlePause}
-					onEnded={handleEnded}
+					onEnded={handleTrackEnded}
 					onError={(e) => console.warn('Player error: ', e)}
-					onProgress={handleProgress}
+					onProgress={handlePlayerProgress}
 					config={{
 						file: {
 							forceAudio: true,
@@ -136,7 +142,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					}}
 				/>
 				<div>
-					{image && (
+					{trackImage && (
 						<div
 							className={
 								'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
@@ -144,28 +150,30 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 						>
 							<GatsbyImage
 								className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
-								image={image}
-								alt={title}
+								image={trackImage}
+								alt={trackTitle}
 							/>
 							<button
 								className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
 								onClick={handlePlay}
 								aria-label="Start playback"
 							>
-								{!playing && <RiPlayCircleLine size={'100%'} />}
+								{!isPlayerPlaying && (
+									<RiPlayCircleLine size={'100%'} />
+								)}
 							</button>
 						</div>
 					)}
 				</div>
 				<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
-					{episodeNum}
+					{trackEpisodeNum}
 				</span>
 				<Link
-					to={slug}
+					to={trackSlug}
 					className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
 				>
 					<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
-						{title}
+						{trackTitle}
 					</h3>
 				</Link>
 				<button
@@ -173,9 +181,13 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					onClick={handlePlayPause}
 					role="switch"
 					aria-label="Play/Pause Button"
-					aria-checked={playing}
+					aria-checked={isPlayerPlaying}
 				>
-					{playing ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
+					{isPlayerPlaying ? (
+						<RiPauseCircleLine />
+					) : (
+						<RiPlayCircleLine />
+					)}
 				</button>
 				<input
 					type="range"
@@ -195,9 +207,13 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 						className={'tooltip p-4 text-4xl cursor-pointer'}
 						data-text={'Volume'}
 						title="Volume Button"
-						aria-pressed={muted}
+						aria-pressed={isPlayerMuted}
 					>
-						{muted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
+						{isPlayerMuted ? (
+							<RiVolumeMuteLine />
+						) : (
+							<RiVolumeUpLine />
+						)}
 					</button>
 					<span
 						className={
@@ -209,7 +225,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 							min={0}
 							max={1}
 							step="any"
-							value={volume}
+							value={playerVolume}
 							onInput={handleVolumeChange}
 							className={'cursor-pointer volume-vertical'}
 							title="Volume Slider"
@@ -230,7 +246,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 						}
 					>
 						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
-							const selected = playbackRate === speed;
+							const selected = playerPlaybackRate === speed;
 							return (
 								<button
 									key={speed}
@@ -249,7 +265,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					</div>
 				</div>
 				<Link
-					to={slug}
+					to={trackSlug}
 					className="text-4xl mr-2 flex justify-center items-center"
 					title="Episode Info and Subtitles"
 				>

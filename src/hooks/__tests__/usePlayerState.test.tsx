@@ -1,9 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePlayerState from 'hooks/usePlayerState';
+import usePlayerState from 'hooks/usePlayerStatus';
 import { useStaticQuery } from 'gatsby';
 import PlayerContext from 'contexts/PlayerContext';
 import React from 'react';
-import SessionStorage from 'utils/sessionStorage';
 
 describe('usePlayerState hook', () => {
 	beforeAll(() => {
@@ -28,13 +27,24 @@ describe('usePlayerState hook', () => {
 	const wrapper = ({ children }: { children?: React.ReactNode }) => (
 		<PlayerContext.Provider
 			value={{
-				storage: SessionStorage.getInstance(),
 				playedSeconds: 0,
-				idPlaying: '1',
-				setIdPlaying: () => undefined,
 				setPlayedSeconds: () => undefined,
-				playing: false,
-				setPlaying: () => undefined,
+				isPlayerPlaying: false,
+				setIsPlayerPlaying: () => undefined,
+				playerVolume: 1,
+				setPlayerVolume: () => undefined,
+				isPlayerMuted: false,
+				setIsPlayerMuted: () => undefined,
+				playerPlaybackRate: 1.0,
+				setPlayerPlaybackRate: () => undefined,
+				trackId: '1',
+				setTrackId: () => undefined,
+				trackAudioURL: undefined,
+				trackImage: null,
+				trackSlug: '',
+				trackTitle: '',
+				trackEpisodeNum: 1,
+				hasStorageBeenReadFromForCurrentTrack: false,
 			}}
 		>
 			{children}
@@ -47,28 +57,14 @@ describe('usePlayerState hook', () => {
 		});
 		expect(result.current).toMatchInlineSnapshot(`
 		Object {
-		  "episodeNum": 0,
-		  "image": null,
-		  "muted": false,
-		  "playbackRate": 1,
 		  "playedPercentage": 0,
 		  "player": Object {
 		    "current": null,
 		  },
-		  "playing": false,
 		  "seeking": false,
-		  "setMuted": [Function],
-		  "setPlaybackRate": [Function],
 		  "setPlayedPercentage": [Function],
-		  "setPlayedSeconds": [Function],
 		  "setPlayerReady": [Function],
-		  "setPlaying": [Function],
 		  "setSeeking": [Function],
-		  "setVolume": [Function],
-		  "slug": "",
-		  "title": "",
-		  "url": "/ep2",
-		  "volume": 1,
 		}
 	`);
 	});
