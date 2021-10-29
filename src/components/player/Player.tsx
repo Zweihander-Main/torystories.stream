@@ -16,6 +16,70 @@ import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import PlayerStateContext from 'contexts/PlayerStateContext';
 import TrackContext from 'contexts/TrackContext';
 
+type ReactPlayerCompProps = {
+	player: React.MutableRefObject<ReactPlayer | null>;
+	trackAudioURL: string | undefined;
+	isPlayerPlaying: boolean;
+	playerPlaybackRate: number;
+	playerVolume: number;
+	isPlayerMuted: boolean;
+	handleMediaLoadedAndReady: () => void;
+	handlePlay: () => void;
+	handlePause: () => void;
+	handleTrackEnded: () => void;
+	handlePlayerProgress: BaseReactPlayerProps['onProgress'];
+};
+
+const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
+	player,
+	trackAudioURL,
+	isPlayerPlaying,
+	playerPlaybackRate,
+	playerVolume,
+	isPlayerMuted,
+	handleMediaLoadedAndReady,
+	handlePlay,
+	handlePause,
+	handleTrackEnded,
+	handlePlayerProgress,
+}) => {
+	return (
+		<ReactPlayer
+			className="hidden"
+			ref={player}
+			url={trackAudioURL}
+			playing={isPlayerPlaying}
+			controls={false}
+			loop={false}
+			playbackRate={playerPlaybackRate}
+			volume={playerVolume}
+			muted={isPlayerMuted}
+			onReady={handleMediaLoadedAndReady}
+			onPlay={handlePlay}
+			onPause={handlePause}
+			onEnded={handleTrackEnded}
+			onError={(e) => console.warn('Player error: ', e)}
+			onProgress={handlePlayerProgress}
+			config={{
+				file: {
+					forceAudio: true,
+				},
+			}}
+		/>
+	);
+};
+
+const MemoizedReactPlayerComp = memo(
+	ReactPlayerComp,
+	(prevProps, nextProps) =>
+		prevProps.player === nextProps.player &&
+		prevProps.trackAudioURL === nextProps.trackAudioURL &&
+		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying &&
+		prevProps.playerPlaybackRate === nextProps.playerPlaybackRate &&
+		prevProps.playerVolume === nextProps.playerVolume &&
+		prevProps.isPlayerMuted === nextProps.isPlayerMuted
+);
+
 type CoverImageProps = {
 	trackImage: IGatsbyImageData | null;
 	trackTitle: string;
@@ -31,23 +95,25 @@ const CoverImage: React.FC<CoverImageProps> = ({
 }) => {
 	if (trackImage) {
 		return (
-			<div
-				className={
-					'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
-				}
-			>
-				<GatsbyImage
-					className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
-					image={trackImage}
-					alt={trackTitle}
-				/>
-				<button
-					className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
-					onClick={handlePlay}
-					aria-label="Start playback"
+			<div>
+				<div
+					className={
+						'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
+					}
 				>
-					{!isPlayerPlaying && <RiPlayCircleLine size="100%" />}
-				</button>
+					<GatsbyImage
+						className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+						image={trackImage}
+						alt={trackTitle}
+					/>
+					<button
+						className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
+						onClick={handlePlay}
+						aria-label="Start playback"
+					>
+						{!isPlayerPlaying && <RiPlayCircleLine size="100%" />}
+					</button>
+				</div>
 			</div>
 		);
 	}
@@ -61,6 +127,36 @@ const MemoizedCoverImage = memo(
 		prevProps.trackTitle === nextProps.trackTitle &&
 		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
 );
+
+type TrackInfoProps = {
+	trackEpisodeNum: number;
+	trackSlug: string;
+	trackTitle: string;
+};
+
+const TrackInfo: React.FC<TrackInfoProps> = ({
+	trackEpisodeNum,
+	trackSlug,
+	trackTitle,
+}) => {
+	return (
+		<React.Fragment>
+			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
+				{trackEpisodeNum}
+			</span>
+			<Link
+				to={trackSlug}
+				className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
+			>
+				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
+					{trackTitle}
+				</h3>
+			</Link>
+		</React.Fragment>
+	);
+};
+
+const MemoizedTrackInfo = memo(TrackInfo);
 
 type PlayerStateControlsProps = {
 	handleToggleMuted: () => void;
@@ -165,6 +261,36 @@ const MemoizedPlayerStateControls = memo(
 			prevProps.trackSlug === nextProps.trackSlug
 		);
 	}
+);
+
+type PlayPauseButtonProps = {
+	handlePlayPause: () => void;
+	isPlayerPlaying: boolean;
+};
+
+const PlayPauseButton: React.FC<PlayPauseButtonProps> = ({
+	handlePlayPause,
+	isPlayerPlaying,
+}) => {
+	return (
+		<React.Fragment>
+			<button
+				className="text-6xl mr-2"
+				onClick={handlePlayPause}
+				role="switch"
+				aria-label="Play/Pause Button"
+				aria-checked={isPlayerPlaying}
+			>
+				{isPlayerPlaying ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
+			</button>
+		</React.Fragment>
+	);
+};
+
+const MemoizedPlayPauseButton = memo(
+	PlayPauseButton,
+	(prevProps, nextProps) =>
+		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
 );
 
 const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
@@ -274,60 +400,30 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				role="navigation"
 				aria-label="Podcast player controls"
 			>
-				<ReactPlayer
-					className="hidden"
-					ref={player}
-					url={trackAudioURL}
-					playing={isPlayerPlaying}
-					controls={false}
-					loop={false}
-					playbackRate={playerPlaybackRate}
-					volume={playerVolume}
-					muted={isPlayerMuted}
-					onReady={handleMediaLoadedAndReady}
-					onPlay={handlePlay}
-					onPause={handlePause}
-					onEnded={handleTrackEnded}
-					onError={(e) => console.warn('Player error: ', e)}
-					onProgress={handlePlayerProgress}
-					config={{
-						file: {
-							forceAudio: true,
-						},
+				<MemoizedReactPlayerComp
+					{...{
+						player,
+						trackAudioURL,
+						isPlayerPlaying,
+						playerPlaybackRate,
+						playerVolume,
+						isPlayerMuted,
+						handleMediaLoadedAndReady,
+						handlePlay,
+						handlePause,
+						handleTrackEnded,
+						handlePlayerProgress,
 					}}
 				/>
-				<div>
-					<MemoizedCoverImage
-						trackImage={trackImage}
-						trackTitle={trackTitle}
-						handlePlay={handlePlay}
-						isPlayerPlaying={isPlayerPlaying}
-					/>
-				</div>
-				<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
-					{trackEpisodeNum}
-				</span>
-				<Link
-					to={trackSlug}
-					className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
-				>
-					<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
-						{trackTitle}
-					</h3>
-				</Link>
-				<button
-					className="text-6xl mr-2"
-					onClick={handlePlayPause}
-					role="switch"
-					aria-label="Play/Pause Button"
-					aria-checked={isPlayerPlaying}
-				>
-					{isPlayerPlaying ? (
-						<RiPauseCircleLine />
-					) : (
-						<RiPlayCircleLine />
-					)}
-				</button>
+				<MemoizedCoverImage
+					{...{ trackImage, trackTitle, handlePlay, isPlayerPlaying }}
+				/>
+				<MemoizedTrackInfo
+					{...{ trackEpisodeNum, trackSlug, trackTitle }}
+				/>
+				<MemoizedPlayPauseButton
+					{...{ handlePlayPause, isPlayerPlaying }}
+				/>
 				<input
 					type="range"
 					min={0}
@@ -341,13 +437,15 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					aria-label="Seek and progress slider"
 				/>
 				<MemoizedPlayerStateControls
-					handleToggleMuted={handleToggleMuted}
-					isPlayerMuted={isPlayerMuted}
-					playerVolume={playerVolume}
-					handleVolumeChange={handleVolumeChange}
-					playerPlaybackRate={playerPlaybackRate}
-					handleSetPlaybackRate={handleSetPlaybackRate}
-					trackSlug={trackSlug}
+					{...{
+						handleToggleMuted,
+						isPlayerMuted,
+						playerVolume,
+						handleVolumeChange,
+						playerPlaybackRate,
+						handleSetPlaybackRate,
+						trackSlug,
+					}}
 				/>
 			</nav>
 			{children}
