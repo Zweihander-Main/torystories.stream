@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { PlayerProvider } from '../PlayerContext';
+import AppContext from '../AppContext';
 import { useStaticQuery } from 'gatsby';
 
 describe('PlayerContext', () => {
@@ -19,6 +19,6 @@ describe('PlayerContext', () => {
 	});
 
 	it('renders a component', () => {
-		expect(render(<PlayerProvider />));
+		expect(render(<AppContext />));
 	});
 });
