@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
-import PlayerContext from 'contexts/PlayerContext';
 import usePlayerStatus from 'hooks/usePlayerStatus';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
@@ -13,12 +12,15 @@ import {
 	RiMusic2Line,
 	RiInformationLine,
 } from 'react-icons/ri';
+import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import PlayerStateContext from 'contexts/PlayerStateContext';
+import TrackContext from 'contexts/TrackContext';
 
 const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	children,
 }) => {
+	const { setPlayedSeconds } = useContext(PlayerProgressContext);
 	const {
-		setPlayedSeconds,
 		isPlayerPlaying,
 		setIsPlayerPlaying,
 		playerVolume,
@@ -27,12 +29,14 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 		setIsPlayerMuted,
 		playerPlaybackRate,
 		setPlayerPlaybackRate,
+	} = useContext(PlayerStateContext);
+	const {
 		trackAudioURL,
 		trackImage,
 		trackSlug,
 		trackTitle,
 		trackEpisodeNum,
-	} = useContext(PlayerContext);
+	} = useContext(TrackContext);
 
 	const {
 		player,

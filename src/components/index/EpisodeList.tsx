@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import useEpisodeList from 'hooks/useEpisodeList';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
-import PlayerContext from 'contexts/PlayerContext';
 import { RiPlayCircleLine } from 'react-icons/ri';
+import TrackContext from 'contexts/TrackContext';
+import PlayerStateContext from 'contexts/PlayerStateContext';
 
 const EpisodeList: React.FC = () => {
 	const { episodeArray } = useEpisodeList();
-	const { trackId, setTrackId, isPlayerPlaying, setIsPlayerPlaying } =
-		useContext(PlayerContext);
+	const { trackId, setTrackId } = useContext(TrackContext);
+	const { isPlayerPlaying, setIsPlayerPlaying } =
+		useContext(PlayerStateContext);
 
 	const handlePlayClick = (e: React.MouseEvent<SVGElement>, id: string) => {
 		e.preventDefault();

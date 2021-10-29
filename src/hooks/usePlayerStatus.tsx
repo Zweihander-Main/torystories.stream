@@ -1,4 +1,5 @@
-import PlayerContext from 'contexts/PlayerContext';
+import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import TrackContext from 'contexts/TrackContext';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 
@@ -14,8 +15,9 @@ type PlayerStateProps = {
 };
 
 const usePlayerState = (): PlayerStateProps => {
-	const { trackId, playedSeconds, hasStorageBeenReadFromForCurrentTrack } =
-		useContext(PlayerContext);
+	const { playedSeconds, hasStorageSecondsBeenReadForCurrentTrack } =
+		useContext(PlayerProgressContext);
+	const { trackId } = useContext(TrackContext);
 
 	const [mediaLoadedAndReady, setMediaLoadedAndReady] = useState(false);
 
@@ -33,7 +35,7 @@ const usePlayerState = (): PlayerStateProps => {
 		if (
 			player.current &&
 			mediaLoadedAndReady &&
-			hasStorageBeenReadFromForCurrentTrack
+			hasStorageSecondsBeenReadForCurrentTrack
 		) {
 			player.current.seekTo(playedSeconds);
 			const duration = player.current.getDuration();
@@ -41,7 +43,7 @@ const usePlayerState = (): PlayerStateProps => {
 				setPlayedPercentage(playedSeconds / duration);
 			}
 		}
-	}, [mediaLoadedAndReady, hasStorageBeenReadFromForCurrentTrack]);
+	}, [mediaLoadedAndReady, hasStorageSecondsBeenReadForCurrentTrack]);
 
 	return {
 		player,

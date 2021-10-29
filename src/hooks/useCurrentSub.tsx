@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import PlayerContext from 'contexts/PlayerContext';
 import { SubtitlesArray } from 'types';
+import PlayerProgressContext from 'contexts/PlayerProgressContext';
 
 // Usage note: do not spread on to JSX Element
 
@@ -11,7 +11,7 @@ type CurrentSubProps = number;
 const useCurrentSub = (
 	subtitlesArray: UseCurrentSubInputProps
 ): CurrentSubProps => {
-	const { playedSeconds } = useContext(PlayerContext);
+	const { playedSeconds } = useContext(PlayerProgressContext);
 	const [currentSubIndex, setCurrentSubIndex] = useState(-1);
 
 	const isBetween = (start: number, end: number, toCheck: number) => {
@@ -36,7 +36,7 @@ const useCurrentSub = (
 				setCurrentSubIndex(foundIndex);
 			}
 		}
-	}, [playedSeconds]);
+	}, [playedSeconds]); // TODO
 
 	return currentSubIndex;
 };

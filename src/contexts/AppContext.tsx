@@ -1,8 +1,19 @@
 import React from 'react';
-import { PlayerProvider } from './PlayerContext';
+import { StorageProvider } from './StorageContext';
+import { PlayerProgressProvider } from './PlayerProgressContext';
+import { PlayerStateProvider } from './PlayerStateContext';
+import { TrackProvider } from './TrackContext';
 
 const AppProvider: React.FC = ({ children }) => {
-	return <PlayerProvider>{children}</PlayerProvider>;
+	return (
+		<StorageProvider>
+			<PlayerStateProvider>
+				<TrackProvider>
+					<PlayerProgressProvider>{children}</PlayerProgressProvider>
+				</TrackProvider>
+			</PlayerStateProvider>
+		</StorageProvider>
+	);
 };
 
 export default AppProvider;

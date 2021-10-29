@@ -6,7 +6,7 @@ import {
 	DELIM,
 } from 'utils/constants';
 
-type PlayerState = {
+export type PlayerState = {
 	volume: number;
 	muted: boolean;
 	playbackRate: number;
