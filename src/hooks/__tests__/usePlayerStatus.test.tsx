@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react-hooks';
 import usePlayerState from 'hooks/usePlayerStatus';
 import { useStaticQuery } from 'gatsby';
-import PlayerContext from 'contexts/PlayerContext';
+import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import React from 'react';
 
-describe('usePlayerState hook', () => {
+describe('usePlayerStatus hook', () => {
 	beforeAll(() => {
 		(useStaticQuery as jest.Mock).mockReturnValue({
 			allMarkdownRemark: {
@@ -25,30 +25,16 @@ describe('usePlayerState hook', () => {
 	});
 
 	const wrapper = ({ children }: { children?: React.ReactNode }) => (
-		<PlayerContext.Provider
+		<PlayerProgressContext.Provider
 			value={{
 				playedSeconds: 0,
 				setPlayedSeconds: () => undefined,
-				isPlayerPlaying: false,
-				setIsPlayerPlaying: () => undefined,
-				playerVolume: 1,
-				setPlayerVolume: () => undefined,
-				isPlayerMuted: false,
-				setIsPlayerMuted: () => undefined,
-				playerPlaybackRate: 1.0,
-				setPlayerPlaybackRate: () => undefined,
-				trackId: '1',
-				setTrackId: () => undefined,
-				trackAudioURL: undefined,
-				trackImage: null,
-				trackSlug: '',
-				trackTitle: '',
-				trackEpisodeNum: 1,
-				hasStorageBeenReadFromForCurrentTrack: false,
+				hasStorageSecondsBeenReadForCurrentTrack: false,
+				setHasStorageSecondsBeenReadForCurrentTrack: () => undefined,
 			}}
 		>
 			{children}
-		</PlayerContext.Provider>
+		</PlayerProgressContext.Provider>
 	);
 
 	it('should render and provide neccessary data for player', () => {
@@ -62,8 +48,8 @@ describe('usePlayerState hook', () => {
 		    "current": null,
 		  },
 		  "seeking": false,
+		  "setMediaLoadedAndReady": [Function],
 		  "setPlayedPercentage": [Function],
-		  "setPlayerReady": [Function],
 		  "setSeeking": [Function],
 		}
 	`);

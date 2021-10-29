@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import useCurrentSub from 'hooks/useCurrentSub';
 import { useStaticQuery } from 'gatsby';
 import { SubtitlesArray } from 'types';
-import PlayerContext from 'contexts/PlayerContext';
+import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import React from 'react';
 
 const testSubs: SubtitlesArray = [
@@ -41,30 +41,17 @@ describe('useCurrentSub hook', () => {
 			children?: React.ReactNode;
 			played: number;
 		}) => (
-			<PlayerContext.Provider
+			<PlayerProgressContext.Provider
 				value={{
 					playedSeconds: played,
 					setPlayedSeconds: () => undefined,
-					isPlayerPlaying: false,
-					setIsPlayerPlaying: () => undefined,
-					playerVolume: 1,
-					setPlayerVolume: () => undefined,
-					isPlayerMuted: false,
-					setIsPlayerMuted: () => undefined,
-					playerPlaybackRate: 1.0,
-					setPlayerPlaybackRate: () => undefined,
-					trackId: '',
-					setTrackId: () => undefined,
-					trackAudioURL: undefined,
-					trackImage: null,
-					trackSlug: '',
-					trackTitle: '',
-					trackEpisodeNum: 1,
-					hasStorageBeenReadFromForCurrentTrack: false,
+					hasStorageSecondsBeenReadForCurrentTrack: false,
+					setHasStorageSecondsBeenReadForCurrentTrack: () =>
+						undefined,
 				}}
 			>
 				{children}
-			</PlayerContext.Provider>
+			</PlayerProgressContext.Provider>
 		);
 		const { rerender, result } = renderHook(() => useCurrentSub(testSubs), {
 			wrapper,
