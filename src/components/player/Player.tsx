@@ -80,6 +80,24 @@ const MemoizedReactPlayerComp = memo(
 		prevProps.isPlayerMuted === nextProps.isPlayerMuted
 );
 
+type GatsbyCoverImageProps = {
+	trackImage: IGatsbyImageData;
+	trackTitle: string;
+};
+
+const GatsbyCoverImage: React.FC<GatsbyCoverImageProps> = ({
+	trackImage,
+	trackTitle,
+}) => (
+	<GatsbyImage
+		className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+		image={trackImage}
+		alt={trackTitle}
+	/>
+);
+
+const MemoizedGatsbyCoverImage = memo(GatsbyCoverImage);
+
 type CoverImageProps = {
 	trackImage: IGatsbyImageData | null;
 	trackTitle: string;
@@ -101,11 +119,7 @@ const CoverImage: React.FC<CoverImageProps> = ({
 						'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
 					}
 				>
-					<GatsbyImage
-						className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
-						image={trackImage}
-						alt={trackTitle}
-					/>
+					<MemoizedGatsbyCoverImage {...{ trackImage, trackTitle }} />
 					<button
 						className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
 						onClick={handlePlay}

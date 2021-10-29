@@ -29,7 +29,13 @@ export const onClientEntry = () => {
 				/^Link$/,
 				/^GatsbyLink$/,
 				/^GatsbyLinkLocationWrapper$/,
+				/^RouterAnnouncer$/,
 				/^Unknown$/,
+				/^[A-Z]$/,
+				/^Placeholder$/,
+				/^MainImage$/,
+				/^Picture$/,
+				/^StaticQueryStore$/,
 			],
 			collapseGroups: true,
 		});
