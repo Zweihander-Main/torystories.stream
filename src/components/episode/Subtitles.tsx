@@ -104,7 +104,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 
 	return (
 		<section
-			className="grid grid-rows-0 grid-cols-0 h-screenMinusPlayer overflow-y-scroll z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
+			className="grid grid-rows-0 grid-cols-0 bg-black h-screenMinusPlayer overflow-y-scroll z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
@@ -132,5 +132,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 };
 
 // TODO: subtitles can be obscured by cover
+// TODO: Memoize the bg image to see if you can reduce the amount rerendered
+// TODO: if not playing, shouldn't re-scroll except on initial load
 
 export default Subtitles;

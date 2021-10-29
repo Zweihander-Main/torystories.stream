@@ -14,7 +14,11 @@ const Layout: React.FC<
 	return (
 		<div className="layout flex flex-col items-center bg-black text-white font-body mb-20">
 			{showHomeButton && (
-				<nav className={'absolute left-0 top-4 z-50'}>
+				<nav
+					role="navigation"
+					aria-label="Home"
+					className={'absolute left-0 top-4 z-50'}
+				>
 					<Link
 						to={'/'}
 						className={'cursor-pointer p-4 no-underline'}

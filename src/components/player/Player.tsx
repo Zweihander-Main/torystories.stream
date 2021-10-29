@@ -117,11 +117,11 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	};
 
 	return (
-		<div>
+		<React.Fragment>
 			<nav
 				className="flex flex-row fixed bottom-0 z-50 text-white bg-player w-full h-player justify-center"
 				role="navigation"
-				aria-label="Podcast player"
+				aria-label="Podcast player controls"
 			>
 				<ReactPlayer
 					className="hidden"
@@ -279,7 +279,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				</Link>
 			</nav>
 			{children}
-		</div>
+		</React.Fragment>
 	);
 };
 
