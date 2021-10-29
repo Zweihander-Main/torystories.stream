@@ -59,7 +59,6 @@ const MemoizedCoverImage = memo(
 	(prevProps, nextProps) =>
 		prevProps.trackImage === nextProps.trackImage &&
 		prevProps.trackTitle === nextProps.trackTitle &&
-		prevProps.handlePlay === nextProps.handlePlay &&
 		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
 );
 
