@@ -19,17 +19,27 @@ const usePlayerState = (): PlayerStateProps => {
 		useContext(PlayerProgressContext);
 	const { trackId } = useContext(TrackContext);
 
-	const [mediaLoadedAndReady, setMediaLoadedAndReady] = useState(false);
-
 	const player = useRef<null | ReactPlayer>(null);
+	const [mediaLoadedAndReady, setMediaLoadedAndReady] = useState(false);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
 	const [seeking, setSeeking] = useState(false);
+	const [playerNeedsToReSeek, setPlayerNeedsToReSeek] = useState(false);
 
 	// track changed
 	useEffect(() => {
 		setMediaLoadedAndReady(false);
 	}, [trackId]); // fire on track change and after load
 
+	if (playerNeedsToReSeek) {
+		if (player.current) {
+			player.current.seekTo(playedSeconds);
+			const duration = player.current.getDuration();
+			if (duration) {
+				setPlayedPercentage(playedSeconds / duration);
+			}
+		}
+		setPlayerNeedsToReSeek(false);
+	}
 	// load retrieved storage data once when player is ready
 	useEffect(() => {
 		if (
@@ -37,11 +47,7 @@ const usePlayerState = (): PlayerStateProps => {
 			mediaLoadedAndReady &&
 			hasStorageSecondsBeenReadForCurrentTrack
 		) {
-			player.current.seekTo(playedSeconds);
-			const duration = player.current.getDuration();
-			if (duration) {
-				setPlayedPercentage(playedSeconds / duration);
-			}
+			setPlayerNeedsToReSeek(true);
 		}
 	}, [mediaLoadedAndReady, hasStorageSecondsBeenReadForCurrentTrack]);
 
