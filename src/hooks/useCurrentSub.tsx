@@ -36,7 +36,7 @@ const useCurrentSub = (
 				setCurrentSubIndex(foundIndex);
 			}
 		}
-	}, [playedSeconds]); // TODO
+	}, [playedSeconds, currentSubIndex, subtitlesArray]);
 
 	return currentSubIndex;
 };
