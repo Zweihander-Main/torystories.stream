@@ -63,6 +63,111 @@ const MemoizedCoverImage = memo(
 		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
 );
 
+type PlayerStateControlsProps = {
+	handleToggleMuted: () => void;
+	isPlayerMuted: boolean;
+	playerVolume: number;
+	handleVolumeChange: React.ChangeEventHandler<HTMLInputElement>;
+	playerPlaybackRate: number;
+	handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement>;
+	trackSlug: string;
+};
+
+const PlayerStateControls: React.FC<PlayerStateControlsProps> = ({
+	handleToggleMuted,
+	isPlayerMuted,
+	playerVolume,
+	handleVolumeChange,
+	playerPlaybackRate,
+	handleSetPlaybackRate,
+	trackSlug,
+}) => {
+	return (
+		<React.Fragment>
+			<div className="flex justify-center items-center group relative">
+				<button
+					onClick={handleToggleMuted}
+					className={'tooltip p-4 text-4xl cursor-pointer'}
+					data-text={'Volume'}
+					title="Volume Button"
+					aria-pressed={isPlayerMuted}
+				>
+					{isPlayerMuted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
+				</button>
+				<span
+					className={
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-player pb-4 w-16 justify-center pt-4'
+					}
+				>
+					<input
+						type="range"
+						min={0}
+						max={1}
+						step="any"
+						value={playerVolume}
+						onInput={handleVolumeChange}
+						className={'cursor-pointer volume-vertical'}
+						title="Volume Slider"
+					/>
+				</span>
+			</div>
+			<div className="tooltip flex justify-center items-center group relative">
+				<span
+					className={'tooltip text-4xl p-4'}
+					data-text={'Speed'}
+					title="Playback Speed Button"
+				>
+					<RiMusic2Line />
+				</span>
+				<div
+					className={
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
+					}
+				>
+					{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
+						const selected = playerPlaybackRate === speed;
+						return (
+							<button
+								key={speed}
+								className={`p-2 hover:font-bold ${
+									selected ? 'font-bold' : ''
+								}`}
+								aria-pressed={selected}
+								onClick={handleSetPlaybackRate}
+								value={speed}
+								title={`Playback Speed ${speed}`}
+							>
+								{`${speed}x`}
+							</button>
+						);
+					})}
+				</div>
+			</div>
+			<Link
+				to={trackSlug}
+				className="text-4xl mr-2 flex justify-center items-center"
+				title="Episode Info and Subtitles"
+			>
+				<span className="tooltip p-4" data-text={'Info/Subs'}>
+					<RiInformationLine />
+				</span>
+			</Link>
+		</React.Fragment>
+	);
+};
+
+const MemoizedPlayerStateControls = memo(
+	PlayerStateControls,
+	(prevProps, nextProps) => {
+		return (
+			prevProps.isPlayerMuted === nextProps.isPlayerMuted &&
+			prevProps.playerVolume === nextProps.playerVolume &&
+			prevProps.playerPlaybackRate === nextProps.playerPlaybackRate &&
+			prevProps.trackSlug === nextProps.trackSlug
+		);
+	}
+);
+
 const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	children,
 }) => {
@@ -236,78 +341,15 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					className={'w-full m-4 cursor-pointer'}
 					aria-label="Seek and progress slider"
 				/>
-				<div className="flex justify-center items-center group relative">
-					<button
-						onClick={handleToggleMuted}
-						className={'tooltip p-4 text-4xl cursor-pointer'}
-						data-text={'Volume'}
-						title="Volume Button"
-						aria-pressed={isPlayerMuted}
-					>
-						{isPlayerMuted ? (
-							<RiVolumeMuteLine />
-						) : (
-							<RiVolumeUpLine />
-						)}
-					</button>
-					<span
-						className={
-							'absolute bottom-full hidden hover:flex group-hover:flex bg-player pb-4 w-16 justify-center pt-4'
-						}
-					>
-						<input
-							type="range"
-							min={0}
-							max={1}
-							step="any"
-							value={playerVolume}
-							onInput={handleVolumeChange}
-							className={'cursor-pointer volume-vertical'}
-							title="Volume Slider"
-						/>
-					</span>
-				</div>
-				<div className="tooltip flex justify-center items-center group relative">
-					<span
-						className={'tooltip text-4xl p-4'}
-						data-text={'Speed'}
-						title="Playback Speed Button"
-					>
-						<RiMusic2Line />
-					</span>
-					<div
-						className={
-							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
-						}
-					>
-						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
-							const selected = playerPlaybackRate === speed;
-							return (
-								<button
-									key={speed}
-									className={`p-2 hover:font-bold ${
-										selected ? 'font-bold' : ''
-									}`}
-									aria-pressed={selected}
-									onClick={handleSetPlaybackRate}
-									value={speed}
-									title={`Playback Speed ${speed}`}
-								>
-									{`${speed}x`}
-								</button>
-							);
-						})}
-					</div>
-				</div>
-				<Link
-					to={trackSlug}
-					className="text-4xl mr-2 flex justify-center items-center"
-					title="Episode Info and Subtitles"
-				>
-					<span className="tooltip p-4" data-text={'Info/Subs'}>
-						<RiInformationLine />
-					</span>
-				</Link>
+				<MemoizedPlayerStateControls
+					handleToggleMuted={handleToggleMuted}
+					isPlayerMuted={isPlayerMuted}
+					playerVolume={playerVolume}
+					handleVolumeChange={handleVolumeChange}
+					playerPlaybackRate={playerPlaybackRate}
+					handleSetPlaybackRate={handleSetPlaybackRate}
+					trackSlug={trackSlug}
+				/>
 			</nav>
 			{children}
 		</React.Fragment>
