@@ -138,11 +138,9 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
 		>
-			<MemoizedBGImage image={image} title={title} />
+			<MemoizedBGImage {...{ image, title }} />
 			<MemoizedSubtitleText
-				subtitlesArray={subtitlesArray}
-				currentSubIndex={currentSubIndex}
-				shouldScroll={shouldScroll}
+				{...{ subtitlesArray, currentSubIndex, shouldScroll }}
 				className="row-start-1 row-end-1 col-start-1 col-end-1 z-50 "
 			/>
 		</section>

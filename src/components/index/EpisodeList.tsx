@@ -90,13 +90,15 @@ const EpisodeList: React.FC = () => {
 									</p>
 								</div>
 								<MemoizedCoverImage
-									featuredImage={featuredImage}
-									title={title}
+									{...{
+										featuredImage,
+										title,
+										handlePlayClick,
+										id,
+									}}
 									shouldDisplayIcon={
 										!isPlayerPlaying || id !== trackId
 									}
-									handlePlayClick={handlePlayClick}
-									id={id}
 								/>
 							</div>
 						</Link>
