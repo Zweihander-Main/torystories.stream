@@ -19,6 +19,10 @@
 
 -   TODO: text-shadow
 -   TODO: Font size increase across the board to 18px?
+-   TODO: right on episode listing, should alternate
+-   TODO: home button obscure
+-   TODO: mobile
+-   TODO: lint-staged (include tsc) + husky
 
 ## License
 

@@ -14,3 +14,24 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const wrapPageElement = ({ element }) => <Player>{element}</Player>;
+// gatsby-browser.js
+
+export const onClientEntry = () => {
+	if (process.env.NODE_ENV !== 'production') {
+		const whyDidYouRender = require('@welldone-software/why-did-you-render');
+		whyDidYouRender(React, {
+			trackAllPureComponents: true,
+			trackHooks: true,
+			include: [/.*/],
+			exclude: [
+				/^DevOverlay$/,
+				/^ErrorBoundary$/,
+				/^Link$/,
+				/^GatsbyLink$/,
+				/^GatsbyLinkLocationWrapper$/,
+				/^Unknown$/,
+			],
+			collapseGroups: true,
+		});
+	}
+};
