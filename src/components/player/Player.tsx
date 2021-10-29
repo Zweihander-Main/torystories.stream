@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerStatus from 'hooks/usePlayerStatus';
 import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import {
 	RiPlayCircleLine,
 	RiPauseCircleLine,
@@ -15,6 +15,53 @@ import {
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import PlayerStateContext from 'contexts/PlayerStateContext';
 import TrackContext from 'contexts/TrackContext';
+
+type CoverImageProps = {
+	trackImage: IGatsbyImageData | null;
+	trackTitle: string;
+	handlePlay: () => void;
+	isPlayerPlaying: boolean;
+};
+
+const CoverImage: React.FC<CoverImageProps> = ({
+	trackImage,
+	trackTitle,
+	handlePlay,
+	isPlayerPlaying,
+}) => {
+	if (trackImage) {
+		return (
+			<div
+				className={
+					'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
+				}
+			>
+				<GatsbyImage
+					className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+					image={trackImage}
+					alt={trackTitle}
+				/>
+				<button
+					className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
+					onClick={handlePlay}
+					aria-label="Start playback"
+				>
+					{!isPlayerPlaying && <RiPlayCircleLine size="100%" />}
+				</button>
+			</div>
+		);
+	}
+	return null;
+};
+
+const MemoizedCoverImage = memo(
+	CoverImage,
+	(prevProps, nextProps) =>
+		prevProps.trackImage === nextProps.trackImage &&
+		prevProps.trackTitle === nextProps.trackTitle &&
+		prevProps.handlePlay === nextProps.handlePlay &&
+		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
+);
 
 const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	children,
@@ -146,28 +193,12 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 					}}
 				/>
 				<div>
-					{trackImage && (
-						<div
-							className={
-								'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
-							}
-						>
-							<GatsbyImage
-								className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
-								image={trackImage}
-								alt={trackTitle}
-							/>
-							<button
-								className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
-								onClick={handlePlay}
-								aria-label="Start playback"
-							>
-								{!isPlayerPlaying && (
-									<RiPlayCircleLine size={'100%'} />
-								)}
-							</button>
-						</div>
-					)}
+					<MemoizedCoverImage
+						trackImage={trackImage}
+						trackTitle={trackTitle}
+						handlePlay={handlePlay}
+						isPlayerPlaying={isPlayerPlaying}
+					/>
 				</div>
 				<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
 					{trackEpisodeNum}
