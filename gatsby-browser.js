@@ -29,7 +29,7 @@ export const onClientEntry = () => {
 				/^Link$/,
 				/^GatsbyLink$/,
 				/^GatsbyLinkLocationWrapper$/,
-				/^RouterAnnouncer$/,
+				/^RouteAnnouncer$/,
 				/^Unknown$/,
 				/^[A-Z]$/,
 				/^Placeholder$/,
