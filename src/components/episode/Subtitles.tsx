@@ -61,6 +61,35 @@ const MemoizedSubtitleText: React.FC<SubtitleTextProps> = memo(
 		prevProps.shouldScroll === nextProps.shouldScroll
 );
 
+type BGImageProps = {
+	image: IGatsbyImageData | null;
+	title: string;
+};
+
+const BGImage: React.FC<BGImageProps> = ({ image, title }) => {
+	if (image) {
+		return (
+			<GatsbyImage
+				image={image}
+				alt={title}
+				className="sticky row-start-1 row-end-1 col-start-1 col-end-1 z-10 top-0 h-screenMinusPlayer opacity-40"
+				objectPosition={''}
+				style={{
+					position: 'sticky',
+				}}
+			/>
+		);
+	}
+	return null;
+};
+
+const MemoizedBGImage = memo(
+	BGImage,
+	(prevProps, nextProps) =>
+		prevProps.image === nextProps.image &&
+		prevProps.title === nextProps.title
+);
+
 type SubtitlesProps = {
 	subtitlesArray: SubtitlesArray;
 	image: IGatsbyImageData | null;
@@ -109,18 +138,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
 		>
-			{image && (
-				<GatsbyImage
-					image={image}
-					alt={title}
-					className="sticky row-start-1 row-end-1 col-start-1 col-end-1 z-10 top-0 h-screenMinusPlayer opacity-40"
-					objectPosition={''}
-					style={{
-						position: 'sticky',
-					}}
-				/>
-			)}
-
+			<MemoizedBGImage image={image} title={title} />
 			<MemoizedSubtitleText
 				subtitlesArray={subtitlesArray}
 				currentSubIndex={currentSubIndex}
@@ -131,8 +149,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 	);
 };
 
-// TODO: subtitles can be obscured by cover
-// TODO: Memoize the bg image to see if you can reduce the amount rerendered
+// TODO: subtitles can be obscured by image cover
 // TODO: if not playing, shouldn't re-scroll except on initial load
 
-export default Subtitles;
+export default memo(Subtitles);
