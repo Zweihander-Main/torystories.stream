@@ -21,7 +21,9 @@ const Layout: React.FC<
 				>
 					<Link
 						to={'/'}
-						className={'cursor-pointer p-4 no-underline'}
+						className={
+							'cursor-pointer p-4 no-underline shadow-navButton bg-black bg-opacity-40 rounded-2xl'
+						}
 					>
 						<RiHome2Line className={'inline'} size="2rem" />
 						<span

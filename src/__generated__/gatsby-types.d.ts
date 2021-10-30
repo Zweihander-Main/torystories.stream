@@ -3807,11 +3807,6 @@ type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
-
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3822,6 +3817,11 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
           & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
+
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];

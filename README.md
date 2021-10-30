@@ -19,7 +19,6 @@
 
 -   TODO: text-shadow
 -   FIXME: Font size increase across the board to 18px?
--   BUG: home button obscure
 -   TODO: episodes should alternate
 -   TODO: episodes should have play icon if not currently playing
 -   FIXME: mobile
