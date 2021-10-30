@@ -55,7 +55,7 @@ const Episode: React.FC<EpisodeProps> = ({
 					<div className="font-display text-episodeNum kern-episode-num justify-self-center self-center">
 						{episodeNum}
 					</div>
-					<div className="pl-4 pr-4 pt-8 pb-8 self-center">
+					<div className="pl-4 pr-8 pt-8 pb-8 self-center">
 						<h3 className="font-display text-5xl tracking-display pb-4">
 							{title}
 						</h3>
