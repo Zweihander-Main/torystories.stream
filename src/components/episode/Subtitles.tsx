@@ -4,8 +4,7 @@ import useCurrentSub from 'hooks/useCurrentSub';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { useEffect } from 'react';
 import PlayerStateContext from 'contexts/PlayerStateContext';
-
-const SCROLL_TIMEOUT_PERIOD = 8000;
+import { SCROLL_TIMEOUT_PERIOD } from 'utils/constants';
 
 type SubtitleTextProps = {
 	subtitlesArray: SubtitlesArray;

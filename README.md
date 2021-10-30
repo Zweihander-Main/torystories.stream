@@ -23,6 +23,7 @@
 -   TODO: episodes should have play icon if not currently playing
 -   FIXME: mobile
 -   TODO: lint-staged (include tsc) + husky
+-   TODO: animations
 
 ## License
 
