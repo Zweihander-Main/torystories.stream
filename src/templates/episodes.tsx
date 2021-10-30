@@ -70,5 +70,3 @@ export const pageQuery = graphql`
 		}
 	}
 `;
-
-// TODO short screen will not treat sub track correctly as it doesn't extend down

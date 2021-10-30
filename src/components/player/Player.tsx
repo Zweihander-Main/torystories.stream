@@ -467,6 +467,4 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	);
 };
 
-// TODO style both of the range's
-
 export default Player;
