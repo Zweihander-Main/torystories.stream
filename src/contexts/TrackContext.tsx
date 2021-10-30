@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 import useEpisodeList from 'hooks/useEpisodeList';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import StorageContext from './StorageContext';
 
 type TrackContextProps = {
@@ -84,18 +84,29 @@ export const TrackProvider: React.FC = ({ children }) => {
 		setTrackEpisodeNum(epData.episodeNum);
 	}, [trackId, getEpByID, saveTrackId]);
 
+	const providerValue = useMemo(
+		() => ({
+			trackId,
+			setTrackId,
+			trackAudioURL,
+			trackImage,
+			trackSlug,
+			trackTitle,
+			trackEpisodeNum,
+		}),
+		[
+			trackId,
+			setTrackId,
+			trackAudioURL,
+			trackImage,
+			trackSlug,
+			trackTitle,
+			trackEpisodeNum,
+		]
+	);
+
 	return (
-		<TrackContext.Provider
-			value={{
-				trackId,
-				setTrackId,
-				trackAudioURL,
-				trackImage,
-				trackSlug,
-				trackTitle,
-				trackEpisodeNum,
-			}}
-		>
+		<TrackContext.Provider value={providerValue}>
 			{children}
 		</TrackContext.Provider>
 	);
