@@ -1,7 +1,7 @@
 module.exports = {
 	siteMetadata: {
-		title: `Tory Stories`, //TODO Change title and description
-		description: `Tory Stories is The Martin Hutchinson Podcast`,
+		title: `Tory Stories`,
+		description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
 		author: `Martin Hutchinson`,
 	},
 	flags: {
