@@ -14,7 +14,6 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const wrapPageElement = ({ element }) => <Player>{element}</Player>;
-// gatsby-browser.js
 
 export const onClientEntry = () => {
 	if (process.env.NODE_ENV !== 'production') {
