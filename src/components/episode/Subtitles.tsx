@@ -36,7 +36,10 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 	}
 
 	return (
-		<p className={`text-xl p-20 text-justify pb-64 ${className}`}>
+		<p
+			className={`text-xl p-20 text-justify pb-64 ${className}`}
+			aria-label={'Subtitle Scrolling Text'}
+		>
 			{subtitlesArray.map((sub, index) => {
 				const { text, startTime } = sub;
 				const isCurrentSub = currentSubIndex === index;
@@ -46,6 +49,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 						key={startTime}
 						ref={isCurrentSub ? currentSubRef : null}
 						className={className}
+						aria-selected={isCurrentSub}
 					>
 						{text}{' '}
 					</span>
@@ -173,6 +177,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
+			aria-label={'Subtitles'}
 		>
 			<MemoizedBGImage {...{ image, title }} />
 			<MemoizedSubtitleText
