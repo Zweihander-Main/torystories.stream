@@ -16,17 +16,8 @@
 		font-variant-numeric: lining-nums;
 	}
 
-	/* TODO: move to extend with package */
-	.hero-indent {
-		text-indent: -0.5em;
-	}
-
 	.one-word-per-line {
 		word-spacing: 1000000px;
-	}
-
-	.tooltip {
-		position: relative;
 	}
 
 	.volume-vertical {
@@ -37,6 +28,10 @@
 		margin-bottom: 8rem;
 		max-width: 8rem;
 		writing-mode: bt-lr;
+	}
+
+	.tooltip {
+		position: relative;
 	}
 
 	.tooltip::before {

@@ -30,6 +30,9 @@ module.exports = {
 			letterSpacing: {
 				display: '-0.035em',
 			},
+			textIndent: {
+				hero: '-0.5em',
+			},
 			height: {
 				player: playerHeight,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
@@ -50,5 +53,9 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [require('tailwind-scrollbar'), require('tailwindcss-textshadow')],
+	plugins: [
+		require('tailwind-scrollbar'),
+		require('tailwindcss-textshadow'),
+		require('tailwindcss-text-indent')(),
+	],
 };
