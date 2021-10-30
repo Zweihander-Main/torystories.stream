@@ -18,10 +18,11 @@
 ## Possible improvements
 
 -   TODO: text-shadow
--   TODO: Font size increase across the board to 18px?
--   TODO: right on episode listing, should alternate
--   TODO: home button obscure
--   TODO: mobile
+-   FIXME: Font size increase across the board to 18px?
+-   BUG: home button obscure
+-   TODO: episodes should alternate
+-   TODO: episodes should have play icon if not currently playing
+-   FIXME: mobile
 -   TODO: lint-staged (include tsc) + husky
 
 ## License

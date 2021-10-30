@@ -1,8 +1,11 @@
-import React, { memo, useCallback, useRef, useState } from 'react';
+import React, { memo, useCallback, useContext, useRef, useState } from 'react';
 import { SubtitlesArray } from 'types';
 import useCurrentSub from 'hooks/useCurrentSub';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { useEffect } from 'react';
+import PlayerStateContext from 'contexts/PlayerStateContext';
+
+const SCROLL_TIMEOUT_PERIOD = 8000;
 
 type SubtitleTextProps = {
 	subtitlesArray: SubtitlesArray;
@@ -34,7 +37,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 	}
 
 	return (
-		<p className={`text-xl p-20 text-justify ${className}`}>
+		<p className={`text-xl p-20 text-justify pb-64 ${className}`}>
 			{subtitlesArray.map((sub, index) => {
 				const { text, startTime } = sub;
 				const isCurrentSub = currentSubIndex === index;
@@ -101,35 +104,69 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 	image,
 	title,
 }) => {
-	const [shouldScroll, setShouldScroll] = useState(true);
-	const [resetTimeout, setResetTimeout] = useState(false);
+	const [shouldTrackCurSub, setShouldTrackCurSub] = useState(false);
+	const [shouldClearTimeout, setShouldClearTimeout] = useState(false);
+	const [shouldResetTimeout, setShouldResetTimeout] = useState(false);
 	const scrollTimeoutID = useRef<number>();
 
+	const currentSubIndex = useCurrentSub(subtitlesArray);
+
+	const { isPlayerPlaying } = useContext(PlayerStateContext);
+
 	const handleScroll = () => {
-		if (shouldScroll === true) {
-			setShouldScroll(false);
-		} else {
-			setResetTimeout(true);
+		if (shouldTrackCurSub) {
+			setShouldTrackCurSub(false);
+		}
+		if (isPlayerPlaying) {
+			setShouldResetTimeout(true);
 		}
 	};
+
+	useEffect(() => {
+		if (isPlayerPlaying) {
+			setShouldTrackCurSub(true);
+		} else {
+			setShouldTrackCurSub(false);
+			setShouldClearTimeout(true);
+		}
+	}, [isPlayerPlaying]);
+
+	useEffect(() => {
+		if (shouldResetTimeout) {
+			window.clearTimeout(scrollTimeoutID.current);
+			scrollTimeoutID.current = window.setTimeout(() => {
+				setShouldTrackCurSub(true);
+			}, SCROLL_TIMEOUT_PERIOD);
+			setShouldResetTimeout(false);
+		}
+	}, [shouldResetTimeout]);
+
+	useEffect(() => {
+		if (shouldClearTimeout) {
+			window.clearTimeout(scrollTimeoutID.current);
+			setShouldClearTimeout(false);
+		}
+	}, [shouldClearTimeout]);
+
+	useEffect(() => {
+		return () => window.clearTimeout(scrollTimeoutID.current);
+	}, []);
 
 	// if reset is true,
 	//     set reset to false, clear timeout, call again (due to dep on reset)
 	// else
 	//     set a timeout assuming handleScroll was called
-	useEffect(() => {
-		if (resetTimeout === true) {
-			setResetTimeout(false);
-			window.clearTimeout(scrollTimeoutID.current);
-		} else if (shouldScroll === false) {
-			scrollTimeoutID.current = window.setTimeout(() => {
-				setShouldScroll(true);
-			}, 10000);
-		}
-		return () => window.clearTimeout(scrollTimeoutID.current);
-	}, [shouldScroll, resetTimeout]);
-
-	const currentSubIndex = useCurrentSub(subtitlesArray);
+	// useEffect(() => {
+	// 	if (shouldClearTimeout === true) {
+	// 		setShouldClearTimeout(false);
+	// 		window.clearTimeout(scrollTimeoutID.current);
+	// 	} else if (shouldTrackCurSub === false) {
+	// 		scrollTimeoutID.current = window.setTimeout(() => {
+	// 			setShouldTrackCurSub(true);
+	// 		}, SCROLL_TIMEOUT_PERIOD);
+	// 	}
+	// 	return () => window.clearTimeout(scrollTimeoutID.current);
+	// }, [shouldTrackCurSub, shouldClearTimeout]);
 
 	return (
 		<section
@@ -140,14 +177,15 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 		>
 			<MemoizedBGImage {...{ image, title }} />
 			<MemoizedSubtitleText
-				{...{ subtitlesArray, currentSubIndex, shouldScroll }}
+				{...{
+					subtitlesArray,
+					currentSubIndex,
+					shouldScroll: shouldTrackCurSub,
+				}}
 				className="row-start-1 row-end-1 col-start-1 col-end-1 z-50 "
 			/>
 		</section>
 	);
 };
-
-// TODO: subtitles can be obscured by image cover
-// TODO: if not playing, shouldn't re-scroll except on initial load
 
 export default memo(Subtitles);
