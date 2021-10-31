@@ -55,15 +55,19 @@ describe('Session storage ', () => {
 
 	it('should save seconds after playback starts', () => {
 		cy.session('changeOnLoad', () => {
-			cy.visitAndSpyStorage('/');
+			cy.visitAndSpyStorage('/', 'getItem');
 			cy.findByLabelText('Start playback').click();
-			cy.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`)
-				.wait(1000)
-				.then((currentID) => {
+			cy.window().then((win) => {
+				cy.spy(win.sessionStorage, 'setItem').as('setItem');
+				cy.getSessionStorage(
+					`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`
+				).then((currentID) => {
+					cy.get('@setItem').should('be.called');
 					cy.getSessionStorage(
 						`${STATE_KEY_PREFIX}${DELIM}${JSON.parse(currentID)}`
 					).should('not.eq', JSON.stringify('0'));
 				});
+			});
 		});
 	});
 
