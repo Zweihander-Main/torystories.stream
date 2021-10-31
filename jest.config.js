@@ -100,6 +100,7 @@ module.exports = {
 			...commonForLintRunners,
 			displayName: 'stylelint',
 			preset: 'jest-runner-stylelint',
+			moduleFileExtensions: ['css'],
 		},
 	],
 };
