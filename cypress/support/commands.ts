@@ -39,7 +39,7 @@ Cypress.Commands.add(
 	'visitAndSpyStorage',
 	(url: string, func: string = 'setItem') => {
 		cy.visit(url, {
-			onLoad: (win) => {
+			onBeforeLoad: (win) => {
 				cy.spy(win.sessionStorage, func).as('sessStorFunc');
 			},
 		});
@@ -69,10 +69,11 @@ const terminalLog = (violations: axe.Result[]): void => {
 };
 
 Cypress.Commands.add('checkA11yWithLog', (...args) => {
+	const type = Cypress.env('type');
 	return cy.checkA11y(
 		args[0] || undefined,
 		args[1] || undefined,
-		terminalLog
+		type === 'cli' ? terminalLog : args[2] || undefined
 	);
 });
 

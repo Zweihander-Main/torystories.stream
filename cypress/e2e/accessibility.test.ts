@@ -8,6 +8,7 @@ describe('Accessibility tests', () => {
 	it('Navigates to the current episode and checks for accessibility violations', () => {
 		cy.findByTitle(/Episode Info and Subtitles/)
 			.click()
+			.window()
 			.checkA11yWithLog();
 	});
 });

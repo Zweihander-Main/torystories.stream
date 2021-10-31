@@ -93,8 +93,8 @@
 		"pretest:e2e:run": "npm run build",
 		"test:e2e:run": "start-server-and-test serve http://localhost:8000 cy:run",
 		"test:e2e:dev": "start-server-and-test dev http://localhost:8000 cy:open",
-		"cy:run": "cypress run",
-		"cy:open": "cypress open",
+		"cy:run": "cypress run --env type=cli",
+		"cy:open": "cypress open --env type=browser",
 		"lint": "jest --config=\"jest.config.js\" --projects \"./test/jest.lint.*.js\"",
 		"format": "prettier --write \"**/*{js,jsx,ts,tsx,json,md,css,md,scss}\""
 	},
