@@ -26,9 +26,4 @@ declare namespace Cypress {
 			options?: Options | undefined
 		): Chainable<void>;
 	}
-	interface Cypress {
-		session: {
-			clearAllSavedSessions(): void;
-		};
-	}
 }

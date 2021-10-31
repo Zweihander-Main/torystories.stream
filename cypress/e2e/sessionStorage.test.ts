@@ -6,37 +6,32 @@ import {
 } from 'utils/constants';
 
 describe('Session storage ', () => {
-	before(() => {
-		Cypress.session.clearAllSavedSessions();
-	});
-
 	it('should be null first time page is visited', () => {
-		cy.session('defaults', () => {
-			cy.visit('/')
-				.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`)
-				.should('eq', null);
+		cy.visit('/', {
+			onBeforeLoad: (win) => {
+				expect(
+					win.sessionStorage.getItem(
+						`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`
+					)
+				).to.be.eq(null);
+			},
 		});
 	});
 
-	it('should be set after page loads', () => {
+	it('should have a default value for played and state after reload', () => {
 		cy.session('defaults', () => {
-			cy.visitAndSpyStorage('/');
+			cy.visitAndSpyStorage('/', 'setItem');
 			cy.getSessionStorage(
 				`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`
 			).should('not.eq', null);
-		});
-	});
-
-	it('should have a default value for played and state', () => {
-		cy.session('defaults', () => {
-			cy.visitAndSpyStorage('/', 'getItem');
-			cy.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`).then(
-				(currentID) => {
+			cy.visit('/');
+			cy.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`)
+				.should('not.eq', null)
+				.then((currentID) => {
 					cy.getSessionStorage(
 						`${STATE_KEY_PREFIX}${DELIM}${JSON.parse(currentID)}`
 					).should('eq', JSON.stringify('0'));
-				}
-			);
+				});
 			cy.getSessionStorage(
 				`${STATE_KEY_PREFIX}${DELIM}${PLAYER_STATE}`
 			).should(
@@ -50,7 +45,7 @@ describe('Session storage ', () => {
 
 	it('should save seconds after playback starts', () => {
 		cy.session('changeOnLoad', () => {
-			cy.visitAndSpyStorage('/', 'getItem');
+			cy.visit('/');
 			cy.findByLabelText('Start playback').click();
 			cy.window().then((win) => {
 				cy.spy(win.sessionStorage, 'setItem').as('setItem');
@@ -68,7 +63,7 @@ describe('Session storage ', () => {
 
 	it('should change state after user changes it and preserve it on page load', () => {
 		cy.session('changeOnLoad', () => {
-			cy.visitAndSpyStorage('/');
+			cy.visit('/');
 			cy.findByTitle('Volume Button').as('vol-button');
 			cy.get('@vol-button')
 				.invoke('attr', 'aria-pressed')
