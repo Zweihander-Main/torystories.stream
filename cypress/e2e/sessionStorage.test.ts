@@ -29,7 +29,7 @@ describe('Session storage ', () => {
 
 	it('should have a default value for played and state', () => {
 		cy.session('defaults', () => {
-			cy.visitAndSpyStorage('/');
+			cy.visitAndSpyStorage('/', 'getItem');
 			cy.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`).then(
 				(currentID) => {
 					cy.getSessionStorage(
