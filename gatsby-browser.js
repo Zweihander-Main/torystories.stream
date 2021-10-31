@@ -3,17 +3,12 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import './src/styles/index.css';
-
 import React from 'react';
-import Player from './src/components/player/Player';
-import AppProvider from './src/contexts/AppContext';
+import './src/styles/index.css';
+import { wrapRoot, wrapPage } from './gatsby-common';
 
-export const wrapRootElement = ({ element }) => (
-	<AppProvider>{element}</AppProvider>
-);
-
-export const wrapPageElement = ({ element }) => <Player>{element}</Player>;
+export const wrapRootElement = wrapRoot;
+export const wrapPageElement = wrapPage;
 
 export const onClientEntry = () => {
 	if (process.env.NODE_ENV !== 'production') {
