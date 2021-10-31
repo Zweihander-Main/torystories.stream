@@ -1,5 +1,7 @@
 # ToryStories.stream
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7c436fa4-a898-4aed-a5cb-5a4a768cae4e/deploy-status)](https://app.netlify.com/sites/torystories/deploys)
+
 > Podcast website with a historical bent
 
 ## Technologies used:
@@ -8,8 +10,9 @@
 -   TypeScript
 -   GraphQL + Typegen
 -   TailwindCSS
+-   Jest + Linting Runners
+-   Cypress + Axe
 -   NetlifyCMS
--   Cypress + axe
 
 ## Dev notes
 
@@ -25,6 +28,8 @@
 -   TODO: lint-staged (include tsc) + husky
 -   TODO: animations
 -   TODO: README and public repo
+-   TODO: Lite player look into, also loading indicator
+-   BUG: Seconds doesn't update on fresh start
 
 ## License
 

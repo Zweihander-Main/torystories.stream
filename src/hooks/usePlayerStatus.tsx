@@ -9,12 +9,12 @@ type PlayerStateProps = {
 	player: React.MutableRefObject<null | ReactPlayer>;
 	playedPercentage: number;
 	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
-	seeking: boolean;
-	setSeeking: React.Dispatch<React.SetStateAction<boolean>>;
+	isSeeking: boolean;
+	setIsSeeking: React.Dispatch<React.SetStateAction<boolean>>;
 	setMediaLoadedAndReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const usePlayerState = (): PlayerStateProps => {
+const usePlayerStatus = (): PlayerStateProps => {
 	const { playedSeconds, hasStorageSecondsBeenReadForCurrentTrack } =
 		useContext(PlayerProgressContext);
 	const { trackId } = useContext(TrackContext);
@@ -22,7 +22,7 @@ const usePlayerState = (): PlayerStateProps => {
 	const player = useRef<null | ReactPlayer>(null);
 	const [mediaLoadedAndReady, setMediaLoadedAndReady] = useState(false);
 	const [playedPercentage, setPlayedPercentage] = useState(0);
-	const [seeking, setSeeking] = useState(false);
+	const [isSeeking, setIsSeeking] = useState(false);
 	const [playerNeedsToReSeek, setPlayerNeedsToReSeek] = useState(false);
 
 	// track changed
@@ -55,10 +55,10 @@ const usePlayerState = (): PlayerStateProps => {
 		player,
 		playedPercentage,
 		setPlayedPercentage,
-		seeking,
-		setSeeking,
+		isSeeking,
+		setIsSeeking,
 		setMediaLoadedAndReady,
 	};
 };
 
-export default usePlayerState;
+export default usePlayerStatus;

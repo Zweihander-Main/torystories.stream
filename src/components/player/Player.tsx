@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useCallback, useContext } from 'react';
 import ReactPlayer from 'react-player';
 import { BaseReactPlayerProps } from 'react-player/base';
 import usePlayerStatus from 'hooks/usePlayerStatus';
@@ -18,31 +18,72 @@ import TrackContext from 'contexts/TrackContext';
 
 type ReactPlayerCompProps = {
 	player: React.MutableRefObject<ReactPlayer | null>;
-	trackAudioURL: string | undefined;
-	isPlayerPlaying: boolean;
-	playerPlaybackRate: number;
-	playerVolume: number;
-	isPlayerMuted: boolean;
-	handleMediaLoadedAndReady: () => void;
-	handlePlay: () => void;
-	handlePause: () => void;
-	handleTrackEnded: () => void;
-	handlePlayerProgress: BaseReactPlayerProps['onProgress'];
+	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
+	isSeeking: boolean;
+	setMediaLoadedAndReady: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 	player,
-	trackAudioURL,
-	isPlayerPlaying,
-	playerPlaybackRate,
-	playerVolume,
-	isPlayerMuted,
-	handleMediaLoadedAndReady,
-	handlePlay,
-	handlePause,
-	handleTrackEnded,
-	handlePlayerProgress,
+	setPlayedPercentage,
+	isSeeking,
+	setMediaLoadedAndReady,
 }) => {
+	const { trackAudioURL } = useContext(TrackContext);
+	const { setPlayedSeconds } = useContext(PlayerProgressContext);
+	const {
+		isPlayerMuted,
+		playerVolume,
+		playerPlaybackRate,
+		isPlayerPlaying,
+		setIsPlayerPlaying,
+	} = useContext(PlayerStateContext);
+
+	const handleTrackEnded = useCallback(() => {
+		setIsPlayerPlaying(false);
+		setPlayedPercentage(0);
+		setPlayedSeconds(0);
+	}, [setIsPlayerPlaying, setPlayedPercentage, setPlayedSeconds]);
+
+	const handleMediaLoadedAndReady = useCallback(() => {
+		setMediaLoadedAndReady(true);
+	}, [setMediaLoadedAndReady]);
+
+	type onProgressParam = Parameters<
+		Exclude<BaseReactPlayerProps['onProgress'], undefined>
+	>[0];
+
+	const handlePlayerProgress: BaseReactPlayerProps['onProgress'] =
+		useCallback(
+			(progressData: onProgressParam) => {
+				// only if not currently seeking and is playing
+				if (!isSeeking && isPlayerPlaying) {
+					setPlayedPercentage(progressData.played);
+					setPlayedSeconds(progressData.playedSeconds);
+				}
+			},
+			[isPlayerPlaying, isSeeking, setPlayedPercentage, setPlayedSeconds]
+		);
+
+	const handlePlay = useCallback(() => {
+		setIsPlayerPlaying(true);
+	}, [setIsPlayerPlaying]);
+
+	const handlePause = useCallback(() => {
+		setIsPlayerPlaying(false);
+	}, [setIsPlayerPlaying]);
+
+	type onErrorParam = Parameters<
+		Exclude<BaseReactPlayerProps['onError'], undefined>
+	>[0];
+
+	const handleError: BaseReactPlayerProps['onError'] = useCallback(
+		(e: onErrorParam) => {
+			console.warn('Player error: ', e);
+		},
+		[]
+	);
+
 	return (
 		<ReactPlayer
 			className="hidden"
@@ -58,7 +99,7 @@ const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 			onPlay={handlePlay}
 			onPause={handlePause}
 			onEnded={handleTrackEnded}
-			onError={(e) => console.warn('Player error: ', e)}
+			onError={handleError}
 			onProgress={handlePlayerProgress}
 			config={{
 				file: {
@@ -71,13 +112,7 @@ const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 
 const MemoizedReactPlayerComp = memo(
 	ReactPlayerComp,
-	(prevProps, nextProps) =>
-		prevProps.player === nextProps.player &&
-		prevProps.trackAudioURL === nextProps.trackAudioURL &&
-		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying &&
-		prevProps.playerPlaybackRate === nextProps.playerPlaybackRate &&
-		prevProps.playerVolume === nextProps.playerVolume &&
-		prevProps.isPlayerMuted === nextProps.isPlayerMuted
+	(prevProps, nextProps) => prevProps.isSeeking === nextProps.isSeeking
 );
 
 type GatsbyCoverImageProps = {
@@ -98,19 +133,15 @@ const GatsbyCoverImage: React.FC<GatsbyCoverImageProps> = ({
 
 const MemoizedGatsbyCoverImage = memo(GatsbyCoverImage);
 
-type CoverImageProps = {
-	trackImage: IGatsbyImageData | null;
-	trackTitle: string;
-	handlePlay: () => void;
-	isPlayerPlaying: boolean;
-};
+const CoverImage: React.FC = () => {
+	const { trackImage, trackTitle } = useContext(TrackContext);
+	const { isPlayerPlaying, setIsPlayerPlaying } =
+		useContext(PlayerStateContext);
 
-const CoverImage: React.FC<CoverImageProps> = ({
-	trackImage,
-	trackTitle,
-	handlePlay,
-	isPlayerPlaying,
-}) => {
+	const handlePlay = useCallback(() => {
+		setIsPlayerPlaying(true);
+	}, [setIsPlayerPlaying]);
+
 	if (trackImage) {
 		return (
 			<div>
@@ -134,25 +165,11 @@ const CoverImage: React.FC<CoverImageProps> = ({
 	return null;
 };
 
-const MemoizedCoverImage = memo(
-	CoverImage,
-	(prevProps, nextProps) =>
-		prevProps.trackImage === nextProps.trackImage &&
-		prevProps.trackTitle === nextProps.trackTitle &&
-		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
-);
+const MemoizedCoverImage = memo(CoverImage);
 
-type TrackInfoProps = {
-	trackEpisodeNum: number;
-	trackSlug: string;
-	trackTitle: string;
-};
+const TrackInfo: React.FC = () => {
+	const { trackEpisodeNum, trackSlug, trackTitle } = useContext(TrackContext);
 
-const TrackInfo: React.FC<TrackInfoProps> = ({
-	trackEpisodeNum,
-	trackSlug,
-	trackTitle,
-}) => {
 	return (
 		<React.Fragment>
 			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
@@ -172,25 +189,40 @@ const TrackInfo: React.FC<TrackInfoProps> = ({
 
 const MemoizedTrackInfo = memo(TrackInfo);
 
-type PlayerStateControlsProps = {
-	handleToggleMuted: () => void;
-	isPlayerMuted: boolean;
-	playerVolume: number;
-	handleVolumeChange: React.ChangeEventHandler<HTMLInputElement>;
-	playerPlaybackRate: number;
-	handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement>;
-	trackSlug: string;
-};
+const PlayerStateControls: React.FC = () => {
+	const {
+		playerVolume,
+		setPlayerVolume,
+		isPlayerMuted,
+		setIsPlayerMuted,
+		playerPlaybackRate,
+		setPlayerPlaybackRate,
+	} = useContext(PlayerStateContext);
 
-const PlayerStateControls: React.FC<PlayerStateControlsProps> = ({
-	handleToggleMuted,
-	isPlayerMuted,
-	playerVolume,
-	handleVolumeChange,
-	playerPlaybackRate,
-	handleSetPlaybackRate,
-	trackSlug,
-}) => {
+	const { trackSlug } = useContext(TrackContext);
+
+	const handleVolumeChange: React.ChangeEventHandler<HTMLInputElement> =
+		useCallback(
+			(e) => {
+				setPlayerVolume(parseFloat(e.target.value));
+			},
+			[setPlayerVolume]
+		);
+
+	const handleToggleMuted = useCallback(() => {
+		setIsPlayerMuted(!isPlayerMuted);
+	}, [setIsPlayerMuted, isPlayerMuted]);
+
+	const handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement> =
+		useCallback(
+			(e) => {
+				setPlayerPlaybackRate(
+					parseFloat((e.target as HTMLButtonElement).value)
+				);
+			},
+			[setPlayerPlaybackRate]
+		);
+
 	return (
 		<React.Fragment>
 			<div className="flex justify-center items-center group relative">
@@ -265,27 +297,16 @@ const PlayerStateControls: React.FC<PlayerStateControlsProps> = ({
 	);
 };
 
-const MemoizedPlayerStateControls = memo(
-	PlayerStateControls,
-	(prevProps, nextProps) => {
-		return (
-			prevProps.isPlayerMuted === nextProps.isPlayerMuted &&
-			prevProps.playerVolume === nextProps.playerVolume &&
-			prevProps.playerPlaybackRate === nextProps.playerPlaybackRate &&
-			prevProps.trackSlug === nextProps.trackSlug
-		);
-	}
-);
+const MemoizedPlayerStateControls = memo(PlayerStateControls);
 
-type PlayPauseButtonProps = {
-	handlePlayPause: () => void;
-	isPlayerPlaying: boolean;
-};
+const PlayPauseButton: React.FC = () => {
+	const { isPlayerPlaying, setIsPlayerPlaying } =
+		useContext(PlayerStateContext);
 
-const PlayPauseButton: React.FC<PlayPauseButtonProps> = ({
-	handlePlayPause,
-	isPlayerPlaying,
-}) => {
+	const handlePlayPause = useCallback(() => {
+		setIsPlayerPlaying(!isPlayerPlaying);
+	}, [setIsPlayerPlaying, isPlayerPlaying]);
+
 	return (
 		<React.Fragment>
 			<button
@@ -301,74 +322,23 @@ const PlayPauseButton: React.FC<PlayPauseButtonProps> = ({
 	);
 };
 
-const MemoizedPlayPauseButton = memo(
-	PlayPauseButton,
-	(prevProps, nextProps) =>
-		prevProps.isPlayerPlaying === nextProps.isPlayerPlaying
-);
+const MemoizedPlayPauseButton = memo(PlayPauseButton);
 
-const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
-	children,
+type SeekBarProps = {
+	player: React.MutableRefObject<ReactPlayer | null>;
+	playedPercentage: number;
+	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
+	setIsSeeking: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SeekBar: React.FC<SeekBarProps> = ({
+	player,
+	playedPercentage,
+	setPlayedPercentage,
+	setIsSeeking,
 }) => {
-	const { setPlayedSeconds } = useContext(PlayerProgressContext);
-	const {
-		isPlayerPlaying,
-		setIsPlayerPlaying,
-		playerVolume,
-		setPlayerVolume,
-		isPlayerMuted,
-		setIsPlayerMuted,
-		playerPlaybackRate,
-		setPlayerPlaybackRate,
-	} = useContext(PlayerStateContext);
-	const {
-		trackAudioURL,
-		trackImage,
-		trackSlug,
-		trackTitle,
-		trackEpisodeNum,
-	} = useContext(TrackContext);
-
-	const {
-		player,
-		playedPercentage,
-		setPlayedPercentage,
-		seeking,
-		setSeeking,
-		setMediaLoadedAndReady,
-	} = usePlayerStatus();
-
-	const handlePlayPause = () => {
-		setIsPlayerPlaying(!isPlayerPlaying);
-	};
-
-	const handlePlay = () => {
-		setIsPlayerPlaying(true);
-	};
-
-	const handlePause = () => {
-		setIsPlayerPlaying(false);
-	};
-
-	const handleVolumeChange: React.ChangeEventHandler<HTMLInputElement> = (
-		e
-	) => {
-		setPlayerVolume(parseFloat(e.target.value));
-	};
-
-	const handleToggleMuted = () => {
-		setIsPlayerMuted(!isPlayerMuted);
-	};
-
-	const handleSetPlaybackRate: React.PointerEventHandler<HTMLButtonElement> =
-		(e) => {
-			setPlayerPlaybackRate(
-				parseFloat((e.target as HTMLButtonElement).value)
-			);
-		};
-
 	const handleSeekMouseDown = () => {
-		setSeeking(true);
+		setIsSeeking(true);
 	};
 
 	const handleSeekChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -381,31 +351,45 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 		e
 	) => {
 		const playedFraction = parseFloat((e.target as HTMLInputElement).value);
-		setSeeking(false);
+		setIsSeeking(false);
 		if (player.current) {
 			player.current.seekTo(playedFraction, 'fraction');
 		}
 	};
 
-	const handlePlayerProgress: BaseReactPlayerProps['onProgress'] = (
-		progressData
-	) => {
-		// only if not currently seeking and is playing
-		if (!seeking && isPlayerPlaying) {
-			setPlayedPercentage(progressData.played);
-			setPlayedSeconds(progressData.playedSeconds);
-		}
-	};
+	return (
+		<input
+			type="range"
+			min={0}
+			max={0.999999}
+			step="any"
+			value={playedPercentage}
+			onMouseDown={handleSeekMouseDown}
+			onChange={handleSeekChange}
+			onMouseUp={handleSeekMouseUp}
+			className={'w-full m-4 cursor-pointer'}
+			aria-label="Seek and progress slider"
+		/>
+	);
+};
 
-	const handleMediaLoadedAndReady = () => {
-		setMediaLoadedAndReady(true);
-	};
+const MemoizedSeekBar = memo(
+	SeekBar,
+	(prevProps, nextProps) =>
+		prevProps.playedPercentage === nextProps.playedPercentage
+);
 
-	const handleTrackEnded = () => {
-		setIsPlayerPlaying(false);
-		setPlayedPercentage(0);
-		setPlayedSeconds(0);
-	};
+const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
+	children,
+}) => {
+	const {
+		player,
+		playedPercentage,
+		setPlayedPercentage,
+		isSeeking,
+		setIsSeeking,
+		setMediaLoadedAndReady,
+	} = usePlayerStatus();
 
 	return (
 		<React.Fragment>
@@ -417,50 +401,23 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				<MemoizedReactPlayerComp
 					{...{
 						player,
-						trackAudioURL,
-						isPlayerPlaying,
-						playerPlaybackRate,
-						playerVolume,
-						isPlayerMuted,
-						handleMediaLoadedAndReady,
-						handlePlay,
-						handlePause,
-						handleTrackEnded,
-						handlePlayerProgress,
+						setPlayedPercentage,
+						setMediaLoadedAndReady,
+						isSeeking,
 					}}
 				/>
-				<MemoizedCoverImage
-					{...{ trackImage, trackTitle, handlePlay, isPlayerPlaying }}
-				/>
-				<MemoizedTrackInfo
-					{...{ trackEpisodeNum, trackSlug, trackTitle }}
-				/>
-				<MemoizedPlayPauseButton
-					{...{ handlePlayPause, isPlayerPlaying }}
-				/>
-				<input
-					type="range"
-					min={0}
-					max={0.999999}
-					step="any"
-					value={playedPercentage}
-					onMouseDown={handleSeekMouseDown}
-					onChange={handleSeekChange}
-					onMouseUp={handleSeekMouseUp}
-					className={'w-full m-4 cursor-pointer'}
-					aria-label="Seek and progress slider"
-				/>
-				<MemoizedPlayerStateControls
+				<MemoizedCoverImage />
+				<MemoizedTrackInfo />
+				<MemoizedPlayPauseButton />
+				<MemoizedSeekBar
 					{...{
-						handleToggleMuted,
-						isPlayerMuted,
-						playerVolume,
-						handleVolumeChange,
-						playerPlaybackRate,
-						handleSetPlaybackRate,
-						trackSlug,
+						player,
+						playedPercentage,
+						setPlayedPercentage,
+						setIsSeeking,
 					}}
 				/>
+				<MemoizedPlayerStateControls />
 			</nav>
 			{children}
 		</React.Fragment>

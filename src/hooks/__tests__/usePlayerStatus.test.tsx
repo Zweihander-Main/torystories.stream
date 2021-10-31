@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePlayerState from 'hooks/usePlayerStatus';
+import usePlayerStatus from 'hooks/usePlayerStatus';
 import { useStaticQuery } from 'gatsby';
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import React from 'react';
@@ -38,7 +38,7 @@ describe('usePlayerStatus hook', () => {
 	);
 
 	it('should render and provide neccessary data for player', () => {
-		const { result } = renderHook(() => usePlayerState(), {
+		const { result } = renderHook(() => usePlayerStatus(), {
 			wrapper,
 		});
 		expect(result.current).toMatchInlineSnapshot(`
