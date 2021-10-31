@@ -29,7 +29,6 @@
 -   TODO: animations
 -   TODO: README and public repo
 -   TODO: Lite player look into, also loading indicator
--   BUG: Seconds doesn't update on fresh start
 
 ## License
 

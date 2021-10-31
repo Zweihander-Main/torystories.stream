@@ -1,4 +1,5 @@
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import PlayerStateContext from 'contexts/PlayerStateContext';
 import TrackContext from 'contexts/TrackContext';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
@@ -31,7 +32,9 @@ const usePlayerStatus = (): PlayerStateProps => {
 	}, [trackId]); // fire on track change and after load
 
 	if (playerNeedsToReSeek) {
-		if (player.current) {
+		// Note: If seekTo is called with 0 seconds, it will glitch the player
+		// and force it to output 0 progress indefinitely
+		if (player.current && playedSeconds !== 0) {
 			player.current.seekTo(playedSeconds);
 			const duration = player.current.getDuration();
 			if (duration) {
