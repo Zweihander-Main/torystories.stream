@@ -22,7 +22,8 @@
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// cypress.commands.overwrite('visit', (originalfn, url, options) => { ... })
+import axe from 'axe-core';
 
 Cypress.Commands.add('getSessionStorage', (key: string) => {
 	cy.window().then((window) => window.sessionStorage.getItem(key));
@@ -42,6 +43,37 @@ Cypress.Commands.add(
 				cy.spy(win.sessionStorage, func).as('sessStorFunc');
 			},
 		});
-		cy.get('@sessStorFunc').should('be.called');
+		cy.get('@sessStorFunc', { timeout: 10000 }).should('be.called');
 	}
 );
+
+// Custom logging for axe
+const terminalLog = (violations: axe.Result[]): void => {
+	cy.task(
+		'log',
+		`${violations.length} accessibility violation${
+			violations.length === 1 ? '' : 's'
+		} ${violations.length === 1 ? 'was' : 'were'} detected`
+	);
+	// pluck specific keys to keep the table readable
+	const violationData = violations.map(
+		({ id, impact, description, nodes }) => ({
+			id,
+			impact,
+			description,
+			nodes: nodes.length,
+		})
+	);
+
+	cy.task('table', violationData);
+};
+
+Cypress.Commands.add('checkA11yWithLog', (...args) => {
+	return cy.checkA11y(
+		args[0] || undefined,
+		args[1] || undefined,
+		terminalLog
+	);
+});
+
+export {};

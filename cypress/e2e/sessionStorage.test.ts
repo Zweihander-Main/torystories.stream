@@ -10,16 +10,11 @@ describe('Session storage ', () => {
 		Cypress.session.clearAllSavedSessions();
 	});
 
-	beforeEach(() => {});
-
-	afterEach(() => {});
-
 	it('should be null first time page is visited', () => {
 		cy.session('defaults', () => {
-			cy.visit('/');
-			cy.getSessionStorage(
-				`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`
-			).should('eq', null);
+			cy.visit('/')
+				.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`)
+				.should('eq', null);
 		});
 	});
 
