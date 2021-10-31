@@ -24,6 +24,7 @@
 -   FIXME: mobile
 -   TODO: lint-staged (include tsc) + husky
 -   TODO: animations
+-   TODO: README and public repo
 
 ## License
 
