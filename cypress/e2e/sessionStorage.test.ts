@@ -114,6 +114,20 @@ describe('Session storage ', () => {
 				.should('eq', 'true');
 		});
 	});
+
+	it('never calls seekTo with 0 seconds', () => {
+		cy.session('testPlayer', () => {
+			cy.visitAndSpyStorage('/', 'setItem');
+			cy.visitAndSpyStorage('/', 'getItem');
+			cy.findByLabelText('Start playback').click();
+			cy.findByLabelText('Seek and progress slider').should(
+				($seekbar) => {
+					expect($seekbar.val()).to.not.equal(0);
+					expect($seekbar.val()).to.not.equal('0');
+				}
+			);
+		});
+	});
 });
 
 export {};
