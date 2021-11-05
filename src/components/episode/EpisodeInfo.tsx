@@ -51,8 +51,8 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 				</React.Fragment>
 			)}
 			<div className="grid grid-cols-2 grid-rows-1">
-				{prev && <div>{prev}</div>}
-				{next && <div>{next}</div>}
+				{prev && <div>{prev.title}</div>}
+				{next && <div>{next.title}</div>}
 			</div>
 			<p className="mt-8">
 				© {new Date().getFullYear()} Martin Hutchinson
