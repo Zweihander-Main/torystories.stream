@@ -43,14 +43,14 @@ describe('usePlayerStatus hook', () => {
 		});
 		expect(result.current).toMatchInlineSnapshot(`
 		Object {
+		  "isSeeking": false,
 		  "playedPercentage": 0,
 		  "player": Object {
 		    "current": null,
 		  },
-		  "seeking": false,
+		  "setIsSeeking": [Function],
 		  "setMediaLoadedAndReady": [Function],
 		  "setPlayedPercentage": [Function],
-		  "setSeeking": [Function],
 		}
 	`);
 	});
