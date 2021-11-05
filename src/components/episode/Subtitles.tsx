@@ -155,22 +155,6 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 		return () => window.clearTimeout(scrollTimeoutID.current);
 	}, []);
 
-	// if reset is true,
-	//     set reset to false, clear timeout, call again (due to dep on reset)
-	// else
-	//     set a timeout assuming handleScroll was called
-	// useEffect(() => {
-	// 	if (shouldClearTimeout === true) {
-	// 		setShouldClearTimeout(false);
-	// 		window.clearTimeout(scrollTimeoutID.current);
-	// 	} else if (shouldTrackCurSub === false) {
-	// 		scrollTimeoutID.current = window.setTimeout(() => {
-	// 			setShouldTrackCurSub(true);
-	// 		}, SCROLL_TIMEOUT_PERIOD);
-	// 	}
-	// 	return () => window.clearTimeout(scrollTimeoutID.current);
-	// }, [shouldTrackCurSub, shouldClearTimeout]);
-
 	return (
 		<section
 			className="grid grid-rows-0 grid-cols-0 bg-black h-screenMinusPlayer overflow-y-scroll z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
