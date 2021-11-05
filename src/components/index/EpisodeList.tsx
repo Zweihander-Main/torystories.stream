@@ -48,20 +48,43 @@ const Episode: React.FC<EpisodeProps> = ({
 	handlePlayClick,
 	trackId,
 }) => {
+	const isEven = episodeNum % 2 === 0;
 	return (
 		<div className="flex flex-column">
 			<Link className={'no-underline hover:font-normal'} to={slug}>
-				<div className="grid grid-cols-episodes grid-rows-episodes bg-brightBlue text-black hover:bg-dullBlue">
-					<div className="font-display text-episodeNum kern-episode-num justify-self-center self-center">
+				<div
+					className={`grid grid-rows-1 text-black ${
+						isEven
+							? 'grid-cols-episodesEven bg-brightBlue hover:bg-dullBlue'
+							: 'grid-cols-episodesOdd bg-brightPurple hover:bg-dullBrightPurple'
+					}`}
+				>
+					<div
+						className={`${
+							isEven
+								? 'col-start-1 col-end-2'
+								: 'col-start-3 col-end-4'
+						} row-end-1 font-display text-episodeNum kern-episode-num justify-self-center self-center`}
+					>
 						{episodeNum}
 					</div>
-					<div className="pl-4 pr-8 pt-8 pb-8 self-center">
+					<div
+						className={`col-start-2 col-end-3 row-end-1 self-center ${
+							isEven ? 'pl-4 pr-12' : 'pl-12 pr-4'
+						}`}
+					>
 						<h3 className="font-display text-5xl tracking-display pb-4">
 							{title}
 						</h3>
 						<p className="font-body text-2xl">{blurb}</p>
 					</div>
-					<div className="grid grid-rows-none grid-cols-none">
+					<div
+						className={`${
+							isEven
+								? 'col-start-3 col-end-4'
+								: 'col-start-1 col-end-2'
+						} row-end-1 grid grid-rows-none grid-cols-none`}
+					>
 						{(!isPlayerPlaying || id !== trackId) && (
 							<RiPlayCircleLine
 								size="100%"

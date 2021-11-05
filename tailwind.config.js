@@ -13,8 +13,10 @@ module.exports = {
 			white: colors.white,
 			brightBlue: '#0D78C1',
 			dullBlue: '#5B85AA',
-			dullPurple: '#414770',
+			brightPurple: '#77499C',
+			dullBrightPurple: '#755C8A',
 			deepPurple: '#372248',
+			dullPurple: '#414770',
 			darkPurple: '#1D152C',
 		},
 		fontFamily: {
@@ -38,10 +40,8 @@ module.exports = {
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
 			},
 			gridTemplateColumns: {
-				episodes: '1fr 5fr 25rem',
-			},
-			gridTemplateRows: {
-				episodes: '25rem',
+				episodesEven: '1fr 5fr 25rem',
+				episodesOdd: '25rem 5fr 1fr',
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',
