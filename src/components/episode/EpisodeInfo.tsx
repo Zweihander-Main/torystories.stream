@@ -25,20 +25,20 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 			className="p-20 bg-georgian-pattern bg-darkPurple z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			aria-label={'Episode Info'}
 		>
-			<h1 className="font-display tracking-display text-5xl mb-4">
+			<h1 className="font-display tracking-display text-5xl mb-4 text-shadow-md">
 				{title}
 			</h1>
-			<h2 className="font-body  text-2xl mb">
+			<h2 className="font-body  text-2xl mb text-shadow">
 				{episodeNum !== -1 && `Episode ${episodeNum}`}
 			</h2>
-			<h3 className={'font-display text-lg mb-4'}>{date}</h3>
+			<h3 className={'font-display text-lg mb-4 text-shadow'}>{date}</h3>
 			<div
-				className={'font-body text-lg mb-4'}
+				className={'font-body text-lg mb-4 text-shadow'}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
 			{syndicationLinks.length > 0 && (
 				<React.Fragment>
-					<h3 className="font-display tracking-display text-2xl">
+					<h3 className="font-display tracking-display text-2xl text-shadow">
 						Episode available at:
 					</h3>
 					<ul>

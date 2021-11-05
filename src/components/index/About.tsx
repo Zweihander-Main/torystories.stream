@@ -39,16 +39,16 @@ const About: React.FC = () => {
 				<StaticImage
 					src="../../images/martin-hutchinson-colorized.png"
 					layout="fixed"
-					className="rounded-full mx-auto border-dullPurple border-8"
+					className="rounded-full mx-auto border-dullPurple border-8 shadow-2xl"
 					height={225}
 					width={225}
 					alt={title}
 				/>
-				<h2 className="font-display tracking-display text-3xl mt-4">
+				<h2 className="font-display tracking-display text-3xl mt-4 text-shadow-sm">
 					{title}
 				</h2>
 				<div
-					className="font-body text-2xl"
+					className="font-body text-2xl text-shadow"
 					dangerouslySetInnerHTML={{ __html: html }}
 				/>
 			</div>

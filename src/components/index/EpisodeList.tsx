@@ -73,7 +73,7 @@ const Episode: React.FC<EpisodeProps> = ({
 							isEven ? 'pl-4 pr-12' : 'pl-12 pr-4'
 						}`}
 					>
-						<h3 className="font-display text-5xl tracking-display pb-4">
+						<h3 className="font-display text-5xl tracking-display pb-4 text-shadow">
 							{title}
 						</h3>
 						<p className="font-body text-2xl">{blurb}</p>
