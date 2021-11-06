@@ -102,7 +102,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 				{title}
 				{(!isPlayerPlaying || trackId !== id) && (
 					<RiPlayCircleLine
-						className="pl-3 pr-3 relative bottom-1 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
+						className="pl-3 pr-3 relative bottom-0.5 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
 						onClick={(e) => handlePlayClick(e, id)}
 					/>
 				)}
