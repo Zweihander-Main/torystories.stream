@@ -25,8 +25,10 @@ module.exports = {
 		},
 		extend: {
 			fontSize: {
-				hero: ['15vw', '11vw'],
-				subHero: ['3.5vw', '3.2vw'],
+				hero: ['15vmax', '11vmax'],
+				heroSmall: ['22vmin', '17vmin'],
+				subHero: ['3.5vmax', '3.2vmax'],
+				subHeroSmall: ['7vmin', '6.4vmin'],
 				episodeNum: ['15vw'],
 			},
 			letterSpacing: {
@@ -45,6 +47,10 @@ module.exports = {
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',
+			},
+			padding: {
+				hero: '4vmax',
+				heroSmall: '4vmin',
 			},
 			backgroundImage: (theme) => ({
 				'georgian-pattern':
