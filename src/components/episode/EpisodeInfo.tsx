@@ -1,9 +1,64 @@
 import PlayerStateContext from 'contexts/PlayerStateContext';
 import TrackContext from 'contexts/TrackContext';
 import { Link } from 'gatsby';
-import React, { useContext } from 'react';
-import { RiPlayCircleLine } from 'react-icons/ri';
+import React, { memo, useContext } from 'react';
+import { IconType } from 'react-icons';
+import {
+	RiPlayCircleLine,
+	RiSoundcloudLine,
+	RiYoutubeLine,
+	RiSpotifyLine,
+	RiMusic2Line,
+} from 'react-icons/ri';
 import { NextPrevInfo } from 'types';
+
+type SyndicationLinkProp = {
+	link: string;
+};
+
+// Will only work for very basic domain matching (xyz.com)
+const DOMAIN_REGEX = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/gim;
+
+const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
+	const domainMatch = DOMAIN_REGEX.exec(link);
+	let domain,
+		Icon: IconType | null = null,
+		title = link;
+	if (domainMatch && domainMatch[1]) {
+		domain = domainMatch[1];
+		switch (domain) {
+			case 'soundcloud.com': {
+				title = 'SoundCloud';
+				Icon = RiSoundcloudLine;
+				break;
+			}
+			case 'youtube.com': {
+				title = 'YouTube';
+				Icon = RiYoutubeLine;
+				break;
+			}
+			case 'spotify.com': {
+				title = 'Spotify';
+				Icon = RiSpotifyLine;
+				break;
+			}
+			default: {
+				title = domain;
+				Icon = RiMusic2Line;
+				break;
+			}
+		}
+	}
+
+	return (
+		<li key={link}>
+			{Icon && <Icon className="inline mr-2 ml-2" />}
+			<a href={link}>{title}</a>
+		</li>
+	);
+};
+
+const MemoizedSyndicationLink = memo(SyndicationLink);
 
 type EpisodeInfoProps = {
 	title: string;
@@ -47,12 +102,12 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 				{title}
 				{(!isPlayerPlaying || trackId !== id) && (
 					<RiPlayCircleLine
-						className="pl-3 pr-3 pt-1 pb-2 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
+						className="pl-3 pr-3 relative bottom-1 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
 						onClick={(e) => handlePlayClick(e, id)}
 					/>
 				)}
 			</h1>
-			<h2 className="font-display tracking-display text-3xl leading-6 text-shadow">
+			<h2 className="font-display tracking-display mt-1 text-3xl leading-6 text-shadow">
 				{episodeNum !== -1 && `Episode ${episodeNum}`}
 			</h2>
 			<h3 className={'font-body text-sm mb-4 text-shadow'}>{date}</h3>
@@ -67,9 +122,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					</h3>
 					<ul>
 						{syndicationLinks.map((link) => (
-							<li key={link}>
-								<a href={link}>{link}</a>
-							</li>
+							<MemoizedSyndicationLink key={link} link={link} />
 						))}
 					</ul>
 				</React.Fragment>
