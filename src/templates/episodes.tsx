@@ -6,6 +6,28 @@ import { TemplatePageContext } from '../types';
 import Subtitles from 'components/episode/Subtitles';
 import EpisodeInfo from 'components/episode/EpisodeInfo';
 
+export const pageQuery = graphql`
+	query EpisodeBySlug($path: String!) {
+		markdownRemark(fields: { slug: { eq: $path } }) {
+			id
+			excerpt(pruneLength: 160)
+			html
+			frontmatter {
+				title
+				episodeNum
+				date(formatString: "MMMM DD, YYYY")
+				description
+				featuredImage {
+					childImageSharp {
+						gatsbyImageData(layout: FULL_WIDTH)
+					}
+				}
+				syndicationLinks
+			}
+		}
+	}
+`;
+
 const EpisodeTemplate: React.FC<
 	PageProps<GatsbyTypes.EpisodeBySlugQuery, TemplatePageContext>
 > = ({ data, pageContext }) => {
@@ -48,25 +70,3 @@ const EpisodeTemplate: React.FC<
 };
 
 export default EpisodeTemplate;
-
-export const pageQuery = graphql`
-	query EpisodeBySlug($path: String!) {
-		markdownRemark(fields: { slug: { eq: $path } }) {
-			id
-			excerpt(pruneLength: 160)
-			html
-			frontmatter {
-				title
-				episodeNum
-				date(formatString: "MMMM DD, YYYY")
-				description
-				featuredImage {
-					childImageSharp {
-						gatsbyImageData(layout: FULL_WIDTH)
-					}
-				}
-				syndicationLinks
-			}
-		}
-	}
-`;

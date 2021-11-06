@@ -103,11 +103,17 @@
 		"url": "https://github.com/Zweihander-Main/torystories.stream"
 	},
 	"eslintConfig": {
+		"settings": {
+			"react": {
+				"version": "detect"
+			}
+		},
 		"env": {
 			"browser": true,
 			"es6": true,
 			"node": true
 		},
+		"parser": "@typescript-eslint/parser",
 		"parserOptions": {
 			"project": "tsconfig.json",
 			"ecmaVersion": 2019,

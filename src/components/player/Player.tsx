@@ -172,14 +172,14 @@ const TrackInfo: React.FC = () => {
 
 	return (
 		<React.Fragment>
-			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display">
+			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display text-shadow">
 				{trackEpisodeNum}
 			</span>
 			<Link
 				to={trackSlug}
 				className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
 			>
-				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5">
+				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5 text-shadow">
 					{trackTitle}
 				</h3>
 			</Link>
