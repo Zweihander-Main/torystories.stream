@@ -20,12 +20,6 @@
 
 ## Possible improvements
 
--   TODO: text-shadow
--   FIXME: Font size increase across the board to 18px?
--   TODO: episodes should alternate
--   TODO: episodes should have play icon if not currently playing
--   FIXME: mobile
--   TODO: lint-staged (include tsc) + husky
 -   TODO: animations
 -   TODO: README and public repo
 -   TODO: Lite player look into, also loading indicator
