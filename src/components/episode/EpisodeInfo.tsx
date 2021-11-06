@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import { NextPrevInfo } from 'types';
 
@@ -50,17 +51,37 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					</ul>
 				</React.Fragment>
 			)}
-			<div className="grid grid-cols-2 grid-rows-1">
-				{prev && <div>{prev.title}</div>}
-				{next && <div>{next.title}</div>}
+			<div className="grid grid-cols-2 grid-rows-1 mt-4 mb-4">
+				{prev && (
+					<div className="col-start-1 col-end-2">
+						<h3
+							className={
+								'font-display tracking-display text-2xl text-shadow'
+							}
+						>
+							Previous Episode:
+						</h3>
+						<Link to={prev.slug}>{prev.title}</Link>
+					</div>
+				)}
+				{next && (
+					<div className="col-start-2 col-end-3 text-right">
+						<h3
+							className={
+								'font-display tracking-display text-2xl text-shadow'
+							}
+						>
+							Next Episode:
+						</h3>
+						<Link to={next.slug}>{next.title}</Link>
+					</div>
+				)}
 			</div>
-			<p className="mt-8">
+			<p className="mt-8 text-center">
 				© {new Date().getFullYear()} Martin Hutchinson
 			</p>
 		</section>
 	);
 };
-
-// TODO prev next styling
 
 export default EpisodeInfo;
