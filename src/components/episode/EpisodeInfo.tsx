@@ -1,5 +1,8 @@
+import PlayerStateContext from 'contexts/PlayerStateContext';
+import TrackContext from 'contexts/TrackContext';
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { useContext } from 'react';
+import { RiPlayCircleLine } from 'react-icons/ri';
 import { NextPrevInfo } from 'types';
 
 type EpisodeInfoProps = {
@@ -10,6 +13,7 @@ type EpisodeInfoProps = {
 	date: string;
 	next: NextPrevInfo;
 	prev: NextPrevInfo;
+	id: string;
 };
 
 const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
@@ -20,7 +24,20 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 	date,
 	next,
 	prev,
+	id,
 }) => {
+	const { setTrackId, trackId } = useContext(TrackContext);
+	const { isPlayerPlaying, setIsPlayerPlaying } =
+		useContext(PlayerStateContext);
+
+	const handlePlayClick = (e: React.MouseEvent<SVGElement>, id: string) => {
+		e.preventDefault();
+		setTrackId(id);
+		if (!isPlayerPlaying) {
+			setIsPlayerPlaying(true);
+		}
+	};
+
 	return (
 		<section
 			className="p-20 bg-georgian-pattern bg-darkPurple z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
@@ -28,11 +45,17 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 		>
 			<h1 className="font-display tracking-display text-5xl mb-4 text-shadow-md">
 				{title}
+				{(!isPlayerPlaying || trackId !== id) && (
+					<RiPlayCircleLine
+						className="pl-3 pr-3 pt-1 pb-2 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
+						onClick={(e) => handlePlayClick(e, id)}
+					/>
+				)}
 			</h1>
-			<h2 className="font-body  text-2xl mb text-shadow">
+			<h2 className="font-display tracking-display text-3xl leading-6 text-shadow">
 				{episodeNum !== -1 && `Episode ${episodeNum}`}
 			</h2>
-			<h3 className={'font-display text-lg mb-4 text-shadow'}>{date}</h3>
+			<h3 className={'font-body text-sm mb-4 text-shadow'}>{date}</h3>
 			<div
 				className={'font-body text-lg mb-4 text-shadow'}
 				dangerouslySetInnerHTML={{ __html: html }}

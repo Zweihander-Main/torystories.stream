@@ -73,6 +73,7 @@ const EpisodeTemplate: React.FC<
 						date,
 						next,
 						prev,
+						id,
 					}}
 				/>
 			</div>
