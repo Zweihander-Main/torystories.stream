@@ -13,7 +13,7 @@ module.exports = {
 			white: colors.white,
 			brightBlue: '#0D78C1',
 			dullBlue: '#5B85AA',
-			brightPurple: '#77499C',
+			brightPurple: '#8755AF',
 			dullBrightPurple: '#755C8A',
 			deepPurple: '#372248',
 			dullPurple: '#414770',
