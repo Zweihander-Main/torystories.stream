@@ -8,27 +8,27 @@ import { SCROLL_TIMEOUT_PERIOD } from 'utils/constants';
 
 type SubtitleTextProps = {
 	subtitlesArray: SubtitlesArray;
-	currentSubIndex: number;
-	shouldScroll: boolean;
+	currentSubIndex: number | null;
+	shouldTrackCurSub: boolean;
 	className?: string;
 };
 
 const SubtitleText: React.FC<SubtitleTextProps> = ({
 	subtitlesArray,
 	currentSubIndex,
-	shouldScroll,
+	shouldTrackCurSub,
 	className = '',
 }) => {
 	const currentSubRef = useCallback(
 		(node: HTMLSpanElement | null) => {
-			if (shouldScroll === true && node !== null) {
+			if (shouldTrackCurSub === true && node !== null) {
 				node.scrollIntoView({
 					behavior: 'smooth',
 					block: 'center',
 				});
 			}
 		},
-		[shouldScroll]
+		[shouldTrackCurSub]
 	);
 
 	if (currentSubIndex === -1) {
@@ -64,7 +64,7 @@ const MemoizedSubtitleText: React.FC<SubtitleTextProps> = memo(
 	(prevProps, nextProps) =>
 		prevProps.currentSubIndex === nextProps.currentSubIndex &&
 		prevProps.subtitlesArray === nextProps.subtitlesArray &&
-		prevProps.shouldScroll === nextProps.shouldScroll
+		prevProps.shouldTrackCurSub === nextProps.shouldTrackCurSub
 );
 
 type BGImageProps = {
@@ -100,19 +100,24 @@ type SubtitlesProps = {
 	subtitlesArray: SubtitlesArray;
 	image: IGatsbyImageData | null;
 	title: string;
+	isCurrentlySelectedInPlayer: boolean;
 };
 
 const Subtitles: React.FC<SubtitlesProps> = ({
 	subtitlesArray,
 	image,
 	title,
+	isCurrentlySelectedInPlayer,
 }) => {
 	const [shouldTrackCurSub, setShouldTrackCurSub] = useState(false);
 	const [shouldClearTimeout, setShouldClearTimeout] = useState(false);
 	const [shouldResetTimeout, setShouldResetTimeout] = useState(false);
+
 	const scrollTimeoutID = useRef<number>();
 
-	const currentSubIndex = useCurrentSub(subtitlesArray);
+	const currentSubIndex = isCurrentlySelectedInPlayer
+		? useCurrentSub(subtitlesArray)
+		: -1;
 
 	const { isPlayerPlaying } = useContext(PlayerStateContext);
 
@@ -169,7 +174,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 				{...{
 					subtitlesArray,
 					currentSubIndex,
-					shouldScroll: shouldTrackCurSub,
+					shouldTrackCurSub,
 				}}
 				className="row-start-1 row-end-1 col-start-1 col-end-1 z-50 "
 			/>

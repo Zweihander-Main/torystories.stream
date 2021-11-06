@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { graphql, PageProps } from 'gatsby';
 import Layout from 'components/structure/Layout';
 import SEO from 'components/structure/SEO';
 import { TemplatePageContext } from '../types';
 import Subtitles from 'components/episode/Subtitles';
 import EpisodeInfo from 'components/episode/EpisodeInfo';
+import TrackContext from 'contexts/TrackContext';
 
 export const pageQuery = graphql`
 	query EpisodeBySlug($path: String!) {
@@ -34,6 +35,7 @@ const EpisodeTemplate: React.FC<
 	const post = data.markdownRemark;
 	const { next, prev, subtitlesArray } = pageContext;
 
+	const id = post?.id || '';
 	const title = post?.frontmatter?.title || '';
 	const description = post?.frontmatter?.description || post?.excerpt || '';
 	const episodeNum = post?.frontmatter?.episodeNum || -1;
@@ -46,23 +48,32 @@ const EpisodeTemplate: React.FC<
 		post?.frontmatter?.featuredImage?.childImageSharp?.gatsbyImageData ||
 		null;
 
+	const { trackId } = useContext(TrackContext);
+
+	const isCurrentlySelectedInPlayer = id === trackId;
+
 	return (
 		<Layout hideFooter={true} showHomeButton={true}>
 			<SEO title={title} description={description} />
 			<div className="grid grid-cols-2 grid-rows-1 h-screenMinusPlayer fixed left-0 top-0">
 				<Subtitles
-					subtitlesArray={subtitlesArray}
-					image={image}
-					title={title}
+					{...{
+						subtitlesArray,
+						image,
+						title,
+						isCurrentlySelectedInPlayer,
+					}}
 				/>
 				<EpisodeInfo
-					title={title}
-					episodeNum={episodeNum}
-					html={html}
-					syndicationLinks={syndicationLinks}
-					date={date}
-					next={next}
-					prev={prev}
+					{...{
+						title,
+						episodeNum,
+						html,
+						syndicationLinks,
+						date,
+						next,
+						prev,
+					}}
 				/>
 			</div>
 		</Layout>
