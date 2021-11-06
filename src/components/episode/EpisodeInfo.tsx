@@ -11,21 +11,18 @@ import {
 	RiMusic2Line,
 } from 'react-icons/ri';
 import { NextPrevInfo } from 'types';
+import { DOMAIN_REGEX } from 'utils/constants';
 
 type SyndicationLinkProp = {
 	link: string;
 };
 
-// Will only work for very basic domain matching (xyz.com)
-const DOMAIN_REGEX = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n?=]+)/gim;
-
 const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 	const domainMatch = DOMAIN_REGEX.exec(link);
-	let domain,
-		Icon: IconType | null = null,
+	let Icon: IconType = RiMusic2Line,
 		title = link;
 	if (domainMatch && domainMatch[1]) {
-		domain = domainMatch[1];
+		const domain = domainMatch[1];
 		switch (domain) {
 			case 'soundcloud.com': {
 				title = 'SoundCloud';
@@ -52,13 +49,16 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 
 	return (
 		<li key={link}>
-			{Icon && <Icon className="inline mr-2 ml-2" />}
+			<Icon className="inline mr-2 ml-2" />
 			<a href={link}>{title}</a>
 		</li>
 	);
 };
 
-const MemoizedSyndicationLink = memo(SyndicationLink);
+const MemoizedSyndicationLink = memo(
+	SyndicationLink,
+	(prevProps, nextProps) => prevProps.link !== nextProps.link
+);
 
 type EpisodeInfoProps = {
 	title: string;
