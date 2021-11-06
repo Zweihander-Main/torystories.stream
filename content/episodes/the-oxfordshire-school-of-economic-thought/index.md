@@ -6,7 +6,7 @@ date: 2021-11-05T01:32:07.973Z
 featuredImage: ep2-oxfordshire.png
 audioFile: torystoriesep2.mp3
 syndicationLinks:
-    - ''
+    - https://soundcloud.com/tory-stories/the-oxfordshire-school-of-economic-thought?si=f47ce9f02f0f4ad29d925f4ce24d920d
 subtitles: torystoriese2.vtt
 ---
 
