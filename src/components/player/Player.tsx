@@ -125,7 +125,7 @@ const GatsbyCoverImage: React.FC<GatsbyCoverImageProps> = ({
 	trackTitle,
 }) => (
 	<GatsbyImage
-		className="col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+		className="bg-black col-start-1 col-end-1 row-start-1 row-end-1 z-20"
 		image={trackImage}
 		alt={trackTitle}
 	/>
