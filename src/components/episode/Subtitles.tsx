@@ -115,9 +115,10 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 
 	const scrollTimeoutID = useRef<number>();
 
-	const currentSubIndex = isCurrentlySelectedInPlayer
-		? useCurrentSub(subtitlesArray)
-		: -1;
+	let currentSubIndex = useCurrentSub(subtitlesArray);
+	if (!isCurrentlySelectedInPlayer) {
+		currentSubIndex = -1;
+	}
 
 	const { isPlayerPlaying } = useContext(PlayerStateContext);
 
