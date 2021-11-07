@@ -53,24 +53,26 @@ const Episode: React.FC<EpisodeProps> = ({
 		<div className="flex flex-column">
 			<Link className={'no-underline hover:font-normal'} to={slug}>
 				<div
-					className={`grid grid-rows-1 text-black ${
+					className={`grid grid-rows-1 grid-cols-episodesTiny text-black ${
 						isEven
-							? 'grid-cols-episodesEven bg-brightBlue hover:bg-dullBlue'
-							: 'grid-cols-episodesOdd bg-brightPurple hover:bg-dullBrightPurple'
+							? 'sm:grid-cols-episodesEvenSmall lg:grid-cols-episodesEvenMed 2xl:grid-cols-episodesEven  bg-brightBlue hover:bg-dullBlue'
+							: 'sm:grid-cols-episodesOddSmall lg:grid-cols-episodesOddMed 2xl:grid-cols-episodesOdd bg-brightPurple hover:bg-dullBrightPurple'
 					}`}
 				>
 					<div
-						className={`${
+						className={`col-span-1 col-start-1 ${
 							isEven
-								? 'col-start-1 col-end-2'
-								: 'col-start-3 col-end-4'
-						} row-end-1 font-display text-episodeNum kern-episode-num justify-self-center self-center`}
+								? 'sm:col-start-1 lg:col-start-1 lg:col-end-2'
+								: 'sm:col-start-2 lg:col-start-3 lg:col-end-4'
+						} row-start-1 row-span-1 font-display text-episodeNum kern-episode-num justify-self-center self-center`}
 					>
 						{episodeNum}
 					</div>
 					<div
-						className={`col-start-2 col-end-3 row-end-1 self-center ${
-							isEven ? 'pl-4 pr-12' : 'pl-12 pr-4'
+						className={`pt-0 sm:pt-12 pb-6 sm:pb-12 pl-6 pr-6 self-center col-span-1 col-start-1 row-start-2 sm:row-start-1 row-span-1 lg:col-start-2 ${
+							isEven
+								? 'sm:col-start-2 sm:pl-4 sm:pr-12'
+								: 'sm:col-start-1 sm:pl-12 sm:pr-4'
 						}`}
 					>
 						<h3 className="font-display text-5xl tracking-display pb-4 text-shadow">
@@ -79,11 +81,11 @@ const Episode: React.FC<EpisodeProps> = ({
 						<p className="font-body text-2xl">{blurb}</p>
 					</div>
 					<div
-						className={`${
+						className={`col-start-1 col-span-2 lg:col-span-1 ${
 							isEven
-								? 'col-start-3 col-end-4'
-								: 'col-start-1 col-end-2'
-						} row-end-1 grid grid-rows-none grid-cols-none`}
+								? 'lg:col-start-3 lg:col-end-4'
+								: 'lg:col-start-1 lg:col-end-2'
+						} row-start-3 sm:row-start-2 lg:row-start-1 row-span-1 grid grid-rows-none grid-cols-none`}
 					>
 						{(!isPlayerPlaying || id !== trackId) && (
 							<RiPlayCircleLine

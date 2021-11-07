@@ -44,7 +44,12 @@ module.exports = {
 			},
 			gridTemplateColumns: {
 				episodesEven: '1fr 5fr 25rem',
+				episodesEvenMed: '1fr 5fr 15rem',
+				episodesEvenSmall: '1fr 5fr',
 				episodesOdd: '25rem 5fr 1fr',
+				episodesOddMed: '15rem 5fr 1fr',
+				episodesOddSmall: '5fr 1fr',
+				episodesTiny: '1fr',
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',
