@@ -353,6 +353,8 @@ type SiteFlags {
 type SiteSiteMetadata {
   title: String
   description: String
+  hero: String
+  subHero: String
   author: String
 }
 
@@ -755,6 +757,8 @@ type MarkdownRemark implements Node {
 
 type MarkdownRemarkFrontmatter {
   title: String
+  menuNum: Int
+  links: [MarkdownRemarkFrontmatterLinks]
   episodeNum: Int
   description: String
   date(
@@ -774,6 +778,11 @@ type MarkdownRemarkFrontmatter {
   audioFile: File
   syndicationLinks: [String]
   subtitles: File
+}
+
+type MarkdownRemarkFrontmatterLinks {
+  display: String
+  url: String
 }
 
 type MarkdownRemarkFields {
@@ -966,6 +975,8 @@ input MarkdownRemarkFilterInput {
 
 input MarkdownRemarkFrontmatterFilterInput {
   title: StringQueryOperatorInput
+  menuNum: IntQueryOperatorInput
+  links: MarkdownRemarkFrontmatterLinksFilterListInput
   episodeNum: IntQueryOperatorInput
   description: StringQueryOperatorInput
   date: DateQueryOperatorInput
@@ -973,6 +984,15 @@ input MarkdownRemarkFrontmatterFilterInput {
   audioFile: FileFilterInput
   syndicationLinks: StringQueryOperatorInput
   subtitles: FileFilterInput
+}
+
+input MarkdownRemarkFrontmatterLinksFilterListInput {
+  elemMatch: MarkdownRemarkFrontmatterLinksFilterInput
+}
+
+input MarkdownRemarkFrontmatterLinksFilterInput {
+  display: StringQueryOperatorInput
+  url: StringQueryOperatorInput
 }
 
 input FileFilterInput {
@@ -1248,6 +1268,10 @@ enum FileFieldsEnum {
   childrenMarkdownRemark
   childrenMarkdownRemark___id
   childrenMarkdownRemark___frontmatter___title
+  childrenMarkdownRemark___frontmatter___menuNum
+  childrenMarkdownRemark___frontmatter___links
+  childrenMarkdownRemark___frontmatter___links___display
+  childrenMarkdownRemark___frontmatter___links___url
   childrenMarkdownRemark___frontmatter___episodeNum
   childrenMarkdownRemark___frontmatter___description
   childrenMarkdownRemark___frontmatter___date
@@ -1422,6 +1446,10 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___internal___type @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___id
   childMarkdownRemark___frontmatter___title
+  childMarkdownRemark___frontmatter___menuNum
+  childMarkdownRemark___frontmatter___links
+  childMarkdownRemark___frontmatter___links___display
+  childMarkdownRemark___frontmatter___links___url
   childMarkdownRemark___frontmatter___episodeNum
   childMarkdownRemark___frontmatter___description
   childMarkdownRemark___frontmatter___date
@@ -1904,6 +1932,8 @@ input DirectorySortInput {
 input SiteSiteMetadataFilterInput {
   title: StringQueryOperatorInput
   description: StringQueryOperatorInput
+  hero: StringQueryOperatorInput
+  subHero: StringQueryOperatorInput
   author: StringQueryOperatorInput
 }
 
@@ -1933,6 +1963,8 @@ enum SiteFieldsEnum {
   buildTime
   siteMetadata___title
   siteMetadata___description
+  siteMetadata___hero
+  siteMetadata___subHero
   siteMetadata___author
   port
   host
@@ -2867,6 +2899,10 @@ type MarkdownRemarkEdge {
 enum MarkdownRemarkFieldsEnum {
   id
   frontmatter___title
+  frontmatter___menuNum
+  frontmatter___links
+  frontmatter___links___display
+  frontmatter___links___url
   frontmatter___episodeNum
   frontmatter___description
   frontmatter___date

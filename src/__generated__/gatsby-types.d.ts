@@ -286,6 +286,8 @@ type SiteFlags = {
 type SiteSiteMetadata = {
   readonly title: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
+  readonly hero: Maybe<Scalars['String']>;
+  readonly subHero: Maybe<Scalars['String']>;
   readonly author: Maybe<Scalars['String']>;
 };
 
@@ -690,6 +692,8 @@ type MarkdownRemark_tableOfContentsArgs = {
 
 type MarkdownRemarkFrontmatter = {
   readonly title: Maybe<Scalars['String']>;
+  readonly menuNum: Maybe<Scalars['Int']>;
+  readonly links: Maybe<ReadonlyArray<Maybe<MarkdownRemarkFrontmatterLinks>>>;
   readonly episodeNum: Maybe<Scalars['Int']>;
   readonly description: Maybe<Scalars['String']>;
   readonly date: Maybe<Scalars['Date']>;
@@ -705,6 +709,11 @@ type MarkdownRemarkFrontmatter_dateArgs = {
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
+};
+
+type MarkdownRemarkFrontmatterLinks = {
+  readonly display: Maybe<Scalars['String']>;
+  readonly url: Maybe<Scalars['String']>;
 };
 
 type MarkdownRemarkFields = {
@@ -1159,6 +1168,8 @@ type MarkdownRemarkFilterInput = {
 
 type MarkdownRemarkFrontmatterFilterInput = {
   readonly title: Maybe<StringQueryOperatorInput>;
+  readonly menuNum: Maybe<IntQueryOperatorInput>;
+  readonly links: Maybe<MarkdownRemarkFrontmatterLinksFilterListInput>;
   readonly episodeNum: Maybe<IntQueryOperatorInput>;
   readonly description: Maybe<StringQueryOperatorInput>;
   readonly date: Maybe<DateQueryOperatorInput>;
@@ -1166,6 +1177,15 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly audioFile: Maybe<FileFilterInput>;
   readonly syndicationLinks: Maybe<StringQueryOperatorInput>;
   readonly subtitles: Maybe<FileFilterInput>;
+};
+
+type MarkdownRemarkFrontmatterLinksFilterListInput = {
+  readonly elemMatch: Maybe<MarkdownRemarkFrontmatterLinksFilterInput>;
+};
+
+type MarkdownRemarkFrontmatterLinksFilterInput = {
+  readonly display: Maybe<StringQueryOperatorInput>;
+  readonly url: Maybe<StringQueryOperatorInput>;
 };
 
 type FileFilterInput = {
@@ -1468,6 +1488,10 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark'
   | 'childrenMarkdownRemark.id'
   | 'childrenMarkdownRemark.frontmatter.title'
+  | 'childrenMarkdownRemark.frontmatter.menuNum'
+  | 'childrenMarkdownRemark.frontmatter.links'
+  | 'childrenMarkdownRemark.frontmatter.links.display'
+  | 'childrenMarkdownRemark.frontmatter.links.url'
   | 'childrenMarkdownRemark.frontmatter.episodeNum'
   | 'childrenMarkdownRemark.frontmatter.description'
   | 'childrenMarkdownRemark.frontmatter.date'
@@ -1642,6 +1666,10 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.internal.type'
   | 'childMarkdownRemark.id'
   | 'childMarkdownRemark.frontmatter.title'
+  | 'childMarkdownRemark.frontmatter.menuNum'
+  | 'childMarkdownRemark.frontmatter.links'
+  | 'childMarkdownRemark.frontmatter.links.display'
+  | 'childMarkdownRemark.frontmatter.links.url'
   | 'childMarkdownRemark.frontmatter.episodeNum'
   | 'childMarkdownRemark.frontmatter.description'
   | 'childMarkdownRemark.frontmatter.date'
@@ -2202,6 +2230,8 @@ type DirectorySortInput = {
 type SiteSiteMetadataFilterInput = {
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly description: Maybe<StringQueryOperatorInput>;
+  readonly hero: Maybe<StringQueryOperatorInput>;
+  readonly subHero: Maybe<StringQueryOperatorInput>;
   readonly author: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2258,6 +2288,8 @@ type SiteFieldsEnum =
   | 'buildTime'
   | 'siteMetadata.title'
   | 'siteMetadata.description'
+  | 'siteMetadata.hero'
+  | 'siteMetadata.subHero'
   | 'siteMetadata.author'
   | 'port'
   | 'host'
@@ -3510,6 +3542,10 @@ type MarkdownRemarkEdge = {
 type MarkdownRemarkFieldsEnum =
   | 'id'
   | 'frontmatter.title'
+  | 'frontmatter.menuNum'
+  | 'frontmatter.links'
+  | 'frontmatter.links.display'
+  | 'frontmatter.links.url'
   | 'frontmatter.episodeNum'
   | 'frontmatter.description'
   | 'frontmatter.date'
@@ -3902,10 +3938,13 @@ type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type FooterMenusQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<(
+        Pick<MarkdownRemarkFrontmatter, 'title'>
+        & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
+      )> }> } };
 
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3918,10 +3957,18 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
 
 
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+    )> }
+  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3949,18 +3996,15 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-    )> }
-  )> };
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 

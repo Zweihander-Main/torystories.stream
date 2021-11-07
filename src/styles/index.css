@@ -15,6 +15,11 @@
 		@apply bg-black;
 	}
 
+	.footer-indent-and-padding {
+		padding-left: 2em;
+		@apply indent-footer;
+	}
+
 	.kern-episode-num {
 		font-feature-settings: 'lnum';
 		font-variant-numeric: lining-nums;

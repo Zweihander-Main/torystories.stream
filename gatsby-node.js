@@ -11,9 +11,14 @@ const webvtt = require('node-webvtt');
 
 const hasPage = (edge) => {
 	switch (edge.node.fields.sourceInstanceName) {
-		case 'misc':
+		case 'misc': {
 			return false;
 			break;
+		}
+		case 'footerMenus': {
+			return false;
+			break;
+		}
 	}
 	return true;
 };

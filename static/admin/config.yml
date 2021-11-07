@@ -74,3 +74,40 @@ collections:
             name: body
             widget: markdown
             required: false
+    - name: footerMenus
+      label: Footer Menus
+      folder: content/footerMenus
+      create: true
+      slug: index
+      media_folder: ''
+      public_folder: ''
+      path: '{{title}}/index'
+      fields:
+          - label: Menu Title
+            name: title
+            widget: string
+            required: true
+          - label: Menu Number (ordering)
+            name: menuNum
+            widget: number
+            required: true
+          - label: 'Links'
+            name: links
+            widget: list
+            allow_add: true
+            collapsed: false
+            summary: List of links
+            minimize_collapsed: false
+            label_singular: New Link
+            fields:
+                - {
+                      label: Display Text,
+                      name: display,
+                      widget: string,
+                      required: true,
+                  }
+                - { label: URL, name: url, widget: string, required: true }
+          - label: Body
+            name: body
+            widget: markdown
+            required: false

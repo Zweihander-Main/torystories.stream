@@ -36,6 +36,7 @@ module.exports = {
 			},
 			textIndent: {
 				hero: '-0.5em',
+				footer: '-2em',
 			},
 			height: {
 				player: playerHeight,

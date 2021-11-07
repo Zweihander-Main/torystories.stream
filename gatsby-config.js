@@ -1,6 +1,8 @@
 module.exports = {
 	siteMetadata: {
 		title: `Tory Stories`,
+		hero: `Tory Stories`,
+		subHero: `The Martin Hutchinson Podcast`,
 		description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
 		author: `Martin Hutchinson`,
 	},
@@ -54,6 +56,13 @@ module.exports = {
 			options: {
 				path: `${__dirname}/content/misc`,
 				name: `misc`,
+			},
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/content/footerMenus`,
+				name: `footerMenus`,
 			},
 		},
 		`gatsby-transformer-remark`,
