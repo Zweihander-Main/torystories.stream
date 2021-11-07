@@ -42,6 +42,9 @@ module.exports = {
 				player: playerHeight,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
 			},
+			flex: {
+				playerTrack: '1 1 50rem',
+			},
 			gridTemplateColumns: {
 				episodesEven: '1fr 5fr 25rem',
 				episodesEvenMed: '1fr 5fr 15rem',

@@ -147,7 +147,7 @@ const CoverImage: React.FC = () => {
 			<div>
 				<div
 					className={
-						'relative w-64 h-64 mt-12 mb-12 ml-8 mr-8 bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
+						'relative w-32 h-32 2xl:w-64 2xl:h-64 mt-12 mb-12 ml-4 2xl:ml-8 mr-4 2xl:mr-8 bottom-32 2xl:bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
 					}
 				>
 					<MemoizedGatsbyCoverImage {...{ trackImage, trackTitle }} />
@@ -177,7 +177,7 @@ const TrackInfo: React.FC = () => {
 			</span>
 			<Link
 				to={trackSlug}
-				className="no-underline hover:underline hover:font-bold flex justify-center items-center mr-8"
+				className="no-underline hover:underline hover:font-bold flex justify-center flex-playerTrack items-center mr-2 xl:mr-4 2xl:mr-8"
 			>
 				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5 text-shadow">
 					{trackTitle}
@@ -237,7 +237,7 @@ const PlayerStateControls: React.FC = () => {
 				</button>
 				<span
 					className={
-						'absolute bottom-full hidden hover:flex group-hover:flex bg-player pb-4 w-16 justify-center pt-4'
+						'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center pb-4 pt-4'
 					}
 				>
 					<input
@@ -310,7 +310,7 @@ const PlayPauseButton: React.FC = () => {
 	return (
 		<React.Fragment>
 			<button
-				className="text-6xl mr-2"
+				className="text-6xl mr-0 2xl:mr-2"
 				onClick={handlePlayPause}
 				role="switch"
 				aria-label="Play/Pause Button"
