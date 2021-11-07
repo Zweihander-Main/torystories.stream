@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
 				}
 			}
 		`);
-	const footerMenus = footerMenusData.allMarkdownRemark.nodes;
+	const footerMenus = footerMenusData?.allMarkdownRemark?.nodes || [];
 
 	return (
 		<footer className="grid items-center sm:items-start sm:justify-items-center mt-8 mb-24 grid-rows-3 grid-cols-1 sm:grid-rows-2 sm:grid-cols-2">
