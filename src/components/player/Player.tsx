@@ -147,12 +147,12 @@ const CoverImage: React.FC = () => {
 			<div>
 				<div
 					className={
-						'relative w-32 h-32 2xl:w-64 2xl:h-64 mt-12 mb-12 ml-4 2xl:ml-8 mr-4 2xl:mr-8 bottom-32 2xl:bottom-64 border-black border-8 grid grid-rows-none grid-columns-none justify-items-center items-center'
+						'z-10 absolute h-24 w-24 lg:relative lg:w-32 lg:h-32 2xl:w-64 2xl:h-64 lg:mt-12 lg:mb-12 lg:ml-4 2xl:ml-8 lg:mr-4 2xl:mr-8 lg:bottom-32 2xl:bottom-64 lg:border-black lg:border-8 lg:grid grid-rows-none grid-columns-none justify-items-center items-center'
 					}
 				>
 					<MemoizedGatsbyCoverImage {...{ trackImage, trackTitle }} />
 					<button
-						className="col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
+						className="hidden lg:inline col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
 						onClick={handlePlay}
 						aria-label="Start playback"
 					>
@@ -171,19 +171,19 @@ const TrackInfo: React.FC = () => {
 	const { trackEpisodeNum, trackSlug, trackTitle } = useContext(TrackContext);
 
 	return (
-		<React.Fragment>
-			<span className="kern-episode-num text-6xl flex justify-center items-center mr-4 font-display tracking-display text-shadow">
+		<div className="z-20 w-auto whitespace-nowrap absolute lg:w-auto lg:whitespace-normal lg:static lg:contents">
+			<span className="relative right-2 font-bold text-xl inline-block text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
 				{trackEpisodeNum}
 			</span>
 			<Link
 				to={trackSlug}
-				className="no-underline hover:underline hover:font-bold flex justify-center flex-playerTrack items-center mr-2 xl:mr-4 2xl:mr-8"
+				className="inline-block no-underline hover:underline hover:font-bold lg:flex justify-center flex-playerTrack items-center mr-2 xl:mr-4 2xl:mr-6"
 			>
 				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5 text-shadow">
 					{trackTitle}
 				</h3>
 			</Link>
-		</React.Fragment>
+		</div>
 	);
 };
 
@@ -310,7 +310,7 @@ const PlayPauseButton: React.FC = () => {
 	return (
 		<React.Fragment>
 			<button
-				className="text-6xl mr-0 2xl:mr-2"
+				className="z-20 text-6xl mr-4 lg:mr-0 2xl:mr-2 ml-4 lg:ml-0"
 				onClick={handlePlayPause}
 				role="switch"
 				aria-label="Play/Pause Button"
@@ -367,7 +367,7 @@ const SeekBar: React.FC<SeekBarProps> = ({
 			onMouseDown={handleSeekMouseDown}
 			onChange={handleSeekChange}
 			onMouseUp={handleSeekMouseUp}
-			className={'w-full m-4 cursor-pointer'}
+			className={'z-20 w-full m-4 cursor-pointer'}
 			aria-label="Seek and progress slider"
 		/>
 	);
