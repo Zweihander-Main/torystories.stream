@@ -20,10 +20,6 @@
 
 ## Possible improvements
 
--   TODO: animations
--   TODO: README and public repo
--   TODO: Lite player look into, also loading indicator
-
 ## License
 
 Code (outside the `/content` and `/static/docs` folders) is licensed under [MIT](./LICENSE)

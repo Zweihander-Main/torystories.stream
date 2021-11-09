@@ -11,6 +11,7 @@ import {
 	RiVolumeMuteLine,
 	RiMusic2Line,
 	RiInformationLine,
+	RiSoundModuleLine,
 } from 'react-icons/ri';
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import PlayerStateContext from 'contexts/PlayerStateContext';
@@ -224,76 +225,88 @@ const PlayerStateControls: React.FC = () => {
 		);
 
 	return (
-		<React.Fragment>
-			<div className="flex justify-center items-center group relative">
-				<button
-					onClick={handleToggleMuted}
-					className={'tooltip p-4 text-4xl cursor-pointer'}
-					data-text={'Volume'}
-					title="Volume Button"
-					aria-pressed={isPlayerMuted}
-				>
-					{isPlayerMuted ? <RiVolumeMuteLine /> : <RiVolumeUpLine />}
-				</button>
-				<span
-					className={
-						'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center pb-4 pt-4'
-					}
-				>
-					<input
-						type="range"
-						min={0}
-						max={1}
-						step="any"
-						value={playerVolume}
-						onInput={handleVolumeChange}
-						className={'cursor-pointer volume-vertical'}
-						title="Volume Slider"
-					/>
-				</span>
-			</div>
-			<div className="tooltip flex justify-center items-center group relative">
-				<span
-					className={'tooltip text-4xl p-4'}
-					data-text={'Speed'}
-					title="Playback Speed Button"
-				>
-					<RiMusic2Line />
-				</span>
-				<div
-					className={
-						'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
-					}
-				>
-					{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
-						const selected = playerPlaybackRate === speed;
-						return (
-							<button
-								key={speed}
-								className={`p-2 hover:font-bold ${
-									selected ? 'font-bold' : ''
-								}`}
-								aria-pressed={selected}
-								onClick={handleSetPlaybackRate}
-								value={speed}
-								title={`Playback Speed ${speed}`}
-							>
-								{`${speed}x`}
-							</button>
-						);
-					})}
-				</div>
-			</div>
-			<Link
-				to={trackSlug}
-				className="text-4xl mr-2 flex justify-center items-center"
-				title="Episode Info and Subtitles"
+		<div className="contents group">
+			<button
+				className="block md:hidden p-4 text-4xl cursor-pointer tooltip"
+				title="Player Controls"
 			>
-				<span className="tooltip p-4" data-text={'Info/Subs'}>
-					<RiInformationLine />
-				</span>
-			</Link>
-		</React.Fragment>
+				<RiSoundModuleLine />
+			</button>
+			<div className="hidden group-hover:flex absolute w-auto right-0 bottom-24 bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
+				<div className="flex justify-center items-center group relative">
+					<button
+						onClick={handleToggleMuted}
+						className={'tooltip p-4 text-4xl cursor-pointer'}
+						data-text={'Volume'}
+						title="Volume Button"
+						aria-pressed={isPlayerMuted}
+					>
+						{isPlayerMuted ? (
+							<RiVolumeMuteLine />
+						) : (
+							<RiVolumeUpLine />
+						)}
+					</button>
+					<span
+						className={
+							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center pb-4 pt-4'
+						}
+					>
+						<input
+							type="range"
+							min={0}
+							max={1}
+							step="any"
+							value={playerVolume}
+							onInput={handleVolumeChange}
+							className={'cursor-pointer volume-vertical'}
+							title="Volume Slider"
+						/>
+					</span>
+				</div>
+				<div className="tooltip flex justify-center items-center group relative">
+					<span
+						className={'tooltip text-4xl p-4'}
+						data-text={'Speed'}
+						title="Playback Speed Button"
+					>
+						<RiMusic2Line />
+					</span>
+					<div
+						className={
+							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
+						}
+					>
+						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
+							const selected = playerPlaybackRate === speed;
+							return (
+								<button
+									key={speed}
+									className={`p-2 hover:font-bold ${
+										selected ? 'font-bold' : ''
+									}`}
+									aria-pressed={selected}
+									onClick={handleSetPlaybackRate}
+									value={speed}
+									title={`Playback Speed ${speed}`}
+								>
+									{`${speed}x`}
+								</button>
+							);
+						})}
+					</div>
+				</div>
+				<Link
+					to={trackSlug}
+					className="text-4xl mr-2 flex justify-center items-center"
+					title="Episode Info and Subtitles"
+				>
+					<span className="tooltip p-4" data-text={'Info/Subs'}>
+						<RiInformationLine />
+					</span>
+				</Link>
+			</div>
+		</div>
 	);
 };
 
@@ -367,7 +380,7 @@ const SeekBar: React.FC<SeekBarProps> = ({
 			onMouseDown={handleSeekMouseDown}
 			onChange={handleSeekChange}
 			onMouseUp={handleSeekMouseUp}
-			className={'z-20 w-full m-4 cursor-pointer'}
+			className={'z-20 w-full md:m-4 cursor-pointer'}
 			aria-label="Seek and progress slider"
 		/>
 	);
