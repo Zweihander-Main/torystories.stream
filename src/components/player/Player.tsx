@@ -233,7 +233,7 @@ const PlayerStateControls: React.FC = () => {
 				<RiSoundModuleLine />
 			</button>
 			<div className="hidden group-hover:flex absolute w-auto right-0 bottom-24 bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
-				<div className="flex justify-center items-center group relative">
+				<div className="order-2 md:order-none flex justify-center items-center group relative">
 					<button
 						onClick={handleToggleMuted}
 						className={'tooltip p-4 text-4xl cursor-pointer'}
@@ -264,7 +264,7 @@ const PlayerStateControls: React.FC = () => {
 						/>
 					</span>
 				</div>
-				<div className="tooltip flex justify-center items-center group relative">
+				<div className="order-3 md:order-none tooltip flex justify-center items-center group relative">
 					<span
 						className={'tooltip text-4xl p-4'}
 						data-text={'Speed'}
@@ -298,7 +298,7 @@ const PlayerStateControls: React.FC = () => {
 				</div>
 				<Link
 					to={trackSlug}
-					className="text-4xl md:mr-2 flex justify-center items-center"
+					className="order-1 md:order-none text-4xl md:mr-2 flex justify-center items-center"
 					title="Episode Info and Subtitles"
 				>
 					<span className="tooltip p-4" data-text={'Info/Subs'}>
