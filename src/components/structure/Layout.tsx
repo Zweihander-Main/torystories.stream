@@ -22,10 +22,10 @@ const Layout: React.FC<
 					<Link
 						to={'/'}
 						className={
-							'cursor-pointer p-2 xl:p-4 no-underline shadow-navButton bg-black bg-opacity-40 rounded-1xl'
+							'cursor-pointerp-2 relative p-3 top-0.5 lg:-top-1 xl:p-4 no-underline lg:shadow-navButton bg-black bg-opacity-40 rounded-1xl'
 						}
 					>
-						<RiHome2Line className={'inline'} size="2rem" />
+						<RiHome2Line className="inline text-xl lg:text-2xl xl:text-3xl " />
 						<span
 							className={
 								'hidden lg:inline font-display tracking-display pl-2 relative top-1 text-xl xl:text-2xl text-shadow-md'

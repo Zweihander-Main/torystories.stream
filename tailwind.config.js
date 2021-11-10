@@ -61,7 +61,7 @@ module.exports = {
 				episodesTiny: '1fr',
 			},
 			gridTemplateRows: {
-				mobileEpInfoTabs: `1fr ${mobileEpInfoTabsHeight}`,
+				mobileEpInfoTabs: `${mobileEpInfoTabsHeight} 1fr`,
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',

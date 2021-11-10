@@ -37,7 +37,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 
 	return (
 		<p
-			className={`text-justify text-md pt-8 pb-8 pl-6 pr-8 sm:text-lg sm:pl-8 sm:pr-8 lg:pl-12 lg:pr-12 lg:text-xl lg:pt-12 lg:pb-24 xl:pt-20 xl:pl-20 xl:pr-20 xl:pb-64 ${className}`}
+			className={`text-justify text-md p-6 pr-10 sm:text-lg lg:pl-12 lg:pr-12 lg:text-xl lg:pt-12 lg:pb-24 xl:pt-20 xl:pl-20 xl:pr-20 xl:pb-64 ${className}`}
 			aria-label={'Subtitle Scrolling Text'}
 		>
 			{subtitlesArray.map((sub, index) => {
