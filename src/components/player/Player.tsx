@@ -172,15 +172,15 @@ const TrackInfo: React.FC = () => {
 	const { trackEpisodeNum, trackSlug, trackTitle } = useContext(TrackContext);
 
 	return (
-		<div className="z-20 w-auto whitespace-nowrap absolute lg:w-auto lg:whitespace-normal lg:static lg:contents">
-			<span className="relative right-2 font-bold text-xl inline-block text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
+		<div className="z-20 w-auto whitespace-normal pl-24 absolute bottom-0 text-center md:bottom-auto md:whitespace-nowrap md:pl-0 lg:text-left lg:w-auto lg:whitespace-normal lg:static lg:contents">
+			<span className="relative right-2 font-bold text-base sm:text-xl inline-block text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
 				{trackEpisodeNum}
 			</span>
 			<Link
 				to={trackSlug}
 				className="inline-block no-underline hover:underline hover:font-bold lg:flex justify-center flex-playerTrack items-center mr-2 xl:mr-4 2xl:mr-6"
 			>
-				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-lg leading-5 text-shadow">
+				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-sm sm:text-lg leading-5 text-shadow">
 					{trackTitle}
 				</h3>
 			</Link>
