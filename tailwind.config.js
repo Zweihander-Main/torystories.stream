@@ -3,6 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 const playerHeight = '6rem';
 const playerHeightSmall = '4rem';
+const mobileEpInfoTabsHeight = '3rem';
 
 module.exports = {
 	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
@@ -43,7 +44,9 @@ module.exports = {
 				player: playerHeight,
 				playerSmall: playerHeightSmall,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
+				screenMinusPlayerAndTabs: `calc(100vh - ${playerHeightSmall} - ${mobileEpInfoTabsHeight})`,
 				screenMinusPlayerSmall: `calc(100vh - ${playerHeightSmall})`,
+				screenMinusPlayerAndTabsSmall: `calc(100vh - ${playerHeightSmall} - ${mobileEpInfoTabsHeight})`,
 			},
 			flex: {
 				playerTrack: '1 1 50rem',
@@ -56,6 +59,9 @@ module.exports = {
 				episodesOddMed: '15rem 5fr 1fr',
 				episodesOddSmall: '5fr 1fr',
 				episodesTiny: '1fr',
+			},
+			gridTemplateRows: {
+				mobileEpInfoTabs: `1fr ${mobileEpInfoTabsHeight}`,
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',

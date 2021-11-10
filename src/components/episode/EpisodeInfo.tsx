@@ -95,7 +95,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 
 	return (
 		<section
-			className="z-10 p-8 lg:p-12 xl:p-20 bg-georgian-pattern bg-darkPurple scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
+			className="col-span-2 row-span-1 lg:col-span-1 z-10 p-8 lg:p-12 xl:p-20 bg-georgian-pattern bg-darkPurple scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			aria-label={'Episode Info'}
 		>
 			<h1 className="mb-4 text-3xl lg:text-4xl xl:text-5xl font-display tracking-display text-shadow-md">

@@ -78,7 +78,7 @@ const BGImage: React.FC<BGImageProps> = ({ image, title }) => {
 			<GatsbyImage
 				image={image}
 				alt={title}
-				className="sticky top-0 z-10 col-start-1 col-end-1 row-start-1 row-end-1 h-screenMinusPlayerSmall md:h-screenMinusPlayer opacity-40"
+				className="sticky top-0 z-10 col-start-1 col-end-1 row-start-1 row-end-1 h-screenMinusPlayerAndTabsSmall md:h-screenMinusPlayerAndTabs lg:h-screenMinusPlayer opacity-40"
 				objectPosition={''}
 				style={{
 					position: 'sticky',
@@ -163,7 +163,7 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 
 	return (
 		<section
-			className="z-10 grid overflow-y-scroll bg-black grid-cols-0 grid-rows-0 h-ScreenMinusPlayerSmall md:h-screenMinusPlayer scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
+			className="z-10 grid col-span-2 row-span-1 overflow-y-scroll bg-black lg:col-span-1 grid-cols-0 grid-rows-0 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}

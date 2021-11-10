@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { graphql, PageProps } from 'gatsby';
 import Layout from 'components/structure/Layout';
 import SEO from 'components/structure/SEO';
@@ -52,30 +52,71 @@ const EpisodeTemplate: React.FC<
 
 	const isCurrentlySelectedInPlayer = id === trackId;
 
+	enum TabSelected {
+		Subtitles,
+		EpisodeInfo,
+	}
+
+	const [mobileTabSelected, setMobiletabSelected] = useState<TabSelected>(
+		TabSelected.EpisodeInfo
+	);
+
 	return (
 		<Layout hideFooter={true} showHomeButton={true}>
 			<SEO title={title} description={description} />
-			<div className="fixed top-0 left-0 grid grid-cols-2 grid-rows-1 h-screenMinusPlayerSmall md:h-screenMinusPlayer">
-				<Subtitles
-					{...{
-						subtitlesArray,
-						image,
-						title,
-						isCurrentlySelectedInPlayer,
-					}}
-				/>
-				<EpisodeInfo
-					{...{
-						title,
-						episodeNum,
-						html,
-						syndicationLinks,
-						date,
-						next,
-						prev,
-						id,
-					}}
-				/>
+			<div className="fixed top-0 left-0 grid grid-cols-2 grid-rows-mobileEpInfoTabs lg:grid-rows-1 h-screenMinusPlayerSmall md:h-screenMinusPlayer">
+				<div className="flex justify-around h-full col-span-2 row-start-2 lg:absolute lg:hidden">
+					<button
+						onClick={() =>
+							setMobiletabSelected(TabSelected.EpisodeInfo)
+						}
+					>
+						EpisodeInfo
+					</button>
+					<button
+						onClick={() =>
+							setMobiletabSelected(TabSelected.Subtitles)
+						}
+					>
+						Subtitles
+					</button>
+				</div>
+				<div
+					className={`${
+						mobileTabSelected === TabSelected.Subtitles
+							? 'contents'
+							: 'hidden absolute'
+					} lg:contents lg:static`}
+				>
+					<Subtitles
+						{...{
+							subtitlesArray,
+							image,
+							title,
+							isCurrentlySelectedInPlayer,
+						}}
+					/>
+				</div>
+				<div
+					className={`${
+						mobileTabSelected === TabSelected.EpisodeInfo
+							? 'contents'
+							: 'hidden absolute'
+					} lg:contents lg:static`}
+				>
+					<EpisodeInfo
+						{...{
+							title,
+							episodeNum,
+							html,
+							syndicationLinks,
+							date,
+							next,
+							prev,
+							id,
+						}}
+					/>
+				</div>
 			</div>
 		</Layout>
 	);
