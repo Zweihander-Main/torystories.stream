@@ -17,18 +17,18 @@ const Layout: React.FC<
 				<nav
 					role="navigation"
 					aria-label="Home"
-					className={'absolute left-0 top-4 z-50'}
+					className={'absolute left-0 top-2 xl:top-4 z-50'}
 				>
 					<Link
 						to={'/'}
 						className={
-							'cursor-pointer p-4 no-underline shadow-navButton bg-black bg-opacity-40 rounded-1xl'
+							'cursor-pointer p-2 xl:p-4 no-underline shadow-navButton bg-black bg-opacity-40 rounded-1xl'
 						}
 					>
 						<RiHome2Line className={'inline'} size="2rem" />
 						<span
 							className={
-								'font-display tracking-display pl-2 relative top-1 text-2xl text-shadow-md'
+								'hidden lg:inline font-display tracking-display pl-2 relative top-1 text-xl xl:text-2xl text-shadow-md'
 							}
 						>
 							Home
