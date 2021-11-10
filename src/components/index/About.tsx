@@ -38,17 +38,17 @@ const About: React.FC = () => {
 			<div className="w-10/12 pt-24 pb-24 mx-auto sm:w-8/12 md:w-7/12 xl:w-6/12">
 				<StaticImage
 					src="../../images/martin-hutchinson-colorized.png"
-					layout="fixed"
-					className="mx-auto border-8 rounded-full shadow-2xl border-dullPurple"
+					layout="constrained"
+					className="w-40 mx-auto border-8 rounded-full shadow-2xl md:w-auto border-dullPurple"
 					height={225}
 					width={225}
 					alt={title}
 				/>
-				<h2 className="mt-4 text-3xl font-display tracking-display text-shadow-sm">
+				<h2 className="mt-4 text-2xl md:text-3xl font-display tracking-display text-shadow-sm">
 					{title}
 				</h2>
 				<div
-					className="text-2xl font-body text-shadow"
+					className="text-xl md:text-2xl font-body text-shadow"
 					dangerouslySetInnerHTML={{ __html: html }}
 				/>
 			</div>

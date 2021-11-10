@@ -75,10 +75,10 @@ const Episode: React.FC<EpisodeProps> = ({
 								: 'sm:col-start-1 sm:pl-12 sm:pr-4'
 						}`}
 					>
-						<h3 className="pb-4 text-5xl font-display tracking-display text-shadow">
+						<h3 className="pb-4 text-4xl md:text-5xl font-display tracking-display text-shadow">
 							{title}
 						</h3>
-						<p className="text-2xl font-body">{blurb}</p>
+						<p className="text-xl md:text-2xl font-body">{blurb}</p>
 					</div>
 					<div
 						className={`col-start-1 col-span-2 lg:col-span-1 ${
