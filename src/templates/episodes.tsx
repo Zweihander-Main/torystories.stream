@@ -65,21 +65,35 @@ const EpisodeTemplate: React.FC<
 		<Layout hideFooter={true} showHomeButton={true}>
 			<SEO title={title} description={description} />
 			<div className="fixed top-0 left-0 grid grid-cols-2 grid-rows-mobileEpInfoTabs lg:grid-rows-1 h-screenMinusPlayerSmall md:h-screenMinusPlayer">
-				<div className="flex justify-around h-full col-span-2 row-start-1 pl-12 lg:absolute lg:hidden">
-					<button
-						onClick={() =>
-							setMobiletabSelected(TabSelected.EpisodeInfo)
-						}
-					>
-						Episode Info
-					</button>
-					<button
-						onClick={() =>
-							setMobiletabSelected(TabSelected.Subtitles)
-						}
-					>
-						Subtitles
-					</button>
+				<div className="flex justify-around h-full col-span-2 row-start-1 pl-10 lg:absolute lg:hidden">
+					<div className="contents">
+						<button
+							className={`w-full text-sm font-bold ${
+								mobileTabSelected === TabSelected.EpisodeInfo
+									? 'bg-deepPurple shadow-innerButton'
+									: 'bg-darkPurple'
+							}`}
+							onClick={() =>
+								setMobiletabSelected(TabSelected.EpisodeInfo)
+							}
+						>
+							Episode Info
+						</button>
+					</div>
+					<div className="contents">
+						<button
+							className={`w-full text-sm font-bold ${
+								mobileTabSelected === TabSelected.Subtitles
+									? 'bg-deepPurple shadow-innerButton'
+									: 'bg-darkPurple'
+							}`}
+							onClick={() =>
+								setMobiletabSelected(TabSelected.Subtitles)
+							}
+						>
+							Subtitles
+						</button>
+					</div>
 				</div>
 				<div
 					className={`${

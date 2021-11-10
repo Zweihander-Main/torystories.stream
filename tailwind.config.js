@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 const playerHeight = '6rem';
 const playerHeightSmall = '4rem';
-const mobileEpInfoTabsHeight = '3rem';
+const mobileEpInfoTabsHeight = '2.5rem';
 
 module.exports = {
 	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
@@ -65,6 +65,7 @@ module.exports = {
 			},
 			boxShadow: {
 				navButton: '0 0 8px 10px rgba(10,10,10,0.4)',
+				innerButton: 'inset 0 2px 12px 0 rgba(10,10,10,0.8)',
 			},
 			padding: {
 				hero: '4vmax',
