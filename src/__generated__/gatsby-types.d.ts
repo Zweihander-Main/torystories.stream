@@ -3933,14 +3933,6 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type FooterMenusQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<(
-        Pick<MarkdownRemarkFrontmatter, 'title'>
-        & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
-      )> }> } };
-
 type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3950,6 +3942,27 @@ type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
+
+
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+    )> }
+  )> };
+
+type FooterMenusQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<(
+        Pick<MarkdownRemarkFrontmatter, 'title'>
+        & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
+      )> }> } };
 
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3992,19 +4005,6 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
-
-
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-    )> }
-  )> };
 
 type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 

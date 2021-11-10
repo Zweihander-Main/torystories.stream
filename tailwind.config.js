@@ -2,6 +2,7 @@ const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const playerHeight = '6rem';
+const playerHeightSmall = '4rem';
 
 module.exports = {
 	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
@@ -40,7 +41,9 @@ module.exports = {
 			},
 			height: {
 				player: playerHeight,
+				playerSmall: playerHeightSmall,
 				screenMinusPlayer: `calc(100vh - ${playerHeight})`,
+				screenMinusPlayerSmall: `calc(100vh - ${playerHeightSmall})`,
 			},
 			flex: {
 				playerTrack: '1 1 50rem',
