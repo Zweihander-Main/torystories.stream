@@ -274,7 +274,7 @@ const PlayerStateControls: React.FC = () => {
 					</span>
 					<div
 						className={
-							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center flex-col-reverse'
+							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-auto justify-center flex-col-reverse'
 						}
 					>
 						{[0.75, 1, 1.25, 1.5, 1.75, 2].map((speed) => {
@@ -282,7 +282,7 @@ const PlayerStateControls: React.FC = () => {
 							return (
 								<button
 									key={speed}
-									className={`p-2 hover:font-bold ${
+									className={`pt-2 pb-2 pl-5 pr-5 hover:font-bold ${
 										selected ? 'font-bold' : ''
 									}`}
 									aria-pressed={selected}
@@ -298,7 +298,7 @@ const PlayerStateControls: React.FC = () => {
 				</div>
 				<Link
 					to={trackSlug}
-					className="text-4xl mr-2 flex justify-center items-center"
+					className="text-4xl md:mr-2 flex justify-center items-center"
 					title="Episode Info and Subtitles"
 				>
 					<span className="tooltip p-4" data-text={'Info/Subs'}>
