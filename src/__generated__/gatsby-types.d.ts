@@ -4014,4 +4014,9 @@ type AboutQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<
         & { readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'title'>> }
       ) }> } };
 
+type HeroQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HeroQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'hero' | 'subHero'>> }> };
+
 }
