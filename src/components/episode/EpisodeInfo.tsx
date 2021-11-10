@@ -95,29 +95,31 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 
 	return (
 		<section
-			className="z-10 p-20 bg-georgian-pattern bg-darkPurple scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
+			className="z-10 p-8 lg:p-12 xl:p-20 bg-georgian-pattern bg-darkPurple scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			aria-label={'Episode Info'}
 		>
-			<h1 className="mb-4 text-5xl font-display tracking-display text-shadow-md">
+			<h1 className="mb-4 text-3xl lg:text-4xl xl:text-5xl font-display tracking-display text-shadow-md">
 				{title}
 				{(!isPlayerPlaying || trackId !== id) && (
 					<RiPlayCircleLine
-						className="pl-3 pr-3 relative bottom-0.5 box-content inline text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
+						className="pl-3 pr-3 relative bottom-0.5 box-content inline text-2xl lg:text-xl xl:text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer"
 						onClick={(e) => handlePlayClick(e, id)}
 					/>
 				)}
 			</h1>
-			<h2 className="mt-1 text-3xl leading-6 font-display tracking-display text-shadow">
+			<h2 className="mt-1 text-xl leading-6 lg:text-2xl xl:text-3xl font-display tracking-display text-shadow">
 				{episodeNum !== -1 && `Episode ${episodeNum}`}
 			</h2>
-			<h3 className={'font-body text-sm mb-4 text-shadow'}>{date}</h3>
+			<h3 className={'font-body text-xs lg:text-sm mb-4 text-shadow'}>
+				{date}
+			</h3>
 			<div
-				className={'font-body text-lg mb-4 text-shadow'}
+				className={'font-body text-md lg:text-lg mb-4 text-shadow'}
 				dangerouslySetInnerHTML={{ __html: html }}
 			/>
 			{syndicationLinks.length > 0 && (
 				<React.Fragment>
-					<h3 className="text-2xl font-display tracking-display text-shadow">
+					<h3 className="text-xl lg:text-2xl font-display tracking-display text-shadow">
 						Episode available at:
 					</h3>
 					<ul>
@@ -132,7 +134,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					<div className="col-start-1 col-end-2">
 						<h3
 							className={
-								'font-display tracking-display text-2xl text-shadow'
+								'font-display tracking-display text-xl lg:text-2xl text-shadow'
 							}
 						>
 							Previous Episode:
@@ -144,7 +146,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					<div className="col-start-2 col-end-3 text-right">
 						<h3
 							className={
-								'font-display tracking-display text-2xl text-shadow'
+								'font-display tracking-display text-xl lg:text-2xl text-shadow'
 							}
 						>
 							Next Episode:
