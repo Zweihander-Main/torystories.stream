@@ -172,7 +172,7 @@ const TrackInfo: React.FC = () => {
 	const { trackEpisodeNum, trackSlug, trackTitle } = useContext(TrackContext);
 
 	return (
-		<div className="absolute bottom-0 z-20 w-auto pl-24 text-center whitespace-normal md:bottom-auto md:whitespace-nowrap md:pl-0 lg:text-left lg:w-auto lg:whitespace-normal lg:static lg:contents">
+		<div className="absolute bottom-0 z-20 w-auto pl-24 text-center whitespace-normal md:whitespace-nowrap lg:bottom-auto lg:pl-0 lg:text-left lg:w-auto lg:whitespace-normal lg:static lg:contents">
 			<span className="relative inline-block text-base font-bold right-2 sm:text-xl text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
 				{trackEpisodeNum}
 			</span>
@@ -323,7 +323,7 @@ const PlayPauseButton: React.FC = () => {
 	return (
 		<React.Fragment>
 			<button
-				className="z-20 ml-4 mr-4 text-6xl lg:mr-0 2xl:mr-2 lg:ml-0"
+				className="z-20 ml-5 mr-4 text-6xl lg:mr-0 2xl:mr-2 lg:ml-0"
 				onClick={handlePlayPause}
 				role="switch"
 				aria-label="Play/Pause Button"
