@@ -3,17 +3,17 @@ import { StaticImage } from 'gatsby-plugin-image';
 
 const Hero: React.FC = () => {
 	return (
-		<section className="grid grid-rows-2 grid-cols-1 h-screenMinusPlayer">
+		<section className="grid grid-cols-1 grid-rows-2 h-screenMinusPlayer">
 			<StaticImage
 				src="../../images/herobg-house-of-commons-pitt.png"
 				alt="Background: Karl Anton Hickel's William Pitt addressing the House of Commons"
 				layout="fullWidth"
-				className="row-start-1 row-end-3 col-start-1 z-10"
+				className="z-10 col-start-1 row-start-1 row-end-3"
 			/>
-			<h1 className="row-start-1 row-end-3 col-start-1 z-20 w-min pr-4 pb-heroSmall sm:pb-hero justify-self-center self-center text-white font-display tracking-display text-heroSmall sm:text-hero indent-hero one-word-per-line text-shadow-xl">
+			<h1 className="z-20 self-center col-start-1 row-start-1 row-end-3 pr-4 text-white w-min pb-heroSmall sm:pb-hero justify-self-center font-display tracking-display text-heroSmall sm:text-hero indent-hero one-word-per-line text-shadow-xl">
 				Tory Stories
 			</h1>
-			<h2 className="row-start-2 row-end-3 col-start-1 z-20 pb-1 pr-2 self-end text-white font-body text-subHeroSmall sm:text-subHero text-right one-word-per-line text-shadow-xl">
+			<h2 className="z-20 self-end col-start-1 row-start-2 row-end-3 pb-1 pr-2 text-right text-white font-body text-subHeroSmall sm:text-subHero one-word-per-line text-shadow-xl">
 				The Martin Hutchinson Podcast
 			</h2>
 		</section>

@@ -126,7 +126,7 @@ const GatsbyCoverImage: React.FC<GatsbyCoverImageProps> = ({
 	trackTitle,
 }) => (
 	<GatsbyImage
-		className="bg-black col-start-1 col-end-1 row-start-1 row-end-1 z-20"
+		className="z-20 col-start-1 col-end-1 row-start-1 row-end-1 bg-black"
 		image={trackImage}
 		alt={trackTitle}
 	/>
@@ -153,7 +153,7 @@ const CoverImage: React.FC = () => {
 				>
 					<MemoizedGatsbyCoverImage {...{ trackImage, trackTitle }} />
 					<button
-						className="hidden lg:inline col-start-1 col-end-1 row-start-1 row-end-1 z-30 w-full opacity-20 hover:opacity-80 cursor-pointer"
+						className="z-30 hidden w-full col-start-1 col-end-1 row-start-1 row-end-1 cursor-pointer lg:inline opacity-20 hover:opacity-80"
 						onClick={handlePlay}
 						aria-label="Start playback"
 					>
@@ -172,15 +172,15 @@ const TrackInfo: React.FC = () => {
 	const { trackEpisodeNum, trackSlug, trackTitle } = useContext(TrackContext);
 
 	return (
-		<div className="z-20 w-auto whitespace-normal pl-24 absolute bottom-0 text-center md:bottom-auto md:whitespace-nowrap md:pl-0 lg:text-left lg:w-auto lg:whitespace-normal lg:static lg:contents">
-			<span className="relative right-2 font-bold text-base sm:text-xl inline-block text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
+		<div className="absolute bottom-0 z-20 w-auto pl-24 text-center whitespace-normal md:bottom-auto md:whitespace-nowrap md:pl-0 lg:text-left lg:w-auto lg:whitespace-normal lg:static lg:contents">
+			<span className="relative inline-block text-base font-bold right-2 sm:text-xl text-shadow font-display tracking-display kern-episode-num lg:static lg:right-auto lg:text-6xl lg:font-normal lg:flex lg:justify-center lg:items-center lg:mr-4">
 				{trackEpisodeNum}
 			</span>
 			<Link
 				to={trackSlug}
-				className="inline-block no-underline hover:underline hover:font-bold lg:flex justify-center flex-playerTrack items-center mr-2 xl:mr-4 2xl:mr-6"
+				className="items-center justify-center inline-block mr-2 no-underline hover:underline hover:font-bold lg:flex flex-playerTrack xl:mr-4 2xl:mr-6"
 			>
-				<h3 className="flex justify-center items-center pb-1 pt-1 font-body text-sm sm:text-lg leading-5 text-shadow">
+				<h3 className="flex items-center justify-center pt-1 pb-1 text-sm leading-5 font-body sm:text-lg text-shadow">
 					{trackTitle}
 				</h3>
 			</Link>
@@ -227,13 +227,13 @@ const PlayerStateControls: React.FC = () => {
 	return (
 		<div className="contents group">
 			<button
-				className="block md:hidden p-4 text-4xl cursor-pointer tooltip"
+				className="block p-4 text-4xl cursor-pointer md:hidden tooltip"
 				title="Player Controls"
 			>
 				<RiSoundModuleLine />
 			</button>
-			<div className="hidden group-hover:flex absolute w-auto right-0 bottom-24 bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
-				<div className="order-2 md:order-none flex justify-center items-center group relative">
+			<div className="absolute right-0 hidden w-auto group-hover:flex bottom-24 bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
+				<div className="relative flex items-center justify-center order-2 md:order-none group">
 					<button
 						onClick={handleToggleMuted}
 						className={'tooltip p-4 text-4xl cursor-pointer'}
@@ -264,7 +264,7 @@ const PlayerStateControls: React.FC = () => {
 						/>
 					</span>
 				</div>
-				<div className="order-3 md:order-none tooltip flex justify-center items-center group relative">
+				<div className="relative flex items-center justify-center order-3 md:order-none tooltip group">
 					<span
 						className={'tooltip text-4xl p-4'}
 						data-text={'Speed'}
@@ -298,10 +298,10 @@ const PlayerStateControls: React.FC = () => {
 				</div>
 				<Link
 					to={trackSlug}
-					className="order-1 md:order-none text-4xl md:mr-2 flex justify-center items-center"
+					className="flex items-center justify-center order-1 text-4xl md:order-none md:mr-2"
 					title="Episode Info and Subtitles"
 				>
-					<span className="tooltip p-4" data-text={'Info/Subs'}>
+					<span className="p-4 tooltip" data-text={'Info/Subs'}>
 						<RiInformationLine />
 					</span>
 				</Link>
@@ -323,7 +323,7 @@ const PlayPauseButton: React.FC = () => {
 	return (
 		<React.Fragment>
 			<button
-				className="z-20 text-6xl mr-4 lg:mr-0 2xl:mr-2 ml-4 lg:ml-0"
+				className="z-20 ml-4 mr-4 text-6xl lg:mr-0 2xl:mr-2 lg:ml-0"
 				onClick={handlePlayPause}
 				role="switch"
 				aria-label="Play/Pause Button"
@@ -407,7 +407,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 	return (
 		<React.Fragment>
 			<nav
-				className="flex flex-row fixed bottom-0 z-50 text-white bg-player w-full h-player justify-center"
+				className="fixed bottom-0 z-50 flex flex-row justify-center w-full text-white bg-player h-player"
 				role="navigation"
 				aria-label="Podcast player controls"
 			>

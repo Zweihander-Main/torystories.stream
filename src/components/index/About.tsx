@@ -34,21 +34,21 @@ const About: React.FC = () => {
 	const title = node.frontmatter?.title || '';
 
 	return (
-		<section className="bg-darkPurple bg-georgian-pattern text-center bg-fixed">
-			<div className="w-10/12 sm:w-8/12 md:w-7/12 xl:w-6/12 mx-auto pt-24 pb-24">
+		<section className="text-center bg-fixed bg-darkPurple bg-georgian-pattern">
+			<div className="w-10/12 pt-24 pb-24 mx-auto sm:w-8/12 md:w-7/12 xl:w-6/12">
 				<StaticImage
 					src="../../images/martin-hutchinson-colorized.png"
 					layout="fixed"
-					className="rounded-full mx-auto border-dullPurple border-8 shadow-2xl"
+					className="mx-auto border-8 rounded-full shadow-2xl border-dullPurple"
 					height={225}
 					width={225}
 					alt={title}
 				/>
-				<h2 className="font-display tracking-display text-3xl mt-4 text-shadow-sm">
+				<h2 className="mt-4 text-3xl font-display tracking-display text-shadow-sm">
 					{title}
 				</h2>
 				<div
-					className="font-body text-2xl text-shadow"
+					className="text-2xl font-body text-shadow"
 					dangerouslySetInnerHTML={{ __html: html }}
 				/>
 			</div>

@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
 	const footerMenus = footerMenusData?.allMarkdownRemark?.nodes || [];
 
 	return (
-		<footer className="grid items-center sm:items-start sm:justify-items-center mt-8 mb-24 grid-rows-3 grid-cols-1 sm:grid-rows-2 sm:grid-cols-2">
+		<footer className="grid items-center grid-cols-1 grid-rows-3 mt-8 mb-24 sm:items-start sm:justify-items-center sm:grid-rows-2 sm:grid-cols-2">
 			{footerMenus.map((menu, menuIndex) => {
 				const title = menu?.frontmatter?.title || '';
 				const mdLinks = menu?.frontmatter?.links || [];
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
 				}));
 				return <Menu key={title} {...{ title, links, menuIndex }} />;
 			})}
-			<p className="text-center self-start mt-8 col-span-1 sm:col-span-2 col-start-1 row-span-1 row-start-3 sm:row-start-2">
+			<p className="self-start col-span-1 col-start-1 row-span-1 row-start-3 mt-8 text-center sm:col-span-2 sm:row-start-2">
 				© {new Date().getFullYear()} Martin Hutchinson
 			</p>
 		</footer>

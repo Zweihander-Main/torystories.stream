@@ -55,7 +55,7 @@ const EpisodeTemplate: React.FC<
 	return (
 		<Layout hideFooter={true} showHomeButton={true}>
 			<SEO title={title} description={description} />
-			<div className="grid grid-cols-2 grid-rows-1 h-screenMinusPlayer fixed left-0 top-0">
+			<div className="fixed top-0 left-0 grid grid-cols-2 grid-rows-1 h-screenMinusPlayer">
 				<Subtitles
 					{...{
 						subtitlesArray,

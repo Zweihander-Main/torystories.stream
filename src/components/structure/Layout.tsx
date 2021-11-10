@@ -12,7 +12,7 @@ const Layout: React.FC<
 	LayoutProps & React.PropsWithChildren<Record<string, unknown>>
 > = ({ children, showHomeButton = false, hideFooter = false }) => {
 	return (
-		<div className="layout flex flex-col items-center bg-black text-white font-body mb-20">
+		<div className="flex flex-col items-center mb-20 text-white bg-black layout font-body">
 			{showHomeButton && (
 				<nav
 					role="navigation"

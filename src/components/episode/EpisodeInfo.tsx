@@ -49,7 +49,7 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 
 	return (
 		<li key={link}>
-			<Icon className="inline mr-2 ml-2" />
+			<Icon className="inline ml-2 mr-2" />
 			<a href={link}>{title}</a>
 		</li>
 	);
@@ -95,10 +95,10 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 
 	return (
 		<section
-			className="p-20 bg-georgian-pattern bg-darkPurple z-10 scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
+			className="z-10 p-20 bg-georgian-pattern bg-darkPurple scrollbar scrollbar-track-dullBlue scrollbar-thumb-brightBlue"
 			aria-label={'Episode Info'}
 		>
-			<h1 className="font-display tracking-display text-5xl mb-4 text-shadow-md">
+			<h1 className="mb-4 text-5xl font-display tracking-display text-shadow-md">
 				{title}
 				{(!isPlayerPlaying || trackId !== id) && (
 					<RiPlayCircleLine
@@ -107,7 +107,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					/>
 				)}
 			</h1>
-			<h2 className="font-display tracking-display mt-1 text-3xl leading-6 text-shadow">
+			<h2 className="mt-1 text-3xl leading-6 font-display tracking-display text-shadow">
 				{episodeNum !== -1 && `Episode ${episodeNum}`}
 			</h2>
 			<h3 className={'font-body text-sm mb-4 text-shadow'}>{date}</h3>
@@ -117,7 +117,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 			/>
 			{syndicationLinks.length > 0 && (
 				<React.Fragment>
-					<h3 className="font-display tracking-display text-2xl text-shadow">
+					<h3 className="text-2xl font-display tracking-display text-shadow">
 						Episode available at:
 					</h3>
 					<ul>

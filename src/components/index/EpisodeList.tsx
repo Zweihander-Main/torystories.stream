@@ -19,7 +19,7 @@ const GatsbyEpisodeImage: React.FC<GatsbyEpisodeImageProps> = ({
 		image={featuredImage}
 		alt={title}
 		objectFit={'cover'}
-		className="h-full self-center justify-self-center row-start-1 row-end-1 col-start-1 col-end-1 z-10"
+		className="z-10 self-center h-full col-start-1 col-end-1 row-start-1 row-end-1 justify-self-center"
 	/>
 );
 
@@ -75,10 +75,10 @@ const Episode: React.FC<EpisodeProps> = ({
 								: 'sm:col-start-1 sm:pl-12 sm:pr-4'
 						}`}
 					>
-						<h3 className="font-display text-5xl tracking-display pb-4 text-shadow">
+						<h3 className="pb-4 text-5xl font-display tracking-display text-shadow">
 							{title}
 						</h3>
-						<p className="font-body text-2xl">{blurb}</p>
+						<p className="text-2xl font-body">{blurb}</p>
 					</div>
 					<div
 						className={`col-start-1 col-span-2 lg:col-span-1 ${
@@ -90,7 +90,7 @@ const Episode: React.FC<EpisodeProps> = ({
 						{(!isPlayerPlaying || id !== trackId) && (
 							<RiPlayCircleLine
 								size="100%"
-								className="h-full self-center justify-self-center row-start-1 row-end-1 col-start-1 col-end-1 z-20 text-white opacity-20 hover:opacity-80 cursor-pointer"
+								className="z-20 self-center h-full col-start-1 col-end-1 row-start-1 row-end-1 text-white cursor-pointer justify-self-center opacity-20 hover:opacity-80"
 								onClick={(e) => handlePlayClick(e, id)}
 							/>
 						)}
