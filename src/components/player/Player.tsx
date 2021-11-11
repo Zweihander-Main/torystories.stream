@@ -132,7 +132,13 @@ const GatsbyCoverImage: React.FC<GatsbyCoverImageProps> = ({
 	/>
 );
 
-const MemoizedGatsbyCoverImage = memo(GatsbyCoverImage);
+const MemoizedGatsbyCoverImage = memo(
+	GatsbyCoverImage,
+	(prevProps, nextProps) =>
+		prevProps.trackTitle === prevProps.trackTitle &&
+		prevProps.trackImage?.images?.fallback?.src ===
+			nextProps.trackImage?.images?.fallback?.src
+);
 
 const CoverImage: React.FC = () => {
 	const { trackImage, trackTitle } = useContext(TrackContext);

@@ -26,6 +26,9 @@ module.exports = {
 			body: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
 		},
 		extend: {
+			brightness: {
+				35: '.35',
+			},
 			fontSize: {
 				hero: ['15vmax', '11vmax'],
 				heroSmall: ['22vmin', '17vmin'],

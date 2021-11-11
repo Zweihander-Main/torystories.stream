@@ -57,7 +57,7 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 
 const MemoizedSyndicationLink = memo(
 	SyndicationLink,
-	(prevProps, nextProps) => prevProps.link !== nextProps.link
+	(prevProps, nextProps) => prevProps.link === nextProps.link
 );
 
 type EpisodeInfoProps = {
@@ -167,4 +167,12 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 	);
 };
 
-export default EpisodeInfo;
+export default memo(
+	EpisodeInfo,
+	(prevProps, nextProps) =>
+		prevProps.id === nextProps.id &&
+		prevProps.title === nextProps.title &&
+		prevProps.episodeNum === nextProps.episodeNum &&
+		prevProps.date === nextProps.date &&
+		prevProps.html === nextProps.html
+);

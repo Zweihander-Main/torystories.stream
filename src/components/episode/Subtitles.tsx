@@ -63,8 +63,9 @@ const MemoizedSubtitleText: React.FC<SubtitleTextProps> = memo(
 	SubtitleText,
 	(prevProps, nextProps) =>
 		prevProps.currentSubIndex === nextProps.currentSubIndex &&
-		prevProps.subtitlesArray === nextProps.subtitlesArray &&
-		prevProps.shouldTrackCurSub === nextProps.shouldTrackCurSub
+		prevProps.shouldTrackCurSub === nextProps.shouldTrackCurSub &&
+		prevProps.subtitlesArray[0].text === nextProps.subtitlesArray[0].text &&
+		prevProps.subtitlesArray.length === nextProps.subtitlesArray.length
 );
 
 type BGImageProps = {
@@ -78,7 +79,7 @@ const BGImage: React.FC<BGImageProps> = ({ image, title }) => {
 			<GatsbyImage
 				image={image}
 				alt={title}
-				className="sticky top-0 z-0 col-span-1 col-start-1 row-span-1 row-start-1 transform-gpu opacity-40 h-screenMinusPlayerAndTabsSmall md:h-screenMinusPlayerAndTabs lg:h-screenMinusPlayer"
+				className="sticky top-0 z-0 col-span-1 col-start-1 row-span-1 row-start-1 brightness-35 transform-gpu h-screenMinusPlayerAndTabsSmall md:h-screenMinusPlayerAndTabs lg:h-screenMinusPlayer"
 				style={{
 					position: 'sticky',
 				}}
@@ -91,8 +92,9 @@ const BGImage: React.FC<BGImageProps> = ({ image, title }) => {
 const MemoizedBGImage = memo(
 	BGImage,
 	(prevProps, nextProps) =>
-		prevProps.image === nextProps.image &&
-		prevProps.title === nextProps.title
+		prevProps.title === nextProps.title &&
+		prevProps.image?.images?.fallback?.src ===
+			nextProps.image?.images?.fallback?.src
 );
 
 type SubtitlesProps = {
@@ -182,4 +184,12 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 	);
 };
 
-export default memo(Subtitles);
+export default memo(
+	Subtitles,
+	(prevProps, nextProps) =>
+		prevProps.isCurrentlySelectedInPlayer ===
+			nextProps.isCurrentlySelectedInPlayer &&
+		prevProps.title === nextProps.title &&
+		prevProps.subtitlesArray[0].text === nextProps.subtitlesArray[0].text &&
+		prevProps.subtitlesArray.length === nextProps.subtitlesArray.length
+);

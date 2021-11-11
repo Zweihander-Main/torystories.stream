@@ -20,7 +20,10 @@ export const pageQuery = graphql`
 				description
 				featuredImage {
 					childImageSharp {
-						gatsbyImageData(layout: FULL_WIDTH)
+						gatsbyImageData(
+							layout: FULL_WIDTH
+							placeholder: BLURRED
+						)
 					}
 				}
 				syndicationLinks

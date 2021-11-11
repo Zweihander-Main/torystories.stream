@@ -23,7 +23,13 @@ const GatsbyEpisodeImage: React.FC<GatsbyEpisodeImageProps> = ({
 	/>
 );
 
-const MemoizedGatsbyEpisodeImage = memo(GatsbyEpisodeImage);
+const MemoizedGatsbyEpisodeImage = memo(
+	GatsbyEpisodeImage,
+	(prevProps, nextProps) =>
+		prevProps.title === nextProps.title &&
+		prevProps.featuredImage?.images?.fallback?.src ===
+			nextProps.featuredImage?.images?.fallback?.src
+);
 
 type EpisodeProps = {
 	id: string;
@@ -116,7 +122,6 @@ const MemoizedEpisode = memo(
 	(prevProps, nextProps) =>
 		prevProps.id === nextProps.id &&
 		prevProps.title === nextProps.title &&
-		prevProps.featuredImage === nextProps.featuredImage &&
 		prevProps.blurb === nextProps.blurb &&
 		prevProps.episodeNum === nextProps.episodeNum &&
 		prevProps.slug === nextProps.slug &&
