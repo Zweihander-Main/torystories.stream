@@ -237,7 +237,7 @@ const PlayerStateControls: React.FC = () => {
 					<span
 						className={'tooltip p-4 text-3xl md:text-4xl'}
 						data-text={'Volume'}
-						title="Volume Button"
+						title="Volume Menu"
 						aria-checked={!isPlayerMuted}
 					>
 						{isPlayerMuted ? (
@@ -264,6 +264,8 @@ const PlayerStateControls: React.FC = () => {
 						<button
 							className="relative px-1.5 py-1 mx-auto text-sm border-2 border-brightBlue rounded cursor-pointer w-min top-1 hover:border-transparent hover:bg-brightBlue text-brightBlue hover:text-black"
 							onClick={handleToggleMuted}
+							title="Mute Button"
+							aria-pressed={isPlayerMuted}
 						>
 							{!isPlayerMuted ? 'Mute' : 'Unmute'}
 						</button>

@@ -64,22 +64,24 @@ describe('Session storage ', () => {
 	it('should change state after user changes it and preserve it on page load', () => {
 		cy.session('changeOnLoad', () => {
 			cy.visit('/');
-			cy.findByTitle('Volume Button').as('vol-button');
-			cy.get('@vol-button')
+			cy.findByTitle('Volume Menu').as('vol-menu');
+			cy.findByTitle('Volume Slider').as('vol-slider');
+			cy.findByTitle('Mute Button').as('mute-button');
+			cy.findByTitle('Playback Speed 1.5').as('playback-1.5');
+			cy.get('@vol-slider').parent().invoke('show').trigger('mouseover');
+			cy.get('@mute-button')
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'false');
-			cy.get('@vol-button')
+			cy.get('@mute-button')
 				.click()
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'true');
-			cy.findByTitle('Volume Slider').as('vol-slider');
 			cy.get('@vol-slider').parent().invoke('show').trigger('mouseover');
 			cy.get('@vol-slider')
 				.should('have.attr', 'value', 1)
 				.invoke('val', 0.25)
 				.trigger('input')
 				.should('have.attr', 'value', 0.25);
-			cy.findByTitle('Playback Speed 1.5').as('playback-1.5');
 			cy.get('@playback-1.5')
 				.parent()
 				.invoke('show')
@@ -105,11 +107,12 @@ describe('Session storage ', () => {
 			);
 
 			cy.visitAndSpyStorage('/', 'getItem');
-			cy.findByTitle('Volume Button')
+			cy.get('@vol-slider').parent().invoke('show').trigger('mouseover');
+			cy.get('@mute-button')
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'true');
-			cy.findByTitle('Volume Slider').should('have.attr', 'value', 0.25);
-			cy.findByTitle('Playback Speed 1.5')
+			cy.get('@vol-slider').should('have.attr', 'value', 0.25);
+			cy.get('@playback-1.5')
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'true');
 		});
