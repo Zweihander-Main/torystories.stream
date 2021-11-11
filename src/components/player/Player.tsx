@@ -355,7 +355,7 @@ const SeekBar: React.FC<SeekBarProps> = ({
 	setPlayedPercentage,
 	setIsSeeking,
 }) => {
-	const handleSeekMouseDown = () => {
+	const handlePointerDown = () => {
 		setIsSeeking(true);
 	};
 
@@ -365,7 +365,7 @@ const SeekBar: React.FC<SeekBarProps> = ({
 		setPlayedPercentage(parseFloat(e.target.value));
 	};
 
-	const handleSeekMouseUp: React.PointerEventHandler<HTMLInputElement> = (
+	const handlePointerUp: React.PointerEventHandler<HTMLInputElement> = (
 		e
 	) => {
 		const playedFraction = parseFloat((e.target as HTMLInputElement).value);
@@ -382,9 +382,9 @@ const SeekBar: React.FC<SeekBarProps> = ({
 			max={0.999999}
 			step="any"
 			value={playedPercentage}
-			onMouseDown={handleSeekMouseDown}
+			onPointerDown={handlePointerDown}
 			onChange={handleSeekChange}
-			onMouseUp={handleSeekMouseUp}
+			onPointerUp={handlePointerUp}
 			className={'z-20 w-full md:m-4 cursor-pointer'}
 			aria-label="Seek and progress slider"
 		/>
