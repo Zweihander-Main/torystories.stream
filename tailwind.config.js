@@ -48,6 +48,10 @@ module.exports = {
 				screenMinusPlayerSmall: `calc(100vh - ${playerHeightSmall})`,
 				screenMinusPlayerAndTabsSmall: `calc(100vh - ${playerHeightSmall} - ${mobileEpInfoTabsHeight})`,
 			},
+			width: {
+				playerTextMobile: 'calc(100vw - 22rem)',
+				playerTextMobileSmall: 'calc(100vw - 8rem)',
+			},
 			flex: {
 				playerTrack: '1 1 66rem',
 			},
