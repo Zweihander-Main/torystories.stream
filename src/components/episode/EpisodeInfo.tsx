@@ -155,7 +155,7 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 					</div>
 				)}
 			</div>
-			<p className="mt-8 text-center text-md lg:text-lg">
+			<p className="mt-8 mb-12 text-center text-md lg:mb-auto lg:text-lg">
 				© {new Date().getFullYear()} Martin Hutchinson
 			</p>
 		</section>
