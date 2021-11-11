@@ -8,7 +8,7 @@ describe('Subtitles ', () => {
 		cy.findByLabelText('Seek and progress slider')
 			.invoke('val', 0.5)
 			.trigger('input')
-			.trigger('mouseup')
+			.trigger('pointerup')
 			.invoke('val')
 			.then(parseFloat)
 			.should('be.gte', 0.5);
