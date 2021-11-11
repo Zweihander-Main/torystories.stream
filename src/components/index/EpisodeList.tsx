@@ -94,6 +94,7 @@ const Episode: React.FC<EpisodeProps> = ({
 							<button
 								className="z-20 self-center h-full col-start-1 col-end-1 row-start-1 row-end-1 text-white cursor-pointer justify-self-center opacity-20 hover:opacity-80"
 								onClick={(e) => handlePlayClick(e, id)}
+								aria-label={`Play Episode ${episodeNum}`}
 							>
 								<RiPlayCircleLine size="100%" />
 							</button>

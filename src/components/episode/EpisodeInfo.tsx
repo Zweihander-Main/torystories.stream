@@ -104,7 +104,10 @@ const EpisodeInfo: React.FC<EpisodeInfoProps> = ({
 			<h1 className="mb-4 text-3xl lg:text-4xl xl:text-5xl font-display tracking-display text-shadow-md">
 				{title}
 				{(!isPlayerPlaying || trackId !== id) && (
-					<button onClick={(e) => handlePlayClick(e, id)}>
+					<button
+						aria-label={`Play Episode ${episodeNum}`}
+						onClick={(e) => handlePlayClick(e, id)}
+					>
 						<RiPlayCircleLine className="pl-3 pr-3 relative bottom-0.5 box-content inline text-2xl lg:text-xl xl:text-4xl text-white opacity-70 hover:opacity-100 cursor-pointer" />
 					</button>
 				)}

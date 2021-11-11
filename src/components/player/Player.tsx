@@ -270,7 +270,7 @@ const PlayerStateControls: React.FC = () => {
 					<span
 						className={'tooltip text-3xl md:text-4xl p-4'}
 						data-text={'Speed'}
-						title="Playback Speed Button"
+						title="Playback Speed Menu"
 					>
 						<RiMusic2Line />
 					</span>
