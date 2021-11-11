@@ -78,8 +78,7 @@ const BGImage: React.FC<BGImageProps> = ({ image, title }) => {
 			<GatsbyImage
 				image={image}
 				alt={title}
-				className="sticky top-0 z-10 col-start-1 col-end-1 row-start-1 row-end-1 h-screenMinusPlayerAndTabsSmall md:h-screenMinusPlayerAndTabs lg:h-screenMinusPlayer opacity-40"
-				objectPosition={''}
+				className="sticky top-0 z-0 col-span-1 col-start-1 row-span-1 row-start-1 transform-gpu opacity-40 h-screenMinusPlayerAndTabsSmall md:h-screenMinusPlayerAndTabs lg:h-screenMinusPlayer"
 				style={{
 					position: 'sticky',
 				}}
