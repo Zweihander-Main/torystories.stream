@@ -30,12 +30,12 @@
 	}
 
 	.volume-vertical {
-		transform-origin: center center;
+		transform-origin: 2.5rem 1rem;
 		transform: rotate(-90deg);
 		position: relative;
-		bottom: -4rem;
+		bottom: -5rem;
 		margin-bottom: 8rem;
-		max-width: 8rem;
+		width: 8rem;
 		writing-mode: bt-lr;
 	}
 
@@ -62,5 +62,10 @@
 
 	a {
 		@apply underline hover:font-bold;
+	}
+
+	/* stylelint-disable-next-line selector-class-pattern */
+	.mobile-group:hover .mobile-group-hover\:flex {
+		display: flex;
 	}
 }

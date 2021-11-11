@@ -33,6 +33,9 @@ module.exports = {
 				subHeroSmall: ['7vmin', '6.4vmin'],
 				episodeNum: ['15vw'],
 			},
+			inset: {
+				playerMobileMenu: playerHeightSmall,
+			},
 			letterSpacing: {
 				display: '-0.035em',
 			},

@@ -225,33 +225,30 @@ const PlayerStateControls: React.FC = () => {
 		);
 
 	return (
-		<div className="contents group">
+		<div className="contents mobile-group">
 			<button
 				className="block p-4 text-3xl cursor-pointer md:text-4xl md:hidden tooltip"
 				title="Player Controls"
 			>
 				<RiSoundModuleLine />
 			</button>
-			<div className="absolute right-0 hidden w-auto group-hover:flex bottom-24 bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
+			<div className="absolute right-0 hidden w-auto mobile-group-hover:flex bottom-playerMobileMenu bg-player md:bottom-auto md:right-auto md:bg-none md:static md:group-hover:contents md:contents">
 				<div className="relative flex items-center justify-center order-2 md:order-none group">
-					<button
-						onClick={handleToggleMuted}
-						className={
-							'tooltip p-4 text-3xl md:text-4xl cursor-pointer'
-						}
+					<span
+						className={'tooltip p-4 text-3xl md:text-4xl'}
 						data-text={'Volume'}
 						title="Volume Button"
-						aria-pressed={isPlayerMuted}
+						aria-checked={!isPlayerMuted}
 					>
 						{isPlayerMuted ? (
 							<RiVolumeMuteLine />
 						) : (
 							<RiVolumeUpLine />
 						)}
-					</button>
+					</span>
 					<span
 						className={
-							'absolute bottom-full hidden hover:flex group-hover:flex bg-player w-16 justify-center pb-4 pt-4'
+							'absolute bottom-full hidden hover:flex group-hover:flex flex-col bg-player w-16 justify-center pb-4 pt-4'
 						}
 					>
 						<input
@@ -264,6 +261,12 @@ const PlayerStateControls: React.FC = () => {
 							className={'cursor-pointer volume-vertical'}
 							title="Volume Slider"
 						/>
+						<button
+							className="relative px-1.5 py-1 mx-auto text-sm border-2 border-brightBlue rounded cursor-pointer w-min top-1 hover:border-transparent hover:bg-brightBlue text-brightBlue hover:text-black"
+							onClick={handleToggleMuted}
+						>
+							{!isPlayerMuted ? 'Mute' : 'Unmute'}
+						</button>
 					</span>
 				</div>
 				<div className="relative flex items-center justify-center order-3 md:order-none tooltip group">

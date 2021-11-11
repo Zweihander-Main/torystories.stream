@@ -3933,15 +3933,18 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type FooterMenusQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<(
+        Pick<MarkdownRemarkFrontmatter, 'title'>
+        & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
+      )> }> } };
+
 type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
 type EpisodeBySlugQueryVariables = Exact<{
   path: Scalars['String'];
@@ -3955,14 +3958,6 @@ type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
       & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
     )> }
   )> };
-
-type FooterMenusQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<(
-        Pick<MarkdownRemarkFrontmatter, 'title'>
-        & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
-      )> }> } };
 
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4000,6 +3995,11 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
