@@ -49,7 +49,7 @@ module.exports = {
 				screenMinusPlayerAndTabsSmall: `calc(100vh - ${playerHeightSmall} - ${mobileEpInfoTabsHeight})`,
 			},
 			flex: {
-				playerTrack: '1 1 50rem',
+				playerTrack: '1 1 66rem',
 			},
 			gridTemplateColumns: {
 				episodesEven: '1fr 5fr 25rem',

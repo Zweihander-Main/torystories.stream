@@ -178,7 +178,7 @@ const TrackInfo: React.FC = () => {
 			</span>
 			<Link
 				to={trackSlug}
-				className="items-center justify-center inline-block mr-2 no-underline hover:underline hover:font-bold lg:flex flex-playerTrack xl:mr-4 2xl:mr-6"
+				className="items-center justify-center inline-block mr-2 no-underline hover:underline hover:font-bold lg:flex lg:flex-playerTrack xl:mr-4 2xl:mr-6"
 			>
 				<h3 className="flex items-center justify-center pt-1 pb-1 text-sm leading-5 font-body sm:text-lg text-shadow">
 					{trackTitle}
