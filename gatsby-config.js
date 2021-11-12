@@ -178,7 +178,8 @@ module.exports = {
 																	.frontmatter
 																	.featuredImage
 																	.childImageSharp
-																	.fixed.src
+																	.fallback
+																	.src
 														),
 													},
 												},
@@ -213,9 +214,12 @@ module.exports = {
 									  date
 									  featuredImage {
 										childImageSharp {
-										  fixed(width: 1500, quality: 50) {
-										    src
-										  }
+											gatsbyImageData(
+												layout: FIXED
+												width: 1500
+												pngOptions: {quality: 50}
+												jpgOptions: {quality: 50}
+											)
 										}
 									  }
 									  audioFile {
