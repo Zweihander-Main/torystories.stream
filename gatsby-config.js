@@ -32,19 +32,20 @@ module.exports = {
 		`gatsby-plugin-image`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
-		// {
-		// 	resolve: `gatsby-plugin-manifest`,
-		// 	options: {
-		// 		name: `Tory Stories`,
-		// 		short_name: `Tory Stories`,
-		// 		start_url: `/`,
-		// 		lang: `en`,
-		// 		background_color: `#260101`,
-		// 		theme_color: `#260101`,
-		// 		display: `minimal-ui`,
-		// 		icon: `src/images/torystoriesicon.png`, // This path is relative to the root of the site.
-		// 	},
-		// },
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: `Tory Stories: The Martin Hutchinson Podcast`,
+				short_name: `Tory Stories`,
+				description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
+				start_url: `/`,
+				lang: `en`,
+				background_color: `#372248`,
+				theme_color: `#372248`,
+				display: `standalone`,
+				icon: `src/images/torystories-icon.png`, // This path is relative to the root of the site.
+			},
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
