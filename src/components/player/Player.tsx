@@ -12,6 +12,7 @@ import {
 	RiMusic2Line,
 	RiInformationLine,
 	RiSoundModuleLine,
+	RiLoader3Line,
 } from 'react-icons/ri';
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
 import PlayerStateContext from 'contexts/PlayerStateContext';
@@ -38,6 +39,7 @@ const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 		playerPlaybackRate,
 		isPlayerPlaying,
 		setIsPlayerPlaying,
+		setIsPlayerBuffering,
 	} = useContext(PlayerStateContext);
 
 	const handleTrackEnded = useCallback(() => {
@@ -74,6 +76,14 @@ const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 		setIsPlayerPlaying(false);
 	}, [setIsPlayerPlaying]);
 
+	const handleBufferStart = useCallback(() => {
+		setIsPlayerBuffering(true);
+	}, [setIsPlayerBuffering]);
+
+	const handleBufferEnd = useCallback(() => {
+		setIsPlayerBuffering(false);
+	}, [setIsPlayerBuffering]);
+
 	type onErrorParam = Parameters<
 		Exclude<BaseReactPlayerProps['onError'], undefined>
 	>[0];
@@ -100,6 +110,8 @@ const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
 			onPlay={handlePlay}
 			onPause={handlePause}
 			onEnded={handleTrackEnded}
+			onBuffer={handleBufferStart}
+			onBufferEnd={handleBufferEnd}
 			onError={handleError}
 			onProgress={handlePlayerProgress}
 			config={{
@@ -326,7 +338,7 @@ const PlayerStateControls: React.FC = () => {
 const MemoizedPlayerStateControls = memo(PlayerStateControls);
 
 const PlayPauseButton: React.FC = () => {
-	const { isPlayerPlaying, setIsPlayerPlaying } =
+	const { isPlayerPlaying, setIsPlayerPlaying, isPlayerBuffering } =
 		useContext(PlayerStateContext);
 
 	const handlePlayPause = useCallback(() => {
@@ -342,7 +354,13 @@ const PlayPauseButton: React.FC = () => {
 				aria-label="Play/Pause Button"
 				aria-checked={isPlayerPlaying}
 			>
-				{isPlayerPlaying ? <RiPauseCircleLine /> : <RiPlayCircleLine />}
+				{isPlayerBuffering ? (
+					<RiLoader3Line className="animate-spin" />
+				) : isPlayerPlaying ? (
+					<RiPauseCircleLine />
+				) : (
+					<RiPlayCircleLine />
+				)}
 			</button>
 		</React.Fragment>
 	);

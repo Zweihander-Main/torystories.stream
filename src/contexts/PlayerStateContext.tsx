@@ -8,6 +8,8 @@ type PlayerStateContextProps = {
 	setPlayerVolume: (volume: number) => void;
 	isPlayerMuted: boolean;
 	setIsPlayerMuted: (muted: boolean) => void;
+	isPlayerBuffering: boolean;
+	setIsPlayerBuffering: (muted: boolean) => void;
 	playerPlaybackRate: number;
 	setPlayerPlaybackRate: (rate: number) => void;
 };
@@ -19,6 +21,8 @@ const PlayerStateContext = React.createContext<PlayerStateContextProps>({
 	setPlayerVolume: () => undefined,
 	isPlayerMuted: false,
 	setIsPlayerMuted: () => undefined,
+	isPlayerBuffering: false,
+	setIsPlayerBuffering: () => undefined,
 	playerPlaybackRate: 1.0,
 	setPlayerPlaybackRate: () => undefined,
 });
@@ -29,6 +33,7 @@ export const PlayerStateProvider: React.FC = ({ children }) => {
 	const [isPlayerPlaying, setIsPlayerPlaying] = useState(false);
 	const [playerVolume, setPlayerVolume] = useState(1);
 	const [isPlayerMuted, setIsPlayerMuted] = useState(false);
+	const [isPlayerBuffering, setIsPlayerBuffering] = useState(false);
 	const [playerPlaybackRate, setPlayerPlaybackRate] = useState(1.0);
 
 	const { loadSavedState, savePlayerState } = useContext(StorageContext);
@@ -60,6 +65,8 @@ export const PlayerStateProvider: React.FC = ({ children }) => {
 				setIsPlayerMuted,
 				playerPlaybackRate,
 				setPlayerPlaybackRate,
+				isPlayerBuffering,
+				setIsPlayerBuffering,
 			}}
 		>
 			{children}
