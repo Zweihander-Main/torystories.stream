@@ -14,11 +14,9 @@
 -   Cypress + Axe
 -   NetlifyCMS
 
-## Dev notes
-
--   Second episode will need some UX care to make switching more seamless
-
 ## Possible improvements
+
+-   When navigating directly to an episode page, the player is set to play the most recent episode rather than the episode navigated to.
 
 ## License
 

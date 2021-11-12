@@ -5,6 +5,7 @@ module.exports = {
 		subHero: `The Martin Hutchinson Podcast`,
 		description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
 		author: `Martin Hutchinson`,
+		siteUrl: `https://www.torystories.stream/`,
 	},
 	flags: {
 		DEV_SSR: true,
@@ -63,6 +64,122 @@ module.exports = {
 			options: {
 				path: `${__dirname}/content/footerMenus`,
 				name: `footerMenus`,
+			},
+		},
+		{
+			resolve: `gatsby-plugin-feed`,
+			options: {
+				query: `
+				{
+					site {
+					siteMetadata {
+						title
+						description
+						siteUrl
+						site_url: siteUrl
+					}
+					}
+				}
+				`,
+				setup: (options) => ({
+					...options,
+					custom_namespaces: {
+						itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
+					},
+					custom_elements: [
+						{ 'itunes:explicit': 'no' },
+						{
+							'itunes:category': [
+								{
+									_attr: {
+										text: 'Education',
+									},
+								},
+							],
+						},
+						{
+							'itunes:subtitle':
+								'The Tory achievements of 1660 - 1832, free of Whiggish prejudice!',
+						},
+						{
+							'itunes:summary':
+								'The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!',
+						},
+						{ 'itunes:author': 'Martin Hutchinson' },
+						{
+							'itunes:image': {
+								_attr: {
+									href: 'https://www.torystories.stream/images/torystories-cover.png',
+								},
+							},
+						},
+					],
+				}),
+				feeds: [
+					{
+						serialize: ({ query: { site, allMarkdownRemark } }) => {
+							return allMarkdownRemark.edges.map((edge) => {
+								return Object.assign(
+									{},
+									edge.node.frontmatter,
+									{
+										description:
+											edge.node.frontmatter.description ||
+											edge.node.excerpt,
+										date: edge.node.frontmatter.date,
+										url: encodeURI(
+											site.siteMetadata.siteUrl +
+												edge.node.fields.slug
+										),
+										author: 'Martin Hutchinson',
+										guid: encodeURI(
+											site.siteMetadata.siteUrl +
+												edge.node.fields.slug
+										),
+										custom_elements: [
+											{
+												'content:encoded':
+													edge.node.html,
+											},
+										],
+									}
+								);
+							});
+						},
+						query: `
+                            {
+                              allMarkdownRemark(
+                                sort: { order: DESC, fields: [frontmatter___date] },
+					            filter: {
+					            	fields: { sourceInstanceName: { eq: "episodes" } }
+					            }
+                              ) {
+                                edges {
+                                  node {
+                                    excerpt(pruneLength: 160)
+                                    html
+                                    fields { slug }
+                                    frontmatter {
+                                      title
+									  description
+                                      date
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          `,
+						output: '/rss.xml',
+						title: 'Tory Stories: The Martin Hutchinson Podcast',
+						feed_url: 'https://www.torystories.stream/rss.xml',
+						site_url: 'https://www.torystories.stream/',
+						image_url:
+							'https://www.torystories.stream/images/torystories-cover.png',
+						language: 'en',
+						match: '^/episodes/',
+						copyright: `${new Date().getFullYear()} Martin Hutchinson`,
+					},
+				],
 			},
 		},
 		`gatsby-transformer-remark`,
