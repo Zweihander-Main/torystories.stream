@@ -9,7 +9,7 @@ type PlayerStateContextProps = {
 	isPlayerMuted: boolean;
 	setIsPlayerMuted: (muted: boolean) => void;
 	isPlayerBuffering: boolean;
-	setIsPlayerBuffering: (muted: boolean) => void;
+	setIsPlayerBuffering: (buffering: boolean) => void;
 	playerPlaybackRate: number;
 	setPlayerPlaybackRate: (rate: number) => void;
 };
