@@ -176,7 +176,8 @@ module.exports = {
 																edge.node
 																	.frontmatter
 																	.featuredImage
-																	.publicURL
+																	.childImageSharp
+																	.fixed.src
 														),
 													},
 												},
@@ -210,7 +211,11 @@ module.exports = {
 									  description
 									  date
 									  featuredImage {
-										publicURL
+										childImageSharp {
+										  fixed(width: 1500, quality: 50) {
+										    src
+										  }
+										}
 									  }
 									  audioFile {
 										publicURL
@@ -233,7 +238,7 @@ module.exports = {
 						feed_url: 'https://www.torystories.stream/rss.xml',
 						site_url: 'https://www.torystories.stream/',
 						image_url:
-							'https://www.torystories.stream/images/torystories-cover.png',
+							'https://www.torystories.stream/images/torystories-cover-144.png',
 						language: 'en',
 						match: '^/episodes/',
 						copyright: `${new Date().getFullYear()} Martin Hutchinson`,
