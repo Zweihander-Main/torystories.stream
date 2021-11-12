@@ -8,6 +8,7 @@ const path = require('path');
 const fs = require('fs');
 const { createFilePath } = require('gatsby-source-filesystem');
 const webvtt = require('node-webvtt');
+const mm = require('music-metadata');
 
 const hasPage = (edge) => {
 	switch (edge.node.fields.sourceInstanceName) {
@@ -76,6 +77,25 @@ const parseSubtitles = (subsFile) => {
 	}
 };
 
+const parseAudioFile = async (audioFile) => {
+	try {
+		const metadata = await mm.parseFile(audioFile, {
+			duration: true,
+			skipCovers: true,
+		});
+		const durationSeconds = metadata?.format?.duration;
+		if (durationSeconds) {
+			const durationString = new Date(1000 * parseFloat(durationSeconds))
+				.toISOString()
+				.substr(11, 8); // Will break at 25 hours
+			return { durationSeconds, durationString };
+		}
+	} catch (error) {
+		console.error(error.message);
+	}
+	return { durationSeconds: 0, durationString: '00:00:00' };
+};
+
 exports.createPages = ({ actions, graphql }) => {
 	const { createPage } = actions;
 	return graphql(`
@@ -94,6 +114,9 @@ exports.createPages = ({ actions, graphql }) => {
 						frontmatter {
 							title
 							subtitles {
+								absolutePath
+							}
+							audioFile {
 								absolutePath
 							}
 						}
@@ -152,6 +175,23 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 			name: `sourceInstanceName`,
 			node,
 			value: sourceInstanceName,
+		});
+	} else if (
+		node.internal.type === 'File' &&
+		node?.sourceInstanceName === 'episodes' &&
+		node.internal?.mediaType.includes('audio')
+	) {
+		parseAudioFile(node.absolutePath).then((audioData) => {
+			createNodeField({
+				name: 'durationSeconds',
+				node,
+				value: audioData.durationSeconds,
+			});
+			createNodeField({
+				name: 'durationString',
+				node,
+				value: audioData.durationString,
+			});
 		});
 	}
 };

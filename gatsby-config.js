@@ -76,6 +76,7 @@ module.exports = {
 						title
 						description
 						siteUrl
+						author
 						site_url: siteUrl
 					}
 					}
@@ -107,6 +108,12 @@ module.exports = {
 						},
 						{ 'itunes:author': 'Martin Hutchinson' },
 						{
+							'itunes:owner': [
+								{ 'itunes:name': 'Martin Hutchinson' },
+								{ 'itunes:email': 'itunes@tbwns.com' },
+							],
+						},
+						{
 							'itunes:image': {
 								_attr: {
 									href: 'https://www.torystories.stream/images/torystories-cover.png',
@@ -119,27 +126,66 @@ module.exports = {
 					{
 						serialize: ({ query: { site, allMarkdownRemark } }) => {
 							return allMarkdownRemark.edges.map((edge) => {
+								const desc =
+									edge.node.frontmatter.description ||
+									edge.node.excerpt;
 								return Object.assign(
 									{},
 									edge.node.frontmatter,
 									{
-										description:
-											edge.node.frontmatter.description ||
-											edge.node.excerpt,
+										description: desc,
 										date: edge.node.frontmatter.date,
 										url: encodeURI(
 											site.siteMetadata.siteUrl +
 												edge.node.fields.slug
 										),
-										author: 'Martin Hutchinson',
+										author: site.siteMetadata.author,
 										guid: encodeURI(
 											site.siteMetadata.siteUrl +
 												edge.node.fields.slug
 										),
+										enclosure: {
+											url: encodeURI(
+												site.siteMetadata.siteUrl +
+													edge.node.frontmatter
+														.audioFile.publicURL
+											),
+											size: edge.node.frontmatter
+												.audioFile.size,
+											type: edge.node.frontmatter
+												.audioFile.internal.mediaType,
+										},
 										custom_elements: [
 											{
 												'content:encoded':
 													edge.node.html,
+											},
+											{
+												'itunes:author':
+													site.siteMetadata.author,
+											},
+											{
+												'itunes:subtitle': desc,
+											},
+											{
+												'itunes:image': {
+													_attr: {
+														href: encodeURI(
+															site.siteMetadata
+																.siteUrl +
+																edge.node
+																	.frontmatter
+																	.featuredImage
+																	.publicURL
+														),
+													},
+												},
+											},
+											{
+												'itunes:duration':
+													edge.node.frontmatter
+														.audioFile.fields
+														.durationString,
 											},
 										],
 									}
@@ -147,28 +193,41 @@ module.exports = {
 							});
 						},
 						query: `
-                            {
-                              allMarkdownRemark(
-                                sort: { order: DESC, fields: [frontmatter___date] },
-					            filter: {
-					            	fields: { sourceInstanceName: { eq: "episodes" } }
-					            }
-                              ) {
-                                edges {
-                                  node {
-                                    excerpt(pruneLength: 160)
-                                    html
-                                    fields { slug }
-                                    frontmatter {
-                                      title
+							{
+							  allMarkdownRemark(
+								sort: { order: DESC, fields: [frontmatter___date] },
+								filter: {
+									fields: { sourceInstanceName: { eq: "episodes" } }
+								}
+							  ) {
+								edges {
+								  node {
+									excerpt(pruneLength: 160)
+									html
+									fields { slug }
+									frontmatter {
+									  title
 									  description
-                                      date
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          `,
+									  date
+									  featuredImage {
+										publicURL
+									  }
+									  audioFile {
+										publicURL
+										size
+										fields {
+										  durationString
+										}
+										internal {
+										  mediaType
+										}
+									  }
+									}
+								  }
+								}
+							  }
+							}
+						  `,
 						output: '/rss.xml',
 						title: 'Tory Stories: The Martin Hutchinson Podcast',
 						feed_url: 'https://www.torystories.stream/rss.xml',

@@ -68,6 +68,7 @@ type File = Node & {
   readonly birthtimeMs: Maybe<Scalars['Float']>;
   readonly blksize: Maybe<Scalars['Int']>;
   readonly blocks: Maybe<Scalars['Int']>;
+  readonly fields: Maybe<FileFields>;
   /** Copy file to static directory and return public url to it */
   readonly publicURL: Maybe<Scalars['String']>;
   /** Returns all children nodes filtered by type ImageSharp */
@@ -159,6 +160,11 @@ type Internal = {
   readonly type: Scalars['String'];
 };
 
+
+type FileFields = {
+  readonly durationSeconds: Maybe<Scalars['Float']>;
+  readonly durationString: Maybe<Scalars['String']>;
+};
 
 type Directory = Node & {
   readonly sourceInstanceName: Scalars['String'];
@@ -776,6 +782,7 @@ type Query_fileArgs = {
   birthtimeMs: Maybe<FloatQueryOperatorInput>;
   blksize: Maybe<IntQueryOperatorInput>;
   blocks: Maybe<IntQueryOperatorInput>;
+  fields: Maybe<FileFieldsFilterInput>;
   publicURL: Maybe<StringQueryOperatorInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
@@ -1043,6 +1050,11 @@ type FloatQueryOperatorInput = {
   readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
 };
 
+type FileFieldsFilterInput = {
+  readonly durationSeconds: Maybe<FloatQueryOperatorInput>;
+  readonly durationString: Maybe<StringQueryOperatorInput>;
+};
+
 type ImageSharpFilterListInput = {
   readonly elemMatch: Maybe<ImageSharpFilterInput>;
 };
@@ -1219,6 +1231,7 @@ type FileFilterInput = {
   readonly birthtimeMs: Maybe<FloatQueryOperatorInput>;
   readonly blksize: Maybe<IntQueryOperatorInput>;
   readonly blocks: Maybe<IntQueryOperatorInput>;
+  readonly fields: Maybe<FileFieldsFilterInput>;
   readonly publicURL: Maybe<StringQueryOperatorInput>;
   readonly childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   readonly childImageSharp: Maybe<ImageSharpFilterInput>;
@@ -1340,6 +1353,8 @@ type FileFieldsEnum =
   | 'birthtimeMs'
   | 'blksize'
   | 'blocks'
+  | 'fields.durationSeconds'
+  | 'fields.durationString'
   | 'publicURL'
   | 'childrenImageSharp'
   | 'childrenImageSharp.fixed.base64'
@@ -3577,6 +3592,8 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.featuredImage.birthtimeMs'
   | 'frontmatter.featuredImage.blksize'
   | 'frontmatter.featuredImage.blocks'
+  | 'frontmatter.featuredImage.fields.durationSeconds'
+  | 'frontmatter.featuredImage.fields.durationString'
   | 'frontmatter.featuredImage.publicURL'
   | 'frontmatter.featuredImage.childrenImageSharp'
   | 'frontmatter.featuredImage.childrenImageSharp.gatsbyImageData'
@@ -3655,6 +3672,8 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.audioFile.birthtimeMs'
   | 'frontmatter.audioFile.blksize'
   | 'frontmatter.audioFile.blocks'
+  | 'frontmatter.audioFile.fields.durationSeconds'
+  | 'frontmatter.audioFile.fields.durationString'
   | 'frontmatter.audioFile.publicURL'
   | 'frontmatter.audioFile.childrenImageSharp'
   | 'frontmatter.audioFile.childrenImageSharp.gatsbyImageData'
@@ -3734,6 +3753,8 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.subtitles.birthtimeMs'
   | 'frontmatter.subtitles.blksize'
   | 'frontmatter.subtitles.blocks'
+  | 'frontmatter.subtitles.fields.durationSeconds'
+  | 'frontmatter.subtitles.fields.durationString'
   | 'frontmatter.subtitles.publicURL'
   | 'frontmatter.subtitles.childrenImageSharp'
   | 'frontmatter.subtitles.childrenImageSharp.gatsbyImageData'
@@ -3936,6 +3957,11 @@ type FooterMenusQuery = { readonly allMarkdownRemark: { readonly nodes: Readonly
         & { readonly links: Maybe<ReadonlyArray<Maybe<Pick<MarkdownRemarkFrontmatterLinks, 'display' | 'url'>>>> }
       )> }> } };
 
+type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
+
 type EpisodeListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3946,29 +3972,6 @@ type EpisodeListQuery = { readonly allMarkdownRemark: { readonly edges: Readonly
           & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }>, readonly audioFile: Maybe<Pick<File, 'publicURL'>> }
         )>, readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>> }
       ) }> } };
-
-type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
-
-type EpisodeBySlugQueryVariables = Exact<{
-  path: Scalars['String'];
-}>;
-
-
-type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
-      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
-    )> }
-  )> };
-
-type DefaultEpisodeIDQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type DefaultEpisodeIDQueryQuery = { readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: Pick<MarkdownRemark, 'id'> }> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3995,6 +3998,24 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type SEOSiteMetadataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOSiteMetadataQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type EpisodeBySlugQueryVariables = Exact<{
+  path: Scalars['String'];
+}>;
+
+
+type EpisodeBySlugQuery = { readonly markdownRemark: Maybe<(
+    Pick<MarkdownRemark, 'id' | 'excerpt' | 'html'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MarkdownRemarkFrontmatter, 'title' | 'episodeNum' | 'date' | 'description' | 'syndicationLinks'>
+      & { readonly featuredImage: Maybe<{ readonly childImageSharp: Maybe<Pick<ImageSharp, 'gatsbyImageData'>> }> }
+    )> }
+  )> };
 
 type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
