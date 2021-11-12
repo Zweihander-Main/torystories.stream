@@ -178,6 +178,8 @@ module.exports = {
 																	.frontmatter
 																	.featuredImage
 																	.childImageSharp
+																	.gatsbyImageData
+																	.images
 																	.fallback
 																	.src
 														),
@@ -291,12 +293,10 @@ module.exports = {
 					const allPages = queryData.allSitePage.nodes;
 					const allEpNodes = queryData.allMarkdownRemark.edges;
 					const epNodeMap = allEpNodes.reduce((acc, { node }) => {
-						console.log(node);
 						const slug = node.fields.slug;
 						acc[slug] = node.frontmatter.featuredImage;
 						return acc;
 					}, {});
-					console.log(epNodeMap);
 					const curTime = new Date().toISOString();
 					return allPages.map((page) => {
 						if (epNodeMap[page.path]) {
