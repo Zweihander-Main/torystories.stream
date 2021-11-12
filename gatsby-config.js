@@ -253,6 +253,66 @@ module.exports = {
 		},
 		`gatsby-transformer-remark`,
 		`gatsby-plugin-catch-links`,
+		{
+			resolve: 'gatsby-plugin-sitemap',
+			options: {
+				query: `
+				{
+  					allSitePage {
+						nodes {
+	  						path
+						}
+  					}
+  					site {
+						siteMetadata {
+	  						siteUrl
+						}
+  					}
+  					allMarkdownRemark(filter: {fields: {sourceInstanceName: {eq: "episodes"}}}) {
+						edges {
+	  						node {
+								frontmatter {
+		  							featuredImage {
+										mtime
+		  							}
+								}
+								fields {
+									slug
+								}
+	  						}
+						}
+  					}
+				}
+				`,
+				resolvePages: (queryData) => {
+					/* Logic: Featured image modified time should be last time
+					an episode was modified. For all other pages, use the
+					current time. */
+					const allPages = queryData.allSitePage.nodes;
+					const allEpNodes = queryData.allMarkdownRemark.edges;
+					const epNodeMap = allEpNodes.reduce((acc, { node }) => {
+						console.log(node);
+						const slug = node.fields.slug;
+						acc[slug] = node.frontmatter.featuredImage;
+						return acc;
+					}, {});
+					console.log(epNodeMap);
+					const curTime = new Date().toISOString();
+					return allPages.map((page) => {
+						if (epNodeMap[page.path]) {
+							return { ...page, ...epNodeMap[page.path] };
+						}
+						return { ...page, mtime: curTime };
+					});
+				},
+				serialize: ({ path, mtime }) => {
+					return {
+						url: path,
+						lastmod: mtime,
+					};
+				},
+			},
+		},
 		`gatsby-plugin-netlify-cms`, // should be last in the array or close to it
 		{
 			resolve: `gatsby-plugin-typegen`,
