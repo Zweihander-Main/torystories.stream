@@ -1,9 +1,6 @@
 ---
-name: Run E2E tests on new code
+name: Run E2E tests on new code in PR
 'on':
-  push:
-    branches:
-      - master
   pull_request: {}
 jobs:
   cypress-run:
