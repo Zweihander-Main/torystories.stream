@@ -18,7 +18,7 @@ jobs:
           ref: master
           check-name: cypress-run
           repo-token: ${{ secrets.REPO_GITHUB_TOKEN }}
-          wait-interval: 600
+          wait-interval: 30
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
