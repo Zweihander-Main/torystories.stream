@@ -4,8 +4,10 @@ describe('Subtitles ', () => {
 		cy.findByTitle(/Episode Info and Subtitles/).click();
 	});
 	it('change as player is playing', () => {
-		cy.findByLabelText('Start playback').click();
 		cy.findByLabelText('Seek and progress slider').as('slider');
+		cy.findByLabelText('Start playback').as('playbutton');
+		cy.get('@slider').invoke('val').should('eq', '0');
+		cy.get('@playbutton').click();
 		cy.get('@slider')
 			.invoke('val', 0.5)
 			.trigger('input')
