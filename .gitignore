@@ -164,3 +164,6 @@ cypress/results/*
 cypress/reports/*
 cypress/screenshots/*
 cypress/videos/*
+
+# TypeGen generated files (changes between dev and build so not worth it)
+src/__generated__/*
