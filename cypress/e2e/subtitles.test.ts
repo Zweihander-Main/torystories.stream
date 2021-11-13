@@ -1,6 +1,6 @@
 describe('Subtitles ', () => {
 	beforeEach(() => {
-		cy.visit('/');
+		cy.visitAndSpyStorage('/', 'getItem');
 		cy.findByTitle(/Episode Info and Subtitles/).click();
 	});
 	it('change as player is playing', () => {
