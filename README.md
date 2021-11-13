@@ -19,21 +19,24 @@
 
 ### Notes:
 
--   `master` branch is protected from merges without a PR and E2E passing
--   Netlify builds from `master`
+-   Netlify builds from `netlify`
+    -   `netlify` branch is protected from push/merge without E2E test passing
+    -   NetlifyCMS and netlify preview deploys working from `master` branch
 
 ### Workflow for development:
 
-    1. Push to `dev` branch
-    2. PR automatically created
-    3. E2E tests run on PR
-    4. If passed, branch merges into `master`
+    1. Pre-commit hooks run on code: all jest tests and lint runners
+    2. Push to `master` branch
+    3. E2E tests run on new code
+    4. If passed, branch pushed into `netlify`
 
 ### Workflow for NetlifyCMS:
 
-    1. PR created in `dev`
-    2. Preview deploys and E2E tests run on PR
+    1. PR created in `master`
+    2. Preview deploys run on PR
     3. PR manually merged or merged through UI
+    4. E2E tests run on new code
+    5. If passed, branch pushed into `netlify`
 
 ## Scripts
 
