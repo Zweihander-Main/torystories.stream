@@ -59,6 +59,16 @@
 
 -   When navigating directly to an episode page, the player is set to play the most recent episode rather than the episode navigated to.
 
+## Available for Hire
+
+I'm available for freelance, contracts, and consulting both remotely and in the Hudson Valley, NY (USA) area. [Some more about me](https://www.zweisolutions.com/about.html) and [what I can do for you](https://www.zweisolutions.com/services.html).
+
+Feel free to drop me a message at:
+
+```
+hi [a+] zweisolutions {●} com
+```
+
 ## License
 
 Code (outside the `/content` and `/static/docs` folders) is licensed under [MIT](./LICENSE)
