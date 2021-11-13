@@ -1,9 +1,9 @@
 ---
-name: Run E2E tests on new code in PR
+name: Run E2E tests on new code in master
 'on':
   push:
     branches:
-      - masters
+      - master
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
