@@ -5,13 +5,23 @@ describe('Subtitles ', () => {
 	});
 	it('change as player is playing', () => {
 		cy.findByLabelText('Start playback').click();
-		cy.findByLabelText('Seek and progress slider')
+		cy.findByLabelText('Seek and progress slider').as('slider');
+		cy.get('@slider')
 			.invoke('val', 0.5)
 			.trigger('input')
-			.trigger('pointerup')
+			.trigger('pointerup');
+		cy.get('@slider', { timeout: 10000 })
 			.invoke('val')
-			.then(parseFloat)
-			.should('be.gte', 0.5);
+			.should((val) => {
+				let valNum;
+				if (typeof val === 'string') {
+					valNum = parseFloat(val);
+					expect(valNum).to.be.gte(0.5);
+				} else {
+					valNum = val;
+					expect(valNum).to.be.gte(0.5);
+				}
+			});
 		cy.get(
 			'[aria-label="Subtitle Scrolling Text"] > [aria-selected="true"]'
 		).as('initial-sub');
@@ -22,5 +32,4 @@ describe('Subtitles ', () => {
 		);
 	});
 });
-
 export {};
