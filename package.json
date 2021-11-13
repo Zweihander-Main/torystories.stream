@@ -65,6 +65,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.26.1",
 		"eslint-plugin-react-hooks": "^4.3.0",
+		"husky": "^7.0.4",
 		"identity-obj-proxy": "^3.0.0",
 		"is-ci-cli": "^2.2.0",
 		"jest": "^27.3.1",
@@ -73,9 +74,13 @@
 		"jest-runner-stylelint": "^2.3.7",
 		"jest-watch-select-projects": "^2.0.0",
 		"jest-watch-typeahead": "^1.0.0",
+		"lint-staged": "^11.2.6",
 		"netlify-cli": "^6.14.16",
 		"prettier": "^2.4.1",
 		"react-test-renderer": "^17.0.2",
+		"remark-cli": "^10.0.0",
+		"remark-lint": "^9.1.0",
+		"remark-preset-lint-recommended": "^6.1.1",
 		"start-server-and-test": "^1.14.0",
 		"stylelint": "^14.0.1",
 		"stylelint-config-prettier": "^9.0.3",
@@ -101,11 +106,26 @@
 		"cy:run": "cypress run --env type=cli",
 		"cy:open": "cypress open --env type=browser",
 		"lint": "jest --config=\"jest.config.js\" --projects \"./test/jest.lint.*.js\"",
+		"lint:md": "remark .",
+		"prepare": "husky install",
 		"format": "prettier --write \"**/*{js,jsx,ts,tsx,json,md,css,md,scss}\""
 	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Zweihander-Main/torystories.stream"
+	},
+	"lint-staged": {
+		"**/*.+(js|jsx|ts|tsx|json|css|html|md)": [
+			"jest --findRelatedTests"
+		],
+		"**/*.+(md)": [
+			"remark"
+		]
+	},
+	"remarkConfig": {
+		"plugins": [
+			"remark-preset-lint-recommended"
+		]
 	},
 	"eslintConfig": {
 		"settings": {
