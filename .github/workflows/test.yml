@@ -24,3 +24,9 @@ jobs:
           start: npm run serve
           wait-on: 'http://localhost:8000'
           wait-on-timeout: 360
+      - name: Upload E2E run data as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: e2e-run-data
+          path: /home/runner/work/torystories.stream/torystories.stream/cypress/(screenshots|videos)/*
+          retention-days: 14
