@@ -23,4 +23,4 @@ jobs:
               with:
                   start: npm run serve
                   wait-on: 'http://localhost:8000'
-                  wait-on-timeout: 90
+                  wait-on-timeout: 240
