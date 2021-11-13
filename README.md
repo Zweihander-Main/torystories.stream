@@ -6,13 +6,39 @@
 
 ## Technologies used:
 
--   GatsbyJS
+-   Gatsby (v4)
 -   TypeScript
 -   GraphQL + Typegen
 -   TailwindCSS
 -   Jest + Linting Runners
 -   Cypress + Axe
--   NetlifyCMS
+-   Github Actions (E2E testing) + Husky pre-commit hooks
+-   NetlifyCMS + Netlify
+
+## Dev workflow
+
+1. All unit, integration, and lint test runners are run on precommit
+2.
+
+## Scripts
+
+-   `npm run build`: Build to production using Gatsby (outputs to `public` folder)
+-   `npm run dev`: Build and serve development version using Gatsby
+-   `npm run serve`: Build and serve production
+-   `npm run test`: Run jest and runners
+-   `npm run test:coverage`: Generate coverage reports
+-   `npm run test:watch`: Run jest and runners in watch mode
+-   `npm run test:debug`: Run jest and allow node-based debugging
+-   `npm run test:e2e`: Run cypress E2E tests
+-   `npm run test:e2e:run`: Run cypress on production
+-   `npm run test:e2e:dev`: Open cypress dashboard on development
+-   `npm run cy:run`: Run cypress
+-   `npm run cy:open`: Open cypress dashboard
+-   `npm run lint`: Run all jest runners
+-   `npm run lint:md`: Run remark markdown linter
+-   `npm run prepare`: Prepare husky
+-   `npm run netlify`: Script to run as netlify that builds and generates public coverage reports
+-   `npm run format`: Auto-format using prettier
 
 ## Possible improvements
 
