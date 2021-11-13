@@ -26,6 +26,7 @@ jobs:
           wait-on-timeout: 360
       - name: Upload E2E run data as artifacts
         uses: actions/upload-artifact@v2
+        if: failure()
         with:
           name: e2e-run-data
           path: /home/runner/work/torystories.stream/torystories.stream/cypress/(screenshots|videos)/*
