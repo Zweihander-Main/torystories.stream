@@ -1,6 +1,6 @@
 # ToryStories.stream
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7c436fa4-a898-4aed-a5cb-5a4a768cae4e/deploy-status)](https://app.netlify.com/sites/torystories/deploys)
+[![Netlify Status](https://img.shields.io/netlify/7c436fa4-a898-4aed-a5cb-5a4a768cae4e?logo=netlify&style=flat-square)](https://app.netlify.com/sites/torystories/deploys)
 [![Build-badge](https://img.shields.io/github/workflow/status/kentcdodds/kentcdodds.com/pipeline?logo=github&style=flat-square)](https://github.com/kentcdodds/kentcdodds.com/actions?query=workflow%3Apipeline)
 
 > Podcast website with a historical bent
