@@ -17,8 +17,23 @@
 
 ## Dev workflow
 
-1. All unit, integration, and lint test runners are run on precommit
-2.
+### Notes:
+
+-   `master` branch is protected from merges without a PR and E2E passing
+-   Netlify builds from `master`
+
+### Workflow for development:
+
+    1. Push to `dev` branch
+    2. PR automatically created
+    3. E2E tests run on PR
+    4. If passed, branch merges into `master`
+
+### Workflow for NetlifyCMS:
+
+    1. PR created in `dev`
+    2. Preview deploys and E2E tests run on PR
+    3. PR manually merged or merged through UI
 
 ## Scripts
 
