@@ -8,10 +8,7 @@ describe('Subtitles ', () => {
 		cy.findByLabelText('Start playback').as('playbutton');
 		cy.get('@slider').invoke('val').should('eq', '0');
 		cy.get('@playbutton').click();
-		cy.get('@slider')
-			.invoke('val', 0.5)
-			.trigger('input')
-			.trigger('pointerup');
+		cy.get('@slider').invoke('val', 0.5).trigger('pointerup');
 		cy.get('@slider', { timeout: 10000 })
 			.invoke('val')
 			.should((val) => {
