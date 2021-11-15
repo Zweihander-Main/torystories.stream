@@ -5,6 +5,8 @@
 
 > Podcast website with a historical bent
 
+![Screenshot of ToryStores.stream](./docs/torystories.png)
+
 ## Technologies used:
 
 -   Gatsby (v4)
