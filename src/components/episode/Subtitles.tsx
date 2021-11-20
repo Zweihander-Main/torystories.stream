@@ -168,8 +168,8 @@ const Subtitles: React.FC<SubtitlesProps> = ({
 			onWheel={handleScroll}
 			onTouchMove={handleScroll}
 			onMouseDown={handleScroll}
-			aria-label={'Subtitles'}
-			role={'presentation'}
+			title={'Subtitles'}
+			role={'none'}
 			tabIndex={0}
 		>
 			<MemoizedBGImage {...{ image, title }} />
