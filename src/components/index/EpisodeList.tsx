@@ -9,17 +9,19 @@ import PlayerStateContext from 'contexts/PlayerStateContext';
 type GatsbyEpisodeImageProps = {
 	featuredImage: IGatsbyImageData;
 	title: string;
+	borderColor: string;
 };
 
 const GatsbyEpisodeImage: React.FC<GatsbyEpisodeImageProps> = ({
 	featuredImage,
 	title,
+	borderColor,
 }) => (
 	<GatsbyImage
 		image={featuredImage}
 		alt={title}
 		objectFit={'cover'}
-		className="z-10 self-center h-full col-start-1 col-end-1 row-start-1 row-end-1 justify-self-center"
+		className={`z-10 self-center h-full col-start-1 col-end-1 row-start-1 row-end-1 border-8 ${borderColor} lg:border-0 justify-self-center`}
 	/>
 );
 
@@ -27,6 +29,7 @@ const MemoizedGatsbyEpisodeImage = memo(
 	GatsbyEpisodeImage,
 	(prevProps, nextProps) =>
 		prevProps.title === nextProps.title &&
+		prevProps.borderColor === nextProps.borderColor &&
 		prevProps.featuredImage?.images?.fallback?.src ===
 			nextProps.featuredImage?.images?.fallback?.src
 );
@@ -107,7 +110,13 @@ const Episode: React.FC<EpisodeProps> = ({
 						)}
 						{featuredImage && (
 							<MemoizedGatsbyEpisodeImage
-								{...{ featuredImage, title }}
+								{...{
+									featuredImage,
+									title,
+									borderColor: isEven
+										? 'border-brightBlue'
+										: 'border-brightPurple',
+								}}
 							/>
 						)}
 					</div>
