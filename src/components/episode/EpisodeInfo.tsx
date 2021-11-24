@@ -8,6 +8,8 @@ import {
 	RiSoundcloudLine,
 	RiYoutubeLine,
 	RiSpotifyLine,
+	RiAppleLine,
+	RiGoogleLine,
 	RiMusic2Line,
 } from 'react-icons/ri';
 import { NextPrevInfo } from 'types';
@@ -37,6 +39,16 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 			case 'spotify.com': {
 				title = 'Spotify';
 				Icon = RiSpotifyLine;
+				break;
+			}
+			case 'apple.com': {
+				title = 'Apple';
+				Icon = RiAppleLine;
+				break;
+			}
+			case 'google.com': {
+				title = 'Google';
+				Icon = RiGoogleLine;
 				break;
 			}
 			default: {
