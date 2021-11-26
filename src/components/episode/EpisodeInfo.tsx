@@ -36,7 +36,7 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 				Icon = RiYoutubeLine;
 				break;
 			}
-			case 'spotify.com': {
+			case 'open.spotify.com': {
 				title = 'Spotify';
 				Icon = RiSpotifyLine;
 				break;
@@ -46,7 +46,7 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 				Icon = RiAppleLine;
 				break;
 			}
-			case 'google.com': {
+			case 'podcasts.google.com': {
 				title = 'Google';
 				Icon = RiGoogleLine;
 				break;
