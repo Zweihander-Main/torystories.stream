@@ -53,7 +53,7 @@
 -   `npm run test:e2e`: Run cypress E2E tests
 -   `npm run test:e2e:run`: Run cypress on production build
 -   `npm run test:e2e:dev`: Open cypress dashboard on development build
--   `npm run test:e2e:dev`: Open cypress dashboard on production build
+-   `npm run test:e2e:dev:prod`: Open cypress dashboard on production build
 -   `npm run cy:run`: Run cypress
 -   `npm run cy:open`: Open cypress dashboard
 -   `npm run lint`: Run all jest runners
