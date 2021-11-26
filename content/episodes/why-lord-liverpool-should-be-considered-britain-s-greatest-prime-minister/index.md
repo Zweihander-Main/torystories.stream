@@ -8,7 +8,7 @@ audioFile: torystoriesep1.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=oNKEoEEKLj4
     - https://open.spotify.com/episode/4L7d2rzZZUJ0Mq7xlYsKrD
-	- https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3doeS1sb3JkLWxpdmVycG9vbC1zaG91bGQtYmUtY29uc2lkZXJlZC1icml0YWluLXMtZ3JlYXRlc3QtcHJpbWUtbWluaXN0ZXI?sa=X&ved=0CAUQkfYCahcKEwj4xP6dgbf0AhUAAAAAHQAAAAAQAQ
+    - https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3doeS1sb3JkLWxpdmVycG9vbC1zaG91bGQtYmUtY29uc2lkZXJlZC1icml0YWluLXMtZ3JlYXRlc3QtcHJpbWUtbWluaXN0ZXI?sa=X&ved=0CAUQkfYCahcKEwj4xP6dgbf0AhUAAAAAHQAAAAAQAQ
     - https://soundcloud.com/tory-stories/why-lord-liverpool-should-be-considered-britains-greatest-prime-minister
 subtitles: torystoriesep1.vtt
 ---
