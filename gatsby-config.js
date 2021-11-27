@@ -7,11 +7,11 @@ const TITLE = `Tory Stories`,
 	SITE_URL = `https://www.torystories.stream/`,
 	FEED_FILENAME = `rss.xml`,
 	IMAGE_ICON_RELATIVE_LOC = `src/images/torystories-icon.png`,
-	IMAGE_COVER_URL = `${SITE_URL}images/torystories-cover.png`,
+	IMAGE_COVER_URL = `${SITE_URL}images/torystories-cover.jpg`,
 	IMAGE_COVER_SMALL_URL = `${SITE_URL}images/torystories-cover-144.png`,
 	COLOR_BG = `#372248`,
 	COLOR_THEME = `${COLOR_BG}`,
-	ITUNES_EXPLICIT = `false`,
+	ITUNES_EXPLICIT = `no`,
 	ITUNES_TYPE = `episodic`,
 	ITUNES_CATEGORY_ARRAY = [
 		{
