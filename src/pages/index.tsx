@@ -9,7 +9,7 @@ import About from 'components/index/About';
 const IndexPage: React.FC = () => {
 	return (
 		<Layout>
-			<SEO title="Home" />
+			<SEO />
 			<Hero />
 			<About />
 			<EpisodeList />

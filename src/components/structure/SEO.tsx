@@ -17,14 +17,14 @@ type SEOProps = {
 				name?: undefined;
 		  }
 	>;
-	title: string;
+	title?: string;
 };
 
 const SEO: React.FC<SEOProps> = ({
 	description = '',
 	lang = 'en',
 	meta = [],
-	title,
+	title = '',
 }) => {
 	const { site } = useStaticQuery<GatsbyTypes.SEOSiteMetadataQuery>(
 		graphql`
@@ -32,8 +32,10 @@ const SEO: React.FC<SEOProps> = ({
 				site {
 					siteMetadata {
 						title
+						subtitle
 						description
 						author
+						feedUrl
 					}
 				}
 			}
@@ -45,8 +47,10 @@ const SEO: React.FC<SEOProps> = ({
 			site &&
 			site?.siteMetadata &&
 			site.siteMetadata.title &&
+			site.siteMetadata.subtitle &&
 			site.siteMetadata.description &&
-			site.siteMetadata.author
+			site.siteMetadata.author &&
+			site.siteMetadata.feedUrl
 		)
 	) {
 		throw new Error('Some part of SEO required site metadata is missing.');
@@ -54,13 +58,16 @@ const SEO: React.FC<SEOProps> = ({
 
 	const metaDescription = description || site.siteMetadata.description;
 
+	const homeTitle = `${site.siteMetadata.title}: ${site.siteMetadata.subtitle}`;
+
 	return (
 		<Helmet
 			htmlAttributes={{
 				lang,
 			}}
-			title={title}
+			title={title !== '' ? title : undefined}
 			titleTemplate={`%s | ${site.siteMetadata.title}`}
+			defaultTitle={homeTitle}
 			meta={[
 				{
 					name: 'description',
@@ -68,7 +75,7 @@ const SEO: React.FC<SEOProps> = ({
 				},
 				{
 					property: 'og:title',
-					content: title,
+					content: title !== '' ? title : homeTitle,
 				},
 				{
 					property: 'og:description',
@@ -88,14 +95,21 @@ const SEO: React.FC<SEOProps> = ({
 				},
 				{
 					name: 'twitter:title',
-					content: title,
+					content: title !== '' ? title : homeTitle,
 				},
 				{
 					name: 'twitter:description',
 					content: metaDescription,
 				},
 			].concat(meta)}
-		/>
+		>
+			<link
+				rel="alternate"
+				title="Subscribe to the latest episodes"
+				type="application/rss+xml"
+				href={site.siteMetadata.feedUrl}
+			/>
+		</Helmet>
 	);
 };
 

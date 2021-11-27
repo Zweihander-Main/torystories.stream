@@ -8,8 +8,8 @@ const Hero: React.FC = () => {
 			query Hero {
 				site {
 					siteMetadata {
-						hero
-						subHero
+						title
+						subtitle
 					}
 				}
 			}
@@ -21,15 +21,15 @@ const Hero: React.FC = () => {
 			heroData &&
 			heroData?.site &&
 			heroData?.site?.siteMetadata &&
-			heroData?.site.siteMetadata.hero &&
-			heroData?.site.siteMetadata.subHero
+			heroData?.site.siteMetadata.title &&
+			heroData?.site.siteMetadata.subtitle
 		)
 	) {
 		throw new Error('Some part of Hero required site metadata is missing.');
 	}
 
-	const heroText = heroData?.site?.siteMetadata?.hero;
-	const subHeroText = heroData?.site?.siteMetadata?.subHero;
+	const heroText = heroData?.site?.siteMetadata?.title;
+	const subHeroText = heroData?.site?.siteMetadata?.subtitle;
 
 	return (
 		<section className="grid grid-cols-1 grid-rows-2 h-screenMinusPlayerSmall md:h-screenMinusPlayer">

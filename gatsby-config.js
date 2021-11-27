@@ -1,11 +1,18 @@
+const TITLE = `Tory Stories`,
+	SUBTITLE = `The Martin Hutchinson Podcast`,
+	DESCRIPTION = `${SUBTITLE}: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
+	AUTHOR = `Martin Hutchinson`,
+	SITEURL = `https://www.torystories.stream/`,
+	FEEDURL = `${SITEURL}rss.xml`;
+
 module.exports = {
 	siteMetadata: {
-		title: `Tory Stories`,
-		hero: `Tory Stories`,
-		subHero: `The Martin Hutchinson Podcast`,
-		description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
-		author: `Martin Hutchinson`,
-		siteUrl: `https://www.torystories.stream/`,
+		title: TITLE,
+		subtitle: SUBTITLE,
+		description: DESCRIPTION,
+		author: AUTHOR,
+		siteUrl: SITEURL,
+		feedUrl: FEEDURL,
 	},
 	flags: {
 		DEV_SSR: true,
