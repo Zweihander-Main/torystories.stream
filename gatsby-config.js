@@ -11,11 +11,12 @@ const TITLE = `Tory Stories`,
 	IMAGE_COVER_SMALL_URL = `${SITE_URL}images/torystories-cover-144.png`,
 	COLOR_BG = `#372248`,
 	COLOR_THEME = `${COLOR_BG}`,
-	ITUNES_EXPLICIT = `no`,
+	ITUNES_EXPLICIT = `false`,
+	ITUNES_TYPE = `episodic`,
 	ITUNES_CATEGORY_ARRAY = [
 		{
 			_attr: {
-				text: 'Education',
+				text: 'History',
 			},
 		},
 	];
@@ -112,6 +113,7 @@ module.exports = {
 					},
 					custom_elements: [
 						{ 'itunes:explicit': `${ITUNES_EXPLICIT}` },
+						{ 'itunes:type': `${ITUNES_TYPE}` },
 						{
 							'itunes:category': ITUNES_CATEGORY_ARRAY,
 						},
@@ -180,7 +182,9 @@ module.exports = {
 													site.siteMetadata.author,
 											},
 											{
-												'itunes:subtitle': desc,
+												'itunes:episode':
+													edge.node.frontmatter
+														.episodeNum,
 											},
 											{
 												'itunes:image': {
@@ -228,6 +232,7 @@ module.exports = {
 									  title
 									  description
 									  date
+									  episodeNum
 									  featuredImage {
 										childImageSharp {
 											gatsbyImageData(
@@ -256,6 +261,7 @@ module.exports = {
 						  `,
 						output: `/${FEED_FILENAME}`,
 						title: `${TITLE}: ${SUBTITLE}`,
+						description: `${DESCRIPTION}`,
 						feed_url: `${SITE_URL}${FEED_FILENAME}`,
 						site_url: `${SITE_URL}`,
 						image_url: `${IMAGE_COVER_SMALL_URL}`,
