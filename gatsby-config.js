@@ -1,18 +1,33 @@
 const TITLE = `Tory Stories`,
 	SUBTITLE = `The Martin Hutchinson Podcast`,
-	DESCRIPTION = `${SUBTITLE}: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
+	DESCRIPTION = `The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
 	AUTHOR = `Martin Hutchinson`,
-	SITEURL = `https://www.torystories.stream/`,
-	FEEDURL = `${SITEURL}rss.xml`;
+	EMAIL = `itunes@tbwns.com`,
+	LANG = `en`,
+	SITE_URL = `https://www.torystories.stream/`,
+	FEED_FILENAME = `rss.xml`,
+	IMAGE_ICON_RELATIVE_LOC = `src/images/torystories-icon.png`,
+	IMAGE_COVER_URL = `${SITE_URL}images/torystories-cover.png`,
+	IMAGE_COVER_SMALL_URL = `${SITE_URL}images/torystories-cover-144.png`,
+	COLOR_BG = `#372248`,
+	COLOR_THEME = `${COLOR_BG}`,
+	ITUNES_EXPLICIT = `no`,
+	ITUNES_CATEGORY_ARRAY = [
+		{
+			_attr: {
+				text: 'Education',
+			},
+		},
+	];
 
 module.exports = {
 	siteMetadata: {
 		title: TITLE,
 		subtitle: SUBTITLE,
-		description: DESCRIPTION,
+		description: `${SUBTITLE}: ${DESCRIPTION}`,
 		author: AUTHOR,
-		siteUrl: SITEURL,
-		feedUrl: FEEDURL,
+		siteUrl: SITE_URL,
+		feedUrl: `${SITE_URL}${FEED_FILENAME}`,
 	},
 	flags: {
 		DEV_SSR: true,
@@ -42,15 +57,15 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `Tory Stories: The Martin Hutchinson Podcast`,
-				short_name: `Tory Stories`,
-				description: `The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!`,
+				name: `${TITLE}: ${SUBTITLE}`,
+				short_name: `${TITLE}`,
+				description: `${SUBTITLE}: ${DESCRIPTION}`,
 				start_url: `/`,
-				lang: `en`,
-				background_color: `#372248`,
-				theme_color: `#372248`,
+				lang: `${LANG}`,
+				background_color: `${COLOR_BG}`,
+				theme_color: `${COLOR_THEME}`,
 				display: `standalone`,
-				icon: `src/images/torystories-icon.png`, // This path is relative to the root of the site.
+				icon: `${IMAGE_ICON_RELATIVE_LOC}`, // This path is relative to the root of the site.
 			},
 		},
 		{
@@ -96,35 +111,27 @@ module.exports = {
 						itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
 					},
 					custom_elements: [
-						{ 'itunes:explicit': 'no' },
+						{ 'itunes:explicit': `${ITUNES_EXPLICIT}` },
 						{
-							'itunes:category': [
-								{
-									_attr: {
-										text: 'Education',
-									},
-								},
-							],
+							'itunes:category': ITUNES_CATEGORY_ARRAY,
 						},
 						{
-							'itunes:subtitle':
-								'The Tory achievements of 1660 - 1832, free of Whiggish prejudice!',
+							'itunes:subtitle': `${DESCRIPTION}`,
 						},
 						{
-							'itunes:summary':
-								'The Martin Hutchinson Podcast: The Tory achievements of 1660 - 1832, free of Whiggish prejudice!',
+							'itunes:summary': `${SUBTITLE}: ${DESCRIPTION}`,
 						},
-						{ 'itunes:author': 'Martin Hutchinson' },
+						{ 'itunes:author': `${AUTHOR}` },
 						{
 							'itunes:owner': [
-								{ 'itunes:name': 'Martin Hutchinson' },
-								{ 'itunes:email': 'itunes@tbwns.com' },
+								{ 'itunes:name': `${AUTHOR}` },
+								{ 'itunes:email': `${EMAIL}` },
 							],
 						},
 						{
 							'itunes:image': {
 								_attr: {
-									href: 'https://www.torystories.stream/images/torystories-cover.png',
+									href: `${IMAGE_COVER_URL}`,
 								},
 							},
 						},
@@ -247,15 +254,14 @@ module.exports = {
 							  }
 							}
 						  `,
-						output: '/rss.xml',
-						title: 'Tory Stories: The Martin Hutchinson Podcast',
-						feed_url: 'https://www.torystories.stream/rss.xml',
-						site_url: 'https://www.torystories.stream/',
-						image_url:
-							'https://www.torystories.stream/images/torystories-cover-144.png',
-						language: 'en',
+						output: `/${FEED_FILENAME}`,
+						title: `${TITLE}: ${SUBTITLE}`,
+						feed_url: `${SITE_URL}${FEED_FILENAME}`,
+						site_url: `${SITE_URL}`,
+						image_url: `${IMAGE_COVER_SMALL_URL}`,
+						language: `${LANG}`,
 						match: '^/episodes/',
-						copyright: `${new Date().getFullYear()} Martin Hutchinson`,
+						copyright: `${new Date().getFullYear()} ${AUTHOR}`,
 					},
 				],
 			},
