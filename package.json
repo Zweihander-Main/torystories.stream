@@ -143,7 +143,7 @@
 		"parser": "@typescript-eslint/parser",
 		"parserOptions": {
 			"project": "tsconfig.json",
-			"ecmaVersion": 2019,
+			"ecmaVersion": 2021,
 			"ecmaFeatures": {
 				"jsx": true
 			},
