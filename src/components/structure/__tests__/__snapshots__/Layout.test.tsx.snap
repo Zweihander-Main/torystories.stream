@@ -13,7 +13,7 @@ exports[`Layout preserves its structure 1`] = `
         class="self-start col-span-1 col-start-1 row-span-1 row-start-3 mt-8 text-center sm:col-span-2 sm:row-start-2"
       >
         © 
-        2021
+        2022
          Martin Hutchinson
       </p>
     </footer>
