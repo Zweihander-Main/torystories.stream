@@ -1,4 +1,4 @@
-# ToryStories.stream
+# [ToryStories.stream](https://www.torystories.stream/)
 
 [![Netlify Status](https://img.shields.io/netlify/7c436fa4-a898-4aed-a5cb-5a4a768cae4e?logo=netlify&style=flat-square)](https://app.netlify.com/sites/torystories/deploys)
 [![Build-badge](https://img.shields.io/github/actions/workflow/status/Zweihander-Main/torystories.stream/test.yml?branch=master&logo=github&style=flat-square)](https://github.com/Zweihander-Main/torystories.stream/actions?query=workflow%3A%22Run+E2E+tests+on+new+code+in+master%22)
