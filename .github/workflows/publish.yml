@@ -4,8 +4,8 @@ name: Push from master to netlify when all green
   push:
     branches:
       - master
-    paths:
-      - "!README.md"
+    paths-ignore:
+      - '**/README.md'
 jobs:
   deploy:
     runs-on: ubuntu-20.04
