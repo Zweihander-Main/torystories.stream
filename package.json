@@ -9,6 +9,7 @@
 		"@fontsource/cormorant-sc": "^4.5.0",
 		"@fontsource/nunito-sans": "^4.5.1",
 		"autoprefixer": "^10.4.0",
+		"caniuse-lite": "^1.0.30001480",
 		"gatsby": "^4.2.0",
 		"gatsby-alias-imports": "^1.0.6",
 		"gatsby-plugin-catch-links": "^4.2.0",
