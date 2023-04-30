@@ -7,8 +7,8 @@ featuredImage: ep4-james-brindley.png
 audioFile: torystoriesep4.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=pQZfWsDJXeE
-	- https://open.spotify.com/episode/4G5ADZTu8zPLW4gBiKRCz2
-	- https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3doby1icm91Z2h0LXVzLXRoZS1pbmR1c3RyaWFsLXJldm9sdXRpb24?sa=X&ved=0CAUQkfYCahcKEwjgvfiqv9L-AhUAAAAAHQAAAAAQAg
+    - https://open.spotify.com/episode/4G5ADZTu8zPLW4gBiKRCz2
+    - https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3doby1icm91Z2h0LXVzLXRoZS1pbmR1c3RyaWFsLXJldm9sdXRpb24?sa=X&ved=0CAUQkfYCahcKEwjgvfiqv9L-AhUAAAAAHQAAAAAQAg
 subtitles: torystoriesep4.vtt
 ---
 
