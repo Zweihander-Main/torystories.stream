@@ -26,21 +26,19 @@ const SEO: React.FC<SEOProps> = ({
 	meta = [],
 	title = '',
 }) => {
-	const { site } = useStaticQuery<GatsbyTypes.SEOSiteMetadataQuery>(
-		graphql`
-			query SEOSiteMetadata {
-				site {
-					siteMetadata {
-						title
-						subtitle
-						description
-						author
-						feedUrl
-					}
+	const { site } = useStaticQuery<Queries.SEOSiteMetadataQuery>(graphql`
+		query SEOSiteMetadata {
+			site {
+				siteMetadata {
+					title
+					subtitle
+					description
+					author
+					feedUrl
 				}
 			}
-		`
-	);
+		}
+	`);
 
 	if (
 		!(

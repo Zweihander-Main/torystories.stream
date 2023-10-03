@@ -22,42 +22,38 @@ type EpisodeListProps = {
 };
 
 const useEpisodeList = (): EpisodeListProps => {
-	const episodeListData = useStaticQuery<GatsbyTypes.EpisodeListQuery>(
-		graphql`
-			query EpisodeList {
-				allMarkdownRemark(
-					sort: { fields: frontmatter___date, order: DESC }
-					filter: {
-						fields: { sourceInstanceName: { eq: "episodes" } }
-					}
-				) {
-					edges {
-						node {
-							id
-							frontmatter {
-								featuredImage {
-									childImageSharp {
-										gatsbyImageData(layout: CONSTRAINED)
-									}
-								}
-								description
-								episodeNum
-								title
-								date(formatString: "MMMM DD, YYYY")
-								audioFile {
-									publicURL
+	const episodeListData = useStaticQuery<Queries.EpisodeListQuery>(graphql`
+		query EpisodeList {
+			allMarkdownRemark(
+				sort: { frontmatter: { date: DESC } }
+				filter: { fields: { sourceInstanceName: { eq: "episodes" } } }
+			) {
+				edges {
+					node {
+						id
+						frontmatter {
+							featuredImage {
+								childImageSharp {
+									gatsbyImageData(layout: CONSTRAINED)
 								}
 							}
-							excerpt(pruneLength: 160)
-							fields {
-								slug
+							description
+							episodeNum
+							title
+							date(formatString: "MMMM DD, YYYY")
+							audioFile {
+								publicURL
 							}
+						}
+						excerpt(pruneLength: 160)
+						fields {
+							slug
 						}
 					}
 				}
 			}
-		`
-	);
+		}
+	`);
 
 	const memoizedEpisodeLookupTable = useMemo(() => {
 		const episodeLookupTable: { [key: string]: episodeData } = {};

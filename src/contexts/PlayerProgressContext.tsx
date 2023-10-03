@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import StorageContext from './StorageContext';
 import TrackContext from './TrackContext';
 
@@ -18,7 +18,9 @@ const PlayerProgressContext = React.createContext<PlayerProgressContextProps>({
 
 export default PlayerProgressContext;
 
-export const PlayerProgressProvider: React.FC = ({ children }) => {
+export const PlayerProgressProvider: React.FC<{ children?: ReactNode }> = ({
+	children,
+}) => {
 	const [playedSeconds, setPlayedSeconds] = useState(0);
 	const { loadSavedSeconds, savePlayedSeconds } = useContext(StorageContext);
 	const { trackId } = useContext(TrackContext);

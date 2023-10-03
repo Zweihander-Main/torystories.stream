@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import StorageContext from './StorageContext';
 
 type PlayerStateContextProps = {
@@ -29,7 +29,9 @@ const PlayerStateContext = React.createContext<PlayerStateContextProps>({
 
 export default PlayerStateContext;
 
-export const PlayerStateProvider: React.FC = ({ children }) => {
+export const PlayerStateProvider: React.FC<{ children?: ReactNode }> = ({
+	children,
+}) => {
 	const [isPlayerPlaying, setIsPlayerPlaying] = useState(false);
 	const [playerVolume, setPlayerVolume] = useState(1);
 	const [isPlayerMuted, setIsPlayerMuted] = useState(false);

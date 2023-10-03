@@ -9,5 +9,10 @@
 		"**/.cache": true,
 		"**/node_modules": true
 	},
-	"vim.useSystemClipboard": true
+	"vim.useSystemClipboard": true,
+	"cSpell.words": [
+		"DELIM",
+		"frontmatter",
+		"lastmod"
+	]
 }

@@ -33,7 +33,7 @@ export const pageQuery = graphql`
 `;
 
 const EpisodeTemplate: React.FC<
-	PageProps<GatsbyTypes.EpisodeBySlugQuery, TemplatePageContext>
+	PageProps<Queries.EpisodeBySlugQuery, TemplatePageContext>
 > = ({ data, pageContext }) => {
 	const post = data.markdownRemark;
 	const { next, prev, subtitlesArray } = pageContext;

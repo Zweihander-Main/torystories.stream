@@ -6,6 +6,12 @@ import {
 	DELIM,
 } from 'utils/constants';
 
+declare global {
+	interface Window {
+		[TS_APP_STATE]: Record<string, unknown>;
+	}
+}
+
 export type PlayerState = {
 	volume: number;
 	muted: boolean;
@@ -99,7 +105,7 @@ export class SessionStorage {
 			: `${STATE_KEY_PREFIX}${DELIM}${key}`;
 	}
 
-	private read(key: string): unknown | undefined {
+	private read(key: string): unknown {
 		const stateKey = this.getStateKey(key);
 
 		try {

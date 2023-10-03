@@ -1,7 +1,13 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 import useEpisodeList from 'hooks/useEpisodeList';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+	ReactNode,
+	useContext,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import StorageContext from './StorageContext';
 
 type TrackContextProps = {
@@ -26,13 +32,15 @@ const TrackContext = React.createContext<TrackContextProps>({
 
 export default TrackContext;
 
-export const TrackProvider: React.FC = ({ children }) => {
-	const defaultID =
-		useStaticQuery<GatsbyTypes.DefaultEpisodeIDQueryQuery>(graphql`
+export const TrackProvider: React.FC<{ children?: ReactNode }> = ({
+	children,
+}) => {
+	const defaultID = useStaticQuery<Queries.DefaultEpisodeIDQueryQuery>(
+		graphql`
 			query DefaultEpisodeIDQuery {
 				allMarkdownRemark(
 					limit: 1
-					sort: { fields: frontmatter___date, order: DESC }
+					sort: { frontmatter: { date: DESC } }
 					filter: {
 						fields: { sourceInstanceName: { eq: "episodes" } }
 					}
@@ -44,7 +52,8 @@ export const TrackProvider: React.FC = ({ children }) => {
 					}
 				}
 			}
-		`);
+		`
+	);
 
 	const { loadSavedId, saveTrackId } = useContext(StorageContext);
 

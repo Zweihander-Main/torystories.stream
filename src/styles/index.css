@@ -1,5 +1,5 @@
-@import '~@fontsource/cormorant-sc/latin-300.css';
-@import '~@fontsource/nunito-sans/latin-200.css';
+@import url('~@fontsource/cormorant-sc/latin-300.css');
+@import url('~@fontsource/nunito-sans/latin-200.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

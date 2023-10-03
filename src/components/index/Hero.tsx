@@ -3,18 +3,16 @@ import { StaticImage } from 'gatsby-plugin-image';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const Hero: React.FC = () => {
-	const heroData = useStaticQuery<GatsbyTypes.HeroQuery>(
-		graphql`
-			query Hero {
-				site {
-					siteMetadata {
-						title
-						subtitle
-					}
+	const heroData = useStaticQuery<Queries.HeroQuery>(graphql`
+		query Hero {
+			site {
+				siteMetadata {
+					title
+					subtitle
 				}
 			}
-		`
-	);
+		}
+	`);
 
 	if (
 		!(

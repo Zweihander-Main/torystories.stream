@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import SessionStorage, { PlayerState } from 'utils/sessionStorage';
 
 type StorageContextProps = {
@@ -25,7 +25,9 @@ const StorageContext = React.createContext<StorageContextProps>({
 
 export default StorageContext;
 
-export const StorageProvider: React.FC = ({ children }) => {
+export const StorageProvider: React.FC<{ children?: ReactNode }> = ({
+	children,
+}) => {
 	const storage = SessionStorage.getInstance();
 
 	const loadSavedId = () => {

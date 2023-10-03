@@ -3,30 +3,28 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 
 const About: React.FC = () => {
-	const aboutData = useStaticQuery<GatsbyTypes.AboutQuery>(
-		graphql`
-			query About {
-				allMarkdownRemark(
-					sort: { order: DESC, fields: frontmatter___date }
-					filter: {
-						fields: {
-							slug: { eq: "/misc/about" }
-							sourceInstanceName: { eq: "misc" }
-						}
+	const aboutData = useStaticQuery<Queries.AboutQuery>(graphql`
+		query About {
+			allMarkdownRemark(
+				sort: { frontmatter: { date: DESC } }
+				filter: {
+					fields: {
+						slug: { eq: "/misc/about" }
+						sourceInstanceName: { eq: "misc" }
 					}
-				) {
-					edges {
-						node {
-							frontmatter {
-								title
-							}
-							html
+				}
+			) {
+				edges {
+					node {
+						frontmatter {
+							title
 						}
+						html
 					}
 				}
 			}
-		`
-	);
+		}
+	`);
 
 	const node = aboutData.allMarkdownRemark.edges[0].node;
 	let html = node.html || '';

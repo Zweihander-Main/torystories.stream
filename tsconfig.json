@@ -20,10 +20,9 @@
 		"rootDir": ".",
 		"sourceMap": true,
 		"strict": true,
-		"suppressImplicitAnyIndexErrors": true,
 		"target": "es5",
 		"typeRoots": ["./.typings", "./node_modules/@types"],
-		"types": ["jest", "@testing-library/react"],
+		"types": ["jest"],
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"noEmit": true,
@@ -40,10 +39,10 @@
 		"plugins": [
 			{
 				"name": "ts-graphql-plugin",
-				"schema": "src/__generated__/gatsby-schema-graphql",
+				"schema": "./cache/typegen/schema.graphql",
 				"tag": "graphql"
 			}
 		]
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*", "./gatsby-node.ts", "./gatsby-config.ts"]
 }

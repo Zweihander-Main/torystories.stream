@@ -46,27 +46,26 @@ const Menu: React.FC<MenuProps> = ({ title, links, menuIndex }) => {
 };
 
 const Footer: React.FC = () => {
-	const footerMenusData =
-		useStaticQuery<GatsbyTypes.FooterMenusQuery>(graphql`
-			query FooterMenus {
-				allMarkdownRemark(
-					filter: {
-						fields: { sourceInstanceName: { eq: "footerMenus" } }
-					}
-					sort: { fields: frontmatter___menuNum }
-				) {
-					nodes {
-						frontmatter {
-							title
-							links {
-								display
-								url
-							}
+	const footerMenusData = useStaticQuery<Queries.FooterMenusQuery>(graphql`
+		query FooterMenus {
+			allMarkdownRemark(
+				filter: {
+					fields: { sourceInstanceName: { eq: "footerMenus" } }
+				}
+				sort: { frontmatter: { menuNum: ASC } }
+			) {
+				nodes {
+					frontmatter {
+						title
+						links {
+							display
+							url
 						}
 					}
 				}
 			}
-		`);
+		}
+	`);
 	const footerMenus = footerMenusData?.allMarkdownRemark?.nodes || [];
 
 	return (
