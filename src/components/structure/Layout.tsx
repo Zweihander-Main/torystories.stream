@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Footer from 'components/structure/Footer';
 import { RiHome2Line } from 'react-icons/ri';
 import { Link } from 'gatsby';

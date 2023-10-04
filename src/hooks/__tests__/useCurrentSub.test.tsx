@@ -3,7 +3,7 @@ import useCurrentSub from 'hooks/useCurrentSub';
 import { useStaticQuery } from 'gatsby';
 import { SubtitlesArray } from 'types';
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
-import React from 'react';
+import * as React from 'react';
 
 const testSubs: SubtitlesArray = [
 	{

@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
+import * as React from 'react';
 
 const About: React.FC = () => {
 	const aboutData = useStaticQuery<Queries.AboutQuery>(graphql`

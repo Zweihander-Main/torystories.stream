@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Player from './src/components/player/Player';
 import AppProvider from './src/contexts/AppContext';
 

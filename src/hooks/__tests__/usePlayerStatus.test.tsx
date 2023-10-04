@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import usePlayerStatus from 'hooks/usePlayerStatus';
 import { useStaticQuery } from 'gatsby';
 import PlayerProgressContext from 'contexts/PlayerProgressContext';
-import React from 'react';
+import * as React from 'react';
 
 describe('usePlayerStatus hook', () => {
 	beforeAll(() => {
