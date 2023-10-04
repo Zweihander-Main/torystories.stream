@@ -1,10 +1,10 @@
 import React, { memo, useContext } from 'react';
-import useEpisodeList from 'hooks/useEpisodeList';
+import useEpisodeList from '../hooks/useEpisodeList';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { Link } from 'gatsby';
 import { RiPlayCircleLine } from 'react-icons/ri';
-import TrackContext from 'contexts/TrackContext';
-import PlayerStateContext from 'contexts/PlayerStateContext';
+import TrackContext from '../contexts/TrackContext';
+import PlayerStateContext from '../contexts/PlayerStateContext';
 
 type GatsbyEpisodeImageProps = {
 	featuredImage: IGatsbyImageData;

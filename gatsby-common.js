@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Player from './src/components/player/Player';
+import Player from './src/components/Player';
 import AppProvider from './src/contexts/AppContext';
 
 export const wrapRoot = ({ element }) => <AppProvider>{element}</AppProvider>;

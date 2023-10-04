@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Footer from 'components/structure/Footer';
+import Footer from './StructFooter';
 import { RiHome2Line } from 'react-icons/ri';
 import { Link } from 'gatsby';
 

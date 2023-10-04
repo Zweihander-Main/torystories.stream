@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import Layout from 'components/structure/Layout';
-import SEO from 'components/structure/SEO';
-import Hero from 'components/index/Hero';
-import EpisodeList from 'components/index/EpisodeList';
-import About from 'components/index/About';
+import Layout from '../components/StructLayout';
+import SEO from '../components/StructSEO';
+import Hero from '../components/Hero';
+import EpisodeList from '../components/EpisodeList';
+import About from '../components/About';
 
 const IndexPage: React.FC = () => {
 	return (

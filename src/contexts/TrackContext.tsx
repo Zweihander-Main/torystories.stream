@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
-import useEpisodeList from 'hooks/useEpisodeList';
+import useEpisodeList from '../hooks/useEpisodeList';
 import React, {
 	ReactNode,
 	useContext,

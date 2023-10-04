@@ -1,10 +1,10 @@
 import React, { memo, useCallback, useContext, useRef, useState } from 'react';
-import { SubtitlesArray } from 'types';
-import useCurrentSub from 'hooks/useCurrentSub';
+import { SubtitlesArray } from '../types';
+import useCurrentSub from '../hooks/useCurrentSub';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { useEffect } from 'react';
-import PlayerStateContext from 'contexts/PlayerStateContext';
-import { SCROLL_TIMEOUT_PERIOD } from 'utils/constants';
+import PlayerStateContext from '../contexts/PlayerStateContext';
+import { SCROLL_TIMEOUT_PERIOD } from '../utils/constants';
 
 type SubtitleTextProps = {
 	subtitlesArray: SubtitlesArray;

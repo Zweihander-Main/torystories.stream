@@ -1,7 +1,5 @@
 import React, { memo, useCallback, useContext } from 'react';
-import ReactPlayer from 'react-player';
-import { BaseReactPlayerProps } from 'react-player/base';
-import usePlayerStatus from 'hooks/usePlayerStatus';
+import usePlayerStatus from '../hooks/usePlayerStatus';
 import { Link } from 'gatsby';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import {
@@ -14,119 +12,12 @@ import {
 	RiSoundModuleLine,
 	RiLoader3Line,
 } from 'react-icons/ri';
-import PlayerProgressContext from 'contexts/PlayerProgressContext';
-import PlayerStateContext from 'contexts/PlayerStateContext';
-import TrackContext from 'contexts/TrackContext';
+import PlayerStateContext from '../contexts/PlayerStateContext';
+import TrackContext from '../contexts/TrackContext';
+import loadable from '@loadable/component';
+import type ReactPlayer from 'react-player';
 
-type ReactPlayerCompProps = {
-	player: React.MutableRefObject<ReactPlayer | null>;
-	setPlayedPercentage: React.Dispatch<React.SetStateAction<number>>;
-	isSeeking: boolean;
-	setMediaLoadedAndReady: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const ReactPlayerComp: React.FC<ReactPlayerCompProps> = ({
-	player,
-	setPlayedPercentage,
-	isSeeking,
-	setMediaLoadedAndReady,
-}) => {
-	const { trackAudioURL } = useContext(TrackContext);
-	const { setPlayedSeconds } = useContext(PlayerProgressContext);
-	const {
-		isPlayerMuted,
-		playerVolume,
-		playerPlaybackRate,
-		isPlayerPlaying,
-		setIsPlayerPlaying,
-		setIsPlayerBuffering,
-	} = useContext(PlayerStateContext);
-
-	const handleTrackEnded = useCallback(() => {
-		setIsPlayerPlaying(false);
-		setPlayedPercentage(0);
-		setPlayedSeconds(0);
-	}, [setIsPlayerPlaying, setPlayedPercentage, setPlayedSeconds]);
-
-	const handleMediaLoadedAndReady = useCallback(() => {
-		setMediaLoadedAndReady(true);
-	}, [setMediaLoadedAndReady]);
-
-	type onProgressParam = Parameters<
-		Exclude<BaseReactPlayerProps['onProgress'], undefined>
-	>[0];
-
-	const handlePlayerProgress: BaseReactPlayerProps['onProgress'] =
-		useCallback(
-			(progressData: onProgressParam) => {
-				// only if not currently seeking and is playing
-				if (!isSeeking && isPlayerPlaying) {
-					setPlayedPercentage(progressData.played);
-					setPlayedSeconds(progressData.playedSeconds);
-				}
-			},
-			[isPlayerPlaying, isSeeking, setPlayedPercentage, setPlayedSeconds]
-		);
-
-	const handlePlay = useCallback(() => {
-		setIsPlayerPlaying(true);
-	}, [setIsPlayerPlaying]);
-
-	const handlePause = useCallback(() => {
-		setIsPlayerPlaying(false);
-	}, [setIsPlayerPlaying]);
-
-	const handleBufferStart = useCallback(() => {
-		setIsPlayerBuffering(true);
-	}, [setIsPlayerBuffering]);
-
-	const handleBufferEnd = useCallback(() => {
-		setIsPlayerBuffering(false);
-	}, [setIsPlayerBuffering]);
-
-	type onErrorParam = Parameters<
-		Exclude<BaseReactPlayerProps['onError'], undefined>
-	>[0];
-
-	const handleError: BaseReactPlayerProps['onError'] = useCallback(
-		(e: onErrorParam) => {
-			console.warn('Player error: ', e);
-		},
-		[]
-	);
-
-	return (
-		<ReactPlayer
-			className="hidden"
-			ref={player}
-			url={trackAudioURL}
-			playing={isPlayerPlaying}
-			controls={false}
-			loop={false}
-			playbackRate={playerPlaybackRate}
-			volume={playerVolume}
-			muted={isPlayerMuted}
-			onReady={handleMediaLoadedAndReady}
-			onPlay={handlePlay}
-			onPause={handlePause}
-			onEnded={handleTrackEnded}
-			onBuffer={handleBufferStart}
-			onBufferEnd={handleBufferEnd}
-			onError={handleError}
-			onProgress={handlePlayerProgress}
-			config={{
-				file: {
-					forceAudio: true,
-				},
-			}}
-		/>
-	);
-};
-
-const MemoizedReactPlayerComp = memo(
-	ReactPlayerComp,
-	(prevProps, nextProps) => prevProps.isSeeking === nextProps.isSeeking
-);
+const LoadablePlayerComp = loadable(() => import('./PlayerComp'));
 
 type GatsbyCoverImageProps = {
 	trackImage: IGatsbyImageData;
@@ -442,7 +333,7 @@ const Player: React.FC<React.PropsWithChildren<Record<string, unknown>>> = ({
 				role="navigation"
 				aria-label="Podcast player controls"
 			>
-				<MemoizedReactPlayerComp
+				<LoadablePlayerComp
 					{...{
 						player,
 						setPlayedPercentage,

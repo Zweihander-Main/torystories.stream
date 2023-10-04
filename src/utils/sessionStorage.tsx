@@ -4,7 +4,7 @@ import {
 	CURRENT,
 	PLAYER_STATE,
 	DELIM,
-} from 'utils/constants';
+} from './constants';
 
 declare global {
 	interface Window {

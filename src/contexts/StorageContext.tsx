@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import SessionStorage, { PlayerState } from 'utils/sessionStorage';
+import SessionStorage, { PlayerState } from '../utils/sessionStorage';
 
 type StorageContextProps = {
 	loadSavedId: () => string | undefined;

@@ -1,5 +1,5 @@
-import PlayerProgressContext from 'contexts/PlayerProgressContext';
-import TrackContext from 'contexts/TrackContext';
+import PlayerProgressContext from '../contexts/PlayerProgressContext';
+import TrackContext from '../contexts/TrackContext';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import ReactPlayer from 'react-player';
 

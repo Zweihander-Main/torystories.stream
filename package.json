@@ -8,6 +8,7 @@
 	"dependencies": {
 		"@fontsource/cormorant-sc": "^5.0.13",
 		"@fontsource/nunito-sans": "^5.0.8",
+		"@loadable/component": "^5.15.3",
 		"autoprefixer": "^10.4.16",
 		"caniuse-lite": "^1.0.30001541",
 		"gatsby": "^5.12.5",
@@ -45,6 +46,7 @@
 		"@testing-library/react": "^14.0.0",
 		"@testing-library/react-hooks": "^8.0.1",
 		"@types/jest": "^29.5.5",
+		"@types/loadable__component": "^5.13.5",
 		"@types/node": "^20.8.2",
 		"@types/react": "^18.2.24",
 		"@types/react-dom": "^18.2.8",
@@ -90,7 +92,6 @@
 		"stylelint-config-standard": "^34.0.0",
 		"tailwindcss-text-indent": "^1.0.2",
 		"ts-graphql-plugin": "^3.0.1",
-		"ts-jest": "^29.1.1",
 		"tslib": "^2.6.2",
 		"typescript": "^5.2.2"
 	},

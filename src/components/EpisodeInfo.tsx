@@ -1,5 +1,5 @@
-import PlayerStateContext from 'contexts/PlayerStateContext';
-import TrackContext from 'contexts/TrackContext';
+import PlayerStateContext from '../contexts/PlayerStateContext';
+import TrackContext from '../contexts/TrackContext';
 import { Link } from 'gatsby';
 import React, { memo, useContext } from 'react';
 import { IconType } from 'react-icons';
@@ -12,8 +12,8 @@ import {
 	RiGoogleLine,
 	RiMusic2Line,
 } from 'react-icons/ri';
-import { NextPrevInfo } from 'types';
-import { DOMAIN_REGEX } from 'utils/constants';
+import { NextPrevInfo } from '../types';
+import { DOMAIN_REGEX } from '../utils/constants';
 
 type SyndicationLinkProp = {
 	link: string;

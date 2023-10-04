@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { graphql, PageProps } from 'gatsby';
-import Layout from 'components/structure/Layout';
-import SEO from 'components/structure/SEO';
+import Layout from '../components/StructLayout';
+import SEO from '../components/StructSEO';
 import { TemplatePageContext } from '../types';
-import Subtitles from 'components/episode/Subtitles';
-import EpisodeInfo from 'components/episode/EpisodeInfo';
-import TrackContext from 'contexts/TrackContext';
+import Subtitles from '../components/Subtitles';
+import EpisodeInfo from '../components/EpisodeInfo';
+import TrackContext from '../contexts/TrackContext';
 
 export const pageQuery = graphql`
 	query EpisodeBySlug($path: String!) {

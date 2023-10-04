@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { SubtitlesArray } from 'types';
-import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import PlayerProgressContext from '../contexts/PlayerProgressContext';
 
 // Usage note: do not spread on to JSX Element
 

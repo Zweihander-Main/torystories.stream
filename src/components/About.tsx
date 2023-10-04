@@ -35,7 +35,7 @@ const About: React.FC = () => {
 		<section className="text-center bg-fixed bg-darkPurple bg-georgian-pattern">
 			<div className="w-10/12 pt-24 pb-24 mx-auto sm:w-8/12 md:w-7/12 xl:w-6/12">
 				<StaticImage
-					src="../../images/martin-hutchinson-colorized.png"
+					src="../images/martin-hutchinson-colorized.png"
 					layout="constrained"
 					className="w-40 mx-auto border-8 rounded-full shadow-2xl md:w-auto border-dullPurple"
 					height={225}
