@@ -73,7 +73,7 @@ describe('Session storage ', () => {
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'false');
 			cy.get('@mute-button')
-				.click()
+				.click({ waitForAnimations: true })
 				.invoke('attr', 'aria-pressed')
 				.should('eq', 'true');
 			cy.get('@vol-slider').parent().invoke('show').trigger('mouseover');
