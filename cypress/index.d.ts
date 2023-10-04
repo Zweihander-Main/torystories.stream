@@ -23,7 +23,8 @@ declare namespace Cypress {
 		 */
 		checkA11yWithLog(
 			context?: string | Node | axe.ContextObject | undefined,
-			options?: Options | undefined
+			options?: Options | undefined,
+			violationCallback?: ((violations: axe.Result[]) => void) | undefined
 		): Chainable<void>;
 	}
 }
