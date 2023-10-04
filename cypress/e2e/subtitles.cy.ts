@@ -28,7 +28,7 @@ describe(
 				});
 			cy.get(
 				'[aria-label="Subtitle Scrolling Text"] > [aria-selected="true"]'
-			).as('initial-sub');
+			).as('initial-sub', { type: 'static' });
 			cy.get('@initial-sub', { timeout: 20000 }).should(
 				'have.attr',
 				'aria-selected',
