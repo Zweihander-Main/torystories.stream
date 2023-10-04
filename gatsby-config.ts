@@ -47,7 +47,6 @@ const config: GatsbyConfig = {
 		],
 	},
 	plugins: [
-		'gatsby-alias-imports',
 		{
 			resolve: 'gatsby-plugin-typescript',
 			options: {
