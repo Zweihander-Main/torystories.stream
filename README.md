@@ -9,7 +9,7 @@
 
 ## Technologies used:
 
--   Gatsby (v4)
+-   Gatsby (v5)
 -   TypeScript
 -   GraphQL + Typegen
 -   TailwindCSS
