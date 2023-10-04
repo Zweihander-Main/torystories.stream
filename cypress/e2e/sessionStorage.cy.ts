@@ -44,7 +44,7 @@ describe('Session storage ', () => {
 	});
 
 	it('should save seconds after playback starts', () => {
-		cy.session('changeOnLoad', () => {
+		cy.session('saveSeconds', () => {
 			cy.visit('/');
 			cy.findByLabelText('Start playback').click();
 			cy.window().then((win) => {
