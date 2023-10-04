@@ -147,7 +147,6 @@ const PlayerStateControls: React.FC = () => {
 						className={'tooltip p-4 text-3xl md:text-4xl'}
 						data-text={'Volume'}
 						title="Volume Menu"
-						aria-checked={!isPlayerMuted}
 					>
 						{isPlayerMuted ? (
 							<RiVolumeMuteLine />
