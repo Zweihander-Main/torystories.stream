@@ -6,9 +6,15 @@ const playerHeightSmall = '4rem';
 const mobileEpInfoTabsHeight = '2.5rem';
 
 module.exports = {
-	purge: ['public/**/*.html', 'src/**/*.{js,jsx,ts,tsx}'],
-	mode: 'jit',
-	darkMode: false, // or 'media' or 'class'
+	content: [
+		'./src/components/**/*.{js,jsx,ts,tsx}',
+		'./src/contexts/**/*.{js,jsx,ts,tsx}',
+		'./src/hooks/**/*.{js,jsx,ts,tsx}',
+		'./src/pages/**/*.{js,jsx,ts,tsx}',
+		'./src/styles/**/*.{js,jsx,ts,tsx}',
+		'./src/templates/**/*.{js,jsx,ts,tsx}',
+		'./src/utils/**/*.{js,jsx,ts,tsx}',
+	],
 	theme: {
 		colors: {
 			black: '#0a0a0a',
@@ -87,9 +93,6 @@ module.exports = {
 				player: 'linear-gradient(180deg, #0D78C1 -300px, #0a0a0a)',
 			}),
 		},
-	},
-	variants: {
-		extend: {},
 	},
 	plugins: [
 		require('tailwind-scrollbar'),

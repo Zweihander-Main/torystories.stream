@@ -198,7 +198,7 @@ const TrackInfo: React.FC = () => {
 				to={trackSlug}
 				className="items-center justify-center inline-block mr-2 no-underline hover:underline hover:font-bold md:mt-1.5 lg:mt-0 lg:flex lg:flex-playerTrack xl:mr-4 2xl:mr-6"
 			>
-				<h3 className="pl-1 overflow-hidden text-sm leading-5 text-center whitespace-nowrap overflow-ellipsis w-playerTextMobileSmall md:w-playerTextMobile lg:whitespace-normal lg:w-auto lg:text-left lg:flex lg:items-center lg:justify-center lg:pl-0 lg:pt-1 lg:pb-1 font-body md:text-lg text-shadow">
+				<h3 className="pl-1 overflow-hidden text-sm leading-5 text-center whitespace-nowrap text-ellipsis w-playerTextMobileSmall md:w-playerTextMobile lg:whitespace-normal lg:w-auto lg:text-left lg:flex lg:items-center lg:justify-center lg:pl-0 lg:pt-1 lg:pb-1 font-body md:text-lg text-shadow">
 					{trackTitle}
 				</h3>
 			</Link>
