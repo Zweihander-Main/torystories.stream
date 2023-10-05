@@ -46,8 +46,7 @@ describe('Session storage ', () => {
 	it('should save seconds after playback starts', () => {
 		cy.session('saveSeconds', () => {
 			cy.visit('/');
-			cy.intercept('*.mp3').as('audio');
-			cy.wait('@audio');
+			cy.wait(4000); // TODO: structure loadable to avoid wait
 			cy.findByLabelText('Start playback').click({
 				waitForAnimations: true,
 				force: true,
@@ -72,8 +71,7 @@ describe('Session storage ', () => {
 	it('should change state after user changes it and preserve it on page load', () => {
 		cy.session('changeOnLoad', () => {
 			cy.visit('/');
-			cy.intercept('*.mp3').as('audio');
-			cy.wait('@audio');
+			cy.wait(4000); // TODO: structure loadable to avoid wait
 			cy.findByTitle('Volume Menu').as('vol-menu');
 			cy.findByTitle('Volume Slider').as('vol-slider');
 			cy.findByTitle('Mute Button').as('mute-button');
