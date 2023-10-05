@@ -33,6 +33,7 @@ const commonForJestTests = {
 	globals: {
 		__PATH_PREFIX__: '',
 	},
+	prettierPath: null,
 	moduleNameMapper: {
 		'.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
 		'.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
@@ -74,11 +75,11 @@ module.exports = {
 		'jest-watch-select-projects',
 	],
 	projects: [
-		// {
-		// 	...commonForJestTests,
-		// 	displayName: 'client',
-		// 	testEnvironment: 'jest-environment-jsdom',
-		// },
+		{
+			...commonForJestTests,
+			displayName: 'client',
+			testEnvironment: 'jest-environment-jsdom',
+		},
 		{
 			...commonForLintRunners,
 			displayName: 'eslint',

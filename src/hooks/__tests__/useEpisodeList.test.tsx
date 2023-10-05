@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useEpisodeList from 'hooks/useEpisodeList';
+import useEpisodeList from '../../hooks/useEpisodeList';
 import { useStaticQuery } from 'gatsby';
 
 describe('useEpisodeList hook', () => {

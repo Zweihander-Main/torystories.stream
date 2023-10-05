@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
-import usePlayerStatus from 'hooks/usePlayerStatus';
+import usePlayerStatus from '../../hooks/usePlayerStatus';
 import { useStaticQuery } from 'gatsby';
-import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import PlayerProgressContext from '../../contexts/PlayerProgressContext';
 import * as React from 'react';
 
 describe('usePlayerStatus hook', () => {
@@ -42,16 +42,16 @@ describe('usePlayerStatus hook', () => {
 			wrapper,
 		});
 		expect(result.current).toMatchInlineSnapshot(`
-		Object {
-		  "isSeeking": false,
-		  "playedPercentage": 0,
-		  "player": Object {
-		    "current": null,
-		  },
-		  "setIsSeeking": [Function],
-		  "setMediaLoadedAndReady": [Function],
-		  "setPlayedPercentage": [Function],
-		}
-	`);
+{
+  "isSeeking": false,
+  "playedPercentage": 0,
+  "player": {
+    "current": null,
+  },
+  "setIsSeeking": [Function],
+  "setMediaLoadedAndReady": [Function],
+  "setPlayedPercentage": [Function],
+}
+`);
 	});
 });

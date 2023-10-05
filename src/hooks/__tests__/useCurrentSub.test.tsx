@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks';
-import useCurrentSub from 'hooks/useCurrentSub';
+import useCurrentSub from '../../hooks/useCurrentSub';
 import { useStaticQuery } from 'gatsby';
 import { SubtitlesArray } from 'types';
-import PlayerProgressContext from 'contexts/PlayerProgressContext';
+import PlayerProgressContext from '../../contexts/PlayerProgressContext';
 import * as React from 'react';
 
 const testSubs: SubtitlesArray = [
