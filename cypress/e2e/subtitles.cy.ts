@@ -27,11 +27,11 @@ describe(
 					}
 				});
 			cy.get(
-				'[aria-label="Subtitle Scrolling Text"] > [aria-selected="true"]'
+				'[aria-label="Subtitle Scrolling Text"] > [aria-current="true"]'
 			).as('initial-sub', { type: 'static' });
 			cy.get('@initial-sub', { timeout: 20000 }).should(
 				'have.attr',
-				'aria-selected',
+				'aria-current',
 				'false'
 			);
 		});

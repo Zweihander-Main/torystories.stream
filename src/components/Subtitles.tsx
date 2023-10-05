@@ -49,7 +49,7 @@ const SubtitleText: React.FC<SubtitleTextProps> = ({
 						key={startTime}
 						ref={isCurrentSub ? currentSubRef : null}
 						className={className}
-						aria-selected={isCurrentSub}
+						aria-current={isCurrentSub}
 					>
 						{text}{' '}
 					</span>
