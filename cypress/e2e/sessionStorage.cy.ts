@@ -46,18 +46,26 @@ describe('Session storage ', () => {
 	it('should save seconds after playback starts', () => {
 		cy.session('saveSeconds', () => {
 			cy.visit('/');
-			cy.findByLabelText('Start playback').click();
-			cy.window().then((win) => {
-				cy.spy(win.sessionStorage, 'setItem').as('setItem');
-				cy.getSessionStorage(
-					`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`
-				).then((currentID) => {
-					cy.get('@setItem').should('be.called');
+			cy.intercept('*.mp3').as('audio');
+			cy.wait('@audio');
+			cy.findByLabelText('Start playback').click({
+				waitForAnimations: true,
+				force: true,
+			});
+			cy.getSessionStorage(`${STATE_KEY_PREFIX}${DELIM}${CURRENT}`).then(
+				(currentID) => {
 					cy.getSessionStorage(
 						`${STATE_KEY_PREFIX}${DELIM}${JSON.parse(currentID)}`
-					).should('not.eq', JSON.stringify('0'));
-				});
-			});
+					).then((initialSeconds) => {
+						cy.wait(2000);
+						cy.getSessionStorage(
+							`${STATE_KEY_PREFIX}${DELIM}${JSON.parse(
+								currentID
+							)}`
+						).should('not.eq', initialSeconds);
+					});
+				}
+			);
 		});
 	});
 
