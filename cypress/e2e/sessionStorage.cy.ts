@@ -72,6 +72,8 @@ describe('Session storage ', () => {
 	it('should change state after user changes it and preserve it on page load', () => {
 		cy.session('changeOnLoad', () => {
 			cy.visit('/');
+			cy.intercept('*.mp3').as('audio');
+			cy.wait('@audio');
 			cy.findByTitle('Volume Menu').as('vol-menu');
 			cy.findByTitle('Volume Slider').as('vol-slider');
 			cy.findByTitle('Mute Button').as('mute-button');
