@@ -7,8 +7,8 @@ featuredImage: ep5-ranking-prime-ministers.png
 audioFile: torystoriesep5.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=rYaVErN3u1c
-    # - https://open.spotify.com/
-    # - https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/
+    - https://open.spotify.com/episode/4Eez8fL8iW0oosmzuRfhRm
+    - https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3JhbmtpbmctdGhlLWdyZWF0ZXN0LXByaW1lLW1pbmlzdGVycw?sa=X&ved=0CAUQkfYCahcKEwiouPv5rOKBAxUAAAAAHQAAAAAQAQ
 subtitles: torystoriesep5.vtt
 ---
 
