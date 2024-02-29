@@ -32,6 +32,8 @@ const Hero: React.FC = () => {
 	return (
 		<section className="grid grid-cols-1 grid-rows-2 h-screenMinusPlayerSmall md:h-screenMinusPlayer">
 			<StaticImage
+				loading={'eager'}
+				aspectRatio={2400 / 1740}
 				src="../images/herobg-house-of-commons-pitt.png"
 				alt="Background: Karl Anton Hickel's William Pitt addressing the House of Commons"
 				layout="fullWidth"

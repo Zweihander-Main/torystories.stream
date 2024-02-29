@@ -34,7 +34,11 @@ const useEpisodeList = (): EpisodeListProps => {
 						frontmatter {
 							featuredImage {
 								childImageSharp {
-									gatsbyImageData(layout: CONSTRAINED)
+									gatsbyImageData(
+										layout: CONSTRAINED
+										formats: [AUTO, WEBP, AVIF]
+										quality: 35
+									)
 								}
 							}
 							description
