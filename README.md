@@ -1,6 +1,5 @@
 # [ToryStories.stream](https://www.torystories.stream/)
 
-[![Netlify Status](https://img.shields.io/netlify/7c436fa4-a898-4aed-a5cb-5a4a768cae4e?logo=netlify&style=flat-square)](https://app.netlify.com/sites/torystories/deploys)
 [![Build-badge](https://img.shields.io/github/actions/workflow/status/Zweihander-Main/torystories.stream/test.yml?branch=master&logo=github&style=flat-square)](https://github.com/Zweihander-Main/torystories.stream/actions?query=workflow%3A%22Run+E2E+tests+on+new+code+in+master%22)
 
 > Podcast website with a historical bent
@@ -16,22 +15,22 @@
 -   Jest + Linting Runners
 -   Cypress + Axe
 -   Github Actions (E2E testing) + Husky pre-commit hooks
--   NetlifyCMS + Netlify
+-   (former) NetlifyCMS
 
 ## Dev workflow
 
 ### Notes:
 
--   Netlify builds from `netlify`
-    -   `netlify` branch is protected from push/merge without E2E test passing
-    -   NetlifyCMS and netlify preview deploys working from `master` branch
+-   Cloudflare builds from `cloudflare`
+    -   `cloudflare` branch is protected from push/merge without E2E test passing
+    -   NetlifyCMS and preview deploys working from `master` branch
 
 ### Workflow for development:
 
 1.  Pre-commit hooks run on code: all jest tests and lint runners
 2.  Push to `master` branch
 3.  E2E tests run on new code
-4.  If passed, branch pushed into `netlify`
+4.  If passed, branch pushed into `cloudflare`
 
 ### Workflow for NetlifyCMS:
 
@@ -39,7 +38,7 @@
 2.  Preview deploys run on PR
 3.  PR manually merged or merged through UI
 4.  E2E tests run on new code
-5.  If passed, branch pushed into `netlify`
+5.  If passed, branch pushed into `cloudflare`
 
 ## Scripts
 
@@ -59,7 +58,7 @@
 -   `npm run lint`: Run all jest runners
 -   `npm run lint:md`: Run remark markdown linter
 -   `npm run prepare`: Prepare husky
--   `npm run netlify`: Script to run as netlify that builds and generates public coverage reports
+-   `npm run cloudflare`: Script to run as cloudflare that builds and generates public coverage reports
 -   `npm run format`: Auto-format using prettier
 
 ## Possible improvements
@@ -79,4 +78,4 @@ hi [a+] zweisolutions {●} com
 ## License
 
 Code (outside the `/content` and `/static/docs` folders) is licensed under [MIT](./LICENSE)
-Content underneath the `/content` and `/static/docs` folders is Copyright 2021 of the author Martin Hutchinson unless otherwise stated, All Rights Reserved.
+Content underneath the `/content` and `/static/docs` folders is Copyright 2021-2024 of the author Martin Hutchinson unless otherwise stated, All Rights Reserved.

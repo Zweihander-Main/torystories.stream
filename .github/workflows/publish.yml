@@ -1,5 +1,5 @@
 ---
-name: Manually push from master to netlify
+name: Manually push from master to cloudflare
 'on':
   workflow_dispatch:
 jobs:
@@ -14,4 +14,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.REPO_GITHUB_TOKEN }}
-          branch: netlify
+          branch: cloudflare

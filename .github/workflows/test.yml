@@ -56,10 +56,10 @@ jobs:
             /home/runner/work/torystories.stream/torystories.stream/cypress/videos/*
           retention-days: 14
 
-      - name: Push changes to netlify if success
+      - name: Push changes to cloudflare if success
         uses: ad-m/github-push-action@master
         if: success()
         with:
           github_token: ${{ secrets.REPO_GITHUB_TOKEN }}
-          branch: netlify
+          branch: cloudflare
           force: true

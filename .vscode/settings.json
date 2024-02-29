@@ -11,9 +11,29 @@
 	},
 	"vim.useSystemClipboard": true,
 	"cSpell.words": [
+		"borales",
+		"camelcase",
+		"caniuse",
 		"DELIM",
+		"fontsource",
 		"frontmatter",
 		"lastmod",
-		"playbutton"
+		"lcov",
+		"loadershim",
+		"nunito",
+		"Parens",
+		"playbutton",
+		"styl",
+		"stylelint",
+		"tailwindcss",
+		"testname",
+		"textshadow",
+		"torystories",
+		"typeahead",
+		"Typegen",
+		"webvtt",
+		"welldone",
+		"Zweihänder",
+		"zweisolutions"
 	]
 }
