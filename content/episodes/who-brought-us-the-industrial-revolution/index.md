@@ -14,6 +14,10 @@ subtitles: torystoriesep4.vtt
 
 Looking at those who brought us the Industrial Revolution: the most important generators of this greatest civilizational advance in world history.
 
+For more information, see Martin's new book on the Industrial Revolution:
+
+[Forging Modernity](https://www.forgingmodernity.com/)
+
 <br>
 
 _Intro/outro music:_
