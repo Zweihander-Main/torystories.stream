@@ -8,7 +8,6 @@ audioFile: torystoriesep6.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=9sJ70iq0Vf8
     # - https://open.spotify.com/episode/TODO
-    # - https://podcasts.google.com/feed/TODO-REMOVE
 subtitles: torystoriesep6.vtt
 ---
 

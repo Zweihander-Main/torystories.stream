@@ -8,7 +8,6 @@ audioFile: torystoriesep2.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=B_RT-z3z97Y
     - https://open.spotify.com/episode/7Ad1g3B60GhR6akLaHqFow
-    - https://podcasts.google.com/feed/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL3Jzcy54bWw/episode/aHR0cHM6Ly93d3cudG9yeXN0b3JpZXMuc3RyZWFtL2VwaXNvZGVzL3RoZS1veGZvcmRzaGlyZS1zY2hvb2wtb2YtZWNvbm9taWMtdGhvdWdodA?sa=X&ved=0CAUQkfYCahcKEwj4xP6dgbf0AhUAAAAAHQAAAAAQAQ
 subtitles: torystoriese2.vtt
 ---
 
