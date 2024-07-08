@@ -8,6 +8,7 @@ audioFile: torystoriesep2.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=B_RT-z3z97Y
     - https://open.spotify.com/episode/7Ad1g3B60GhR6akLaHqFow
+    - https://podcasts.apple.com/us/podcast/the-oxfordshire-school-of-economic-thought/id1604954812?i=1000547821766
 subtitles: torystoriese2.vtt
 ---
 

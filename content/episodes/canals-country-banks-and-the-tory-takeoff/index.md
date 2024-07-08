@@ -8,6 +8,7 @@ audioFile: torystoriesep3.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=zFlr6jQLqnQ
     - https://open.spotify.com/episode/0Te9MRLbQbxjUXBZ5zDzaD
+    - https://podcasts.apple.com/us/podcast/canals-country-banks-and-the-tory-takeoff/id1604954812?i=1000580481522
 subtitles: torystoriesep3.vtt
 ---
 

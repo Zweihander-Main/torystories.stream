@@ -8,6 +8,7 @@ audioFile: torystoriesep6.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=9sJ70iq0Vf8
     - https://open.spotify.com/episode/0xFZdny2rueAR8qdjVYfmw
+    - https://podcasts.apple.com/us/podcast/why-the-stuart-restoration-gave-us-the/id1604954812?i=1000661287987
 subtitles: torystoriesep6.vtt
 ---
 

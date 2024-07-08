@@ -8,6 +8,7 @@ audioFile: torystoriesep5.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=rYaVErN3u1c
     - https://open.spotify.com/episode/4Eez8fL8iW0oosmzuRfhRm
+    - https://podcasts.apple.com/us/podcast/ranking-the-greatest-prime-ministers/id1604954812?i=1000630253272
 subtitles: torystoriesep5.vtt
 ---
 

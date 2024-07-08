@@ -8,6 +8,7 @@ audioFile: torystoriesep1.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=oNKEoEEKLj4
     - https://open.spotify.com/episode/4L7d2rzZZUJ0Mq7xlYsKrD
+    - https://podcasts.apple.com/us/podcast/why-lord-liverpool-should-be-considered-britains-greatest/id1604954812?i=1000547821684
 subtitles: torystoriesep1.vtt
 ---
 

@@ -8,6 +8,7 @@ audioFile: torystoriesep4.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=pQZfWsDJXeE
     - https://open.spotify.com/episode/4G5ADZTu8zPLW4gBiKRCz2
+    - https://podcasts.apple.com/us/podcast/who-brought-us-the-industrial-revolution/id1604954812?i=1000609385404
 subtitles: torystoriesep4.vtt
 ---
 
