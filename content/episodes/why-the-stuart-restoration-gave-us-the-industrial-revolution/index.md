@@ -7,7 +7,7 @@ featuredImage: ep6-stuart-restoration-hudsons-bay.png
 audioFile: torystoriesep6.mp3
 syndicationLinks:
     - https://www.youtube.com/watch?v=9sJ70iq0Vf8
-    # - https://open.spotify.com/episode/TODO
+    - https://open.spotify.com/episode/0xFZdny2rueAR8qdjVYfmw
 subtitles: torystoriesep6.vtt
 ---
 
