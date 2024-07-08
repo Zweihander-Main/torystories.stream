@@ -41,7 +41,7 @@ const SyndicationLink: React.FC<SyndicationLinkProp> = ({ link }) => {
 				Icon = RiSpotifyLine;
 				break;
 			}
-			case 'apple.com': {
+			case 'podcasts.apple.com': {
 				title = 'Apple';
 				Icon = RiAppleLine;
 				break;
